@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <?php include("../template/menu.php") ?>
+
 	<div id="booking" class="section">
 		<div class="section-center">
 			<div class="container">
@@ -22,13 +22,27 @@
 						<form>
                             <div class="container">
                                 <div class="row text-center mb-3">
-                                    <h2>Accedi alla tua area riservata</h2>
+                                    <h2>Registrati al programma fedeltà</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <span class="form-label">Nome</span>
+                                        <input class="form-control" type="text" placeholder="Nome">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <span class="form-label">Cognome</span>
+                                        <input class="form-control" type="text" placeholder="Cognome">
+                                    </div>
                                 </div>
                             </div>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<span class="form-label">E-mail:</span>
+										<span class="form-label">E-mail</span>
 										<input class="form-control" type="text" placeholder="Email">
 									</div>
 								</div>
@@ -49,19 +63,6 @@
 								</div>
 							</div>
 						</form>
-                        <hr>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <span style="font-size:10px;"> OPPURE </span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-center pt-2">
-                                    <a href="https://gruppoaereo4.000webhostapp.com/view/registration.view.php" style="font-size:20px;"> Registrati </a>
-                                </div>
-                            </div>
-                        </div>
 					</div>
 				</div>
 			</div>

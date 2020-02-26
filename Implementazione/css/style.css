@@ -188,12 +188,12 @@
 }
 
 .navbar-dark .navbar-toggler {
-	border: 2px solid #64B5F6;
+	/*border: 2px solid #64B5F6;*/
 	z-index: 1;
 }
 
 .navbar-dark .navbar-toggler .navbar-toggler-icon {
-	background-image: url("data:image/svg+xml;charset=utf8,<svg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='rgba(100, 181, 246, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+	background-image: url("data:image/svg+xml;charset=utf8,<svg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='rgba(102, 102, 102, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/></svg>");
 }
 
 .navbar:after {
@@ -215,4 +215,26 @@
 
 .pos-f-t #navbarToggleExternalContent .bg-dark {
 	background: #64B5F6 !important;
+}
+
+.title-menu{
+	display: inline-block;
+}
+
+.menu-voice span, .menu-account span{
+	padding: 30px;
+	font-size: 20px;
+	color: white;
+}
+.menu-voice{
+	display: inline-block;
+}
+
+.menu-account{
+	display: inline-block;
+	float: right;
+}
+
+#navbarToggleExternalContent a{
+	text-decoration: none;
 }
