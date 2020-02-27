@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Gruppo Aereo 4</title>
     <?php include("template/header.php") ?>
-    <link type="text/css" rel="stylesheet" href="css/style.css" />
+
 </head>
 <body>
     <?php include("template/menu.php") ?>
