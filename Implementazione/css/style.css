@@ -29,12 +29,12 @@
 	box-shadow: 0 0 3px #777
 }
 
-.booking-form .form-group {
+.booking-form .form-group, .login-form .form-group {
 	position: relative;
 	margin-bottom: 20px;
 }
 
-.booking-form .form-control {
+.booking-form .form-control, .login-form .form-control {
 	background-color: #fff;
 	height: 50px;
 	color: #191a1e;
@@ -47,29 +47,29 @@
 	padding: 0px 15px;
 }
 
-.booking-form .form-control::-webkit-input-placeholder {
+.booking-form .form-control::-webkit-input-placeholder, .login-form .form-control::-webkit-input-placeholder {
 	color: rgba(82, 82, 84, 0.4);
 }
 
-.booking-form .form-control:-ms-input-placeholder {
+.booking-form .form-control:-ms-input-placeholder, .login-form .form-control:-ms-input-placeholder {
 	color: rgba(82, 82, 84, 0.4);
 }
 
-.booking-form .form-control::placeholder {
+.booking-form .form-control::placeholder, .login-form .form-control::placeholder {
 	color: rgba(82, 82, 84, 0.4);
 }
 
-.booking-form input[type="date"].form-control:invalid {
+.booking-form input[type="date"].form-control:invalid, .login-form input[type="date"].form-control:invalid  {
 	color: rgba(82, 82, 84, 0.4);
 }
 
-.booking-form select.form-control {
+.booking-form select.form-control, .login-form select.form-control {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 }
 
-.booking-form select.form-control+.select-arrow {
+.booking-form select.form-control+.select-arrow,.login-form select.form-control+.select-arrow {
 	position: absolute;
 	right: 10px;
 	bottom: 6px;
@@ -82,14 +82,14 @@
 	font-size: 14px;
 }
 
-.booking-form select.form-control+.select-arrow:after {
+.booking-form select.form-control+.select-arrow:after, .login-form select.form-control+.select-arrow:after {
 	content: '\279C';
 	display: block;
 	-webkit-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
 
-.booking-form .form-label {
+.booking-form .form-label, .login-form .form-label {
 	display: block;
 	margin-left: 10px;
 	margin-bottom: 5px;
@@ -101,13 +101,13 @@
 	color: #555;
 }
 
-.booking-form .form-checkbox input {
+.booking-form .form-checkbox input, .login-form .form-checkbox input{
 	position: absolute !important;
 	margin-left: -9999px !important;
 	visibility: hidden !important;
 }
 
-.booking-form .form-checkbox label {
+.booking-form .form-checkbox label, .login-form .form-checkbox label {
 	position: relative;
 	padding-top: 4px;
 	padding-left: 30px;
@@ -115,11 +115,11 @@
 	color: #fff;
 }
 
-.booking-form .form-checkbox label+label {
+.booking-form .form-checkbox label+label, .login-form .form-checkbox label+label {
 	margin-left: 15px;
 }
 
-.booking-form .form-checkbox input+span {
+.booking-form .form-checkbox input+span, .login-form .form-checkbox input+span {
 	position: absolute;
 	left: 2px;
 	top: 4px;
@@ -129,7 +129,7 @@
 	border-radius: 50%;
 }
 
-.booking-form .form-checkbox input+span:after {
+.booking-form .form-checkbox input+span:after, .login-form .form-checkbox input+span:after {
 	content: '';
 	position: absolute;
 	top: 50%;
@@ -144,21 +144,21 @@
 	transform: translate(-50%, -50%);
 }
 
-.booking-form .form-checkbox input:not(:checked)+span:after {
+.booking-form .form-checkbox input:not(:checked)+span:after, .login-form .form-checkbox input:not(:checked)+span:after {
 	opacity: 0;
 }
 
-.booking-form .form-checkbox input:checked+span:after {
+.booking-form .form-checkbox input:checked+span:after, .login-form .form-checkbox input:checked+span:after  {
 	opacity: 1;
 	width: 10px;
 	height: 10px;
 }
 
-.booking-form .form-btn {
+.booking-form .form-btn, .login-form .form-btn {
 	margin-top: 27px;
 }
 
-.booking-form .submit-btn {
+.booking-form .submit-btn, .login-form .submit-btn {
 	color: #fff;
 	background-color: #64B5F6;
 	font-weight: 400;
@@ -173,11 +173,13 @@
 }
 
 .booking-form .submit-btn:hover,
-.booking-form .submit-btn:focus {
+.booking-form .submit-btn:focus,
+.login-form .submit-btn:hover,
+.login-form .submit-btn:focus{
 	opacity: 0.9;
 }
 
-.booking-form .form-control:focus {
+.booking-form .form-control:focus, .login-form .form-control:focus {
 	color: #64B5F6;
 	border-color: #64B5F6;
 }
@@ -246,4 +248,17 @@
 	left: 50%;
 	top: 20px;
 	transform: translateX(-50%);
+
+}
+.body-cont{
+	margin-top: 120px;
+}
+
+.login-form {
+	padding: 40px;
+}
+#containercircle {
+	margin: 20px;
+	width: 200px;
+	height: 100px;
 }
