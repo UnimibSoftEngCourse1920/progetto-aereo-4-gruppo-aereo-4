@@ -4,7 +4,7 @@
 namespace controller;
 
 
-class VoliController
+class VoloController
 {
 
 }

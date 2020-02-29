@@ -2,33 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc054df4-6fa5-412e-b57f-f130dd6b58d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/controller/ClientiController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/PrenotazioneController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/VenditaController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/VoliController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/cliente/RegistroClienti.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/compagnia/Impiegato.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/prenotazione/RegistroPrenotazioni.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/volo/RegistroVoli.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/ClientiHandler.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/VoliHandler.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/acquisto/Acquisto.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/acquisto/Acquisto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/acquisto/pagamento/IstitutoDiCredito.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/acquisto/pagamento/IstitutoDiCredito.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/acquisto/pagamento/Pagamento.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/acquisto/pagamento/Pagamento.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/acquisto/pagamento/PagamentoConCarta.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/acquisto/pagamento/PagamentoConCarta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/acquisto/pagamento/PagamentoConPunti.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/acquisto/pagamento/PagamentoConPunti.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/cliente/Cliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/cliente/Cliente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/cliente/ClienteFedelta.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/cliente/ClienteFedelta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/prenotazione/Prenotazione.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/prenotazione/Prenotazione.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/servizi/DB.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/servizi/DB.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/servizi/Mailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/servizi/Mailer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/volo/Aereo.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/volo/Aereo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/volo/Aereoporto.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/volo/Aereoporto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/volo/Biglietto.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/volo/Biglietto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/volo/Posto.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/volo/Posto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/volo/Promozione.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/volo/Promozione.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/volo/Volo.php" beforeDir="false" afterPath="$PROJECT_DIR$/model/volo/Volo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/ClientiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ClienteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/VoliController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/VoloController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +48,7 @@
       <workItem from="1582722074074" duration="3198000" />
       <workItem from="1582728826247" duration="2638000" />
       <workItem from="1582973651810" duration="727000" />
-      <workItem from="1582992299137" duration="172000" />
+      <workItem from="1582992299137" duration="435000" />
     </task>
     <servers />
   </component>
@@ -80,6 +56,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="622" y="71" width="657" height="979" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1582992731085">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="622" y="71" width="657" height="979" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1582992731085" />
     <state x="243" y="1" width="1200" height="584" maximized="true" key="DirDiffDialog" timestamp="1582731521807">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
