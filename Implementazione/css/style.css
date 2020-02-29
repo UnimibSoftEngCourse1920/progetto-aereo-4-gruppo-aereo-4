@@ -243,7 +243,7 @@
 }
 
 #logo {
-	height: 75px;
+	height: 90px;
 	position: absolute;
 	left: 50%;
 	top: 20px;
@@ -257,8 +257,15 @@
 .login-form {
 	padding: 40px;
 }
+
 #containercircle {
 	margin: 20px;
 	width: 200px;
 	height: 100px;
+}
+
+.btn-select-flight{
+	color: white;
+	background: #42a5f5;
+	font-weight: 600;
 }
