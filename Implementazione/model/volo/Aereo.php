@@ -1,6 +1,12 @@
 <?php
+
+
+namespace model\volo;
+
+
 class Aereo{
-  private $marca_modello;
-  private $posti_disponibili;
-  private $numero_serie;
-} ?>
+    private $marcaModello;
+    private $postiDisponibili;
+    private $numeroSerie;
+}
+

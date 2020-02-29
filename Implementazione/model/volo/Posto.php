@@ -1,5 +1,10 @@
 <?php
+
+
+namespace model\volo;
+
+
 class Posto{
-  private $numero_posto;
-  private $stato;
-} ?>
+    private $numeroPosto;
+    private $stato;
+}

@@ -1,8 +1,15 @@
 <?php
-  class ClienteFedele extends Cliente{
+
+
+namespace model\cliente;
+
+
+class ClienteFedelta extends Cliente{
     private $indirizzo;
-    private $codice_fedelta;
+    private $codiceFedelta;
     private $username;
     private $password;
-  }
+}
+
 ?>
+

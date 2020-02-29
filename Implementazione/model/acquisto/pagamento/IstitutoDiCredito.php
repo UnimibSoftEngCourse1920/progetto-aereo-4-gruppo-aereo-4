@@ -1,4 +1,12 @@
 <?php
-class IstitutoDiCredito{
-  
-} ?>
+
+
+namespace model\acquisto\pagamento;
+
+
+class IstitutoDiCredito
+{
+
+}
+
+

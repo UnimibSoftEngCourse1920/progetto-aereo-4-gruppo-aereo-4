@@ -1,5 +1,10 @@
-<<?php
+<?php
+
+
+namespace model\acquisto;
+
+
 class Acquisto{
-  private $punti_accumulati;
-  private $codice_acquisto;
+    private $puntiAccumulati;
+    private $codiceAcquisto;
 } ?>

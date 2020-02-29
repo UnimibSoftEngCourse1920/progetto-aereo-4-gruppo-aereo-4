@@ -1,7 +1,11 @@
 <?php
+
+
+namespace model\prenotazione;
+
+
 class Prenotazione{
-  private $data;
-  private $codice_prenotazione;
-  private $stato; //Serve??
+    private $data;
+    private $codicePrenotazione;
+    private $stato; //Serve??
 }
- ?>

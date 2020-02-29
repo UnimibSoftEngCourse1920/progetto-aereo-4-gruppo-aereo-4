@@ -1,5 +1,10 @@
 <?php
+
+
+namespace model\volo;
+
+
 class Biglietto{
-  private $tariffa;
-  private $nominativo; //viene utilizzato?
-} ?>
+    private $tariffa;
+    private $nominativo;
+}

@@ -1,4 +1,9 @@
 <?php
+
+
+namespace model\acquisto\pagamento;
+
+
 class PagamentoconPunti extends Pagamento{
-  private $punti_utilizzati;
+    private $puntiUtilizzati;
 } ?>

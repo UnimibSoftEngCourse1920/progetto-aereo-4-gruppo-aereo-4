@@ -1,6 +1,11 @@
 <?php
+
+
+namespace model\acquisto\pagamento;
+
+
 abstract class Pagamento{
-  private $codice_transazione;
-  private $data;
-  private $importo;
+    private $codiceTransazione;
+    private $data;
+    private $importo;
 } ?>

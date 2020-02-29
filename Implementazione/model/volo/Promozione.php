@@ -1,7 +1,12 @@
 <?php
+
+
+namespace model\volo;
+
+
 class Promozione{
-  private $data_inizio;
-  private $data_fine;
-  private $nome;
-  private $tipologia; //cosa significa? Sconto percentuale oppure prezzo fisso??
-} ?>
+    private $dataInizio;
+    private $dataFine;
+    private $nome;
+    private $tipologia; //cosa significa? Sconto percentuale oppure prezzo fisso??
+}
