@@ -56,7 +56,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-center pt-2">
-                            <a href="https://gruppoaereo4.000webhostapp.com/view/registration.view.php" style="font-size:20px;"> Registrati </a>
+                            <a href="https://gruppoaereo4.000webhostapp.com/view/registrazione.view.php" style="font-size:20px;"> Registrati </a>
                         </div>
                     </div>
                 </div>
