@@ -10,11 +10,11 @@ class Cliente{
     private $email;
     private $dataNascita;
 
-    public __contruct($nome, $cognome, $email, $dataNascita){
-        this->$nome = $nome;
-        this->$cognome = $cognome;
-        this->$email = $email;
-        this->$dataNascita = $dataNascita;
+    public function __construct($nome, $cognome, $email, $dataNascita){
+        $this->$nome = $nome;
+        $this->$cognome = $cognome;
+        $this->$email = $email;
+        $this->$dataNascita = $dataNascita;
     }
 }
 

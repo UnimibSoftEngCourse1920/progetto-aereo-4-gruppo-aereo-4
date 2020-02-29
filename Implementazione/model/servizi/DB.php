@@ -10,14 +10,14 @@ class DB{
 
     private function __construct(){
         //si connette al DB
-        $self->$connection = new PDO('dblib:host=your_hostname;dbname=your_db;charset=UTF-8', $user, $pass);
+        $this -> connection = new PDO('dblib:host=your_hostname;dbname=your_db;charset=UTF-8', 'user', 'pass');
     }
 
     public static function getIstance(){
-        if ($self->$instance == null) {
-            $self->$instance = new DB();
+        if (!self::$instance) {
+            self::$instance = new DB();
         }
-        return $self->$instance;
+        return self::$instance;
     }
 
     public function emailExists($email){
@@ -25,6 +25,23 @@ class DB{
         //ritorna boolean
     }
 
+    //Operazioni CRUD
+
+    public function update($object){
+        return null;
+    }
+
+    public function put($object){
+
+    }
+
+    public function get($object){
+        return null;
+    }
+
 }
+
+
+
 
 

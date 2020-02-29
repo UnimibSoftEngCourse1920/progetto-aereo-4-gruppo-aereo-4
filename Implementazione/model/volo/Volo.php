@@ -13,4 +13,8 @@ class Volo{
     private $stato;
     private $codiceVolo;
     private $miglia;
+
+    public function modificaDati($datiVolo){
+        //si modifica da solo
+    }
 }
