@@ -13,7 +13,6 @@ class Mailer{
 
     }
 
-    //Sarebbe meglio fare un nuovo thread per questo
     public function inviaEmailVolo($tipo, $cliente, $volo){
 
     }

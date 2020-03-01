@@ -4,13 +4,15 @@
 namespace model\servizi;
 
 
-class DB{
-    private $connection;
+class DBFacade{
     private static $instance = null;
 
+    private $gestori = array();
+
+
     private function __construct(){
-        //si connette al DB
-        $this -> connection = new PDO('dblib:host=your_hostname;dbname=your_db;charset=UTF-8', 'user', 'pass');
+        $cli = new ClienteDB();
+        $gestori['Cliente'] = $cli;
     }
 
     public static function getIstance(){
@@ -28,15 +30,16 @@ class DB{
     //Operazioni CRUD
 
     public function update($object){
-        return null;
+        $esito = $this -> gestori[get_class($object)] -> update($object);
     }
 
-    public function put($object){
-
+    public function create($object){
+        $esito = $this -> gestori[get_class($object)] -> put($object);
     }
 
-    public function get($object){
-        return null;
+    public function read($OID, $class){
+        $returnObject = $this -> gestori[$class].get($OID);
+        return $returnObject;
     }
 
 }
