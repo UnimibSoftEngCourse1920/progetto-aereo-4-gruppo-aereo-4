@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gruppo Aereo 4 - Registrazione</title>
+    <title>Gruppo Aereo 4 - Area fedeltà</title>
     <?php include("../template/header.php") ?>
     <link type="text/css" rel="stylesheet" href="../css/style.css" />
 </head>
