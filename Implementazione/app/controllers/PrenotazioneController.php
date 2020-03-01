@@ -4,7 +4,7 @@
 namespace controller;
 
 
-class PrenotazioneController
+class PrenotazioneController extends Controller
 {
 
 }

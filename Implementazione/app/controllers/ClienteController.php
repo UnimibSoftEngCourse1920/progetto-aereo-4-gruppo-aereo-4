@@ -4,7 +4,7 @@
 namespace controller;
 
 
-class ClienteController{
+class ClienteController extends Controller{
 
     private $registroClienti;
     private $mailer;

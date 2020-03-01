@@ -2,7 +2,7 @@
 
 class App {
 	
-	protected $controller = 'home';
+	protected $controller = 'HomeController';
 	protected $method = 'index';
 	protected $params = [];
 	
@@ -11,7 +11,7 @@ class App {
 		
 		//Recupero il controller e lo istanzio
 		if(file_exists('../app/controllers/'.$url[0].'.php')) {
-			$this->controller = $url[0];
+			$this->controller = ucfirst($url[0])."Controller";
 			unset($url[0]);
 		}
 		require_once '../app/controllers/'.$this->controller.'.php';
@@ -25,8 +25,9 @@ class App {
 			}
 		}
 		$this->params = $url ? array_values($url) : [];
-		//Chiamo il metodo
-		call_user_func_array([$this->controller, $this->method], $this->params);
+		
+		//Chiamo il metodo, passando anche i parametri in post
+		call_user_func_array([$this->controller, $this->method], array_merge($this->params, $_POST));
 	}
 	
 	public function parseUrl() {

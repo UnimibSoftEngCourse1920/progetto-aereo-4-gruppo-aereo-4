@@ -4,7 +4,7 @@
 namespace controller;
 
 
-class VenditaController
+class VenditaController extends Controller
 {
 
 }

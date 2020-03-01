@@ -7,12 +7,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Gruppo Aereo 4 - Login</title>
-    <?php include("../template/header.php") ?>
+    <?php include("../app/template/header.php") ?>
     <link type="text/css" rel="stylesheet" href="../css/style.css" />
 </head>
 
 <body>
-    <?php include("../template/menu.php") ?>
+    <?php include("../app/template/menu.php") ?>
     <div class="container body-cont">
         <div class="row">
             <div class="col-md-3"></div>
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-	<?php include("../template/footer.php") ?>
+	<?php include("../app/template/footer.php") ?>
 </body>
 
 </html>

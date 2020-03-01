@@ -15,7 +15,7 @@ abstract class tipoAvviso{
 }
 
 
-class VoloController{
+class VoloController extends Controller {
 
     private $registroVoli;
     private $registroPrenotazioni;
