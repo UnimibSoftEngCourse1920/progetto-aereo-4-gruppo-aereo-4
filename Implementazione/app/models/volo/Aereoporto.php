@@ -10,4 +10,10 @@ class Aereoporto{
     private $nazione;
     private $citta;
     private $codice;
+
+    public function getNome(){
+        return $this->nome;
+    }
+
 }
+

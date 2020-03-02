@@ -9,8 +9,9 @@ use model\volo\RegistroVoli;
 
 class RegistroPrenotazioni{
 
-    public function getClientiVolo($codice){
-
+    public function getClientiVolo($OIDVolo){
+        $listaClienti = DB::getIstance() -> getClientiVolo($OIDVolo);
+        return $listaClienti;
     }
 
     public function generaEstrattoConto($codiceFedelta){
