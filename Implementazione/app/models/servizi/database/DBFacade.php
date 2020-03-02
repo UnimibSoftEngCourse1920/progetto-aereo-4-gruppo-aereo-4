@@ -38,7 +38,7 @@ class DBFacade{
     }
 
     public function read($OID, $class){
-        $returnObject = $this -> gestori[$class].get($OID);
+        $returnObject = $this -> gestori[$class]->get($OID);
         return $returnObject;
     }
 
