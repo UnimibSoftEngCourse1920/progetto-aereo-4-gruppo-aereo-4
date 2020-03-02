@@ -4,6 +4,8 @@
 namespace model\volo;
 
 
+use model\servizi\DB;
+
 class RegistroVoli{
 
     public function getVolo($codiceVolo){
@@ -20,6 +22,10 @@ class RegistroVoli{
 
     private function generaCodiceVolo($datiVolo){
         return 'MIAM202010070810';
+    }
+
+    public static function checkDisponibilitaPosti($numPosti, $codVolo){
+        return Volo::getDisponibilitaPosti($codVolo);
     }
 
 }
