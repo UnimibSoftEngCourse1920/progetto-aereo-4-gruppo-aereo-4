@@ -3,6 +3,9 @@
 
 namespace model\servizi;
 
+use model\cliente\ClienteFedelta;
+use PDO;
+
 
 class DB{
     private $connection;
@@ -10,7 +13,7 @@ class DB{
 
     private function __construct(){
         //si connette al DB
-        $this -> connection = new PDO('dblib:host=your_hostname;dbname=your_db;charset=UTF-8', 'user', 'pass');
+        $this->connection = new PDO('dblib:host=your_hostname;dbname=your_db;charset=UTF-8', 'user', 'pass');
     }
 
     public static function getIstance(){
@@ -20,9 +23,10 @@ class DB{
         return self::$instance;
     }
 
-    public function emailExists($email){
-        //Cerca sul DB se c'è un cliente fedeltà con quella email
-        //ritorna boolean
+    public function emailFedeltaExists($email){
+        $query = "SELECT * from CLIENTE WHERE EMAIL = '$email' and codiceFedelta is not null ";
+        $result = $this->connection -> query($query);
+        return  $result->rowCount() == 0;
     }
 
     //Operazioni CRUD
@@ -32,11 +36,11 @@ class DB{
     }
 
     public function put($object){
-
+    return 'esito';
     }
 
     public function get($object){
-        return null;
+        return new ClienteFedelta();
     }
 
 }

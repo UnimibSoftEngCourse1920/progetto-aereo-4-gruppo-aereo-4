@@ -5,16 +5,22 @@ namespace model\cliente;
 
 
 class Cliente{
-    private $nome;
-    private $cognome;
-    private $email;
-    private $dataNascita;
+    protected $OID;
+    protected $nome;
+    protected $cognome;
+    protected $email;
+    protected $dataNascita;
 
-    public function __construct($nome, $cognome, $email, $dataNascita){
-        $this->$nome = $nome;
-        $this->$cognome = $cognome;
-        $this->$email = $email;
-        $this->$dataNascita = $dataNascita;
+    public function __construct($OID, $nome, $cognome, $email, $dataNascita){
+        $this->OID = $OID;
+        $this->nome = $nome;
+        $this->cognome = $cognome;
+        $this->email = $email;
+        $this->dataNascita = $dataNascita;
+    }
+
+    public function getEmail(){
+        return $this->email;
     }
 }
 

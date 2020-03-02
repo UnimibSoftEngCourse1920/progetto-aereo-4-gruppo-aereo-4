@@ -3,19 +3,26 @@
 
 namespace controller;
 
+use model\cliente\RegistroClienti;
+use model\servizi\Mailer;
+
 
 class ClienteController extends Controller{
 
     private $registroClienti;
     private $mailer;
 
-    public function iscrizioneFedelta($datiCliente){
-        $mail_exists = $this -> registroClienti -> checkEmailClienteFedelta($datiCliente->mail);
+    public function __construct(){
+        $this->mailer = new Mailer();
+        $this->registroClienti = new RegistroClienti();
+    }
+
+    public function iscrizioneFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $username, $password){
+        $mail_exists = $this -> registroClienti -> checkEmailClienteFedelta(mail);
         if (!$mail_exists) {
-            $nuovoCliente = $this -> $registroClienti -> nuovoClienteFedelta($datiCliente);
-            //mettere un esito operazione?
+            $nuovoCliente = $this -> $registroClienti -> nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $username, $password);
             if ($nuovoCliente != null) {
-                $this -> mailer -> inviaEmailCodiceFedelta($datiCliente->mail, $nuovoCliente -> codiceFedelta);
+                $this -> mailer -> inviaEmailCodiceFedelta($email, $nuovoCliente->codiceFedelta);
             }
             else{
                 //Scrive operazione non andata a buon fine e l'user deve rifare tutta la trafila
@@ -27,13 +34,11 @@ class ClienteController extends Controller{
     }
 
     public function annullaIscrizione($codiceFedelta){
-        $cliente = $this -> registroClienti  ->  getCliente($codiceFedelta); //da implementare
-        if ($cliente != null) {
-            $cliente->annullaIscrizioneFedelta();
-            DB::getIstance()->update($cliente);
-        }
-        //bisogna sempre controllare se è andato tutto a buon fine
-        $this -> mailer -> inviaEmailConfermaCancellazione($cliente);
+        $cliente = $this->registroClienti  ->  annullaIscrizione($codiceFedelta);
+        if($cliente != null)
+            $this->mailer -> inviaEmailConfermaCancellazione($cliente);
+        else
+            $error = 'ERRORE'; //Da implementare errori
     }
 
 }
