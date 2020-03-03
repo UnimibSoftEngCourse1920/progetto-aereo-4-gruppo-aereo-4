@@ -69,9 +69,15 @@ class Volo{
         return $this->orarioArrivo;
     }
 
-    public static function getDisponibilitaPosti($numPosti){
-        $ris = null;
-        if($numPosti<=$ris)
+    public function getDisponibilitaPosti($numPosti){
+        $contaLiberi=0;
+        $posti = $this->listaPosti;
+        foreach ($posti as $posto){
+            if($posto->isOccupato()==0)
+                $contaLiberi++;
+        }
+
+        if($numPosti<=$contaLiberi)
             return true;
         else
             return false;
@@ -89,14 +95,26 @@ class Volo{
         }
     }
 
-    public function prenota($numPosti, $codPrenotazione){
-        $postiRimanenti = $numPosti;
-        $listaPosti = array();
-        while ($postiRimanenti > 0){
-            $posto = new Posto($codPrenotazione);
-            array_push($listaPosti,$posto->numPosto);
-            $postiRimanenti--;
-        }
-        return $listaPosti;
+    public function getPrezzoBiglietto(){
+        return $this->miglia/10;
     }
+
+    public function prenota($numPosti){
+        $postiRimanenti = $numPosti;
+        $listaPostiPrenotati = array();
+        foreach ($this->listaPosti as $posto){
+            if($postiRimanenti>0) {
+                if ($posto->isOccupato() == 0) {
+                    $posto->cambiaStato();
+                    array_push($listaPostiPrenotati,$posto);
+                    $postiRimanenti--;
+                }
+            }
+
+        }
+        return $listaPostiPrenotati;
+    }
+
+
+
 }

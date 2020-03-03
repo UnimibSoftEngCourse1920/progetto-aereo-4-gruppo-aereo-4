@@ -11,11 +11,6 @@ class RegistroVoli{
     public static $AVVISAMODIFICAVOLO='MODIFICA';
     public static $AVVISACANCELLAZIONEVOLO='CANCELLAZIONE';
 
-    public function getVolo($codiceVolo){
-        //cerca sul db e ritorna un volo
-        return null;
-    }
-
     public function inserisciVolo($orarioPartenza, $orarioArrivo, $data, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
         //controllo che i dati forniti siano validi
         //$codiceVolo = $this -> generaCodiceVolo($datiVolo); //Come viene generato? A questo punto ha senso generarlo?
@@ -53,8 +48,9 @@ class RegistroVoli{
         //E' un campo autoincrement dal DB o lo genero secondo una logica?
     }
 
-    public static function checkDisponibilitaPosti($numPosti, $codVolo){
-        return Volo::getDisponibilitaPosti($codVolo);
+    public function checkDisponibilitaPosti($numPosti, $codVolo){
+        $v = $this->getVolo($codVolo);
+        return $v->getDisponibilitaPosti($numPosti);
     }
 
     //public function avvisaPasseggeri($OIDVolo, )

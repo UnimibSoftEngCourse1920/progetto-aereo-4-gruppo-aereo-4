@@ -9,21 +9,25 @@ use model\servizi\DB;
 class Prenotazione{
     private $data;
     private $OID;
-    private $stato; //Serve??
+    private $tariffa;
     private $listaPosti;
     private $cliente;
+    private $codVolo;
+    private $listaBiglietti;
 
-    public function __construct($cliente,$codVolo,$numPosti,$data){
+    public function __construct($cliente,$codVolo,$numPosti,$tariffa,$data){
         $this->data=$data;
-
-        //NB!! Il costruttore NON fa logica
-        DB::getIstance()->put();//inserisci pren
-       // DB::getIstance()->inserisciPrenotazione();
-        $this->OID = DB::getIstance()->get(); // prendo il codice prenotazione appena creata
+        $this->tariffa=$tariffa;
+        $this->cliente = $cliente;
+        $this->codVolo = $codVolo;
     }
 
     public function generaEstrattoContoParziale(){
 
+    }
+
+    public function registraPrenotazione(){
+        $this->OID = DB::getIstance()->salvaPrenotazione($this);
     }
 
     //getClienteCode() !!

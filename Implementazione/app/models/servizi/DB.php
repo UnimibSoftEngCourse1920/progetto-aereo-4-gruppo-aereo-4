@@ -35,6 +35,20 @@ class DB{
         return array();
     }
 
+    public function checkPrenotazioneUnivoca($email,$codVolo){
+        $query = "SELECT * from PRENOTAZIONE WHERE EMAIL = '$email' and CODVOLO ='$codVolo' ";
+        $result = $this->connection -> query($query);
+        return  $result->rowCount() == 0;
+    }
+
+    public function salvaPrenotazione($prenotazione){
+        $sql = "INSERT INTO PRENOTAZIONE (firstname, lastname, email) VALUES ('John', 'Doe', 'john@example.com')";
+        // use exec() because no results are returned
+        $this->connection->exec($sql);
+        $id = $this->connection->lastInsertId();
+        return $id;
+    }
+
     //Operazioni CRUD
 
     public function update($object){

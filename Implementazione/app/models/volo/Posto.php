@@ -10,7 +10,7 @@ class Posto{
     private $OID;
     private $numeroPosto;
     private $stato;
-    //private $codPrenotazione;
+    private $codPrenotazione;
 
     public function __construct($numeroPosto){
         $this->OID = OIDGenerator::getIstance()->getNewOID();
@@ -37,5 +37,9 @@ class Posto{
             $this->$attributo = $valore;
         }
         return $this;
+    }
+
+    public function creaBiglietto($numPosto,$prezzo, $tariffa){
+
     }
 }
