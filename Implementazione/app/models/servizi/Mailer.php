@@ -9,7 +9,7 @@ class Mailer{
     private $email;
     private $password;
 
-    public function inviaEmailConfermaCancellazione($cliente){
+    public function inviaCancellazioneFedelta($cliente){
 
     }
 
@@ -59,6 +59,11 @@ class Mailer{
                     ";
 
         mail($email, 'Conferma iscrizione programma fedeltà', $message);
+    }
+
+    public function inviaComunicazioneInfedelta($cliente){
+        $message = 'INFEDELEEEE!!!!';
+        mail($cliente->getEmail(), 'Avviso infedeltà', $message);
     }
 
     private function generateRecipients($listaClienti){

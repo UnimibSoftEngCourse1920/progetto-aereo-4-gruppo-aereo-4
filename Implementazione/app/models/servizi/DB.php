@@ -29,6 +29,12 @@ class DB{
         return  $result->rowCount() == 0;
     }
 
+    public function getFedeltaUltimaPrenotazione($anni){
+        //select * from prenot join cliente WHERE (clienteFedelta) and OIDCli not in (SELECT codcli from pr where diff(today, data)>= $anni)
+        //ritorna lista di clienti da aggiornare
+        return array();
+    }
+
     //Operazioni CRUD
 
     public function update($object){

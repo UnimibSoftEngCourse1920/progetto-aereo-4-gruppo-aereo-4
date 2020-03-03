@@ -22,6 +22,7 @@ class Cliente{
     public function getEmail(){
         return $this->email;
     }
+
 }
 
  ?>

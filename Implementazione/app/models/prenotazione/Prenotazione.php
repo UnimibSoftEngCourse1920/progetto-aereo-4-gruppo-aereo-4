@@ -11,9 +11,12 @@ class Prenotazione{
     private $OID;
     private $stato; //Serve??
     private $listaPosti;
+    private $cliente;
 
     public function __construct($cliente,$codVolo,$numPosti,$data){
         $this->data=$data;
+
+        //NB!! Il costruttore NON fa logica
         DB::getIstance()->put();//inserisci pren
        // DB::getIstance()->inserisciPrenotazione();
         $this->OID = DB::getIstance()->get(); // prendo il codice prenotazione appena creata
@@ -22,6 +25,8 @@ class Prenotazione{
     public function generaEstrattoContoParziale(){
 
     }
+
+    //getClienteCode() !!
 
     public function __get($attributo) {
         if (property_exists($this, $attributo)) {

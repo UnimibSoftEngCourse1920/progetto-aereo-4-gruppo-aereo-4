@@ -4,17 +4,20 @@
 namespace controller;
 
 use model\cliente\RegistroClienti;
+use model\prenotazione\RegistroPrenotazioni;
 use model\servizi\Mailer;
 
 
 class ClienteController extends Controller{
 
     private $registroClienti;
+    private $registroPrenotazioni;
     private $mailer;
 
     public function __construct(){
         $this->mailer = new Mailer();
         $this->registroClienti = new RegistroClienti();
+        $this->registroPrenotazioni = new RegistroPrenotazioni();
     }
 
     public function iscrizioneFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $username, $password){
@@ -34,11 +37,33 @@ class ClienteController extends Controller{
     }
 
     public function annullaIscrizione($codiceFedelta){
-        $cliente = $this->registroClienti  ->  annullaIscrizione($codiceFedelta);
+        $cliente = $this->registroClienti -> annullaIscrizione($codiceFedelta);
         if($cliente != null)
             $this->mailer -> inviaEmailConfermaCancellazione($cliente);
         else
             $error = 'ERRORE'; //Da implementare errori
     }
+
+    public function ricercaClientiInfedeli(){
+        //ricerca 3 anni
+        $listaOIDCli = $this->registroPrenotazioni -> getFedeltaUltimaPrenotazione(3);
+        foreach ($listaOIDCli as $OIDcliente){
+            $esito = $this->registroClienti -> annullaIscrizione($OIDcliente);
+            if($esito)
+                $this->registroClienti->avvisaCliente($OIDcliente, RegistroClienti::$AVVISACANCELLAZIONEFEDELTA);
+            else
+                $x='ERRORE';
+        }
+        //ricerca 2 anni
+        $listaOIDCli = $this->registroPrenotazioni -> getFedeltaUltimaPrenotazione(2);
+        foreach ($listaOIDCli as $OIDcliente){
+            $esito = $this->registroClienti -> setClienteInfedele($OIDcliente);
+            if($esito)
+                $this->registroClienti->avvisaCliente($OIDcliente, RegistroClienti::$AVVISACANCELLAZIONEFEDELTA);
+            else
+                $x='ERRORE';
+        }
+    }
+
 
 }

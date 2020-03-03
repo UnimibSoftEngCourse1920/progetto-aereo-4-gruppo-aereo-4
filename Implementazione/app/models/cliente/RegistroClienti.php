@@ -5,11 +5,22 @@ namespace model\cliente;
 
 
 use model\servizi\DB;
+use model\servizi\Mailer;
 use model\servizi\OIDGenerator;
 
 class RegistroClienti
 {
+    public static $AVVISACANCELLAZIONEFEDELTA = "CANCELLAZIONEFEDELTA";
+    public static $AVVISACLIENTEINFEDELE = "CLIENTEINFEDELE";
+
+    public $mailer;
+
     //lista clienti
+
+    public function __construct()
+    {
+        $this->mailer = new Mailer();
+    }
 
     public function checkEmailClienteFedelta($email)
     {
@@ -52,6 +63,29 @@ class RegistroClienti
             //cosa faccio se non va a buon fine
         }
         return $cliente;
+    }
+
+    public function avvisaCliente($OID, $tipologiaAvviso){
+        $cliente = DB::getIstance()->get($OID);
+
+        switch ($tipologiaAvviso){
+            case RegistroClienti::$AVVISACANCELLAZIONEFEDELTA:
+                $this->mailer->inviaCancellazioneFedelta($cliente);
+                break;
+
+            case RegistroClienti::$AVVISACLIENTEINFEDELE:
+                $this->mailer->inviaComunicazioneInfedelta($cliente);
+                break;
+
+        }
+    }
+
+    public function setClienteInfedele($OID){
+        $cli = DB::getIstance()->get($OID);
+        $cli->setStato(ClienteFedelta::$STATOINFEDELE);
+        DB::getIstance()->update($cli);
+        //ritorno esito di tutte le op.
+        return true;
     }
 
 }
