@@ -4,18 +4,26 @@
 namespace model\volo;
 
 
+use model\servizi\OIDGenerator;
+
 class Posto{
+    private $OID;
     private $numeroPosto;
     private $stato;
-    private $codPrenotazione;
+    //private $codPrenotazione;
 
-    public function __construct($codPrenotazione){
-        $numeroPosto = null; //poi prenderà dal db il primo posto libero
-        $this->codPrenotazione = $codPrenotazione;
+    public function __construct($numeroPosto){
+        $this->OID = OIDGenerator::getIstance()->getNewOID();
+        $this->stato = false;
+        $this->numeroPosto = $numeroPosto;
     }
 
     public function cambiaStato(){
         $this->stato = 1;
+    }
+
+    public function isOccupato(){
+        return $this->stato;
     }
 
     public function __get($attributo) {

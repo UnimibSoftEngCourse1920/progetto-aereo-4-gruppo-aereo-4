@@ -8,6 +8,9 @@ use model\servizi\DB;
 
 class RegistroVoli{
 
+    public static $AVVISAMODIFICAVOLO='MODIFICA';
+    public static $AVVISACANCELLAZIONEVOLO='CANCELLAZIONE';
+
     public function getVolo($codiceVolo){
         //cerca sul db e ritorna un volo
         return null;
@@ -32,8 +35,8 @@ class RegistroVoli{
         $voloMod->setData($nuovaData);
         $voloMod->setOrarioPartenza($nuovoOrarioPart);
         $voloMod->setOrarioArrivo($nuovoOrarioArr);
-
-        return $voloMod;
+        DB::getIstance()->update($voloMod);
+        return true; //ritornare esito
     }
 
     public function rimuoviVolo($OIDVolo){
@@ -53,5 +56,7 @@ class RegistroVoli{
     public static function checkDisponibilitaPosti($numPosti, $codVolo){
         return Volo::getDisponibilitaPosti($codVolo);
     }
+
+    //public function avvisaPasseggeri($OIDVolo, )
 
 }

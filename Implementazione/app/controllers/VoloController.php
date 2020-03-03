@@ -24,7 +24,6 @@ class VoloController extends Controller {
 
     public function modificaVolo($OIDVolo, $nuovaData, $nuovoOrarioPart, $nuovoOrarioArr){
         $voloMod = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaData, $nuovoOrarioPart, $nuovoOrarioArr);
-        DB::getIstance() -> update($voloMod);
         // vedo esito delle op. prima
         //
         $listaClienti = $this->registroPrenotazioni -> getClientiVolo($voloMod -> OIDVolo);

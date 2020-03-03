@@ -21,7 +21,7 @@ class Volo{
     private $aereo;
     private $promozione;
 
-    private $posti; //posti che sono stati occupati dal volo
+    private $listaPosti; //posti del volo
 
     public function __construct($orarioPartenza, $orarioArrivo, $data, $AereoportoPart, $AereoportArr, $Aereo){
         $database = DB::getIstance();
@@ -36,6 +36,12 @@ class Volo{
         $this->aereoportoDest = $database->get($AereoportArr);
         $this->aereo = $database->get($Aereo);
         $this->promozione = null;
+        $this->listaPosti = array();
+
+        for($i=0; $i<$this->aereo->getPostiDisponibili(); $i++){
+            $p = new Posto($i+1);
+            $this->listaPosti[] = $p;
+        }
     }
 
     public function setData($data){
