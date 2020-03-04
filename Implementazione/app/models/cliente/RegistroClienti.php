@@ -87,6 +87,15 @@ class RegistroClienti
         //ritorno esito di tutte le op.
         return true;
     }
+	
+	public function getCliente($idCliente) {
+		$cliente = DB::getIstance()->getCliente($idCliente);
+		return $cliente;
+	}
+		
+	public function aggiornaCliente($cliente) {
+		DB::getIstance()->aggiornaCliente($cliente);
+	}
 
 }
 

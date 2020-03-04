@@ -1,12 +1,16 @@
 <?php
 
-
 namespace model\prenotazione;
-
 
 use model\servizi\DB;
 use model\volo\RegistroVoli;
 use model\volo\Volo;
+
+abstract class Tariffa
+{
+    const Standard = "standard";
+    const Plus = "plus";
+}
 
 class RegistroPrenotazioni{
 
@@ -41,5 +45,57 @@ class RegistroPrenotazioni{
         //NB!! Questo metodo mi DOVREBBE ritornare una lista di clienti, la chiamata al DB probabilmente ritorna la lista di prenotazioni
         return DB::getIstance()->getFedeltaUltimaPrenotazione($anniTrascorsi);
     }
+	
+	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta) {
+		$tariffa = $prenotazione->getTariffa();
+		$tassa = $this->calcolaTassa($tariffa, $nuovaTariffa);
+		$esitoCambioData = $prenotazione->cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta);
+		return $esitoCambioData;
+	}
+	
+	private function calcolaTassa($tariffa, $nuovaTariffa) {
+		$tassa = 0;
+		if($tariffa != Tariffa::Plus) {
+			$tassa += 10;		
+			if($nuovaTariffa == Tariffa::Plus) {
+				$tassa += 10;
+			}
+		}
+		return $tassa;
+	}
+	
+	public function acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta) {
+		$importo = $prenotazione->getImporto();
+		$esitoPagamento = $prenotazione->acquista($metodoPagamento, $cliente, $importo, $carta);
+		if($esitoPagamento) {
+			$punti = $this->calcolaPunti($importo);
+			$cliente->aggiungiPunti($punti);
+			$cliente->setStato("fedele");
+		}
+		return $esitoPagamento;
+	}
+	
+	public function generaBiglietti($prenotazione, $cliente) {
+		$biglietti = $prenotazione->getBiglietti();
+		foreach($biglietti as $biglietto) {
+			$biglietto->generaPDF();
+		}
+		$email = $cliente->getEmail();
+		Mailer::getIstance()->inviaBiglietti($biglietti, $email);
+	}
+	
+	private function calcolaPunti($importo) {
+		return $importo/10;
+	}
+	
+	public function getPrenotazione($idCliente) {
+		$cliente = DB::getIstance()->getCliente($idCliente);
+		return $cliente;
+	}
+	
+	public function aggiornaPrenotazione($prenotazione) {
+		DB::getIstance()->aggiornaPrenotazione($prenotazione);
+	}
+	
 }
 ?>

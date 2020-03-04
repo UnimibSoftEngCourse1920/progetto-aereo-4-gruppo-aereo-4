@@ -52,6 +52,25 @@ class RegistroVoli{
         $v = $this->getVolo($codVolo);
         return $v->getDisponibilitaPosti($numPosti);
     }
+	
+	public function cercaVoli($partenza, $destinazione, $data, $nPosti) {
+		$voli = DB::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
+		return $voli;
+	}
+	
+	public function cercaDateDisponibili($idVolo, $nPosti) {
+		$voli = DB::getIstance()->cercaDateDisponibili($idVolo, $nPosti);
+		return $voli;
+	}
+	
+	public function getVolo($idVolo) {
+		$volo = DB::getIstance()->getVolo($idVolo);
+		return $volo;
+	}
+	
+	public function aggiornaVolo($idVolo) {
+		DB::getIstance()->aggiornaVolo($idVolo);
+	}
 
     //public function avvisaPasseggeri($OIDVolo, )
 
