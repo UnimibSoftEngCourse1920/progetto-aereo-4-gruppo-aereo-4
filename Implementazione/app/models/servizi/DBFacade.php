@@ -71,6 +71,10 @@ class DBFacade{
         //ritorna boolean
     }
 
+    public function cercaVoli($partenza, $destinazione, $data, $nPosti){
+        $this->gestori['Volo']->getVoli($partenza, $destinazione, $data, $nPosti);
+    }
+
 }
 
 
