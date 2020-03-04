@@ -1,9 +1,5 @@
 <?php
 
-
-namespace model\volo;
-
-
 class Aereoporto{
     private $nome;
     private $continente;

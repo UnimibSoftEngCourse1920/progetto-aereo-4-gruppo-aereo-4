@@ -1,13 +1,5 @@
 <?php
 
-
-namespace model\cliente;
-
-
-use model\servizi\DB;
-use model\servizi\Mailer;
-use model\servizi\OIDGenerator;
-
 class RegistroClienti
 {
     public static $AVVISACANCELLAZIONEFEDELTA = "CANCELLAZIONEFEDELTA";
@@ -88,10 +80,10 @@ class RegistroClienti
         return true;
     }
 	
-	public function getCliente($idCliente) {
+	/*public function getCliente($idCliente) {
 		$cliente = DB::getIstance()->getCliente($idCliente);
 		return $cliente;
-	}
+	}*/
 		
 	public function aggiornaCliente($cliente) {
 		DB::getIstance()->aggiornaCliente($cliente);

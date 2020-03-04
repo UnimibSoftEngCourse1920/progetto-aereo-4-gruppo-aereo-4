@@ -15,7 +15,7 @@
             <div class="row py-5 my-5">
                 <div class="col-md-3"></div>
                 <div class="booking-form col-md-6 my-5">
-                    <form action="" method="post">
+                    <form action="/public/vendita/consultaVoli" method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">

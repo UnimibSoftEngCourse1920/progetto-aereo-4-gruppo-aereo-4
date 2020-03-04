@@ -1,12 +1,9 @@
 <?php
 
-
-namespace controller;
-
-use model\cliente\RegistroClienti;
-use model\prenotazione\RegistroPrenotazioni;
-use model\servizi\Mailer;
-
+require_once __DIR__ . "/../models/servizi/Mailer.php";
+require_once __DIR__ . "/../models/cliente/RegistroClienti.php";
+require_once __DIR__ . "/../models/prenotazione/RegistroPrenotazioni.php";
+require_once __DIR__ . "/../core/Controller.php";
 
 class ClienteController extends Controller{
 
@@ -65,5 +62,12 @@ class ClienteController extends Controller{
         }
     }
 
+    public function login() {
+        $this->view('cliente/login');
+    }
+
+    public function registrazione() {
+        $this->view('cliente/registrazione');
+    }
 
 }

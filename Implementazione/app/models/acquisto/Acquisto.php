@@ -1,7 +1,5 @@
 <?php
 
-namespace model\acquisto;
-
 abstract class MetodoPagamento
 {
     const Punti = "punti";

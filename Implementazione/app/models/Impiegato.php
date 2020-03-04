@@ -1,9 +1,5 @@
 <?php
 
-
-namespace model;
-
-
 class Impiegato{
     private $nome;
     private $cognome;

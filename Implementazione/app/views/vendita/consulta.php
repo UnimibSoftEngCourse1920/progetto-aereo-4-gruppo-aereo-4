@@ -30,33 +30,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1023</th>
-                    <td>Milano </td>
-                    <td>Barcellona</td>
-                    <td>9:30</td>
-                    <td>2/3/2020</td>
-                    <td>40€</td>
-                    <td><button class="btn btn-select-flight"> Scegli questo volo <i class="fas fa-arrow-right"></i> </button></td>
-                </tr>
-                <tr>
-                    <th scope="row">2212</th>
-                    <td>Milano </td>
-                    <td>Barcellona</td>
-                    <td>12:30</td>
-                    <td>2/3/2020</td>
-                    <td>40€</td>
-                    <td><button class="btn btn-select-flight"> Scegli questo volo <i class="fas fa-arrow-right"></i> </button></td>
-                </tr>
-                <tr>
-                    <th scope="row">3022</th>
-                    <td>Milano </td>
-                    <td>Barcellona</td>
-                    <td>17:30</td>
-                    <td>2/3/2020</td>
-                    <td>40€</td>
-                    <td><button class="btn btn-select-flight"> Scegli questo volo <i class="fas fa-arrow-right"></i> </button></td>
-                </tr>
+                    <tr>
+                        <th scope="row"123123</th>
+                        <td>Milano </td>
+                        <td>Barcellona</td>
+                        <td>9:30</td>
+                        <td>2/3/2020</td>
+                        <td>40€</td>
+                        <td><button class="btn btn-select-flight"> Scegli questo volo <i class="fas fa-arrow-right"></i> </button></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

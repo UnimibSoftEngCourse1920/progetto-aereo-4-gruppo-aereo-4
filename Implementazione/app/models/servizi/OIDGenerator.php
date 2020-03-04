@@ -1,8 +1,5 @@
 <?php
 
-
-namespace model\servizi;
-
 //Singleton??
 //Static??
 

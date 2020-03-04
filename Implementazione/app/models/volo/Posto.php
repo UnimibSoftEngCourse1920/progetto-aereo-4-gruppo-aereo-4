@@ -1,11 +1,5 @@
 <?php
 
-
-namespace model\volo;
-
-
-use model\servizi\OIDGenerator;
-
 class Posto{
     private $OID;
     private $numeroPosto;

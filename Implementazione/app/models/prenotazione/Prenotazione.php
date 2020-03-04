@@ -1,11 +1,5 @@
 <?php
 
-
-namespace model\prenotazione;
-
-
-use model\servizi\DB;
-
 class Prenotazione{
     private $data;
     private $OID;

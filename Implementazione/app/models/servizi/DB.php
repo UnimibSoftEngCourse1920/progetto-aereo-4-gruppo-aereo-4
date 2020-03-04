@@ -1,12 +1,5 @@
 <?php
 
-
-namespace model\servizi;
-
-use model\cliente\ClienteFedelta;
-use PDO;
-
-
 class DB{
     private $connection;
     private static $instance = null;

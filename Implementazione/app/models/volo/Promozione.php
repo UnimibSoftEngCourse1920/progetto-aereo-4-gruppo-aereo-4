@@ -1,9 +1,5 @@
 <?php
 
-
-namespace model\volo;
-
-
 class Promozione{
     private $dataInizio;
     private $dataFine;

@@ -1,9 +1,5 @@
 <?php
 
-
-namespace model\cliente;
-
-
 class Cliente{
     protected $OID;
     protected $nome;
