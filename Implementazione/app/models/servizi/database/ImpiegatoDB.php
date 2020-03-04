@@ -1,13 +1,13 @@
 <?php
 
 
-namespace model\servizi;
+namespace model\servizi\database;
 
 
 class ImpiegatoDB
 {
     protected function generateCreateQuery($obj){
-        return "INSERT INTO IMPIEGATO 
-                VALUES ($obj->OID, $obj->nome, $obj->cognome, $obj->username, $obj->password)";
+        return "INSERT INTO Impiegato 
+                VALUES ($obj->getOID(), $obj->getNome(), $obj->getCognome(), $obj->getUsername(), $obj->getPassword())";
     }
 }

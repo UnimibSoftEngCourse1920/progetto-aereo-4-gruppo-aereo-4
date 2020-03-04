@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc054df4-6fa5-412e-b57f-f130dd6b58d0" name="Default Changelist" comment="">
+    <list default="true" id="1c0c4cbf-8d77-49a9-967c-4ff2964d93f8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/servizi/IstitutoDB.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/DBFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/DBFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/acquisto/pagamento/IstitutoDiCredito.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/acquisto/pagamento/IstitutoDiCredito.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/DBFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/DBFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/AbstractDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/AbstractDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/AcquistoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/AcquistoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/AereoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/AereoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/AereoportoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/AereoportoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/BigliettoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/BigliettoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/ClienteDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/ClienteDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/ImpiegatoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/ImpiegatoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/IstitutoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/IstitutoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/PagamentoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/PagamentoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/PostoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/PostoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/PrenotazioneDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/PrenotazioneDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/PromozioneDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/PromozioneDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/VoloDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/VoloDB.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +28,20 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="Gruppo Aereo 4" />
@@ -70,7 +97,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fc054df4-6fa5-412e-b57f-f130dd6b58d0" name="Default Changelist" comment="" />
+      <changelist id="1c0c4cbf-8d77-49a9-967c-4ff2964d93f8" name="Default Changelist" comment="" />
       <created>1582722071094</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -83,6 +110,7 @@
       <workItem from="1583010605347" duration="6214000" />
       <workItem from="1583076120889" duration="15337000" />
       <workItem from="1583319387680" duration="1747000" />
+      <workItem from="1583351756208" duration="819000" />
     </task>
     <servers />
   </component>
@@ -98,6 +126,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="645" y="233" width="619" height="647" key="#PostoDB.php/0.27.1920.1053@0.27.1920.1053" timestamp="1583097443568" />
+    <state x="555" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583340153215">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="555" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1583340153215" />
     <state x="622" y="71" width="657" height="979" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583100740620">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -114,11 +146,11 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="470" y="367" width="1105" height="499" key="NewPhpClassDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1583142938110" />
-    <state x="588" y="329" key="com.intellij.ide.util.TipDialog" timestamp="1583319390917">
+    <state x="588" y="329" key="com.intellij.ide.util.TipDialog" timestamp="1583351778305">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="470" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1582728832951" />
-    <state x="588" y="329" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1583319390917" />
+    <state x="588" y="329" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1583351778305" />
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1583087242757">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

@@ -9,28 +9,34 @@ use model\cliente\ClienteFedelta;
 
 class ClienteDB extends AbstractDB
 {
-    public function __construct(){
-        parent::__construct();
+
+    public function get($OID){
+        $query = "Select * from Cliente where OID = '$OID'";
+        $statement = $this->connection->prepare($query);
+        $statement->execute();
+        
     }
 
-    public function create($cliente){
-        //genero la query in base ai dati
-        $query = "SELECT from Cliente where OID = " . $cliente -> OID;
+    public function generatePutQuery($object)
+    {
+        $indirizzo = $codiceFedelta = $stato = $password = null;
+        if($object->isClienteFedelta()){
+            $indirizzo = $object->getIndirizzo();
+            $codiceFedelta = $object-> getCodiceFedelta();
+            $stato = $object->getStato();
+            $password = $object-> getPassword();
+        }
+
+        $query = "INSERT INTO Cliente VALUES($object->getOID(),
+                                             $object->getNome(),
+                                             $object->getCognome(),
+                                             $object->getDataNascita(),
+                                             $indirizzo,
+                                             $codiceFedelta,
+                                             $stato,
+                                             $password
+                                             $object->getEmail() 
+                                             );";
     }
-
-    public function read($OID){
-        //effettua query al DB
-        //controllo se è fedelta
-        if($isClienteFedelta)
-            $cliente = new Cliente('','','','');
-        else
-            $cliente = new ClienteFedelta('','');
-
-        return $cliente;
-    }
-
-    public function update(){}
-
-    public function delete(){}
 
 }

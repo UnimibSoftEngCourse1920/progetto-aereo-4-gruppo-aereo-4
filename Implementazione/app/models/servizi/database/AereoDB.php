@@ -6,14 +6,14 @@ namespace model\servizi;
 
 class AereoDB extends AbstractDB
 {
-    protected function generateCreateQuery($obj){
-        return "INSERT INTO AEREO 
-                VALUES ($obj->OID, $obj->marcaModello, $obj->numeroPosti, $obj->numeroSerie)";
+    protected function generatePutQuery($obj){
+        return "INSERT INTO Aereo 
+                VALUES ($obj->getOID(), $obj->getNumeroPosti(), $obj->getNumeroSerie(), $obj->getMarcaModello())";
     }
 
     protected function generateUpdateQuery($obj){
-        return "UPDATE ".get_class($obj)." 
-                SET marcaModello = '$obj->marcaModello, numeroPosti = '$obj->numeroPosti, numeroSerie = '$obj->numeroSerie'
+        return "UPDATE ".$this->getClassName($obj)." 
+                SET marcaModello = '$obj->marcaModello', numeroPosti = $obj->numeroPosti, numeroSerie = '$obj->numeroSerie'
                 WHERE OID = '$obj->OID'";
     }
 }

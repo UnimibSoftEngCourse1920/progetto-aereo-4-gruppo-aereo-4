@@ -7,8 +7,8 @@ namespace model\servizi;
 class PagamentoDB extends AbstractDB
 {
     protected function generateCreateQuery($obj){
-        return "INSERT INTO PAGAMENTO 
-                VALUES ($obj->OID, $obj->importo, $obj->puntiUtilizzati, $obj->data, $obj->OIDIstituto)";
+        return "INSERT INTO Pagamento 
+                VALUES ($obj->getOID(), $obj->getImporto(), $obj->getPuntiUtilizzati(), $obj->getData(), $obj->getIstituto())";
     }
 
 }

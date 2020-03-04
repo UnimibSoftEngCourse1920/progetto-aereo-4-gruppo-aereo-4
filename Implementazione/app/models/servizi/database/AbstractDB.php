@@ -10,15 +10,21 @@ abstract class AbstractDB
 {
     protected $connection;
 
-    protected function __construct(){
-        //si connette al DB
-        $this -> connection = new PDO('dblib:host=your_hostname;dbname=your_db;charset=UTF-8', 'user', 'pass');
+    public function __construct(){
+        try {
+            $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+            $this->connection = new PDO('mysql:host=localhost;dbname=id12704943_compagniaaerea' , 'id12704943_sa', '4dm1n', $pdo_options);
+        }
+        catch (Exception $e)
+        {
+            die('Error : ' . $e->getMessage());
+        }
     }
 
-    protected function read($OID, $class){
+    protected function get($OID, $class){
         //Ad ora non vale per cliente
 
-        $stmt = $this->connection->prepare($this->generateReadQuery()); //manca la query
+        $stmt = $this->connection->prepare($this->generateGetQuery()); //manca la query
         //template method
         $stmt->execute();
         $stmt -> setFetchMode(PDO::FETCH_CLASS, $class);
@@ -35,19 +41,23 @@ abstract class AbstractDB
         return $result;
     }
 
-    protected function create($object){
-        $result = $this->connection->exec($this->generateCreateQuery($object));
+    protected function put($object){
+        $result = $this->connection->exec($this->generatePutQuery($object));
         return $result;
+    }
+
+    protected function getClassName($object){
+        return substr(strrchr(get_class($object), "\\"), 1);
     }
 
     //Metodi hook
     //Sono comunque stati definiti qui perchè per molte operazioni il comportamento è comune per tutti (es. delete)
 
-    protected function generateReadQuery($OID, $class){
+    protected function generateGetQuery($OID, $class){
         return "SELECT * FROM " . $class . " WHERE OID = '" . $OID . "'";
     }
 
-    protected function generateCreateQuery($object){ return '';}
+    protected function generatePutQuery($object){ return '';}
 
     protected function generateUpdateQuery($object){ return '';}
 

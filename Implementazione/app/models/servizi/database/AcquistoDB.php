@@ -6,8 +6,9 @@ namespace model\servizi;
 
 class AcquistoDB extends AbstractDB
 {
-    protected function generateCreateQuery($obj){
-        return "INSERT INTO ACQUISTO 
-                VALUES ($obj->OID, $obj->OIDPagamento, $obj->puntiAccumulati)";
+    protected function generatePutQuery($obj)
+    {   $pagamento = $obj->getPagamento() == null ? null : $obj->getPagamento()->getOID();
+        return "INSERT INTO Acquisto 
+                VALUES ($obj->getOID(), $obj->getPuntiAccumulati(), $obj->getPagamento())";
     }
 }

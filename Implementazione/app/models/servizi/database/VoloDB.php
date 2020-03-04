@@ -7,27 +7,29 @@ namespace model\servizi;
 class VoloDB extends AbstractDB
 {
     protected function generateCreateQuery($obj){
-        $query = "INSERT INTO VOLO VALUES (
-                    $obj->OID, 
-                    $obj->orarioPartenza, 
-                    $obj->orarioArrivo,
-                    $obj->data,
-                    $obj->stato,
-                    $obj->miglia,
-                    $obj->getAereo().getOID(),
-                    $obj->getAereoportoPart().getOID(),
-                    $obj->getAereoportoArrivo().getOID()";
-        if($obj.getPromozione()!=null)
-            $query = $query . ", $obj->getPromozione().getOID()";
+        $query = "INSERT INTO Volo VALUES (
+                    $obj->getOID(),
+                    $obj->getOrarioPartenza(),
+                    $obj->OorarioArrivo(),
+                    $obj->getData(),
+                    $obj->getStato(),
+                    $obj->getMiglia()),
+                    $obj->getAereo().getOID()";
+        $query .= $obj.getPromozione()!=null ? ", $obj->getPromozione().getOID() );" : ");";
+        //VoloAereoporto
+        $query .= "Insert into VoloAereoporto values ($obj->getOID(), $obj->getAereoportoPart().getOID(), $obj->getAereoportoArrivo().getOID() )";
+        //VoloPosto
+        foreach ($obj->getPosti() as $posto)
+            $query .= "INSERT INTO VoloPosto values ($obj->getOID(), $posto->getOID())";
 
-        return $query . ')';
+        return $query;
+
     }
 
     protected function generateUpdateQuery($object){
-        //Cosa si può cambiare di un volo?
-        //DA FINIRE
+
         return "UPDATE ".get_class($object)." 
-                SET stato = '$object->stato', data = '$object->data'
-                WHERE OID = '$object->OID'";
+                SET stato = '$object->getStato()', data = '$object->getData(), orarioPartenza='$object->getOrarioPartenza()', orarioArrivo='$object->getOrarioArrivo()'
+                WHERE OID = '$object->getOID()'";
     }
 }

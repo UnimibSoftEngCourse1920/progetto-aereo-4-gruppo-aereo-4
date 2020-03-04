@@ -6,9 +6,10 @@ namespace model\servizi;
 
 class PromozioneDB extends AbstractDB{
 
+    //Da rivedere fabio
+
     protected function generateCreateQuery($obj){
-        return "INSERT INTO PROMOZIONE 
-                VALUES ($obj->OID, $obj->dataInizio, $obj->dataFine, $obj->nome)
-                "; //tipologia
+        return "INSERT INTO Promozione
+                VALUES ($obj->getOID(), $obj->getDataInizio(), $obj->getDataFine(), $obj->getNome())"; //tipologia
     }
 }
