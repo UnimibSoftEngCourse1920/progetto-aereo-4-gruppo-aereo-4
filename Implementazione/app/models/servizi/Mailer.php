@@ -65,6 +65,11 @@ class Mailer{
         mail($cliente->getEmail(), 'Avviso infedeltà', $message);
     }
 
+    public function avvisaClientiPromozioni($listaClienti, $listaPromozioni){
+        //Genero testo dalla lista promozioni
+        mail($this->generateRecipients($listaClienti), 'Scopri le nuove promozioni', 'Lista promozioni');
+    }
+
     private function generateRecipients($listaClienti){
         $recipients = array();
         foreach ($listaClienti as $cliente){

@@ -6,18 +6,21 @@ namespace controller;
 use model\cliente\RegistroClienti;
 use model\prenotazione\RegistroPrenotazioni;
 use model\servizi\Mailer;
+use model\volo\RegistroPromozioni;
 
 
 class ClienteController extends Controller{
 
     private $registroClienti;
     private $registroPrenotazioni;
+    private $registroPromozioni;
     private $mailer;
 
     public function __construct(){
         $this->mailer = new Mailer();
         $this->registroClienti = new RegistroClienti();
         $this->registroPrenotazioni = new RegistroPrenotazioni();
+        $this->registroPromozioni = new RegistroPromozioni();
     }
 
     public function iscrizioneFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $username, $password){
@@ -65,5 +68,10 @@ class ClienteController extends Controller{
         }
     }
 
+    public function avvisaPromozioniFedelta(){
+        $listaClienti = DB::getIstance()->getClientiFedelta();
+        $listaPromozioni = $this->registroPromozioni->getPromozioniFedelta();
+        $this->mailer -> avvisaClientiPromozioni($listaClienti, $listaPromozioni);
+    }
 
 }

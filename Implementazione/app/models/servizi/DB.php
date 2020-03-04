@@ -49,6 +49,11 @@ class DB{
         return $id;
     }
 
+    public function getClientiFedelta(){
+        //ritorna lista clienti fedelta
+        return array();
+    }
+
     //Operazioni CRUD
 
     public function update($object){
