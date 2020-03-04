@@ -10,7 +10,6 @@ class Posto{
     private $OID;
     private $numeroPosto;
     private $stato;
-    private $codPrenotazione;
 
     public function __construct($numeroPosto){
         $this->OID = OIDGenerator::getIstance()->getNewOID();
@@ -26,7 +25,33 @@ class Posto{
         return $this->stato;
     }
 
+    /**
+     * @return string
+     */
+    public function getOID()
+    {
+        return $this->OID;
+    }
+
+    /**
+     * @return Posto
+     */
+    public function getNumeroPosto()
+    {
+        return $this->numeroPosto;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStato()
+    {
+        return $this->stato;
+    }
+
+
     public function __get($attributo) {
+        //da rimuovere
         if (property_exists($this, $attributo)) {
             return $this->$attributo;
         }

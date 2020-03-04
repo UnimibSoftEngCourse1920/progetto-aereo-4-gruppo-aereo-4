@@ -4,19 +4,26 @@
 namespace model\volo;
 
 
+use model\servizi\OIDGenerator;
+
 class Aereo{
+    private $OID;
     private $marcaModello;
-    private $postiDisponibili;
+    private $numeroPosti;
     private $numeroSerie;
 
-    public function __construct($postiDisponibili)
+
+    public function __construct($marcaModello, $numeroPosti, $numeroSerie)
     {
-        $this->postiDisponibili = $postiDisponibili;
+        $this->marcaModello = $marcaModello;
+        $this->numeroPosti = $numeroPosti;
+        $this->numeroSerie = $numeroSerie;
+        $this->OID = OIDGenerator::getIstance()->getNewOID();
     }
 
-    public function getPostiDisponibili()
+    public function getNumeroPosti()
     {
-        return $this->postiDisponibili;
+        return $this->numeroPosti;
     }
 }
 

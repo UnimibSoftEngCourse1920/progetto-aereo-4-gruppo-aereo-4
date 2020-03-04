@@ -9,24 +9,21 @@ class PagamentoConCarta extends Pagamento{
 	private $carta;
 	
 	public function __construct($importo, $carta) {
-		$this->setImporto($importo);
-		$this->setCarta($carta);
+	    parent::__construct($importo);
+	    $this->carta = $carta;
 	}
-	
-	public function setImporto($importo) {
-		$this->importo = $importo;
-	}
-	
+
 	public function setCarta($carta) {
 		//TODO: Vedere come arriva la carta
 		$this->carta = $carta;
 	}	
     
 	public function effettua($cliente) {
-		$carta = $this->getCarta();
 		$istituto = new IstitutoDiCredito();
-		$esitoPagamento = $istituto->autorizzaPagamento($carta);
+		$esitoPagamento = $istituto->autorizzaPagamento($this->carta);
 		return $esitoPagamento;
 	}
+
+	//Secondo me la carta arriva direttamente dalla chiamata effettua
 	
 } 

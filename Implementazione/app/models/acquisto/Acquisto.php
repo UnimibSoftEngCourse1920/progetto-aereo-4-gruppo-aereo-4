@@ -2,6 +2,8 @@
 
 namespace model\acquisto;
 
+use model\servizi\OIDGenerator;
+
 abstract class MetodoPagamento
 {
     const Punti = "punti";
@@ -9,16 +11,18 @@ abstract class MetodoPagamento
 }
 
 class Acquisto{
-	
+
+    //mettere importo qui??
+
     private $puntiAccumulati;
-    private $codiceAcquisto;
+    private $OID;
 	
 	public function __construct($metodoPagamento, $importo) {
-		
+		$this->OID = OIDGenerator::getIstance()->getNewOID();
 	}
 	
 	
-	public function effettuaPagamento($cliente, $carta) {
+	public function effettuaPagamento($metodoPagamento, $cliente, $carta) {
 		$metodoPagamento = $this->getMetodoPagamento();
 		if($metodoPagamento == MetodoPagamento::Punti && $cliente->getCodiceFedelta()) {
 			$punti = $this->costoToPunti($this->getImporto());

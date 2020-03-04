@@ -4,11 +4,73 @@
 namespace model;
 
 
+use model\servizi\OIDGenerator;
+
 class Impiegato{
     private $nome;
     private $cognome;
-    private $codice_impiegato;
     private $username;
     private $password;
-    private $ruolo; //impiegato, supervisor(che può anche inserire nuovi impiegati) SE SI UTILIZZA; MODIFICARE DIAGRM CLASSI
+    private $OID;
+
+    /**
+     * Impiegato constructor.
+     * @param $nome
+     * @param $cognome
+     * @param $username
+     * @param $password
+     */
+    public function __construct($nome, $cognome, $username, $password)
+    {
+        $this->nome = $nome;
+        $this->cognome = $cognome;
+        $this->username = $username;
+        $this->password = $password;
+        $this->OID = OIDGenerator::getIstance()->getNewOID();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCognome()
+    {
+        return $this->cognome;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOID()
+    {
+        return $this->OID;
+    }
+
+
+
+
+
 }
