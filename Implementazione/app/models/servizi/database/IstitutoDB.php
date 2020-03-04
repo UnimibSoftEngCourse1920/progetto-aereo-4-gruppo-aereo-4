@@ -1,7 +1,7 @@
 <?php
 
 
-namespace model\servizi;
+namespace model\servizi\database;
 
 
 class IstitutoDB

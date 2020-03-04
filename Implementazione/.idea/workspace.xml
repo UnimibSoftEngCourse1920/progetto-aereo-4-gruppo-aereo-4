@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc054df4-6fa5-412e-b57f-f130dd6b58d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/models/servizi/database/AbstractDB.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/servizi/database/AcquistoDB.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/servizi/database/AereoDB.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/servizi/database/ClienteDB.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/servizi/database/PagamentoDB.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/servizi/database/PostoDB.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/servizi/database/PrenotazioneDB.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/servizi/database/VoloDB.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/servizi/DB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/DBFacade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/servizi/Mailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/Mailer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/volo/Posto.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/volo/Posto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/IstitutoDB.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/DBFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/DBFacade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +50,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/models/servizi" />
       <recent name="$PROJECT_DIR$/app/models/servizi/database" />
       <recent name="$PROJECT_DIR$/model" />
     </key>
@@ -89,6 +82,7 @@
       <workItem from="1582998615878" duration="6110000" />
       <workItem from="1583010605347" duration="6214000" />
       <workItem from="1583076120889" duration="15337000" />
+      <workItem from="1583319387680" duration="1747000" />
     </task>
     <servers />
   </component>
@@ -120,11 +114,11 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="470" y="367" width="1105" height="499" key="NewPhpClassDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1583142938110" />
-    <state x="588" y="329" key="com.intellij.ide.util.TipDialog" timestamp="1583076124769">
+    <state x="588" y="329" key="com.intellij.ide.util.TipDialog" timestamp="1583319390917">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="470" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1582728832951" />
-    <state x="588" y="329" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1583076124769" />
+    <state x="588" y="329" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1583319390917" />
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1583087242757">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

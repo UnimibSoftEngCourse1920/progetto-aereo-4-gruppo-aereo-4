@@ -3,6 +3,13 @@
 
 namespace model\servizi;
 
+//Require di tutto il sottopackage database
+$folder =   "./database/";
+$files = glob($folder."*.php");
+foreach($files as $phpFile){
+    require_once("$phpFile");
+}
+
 
 class DBFacade{
     private static $instance = null;
@@ -17,7 +24,7 @@ class DBFacade{
 
     public static function getIstance(){
         if (!self::$instance) {
-            self::$instance = new DB();
+            self::$instance = new DBFacade();
         }
         return self::$instance;
     }
