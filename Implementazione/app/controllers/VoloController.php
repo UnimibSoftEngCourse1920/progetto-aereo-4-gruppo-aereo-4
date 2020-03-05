@@ -1,12 +1,30 @@
 <?php
 
 require_once __DIR__ . "/../core/Controller.php";
-
+require_once __DIR__ . "/../models/volo/RegistroVoli.php";
+require_once __DIR__ . "/../models/prenotazione/RegistroPrenotazioni.php";
+require_once __DIR__ . "/../models/servizi/Mailer.php";
 class VoloController extends Controller {
 
     private $registroVoli;
     private $registroPrenotazioni;
     private $mailer;
+
+    public function login($name = '') {
+        $this->view('impiegato/login');
+    }
+
+    public function admin($name = '') {
+        $this->view('impiegato/admin');
+    }
+
+    public function voli($name = '') {
+        $this->view('impiegato/voli');
+    }
+
+    public function promozioni($name = '') {
+        $this->view('impiegato/promozioni');
+    }
 
     public function __construct(){
         $this->registroVoli = new RegistroVoli();
@@ -32,4 +50,6 @@ class VoloController extends Controller {
         $listaClienti = $this->registroPrenotazioni -> getClientiVolo($volo -> OIDVolo);
         $this->mailer -> inviaEmailCancellazioneVolo($listaClienti, $volo);
     }
+
+
 }

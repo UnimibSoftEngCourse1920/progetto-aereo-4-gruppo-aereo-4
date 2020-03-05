@@ -29,17 +29,23 @@
                     <th scope="col"></th>
                 </tr>
                 </thead>
+                <?php foreach($data["voli"] as $volo) {?>
                 <tbody>
                     <tr>
-                        <th scope="row"123123</th>
-                        <td>Milano </td>
-                        <td>Barcellona</td>
-                        <td>9:30</td>
-                        <td>2/3/2020</td>
-                        <td>40€</td>
-                        <td><button class="btn btn-select-flight"> Scegli questo volo <i class="fas fa-arrow-right"></i> </button></td>
+                        <th scope="row"><?=$volo->getOID()?></th>
+                        <td><?=$volo->getAeroportoPartenza()?></td>
+                        <td><?=$volo->getAeroportoDestinazione()?></td>
+                        <td><?=$volo->getOrarioPartenza()?></td>
+                        <td><?=$volo->getData()?></td>
+                        <td><?=$volo->getPrezzoBiglietto()?></td>
+                        <td>
+                            <a href="/public/prenotazione/prenota/<?=$volo->getOID()?>"">
+                                <button class="btn btn-select-flight"> Scegli questo volo <i class="fas fa-arrow-right"></i> </button>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
+                <?php }?>
             </table>
         </div>
     </div>

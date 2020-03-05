@@ -1,5 +1,8 @@
 <?php
 
+require_once "../app/models/volo/Volo.php";
+
+
 class RegistroVoli{
 
     public static $AVVISAMODIFICAVOLO='MODIFICA';
@@ -48,7 +51,10 @@ class RegistroVoli{
     }
 	
 	public function cercaVoli($partenza, $destinazione, $data, $nPosti) {
-		//$voli = DB::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
+		//$voli = DBFacade::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
+        $voli = array(new Volo("1", "1", "1", "1", "1", "1"),
+                new Volo("2", "2", "2", "2", "2", "2"),
+                new Volo("3", "3", "3", "3", "3", "3"));
 		return $voli;
 	}
 	
@@ -58,7 +64,8 @@ class RegistroVoli{
 	}
 	
 	public function getVolo($idVolo) {
-		$volo = DB::getIstance()->getVolo($idVolo);
+		//$volo = DB::getIstance()->getVolo($idVolo);
+        $volo = new Volo("1", "1", "1", "1", "1", "1");
 		return $volo;
 	}
 	

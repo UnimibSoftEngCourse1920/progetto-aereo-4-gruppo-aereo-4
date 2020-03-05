@@ -1,6 +1,8 @@
 <?php
 
-class Volo{
+require_once "../app/models/servizi/DB.php";
+
+class Volo {
     private $OID;
     private $data;
     private $orarioPartenza;
@@ -17,126 +19,26 @@ class Volo{
     private $listaPosti; //posti del volo
 
     public function __construct($orarioPartenza, $orarioArrivo, $data, $AereoportoPart, $AereoportArr, $Aereo){
-        $database = DB::getIstance();
-        $this->OID = OIDGenerator::getIstance()->getNewOID();
+        //$database = DB::getIstance();
+        //$this->OID = OIDGenerator::getIstance()->getNewOID();
+        $this->OID = $data; //Per test
         $this->orarioPartenza = $orarioPartenza;
         $this->orarioArrivo = $orarioArrivo;
         $this->data = $data;
-        $this->miglia = $this->calcolaMiglia();
+        //$this->miglia = $this->calcolaMiglia();
         $this->stato = 'ATTIVO';
         //codice volo??
-        $this->aereoportoPartenza = $database->get($AereoportoPart);
-        $this->aereoportoDestinazione = $database->get($AereoportArr);
-        $this->aereo = $database->get($Aereo);
+        //$this->aereoportoPart = $database->get($AereoportoPart);
+        //$this->aereoportoDest = $database->get($AereoportArr);
+        //$this->aereo = $database->get($Aereo);
         $this->promozione = null;
         $this->listaPosti = array();
 
-        for($i=0; $i<$this->aereo->getPostiDisponibili(); $i++){
+        /*for($i=0; $i<$this->aereo->getPostiDisponibili(); $i++){
             $p = new Posto($i+1);
             $this->listaPosti[] = $p;
-        }
+        }*/
     }
-
-    // <editor-fold defaultstate="collapsed" desc="getters">
-
-    /**
-     * @return string
-     */
-    public function getOID()
-    {
-        return $this->OID;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrarioPartenza()
-    {
-        return $this->orarioPartenza;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrarioArrivo()
-    {
-        return $this->orarioArrivo;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStato()
-    {
-        return $this->stato;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCodiceVolo()
-    {
-        return $this->codiceVolo;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMiglia()
-    {
-        return $this->miglia;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAereoportoPart()
-    {
-        return $this->aereoportoPart;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAereoportoDest()
-    {
-        return $this->aereoportoDest;
-    }
-
-    /**
-     * @return \model\cliente\ClienteFedelta
-     */
-    public function getAereo()
-    {
-        return $this->aereo;
-    }
-
-    /**
-     * @return null
-     */
-    public function getPromozione()
-    {
-        return $this->promozione;
-    }
-
-    /**
-     * @return array
-     */
-    public function getListaPosti()
-    {
-        return $this->listaPosti;
-    }
-
-    // </editor-fold>
-
 
     public function setData($data){
         //if($data >= date("Ymd"))
@@ -155,6 +57,29 @@ class Volo{
         $this->stato = $stato;
     }
 
+    public function getOrarioPartenza(){
+        return $this->orarioPartenza;
+    }
+
+    public function getOrarioArrivo(){
+        return $this->orarioArrivo;
+    }
+
+    public function getAeroportoPartenza(){
+        return $this->aereoportoPart;
+    }
+
+    public function getAeroportoDestinazione(){
+        return $this->aereoportoDest;
+    }
+
+    public function getOID() {
+        return $this->OID;
+    }
+
+    public function getData() {
+        return $this->data;
+    }
 
     public function getDisponibilitaPosti($numPosti){
         $contaLiberi=0;
@@ -201,7 +126,4 @@ class Volo{
         }
         return $listaPostiPrenotati;
     }
-
-
-
 }
