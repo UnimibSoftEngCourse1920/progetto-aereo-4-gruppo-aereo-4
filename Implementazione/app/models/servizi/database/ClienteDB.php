@@ -32,4 +32,10 @@ class ClienteDB extends AbstractDB
         return ($stmt->rowCount() > 0);
     }
 
+    public function login($email, $password){
+        $query = "SELECT * from Impiegato where email = '$email' and password='$password'";
+        $stmt = $this->connection->query($query);
+        return ($stmt->rowCount() > 0);
+    }
+
 }

@@ -11,4 +11,10 @@ class ImpiegatoDB
         $query = "INSERT INTO Impiegato VALUES ('%s', '%s', '%s', '%s', '%s')";
         return sprintf($obj->getOID(), $obj->getNome(), $obj->getCognome(), $obj->getUsername(), $obj->getPassword());
     }
+
+    public function login($username, $password){
+        $query = "SELECT * from Impiegato where username = '$username' and password='$password'";
+        $stmt = $this->connection->query($query);
+        return ($stmt->rowCount() > 0);
+    }
 }

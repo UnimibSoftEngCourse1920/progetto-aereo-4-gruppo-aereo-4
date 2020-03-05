@@ -89,6 +89,14 @@ class DBFacade{
         return $this->gestori['Prenotazione'] -> getScadute($ore);
     }
 
+    public function userLogin($email, $password){
+        return $this->gestori['Cliente'] -> login($email, $password);
+    }
+
+    public function impiegatoLogin($username, $password){
+        return $this->gestori['Impiegato'] -> login($username, $password);
+    }
+
 
 }
 
