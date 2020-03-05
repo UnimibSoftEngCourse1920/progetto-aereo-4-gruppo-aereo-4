@@ -11,7 +11,10 @@ class PrenotazioneController extends Controller
         $this->registroPrenotazioni->cancellaPrenotazioniScadute();
     }
 
-    public function prenota($idVolo) {
+    public function prenota($idVolo, $nome = "", $cognome = "", $email = "", $nPosti = "") {
+        if(isset($idVolo) && isset($nome) && isset($cognome) && isset($email) && isset($nPosti)) {
+            header('Location: /public/vendita/acquista');
+        }
         $registro = $this->model('volo/RegistroVoli');
         $volo = $registro->getVolo($idVolo);
         $this->view('prenotazione/prenotazione', ["volo"=> $volo]);

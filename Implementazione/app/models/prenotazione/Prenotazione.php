@@ -6,14 +6,15 @@ class Prenotazione{
     private $tariffa;
     private $listaPosti;
     private $cliente;
-    private $codVolo;
+    private $volo;
     private $listaBiglietti;
 
-    public function __construct($cliente,$codVolo,$numPosti,$tariffa,$data){
+    public function __construct($cliente,$volo,$numPosti,$tariffa,$data){
         $this->data=$data;
         $this->tariffa=$tariffa;
         $this->cliente = $cliente;
-        $this->codVolo = $codVolo;
+        $this->volo = $volo;
+        $this->listaPosti = $volo->prenota($numPosti);
     }
 
     public function generaEstrattoContoParziale(){

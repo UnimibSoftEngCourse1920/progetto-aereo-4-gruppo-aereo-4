@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="login-form col-md-6">
-                <form>
+                <form action="" method="post">
                     <div class="container">
                         <div class="row text-center mb-3">
                             <h2>Accedi alla tua area riservata</h2>
@@ -27,16 +27,17 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <span class="form-label">E-mail:</span>
-                                <input class="form-control" type="text" placeholder="Email">
+                                <input class="form-control" type="text" name="email" placeholder="Email">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <span class="form-label">Password</span>
-                                <input class="form-control" type="password" placeholder="Password">
+                                <input class="form-control" name="password" type="password" placeholder="Password">
                             </div>
                         </div>
                     </div>
+                    <?=$data["error"]?>
                     <div class="row">
                         <div class="col-md-3">
                             </div>

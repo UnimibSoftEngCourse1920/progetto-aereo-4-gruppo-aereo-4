@@ -61,22 +61,6 @@
             </div>
         </div>
 	</div>
-    <style>
-        .navbar-dark .navbar-toggler .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,<svg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='rgba(102, 102, 102, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/></svg>");
-        }
-        .navbar:after {
-            display: block;
-            content: '';
-            width: 700px;
-            height: 500px;
-            top: 0;
-            left: 0;
-            position: absolute;
-            transform: translate(-50%, -50%);
-            background: radial-gradient(rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0) 70%);
-        }
-    </style>
 	<?php include("../app/template/footer.php") ?>
 </body>
 
