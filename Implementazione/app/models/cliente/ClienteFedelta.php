@@ -13,8 +13,8 @@ class ClienteFedelta extends Cliente{
     private $password;
     private $stato;
 
-    public function __construct($nome, $cognome, $email, $dataNascita, $codiceFedelta, $indirizzo, $username, $password, $OID){
-            parent::__construct($OID, $nome, $cognome, $email, $dataNascita);
+    public function __construct($nome, $cognome, $email, $dataNascita, $codiceFedelta, $indirizzo, $username, $password){
+            parent::__construct($nome, $cognome, $email, $dataNascita);
             $this->codiceFedelta = $codiceFedelta;
             $this->indirizzo = $indirizzo;
             $this->username = $username;

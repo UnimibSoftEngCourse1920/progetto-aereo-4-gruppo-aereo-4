@@ -7,8 +7,8 @@ class Cliente{
     protected $email;
     protected $dataNascita;
 
-    public function __construct($OID, $nome, $cognome, $email, $dataNascita){
-        $this->OID = $OID;
+    public function __construct($nome, $cognome, $email, $dataNascita){
+        $this->OID = OIDGenerator::getIstance()->getNewOID();
         $this->nome = $nome;
         $this->cognome = $cognome;
         $this->email = $email;
