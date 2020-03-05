@@ -16,7 +16,7 @@ class RegistroClienti
 
     public function checkEmailClienteFedelta($email)
     {
-        $mailExists = DB::getIstance() -> emailFedeltaExists($email);
+        $mailExists = DBFacade::getIstance() -> emailFedeltaExists($email);
         return $mailExists;
     }
 
@@ -32,7 +32,7 @@ class RegistroClienti
         $codice = $this -> generaCodiceFedelta();
         $OID = OIDGenerator::getIstance()->getNewOID();
         $nuovoCliente = new ClienteFedelta($nome, $cognome, $email, $dataNascita, $codice, $indirizzo, $username, $password, $OID);
-        $esito = DB::getIstance() -> put($nuovoCliente);
+        $esito = DBFacade::getIstance() -> put($nuovoCliente);
         //devo controllare che esito mi ritorna il DB e tornarlo al controller
         //per ora ritorno sempre true
         if ($esito)
@@ -43,22 +43,22 @@ class RegistroClienti
 
     public function getCliente($codiceFedelta){
         //per ora è deprecated
-        return DB::getIstance() -> get($codiceFedelta);
+        return DBFacade::getIstance() -> get($codiceFedelta);
     }
 
     public function annullaIscrizione($codiceFedelta){
-        $db = DB::getIstance();
+        $db = DBFacade::getIstance();
         $cliente = $db->get($codiceFedelta);
         if ($cliente != null) {
             $cliente->annullaIscrizioneFedelta();
-            DB::getIstance()->update($cliente);
+            DBFacade::getIstance()->update($cliente);
             //cosa faccio se non va a buon fine
         }
         return $cliente;
     }
 
     public function avvisaCliente($OID, $tipologiaAvviso){
-        $cliente = DB::getIstance()->get($OID);
+        $cliente = DBFacade::getIstance()->get($OID);
 
         switch ($tipologiaAvviso){
             case RegistroClienti::$AVVISACANCELLAZIONEFEDELTA:
@@ -73,20 +73,20 @@ class RegistroClienti
     }
 
     public function setClienteInfedele($OID){
-        $cli = DB::getIstance()->get($OID);
+        $cli = DBFacade::getIstance()->get($OID);
         $cli->setStato(ClienteFedelta::$STATOINFEDELE);
-        DB::getIstance()->update($cli);
+        DBFacade::getIstance()->update($cli);
         //ritorno esito di tutte le op.
         return true;
     }
 	
 	/*public function getCliente($idCliente) {
-		$cliente = DB::getIstance()->getCliente($idCliente);
+		$cliente = DBFacade::getIstance()->getCliente($idCliente);
 		return $cliente;
 	}*/
 		
 	public function aggiornaCliente($cliente) {
-		DB::getIstance()->aggiornaCliente($cliente);
+		DBFacade::getIstance()->aggiornaCliente($cliente);
 	}
 
 }

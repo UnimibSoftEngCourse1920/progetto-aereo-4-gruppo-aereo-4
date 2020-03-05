@@ -68,7 +68,7 @@ class ClienteController extends Controller{
     }
 
     public function avvisaPromozioniFedelta() {
-        $listaClienti = DB::getIstance()->getClientiFedelta();
+        $listaClienti = DBFacade::getIstance()->getClientiFedelta();
         $listaPromozioni = $this->registroPromozioni->getPromozioniFedelta();
         $this->mailer->avvisaClientiPromozioni($listaClienti, $listaPromozioni);
     }

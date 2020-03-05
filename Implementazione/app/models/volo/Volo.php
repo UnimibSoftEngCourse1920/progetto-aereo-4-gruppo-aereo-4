@@ -18,7 +18,7 @@ class Volo {
     private $listaPosti; //posti del volo
 
     public function __construct($dataOraPartenza, $dataOraArrivo, $AereoportoPart, $AereoportArr, $Aereo){
-        //$database = DB::getIstance();
+        //$database = DBFacade::getIstance();
         //$this->OID = OIDGenerator::getIstance()->getNewOID();
         //$this->OID = $data; //Per test
         $this->dataOraPartenza = $dataOraPartenza;
@@ -108,7 +108,7 @@ class Volo {
                 if ($posto->isOccupato() == 0) { //se non è occupato
                     $posto->cambiaStato(); //lo occupo
                     array_push($listaPostiPrenotati,$posto); //lo aggiungo alla lista dei posti prenotati
-                    DB::getIstance()->update($posto); //aggiorno anche sul DB
+                    DBFacade::getIstance()->update($posto); //aggiorno anche sul DB
                     $postiRimanenti--; // diminuisco i posti da prenotare
                 }
             }
