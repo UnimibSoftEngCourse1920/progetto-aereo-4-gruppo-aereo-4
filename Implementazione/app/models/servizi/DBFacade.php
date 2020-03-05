@@ -80,6 +80,10 @@ class DBFacade{
         $this->gestori['Volo']->getVoli($partenza, $destinazione, $data, $nPosti);
     }
 
+    public function getPrenotazioniScadute($ore){
+        $this->gestori['Prenotazione'] -> getScadute($ore);
+    }
+
 }
 
 

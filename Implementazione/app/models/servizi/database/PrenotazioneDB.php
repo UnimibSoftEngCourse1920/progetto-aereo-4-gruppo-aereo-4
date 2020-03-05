@@ -36,4 +36,11 @@ class PrenotazioneDB extends AbstractDB
         foreach($obj->getAcquisti() as $acquisto)
             $query .= sprintf("UPDATE PrenotazioneAcquisto  SET acquisto = '%s' where OID = '%s';",$acquisto->getOID() ,$obj->getOID());
     }
+
+    public function getScadute($ore){
+        $query = "select * from Prenotazione where OID NOT IN (select OID from PrenotazioneAcquisto) AND TIMESTAMPDIFF(HOUR, p.dataora, NOW()) >= '$ore'";
+        $stmt = $this->connection->query($query);
+        $listaPrenotazioni = $stmt->fetchAll(PDO::FETCH_CLASS, "Volo");
+        return $listaPrenotazioni;
+    }
 }
