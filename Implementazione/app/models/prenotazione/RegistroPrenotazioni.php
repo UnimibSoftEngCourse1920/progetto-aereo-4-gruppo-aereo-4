@@ -90,6 +90,10 @@ class RegistroPrenotazioni{
 	public function aggiornaPrenotazione($prenotazione) {
 		DB::getIstance()->aggiornaPrenotazione($prenotazione);
 	}
+
+	public function cancellaPrenotazioniScadute(){
+        \model\servizi\DBFacade::getIstance() -> getPrenotazioniScadute(24);
+    }
 	
 }
 ?>
