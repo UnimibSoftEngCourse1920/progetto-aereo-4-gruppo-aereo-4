@@ -27,15 +27,15 @@ class ClienteDB extends AbstractDB
             $password = $object-> getPassword();
         }
 
-        $query = "INSERT INTO Cliente VALUES($object->getOID(),
-                                             $object->getNome(),
-                                             $object->getCognome(),
-                                             $object->getDataNascita(),
-                                             $indirizzo,
-                                             $codiceFedelta,
-                                             $stato,
-                                             $password
-                                             $object->getEmail() 
+        $query = "INSERT INTO Cliente VALUES('$object->getOID()',
+                                             '$object->getNome()',
+                                             '$object->getCognome()',
+                                             '$object->getDataNascita()',
+                                             '$indirizzo',
+                                             '$codiceFedelta',
+                                             '$stato',
+                                             '$password'
+                                             '$object->getEmail()' 
                                              );";
     }
 

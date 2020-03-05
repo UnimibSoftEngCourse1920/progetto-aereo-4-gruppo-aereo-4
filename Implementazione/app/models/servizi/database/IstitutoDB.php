@@ -8,6 +8,6 @@ class IstitutoDB
 {
     public function generateCreateQuery($obj){
         return "INSERT INTO IstitutoDiCredito
-                VALUES ($obj->getOID(), $obj->getNome())";
+                VALUES ('$obj->getOID()', '$obj->getNome()')";
     }
 }

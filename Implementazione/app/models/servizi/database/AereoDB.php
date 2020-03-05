@@ -8,7 +8,7 @@ class AereoDB extends AbstractDB
 {
     protected function generatePutQuery($obj){
         return "INSERT INTO Aereo 
-                VALUES ($obj->getOID(), $obj->getNumeroPosti(), $obj->getNumeroSerie(), $obj->getMarcaModello())";
+                VALUES ('$obj->getOID()', $obj->getNumeroPosti(), '$obj->getNumeroSerie()', '$obj->getMarcaModello()')";
     }
 
     protected function generateUpdateQuery($obj){

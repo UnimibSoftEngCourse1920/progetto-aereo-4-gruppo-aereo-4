@@ -8,6 +8,6 @@ class ImpiegatoDB
 {
     protected function generateCreateQuery($obj){
         return "INSERT INTO Impiegato 
-                VALUES ($obj->getOID(), $obj->getNome(), $obj->getCognome(), $obj->getUsername(), $obj->getPassword())";
+                VALUES ('$obj->getOID()', '$obj->getNome()', '$obj->getCognome()', '$obj->getUsername()', '$obj->getPassword()')";
     }
 }
