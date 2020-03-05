@@ -1,8 +1,6 @@
 <?php
 
-
-namespace model\cliente;
-
+require_once __DIR__ . "/Cliente.php";
 
 class ClienteFedelta extends Cliente{
 

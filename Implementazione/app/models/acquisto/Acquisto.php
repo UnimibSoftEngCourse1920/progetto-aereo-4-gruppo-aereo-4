@@ -1,8 +1,5 @@
 <?php
 
-namespace model\acquisto;
-
-use model\servizi\OIDGenerator;
 
 abstract class MetodoPagamento
 {

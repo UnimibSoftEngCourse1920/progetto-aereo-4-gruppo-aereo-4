@@ -1,8 +1,5 @@
 <?php
 
-namespace model\acquisto\pagamento;
-
-use model\servizi\OIDGenerator;
 
 class IstitutoDiCredito
 {
@@ -31,7 +28,7 @@ class IstitutoDiCredito
 		if(mt_rand() / mt_getrandmax() <= 0.8) {
 			return true;
 		} else {
-			return false
+			return false;
 		}
 	}
 }

@@ -17,23 +17,23 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="login-form col-md-6">
-                <form>
+                <form action="" method="post">
                     <div class="container">
                         <div class="row text-center mb-3">
-                            <h2>Accedi alla tua area riservata</h2>
+                            <h2>Accedi al pannello di amministrazione</h2>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <span class="form-label">E-mail:</span>
-                                <input class="form-control" type="text" placeholder="Email">
+                                <span class="form-label">Username</span>
+                                <input class="form-control" type="text" name="username" placeholder="Username">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <span class="form-label">Password</span>
-                                <input class="form-control" type="password" placeholder="Password">
+                                <input class="form-control" type="password" name="password" placeholder="Password">
                             </div>
                         </div>
                     </div>
@@ -47,19 +47,6 @@
                         </div>
                     </div>
                 </form>
-                <hr>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <span style="font-size:10px;"> OPPURE </span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center pt-2">
-                            <a href="/public/cliente/registrazione" style="font-size:20px;"> Registrati </a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

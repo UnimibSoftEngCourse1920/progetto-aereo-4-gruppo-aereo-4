@@ -1,11 +1,5 @@
 <?php
 
-
-namespace model\volo;
-
-use model\servizi\DB;
-
-
 class RegistroVoli{
 
     public static $AVVISAMODIFICAVOLO='MODIFICA';
@@ -54,7 +48,7 @@ class RegistroVoli{
     }
 	
 	public function cercaVoli($partenza, $destinazione, $data, $nPosti) {
-		$voli = DB::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
+		//$voli = DB::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
 		return $voli;
 	}
 	

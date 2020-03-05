@@ -1,12 +1,5 @@
 <?php
 
-
-namespace model\volo;
-
-
-use model\servizi\DB;
-use model\servizi\OIDGenerator;
-
 class Volo{
     private $OID;
     private $data;

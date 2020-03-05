@@ -1,8 +1,6 @@
 <?php
 
-
-namespace model\acquisto\pagamento;
-
+require_once __DIR__ . "/Pagamento.php";
 
 class PagamentoconPunti extends Pagamento{
 	

@@ -1,13 +1,9 @@
 <?php
 
-
-namespace controller;
-
-use model\cliente\RegistroClienti;
-use model\prenotazione\RegistroPrenotazioni;
-use model\servizi\Mailer;
-use model\volo\RegistroPromozioni;
-
+require_once __DIR__ . "/../models/servizi/Mailer.php";
+require_once __DIR__ . "/../models/cliente/RegistroClienti.php";
+require_once __DIR__ . "/../models/prenotazione/RegistroPrenotazioni.php";
+require_once __DIR__ . "/../core/Controller.php";
 
 class ClienteController extends Controller{
 
@@ -68,10 +64,19 @@ class ClienteController extends Controller{
         }
     }
 
+<<<<<<< HEAD
     public function avvisaPromozioniFedelta(){
         $listaClienti = DB::getIstance()->getClientiFedelta();
         $listaPromozioni = $this->registroPromozioni->getPromozioniFedelta();
         $this->mailer -> avvisaClientiPromozioni($listaClienti, $listaPromozioni);
+=======
+    public function login() {
+        $this->view('cliente/login');
+    }
+
+    public function registrazione() {
+        $this->view('cliente/registrazione');
+>>>>>>> 29ea33f6a4ea2601f6bc81a01f225a3209ead39c
     }
 
 }

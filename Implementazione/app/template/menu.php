@@ -6,7 +6,7 @@
                     <a href="<?php echo $dir ?>"> <span>Home</span> </a>
                 </div>
                 <div class="menu-account">
-                    <a href="<?php echo $dir ?>view/login.view.php">
+                    <a href="/public/cliente/login">
                         <span> <i class="fas fa-user"></i> Login / Registrati </span>
                     </a>
                 </div>

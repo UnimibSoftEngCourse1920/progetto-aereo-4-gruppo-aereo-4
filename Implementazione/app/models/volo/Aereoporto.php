@@ -1,11 +1,6 @@
 <?php
 
 
-namespace model\volo;
-
-
-use model\servizi\OIDGenerator;
-
 class Aereoporto{
 
     private $OID;

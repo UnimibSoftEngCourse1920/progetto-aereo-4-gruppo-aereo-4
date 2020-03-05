@@ -1,11 +1,6 @@
 <?php
 
 
-namespace model;
-
-
-use model\servizi\OIDGenerator;
-
 class Impiegato{
     private $nome;
     private $cognome;

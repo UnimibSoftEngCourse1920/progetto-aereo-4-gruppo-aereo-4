@@ -1,14 +1,15 @@
 <?php
 
-namespace controller;
+require_once __DIR__ . "/../core/Controller.php";
 
 class VenditaController extends Controller
 {
 	//TODO: DB
 	public function consultaVoli($partenza, $destinazione, $data, $nPosti) {
-		$registro = $this->model('RegistroVoli');
+	    var_dump($partenza . " " . $destinazione . " " . $data . " " . $nPosti);
+		$registro = $this->model('volo/RegistroVoli');
 		$voli = $registro->cercaVoli($partenza, $destinazione, $data, $nPosti);
-		$this->view('vendita/consulta', $voli);
+		$this->view('vendita/consulta', json_encode($voli));
 	}
 	
 	//TODO: DB e restituire voli anziché date

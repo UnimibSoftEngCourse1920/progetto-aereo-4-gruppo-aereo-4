@@ -1,14 +1,6 @@
 <?php
 
-
-namespace controller;
-
-use model\prenotazione\RegistroPrenotazioni;
-use model\servizi\DB;
-use model\servizi\Mailer;
-use model\volo\RegistroVoli;
-
-
+require_once __DIR__ . "/../core/Controller.php";
 
 class VoloController extends Controller {
 

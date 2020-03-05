@@ -1,5 +1,6 @@
 <?php
 
+
 namespace model\acquisto\pagamento;
 
 use model\servizi\OIDGenerator;
@@ -32,9 +33,7 @@ abstract class Pagamento{
         return $this->importo;
     }
 
+    public abstract function effettua($cliente){}
 
-
-
-    public function effettua($cliente){}
 	
 } 

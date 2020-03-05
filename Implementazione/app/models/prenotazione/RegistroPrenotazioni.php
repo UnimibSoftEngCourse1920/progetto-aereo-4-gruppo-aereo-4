@@ -1,11 +1,5 @@
 <?php
 
-namespace model\prenotazione;
-
-use model\servizi\DB;
-use model\volo\RegistroVoli;
-use model\volo\Volo;
-
 abstract class Tariffa
 {
     const Standard = "standard";
