@@ -8,6 +8,13 @@ abstract class Tariffa
 
 class RegistroPrenotazioni{
 
+    private $mailer;
+
+    public function __construct()
+    {
+        $this->mailer = new Mailer();
+    }
+
     public function getClientiVolo($OIDVolo){
         $listaClienti = DB::getIstance() -> getClientiVolo($OIDVolo);
         return $listaClienti;
@@ -92,7 +99,16 @@ class RegistroPrenotazioni{
 	}
 
 	public function cancellaPrenotazioniScadute(){
-        \model\servizi\DBFacade::getIstance() -> getPrenotazioniScadute(24);
+        $listaPrenotazioni = \model\servizi\DBFacade::getIstance() -> getPrenotazioniScaduteIn(72);
+        $listaClienti = array();
+        foreach ($listaPrenotazioni as $prenotazione){
+            \model\servizi\DBFacade::getIstance()->delete($prenotazione->getOID(), "Prenotazione");
+        }
+
+        $listaPrenotazioni = \model\servizi\DBFacade::getIstance() -> getPrenotazioniScaduteIn(96);
+        foreach ($listaPrenotazioni as $prenotazione)
+            $listaClienti[] = $prenotazione->getCliente()->getEmail();
+        $this->mailer->avvisaPrenotazioneInScadenza($listaClienti);
     }
 	
 }

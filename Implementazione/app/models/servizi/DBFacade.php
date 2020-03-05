@@ -24,7 +24,9 @@ class DBFacade{
 
     private function __construct(){
         //factory ??
-        $this->gestori['Cliente'] = new ClienteDB();
+        $cli = new ClienteDB();
+        $this->gestori['Cliente'] = $cli;
+        $this->gestori['ClienteFedelta'] = $cli;
         $this->gestori['Acquisto'] = new AcquistoDB();
         $this->gestori['Aereo'] = new AereoDB();
         $this->gestori['Aereoporto'] = new AereoportoDB();
@@ -69,20 +71,24 @@ class DBFacade{
         //return substr(strrchr(get_class($class), "\\"), 1);
     }
 
+    public function getAll($class){
+        return $this->gestori[$class] ->getAll($class);
+    }
+
     //Metodi Facade
 
     public function emailExists($email){
-        //Cerca sul DB se c'è un cliente fedeltà con quella email
-        //ritorna boolean
+        return $this->gestori['Cliente'] -> emailExists($email);
     }
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
-        $this->gestori['Volo']->getVoli($partenza, $destinazione, $data, $nPosti);
+        return $this->gestori['Volo']->getVoli($partenza, $destinazione, $data, $nPosti);
     }
 
-    public function getPrenotazioniScadute($ore){
-        $this->gestori['Prenotazione'] -> getScadute($ore);
+    public function getPrenotazioniScaduteIn($ore){
+        return $this->gestori['Prenotazione'] -> getScadute($ore);
     }
+
 
 }
 

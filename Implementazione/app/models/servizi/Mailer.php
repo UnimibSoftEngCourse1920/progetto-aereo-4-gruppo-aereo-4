@@ -66,6 +66,10 @@ class Mailer{
         mail($this->generateRecipients($listaClienti), 'Scopri le nuove promozioni', 'Lista promozioni');
     }
 
+    public function avvisaPrenotazioneInScadenza($listaClienti){
+        mail($this->generateRecipients($listaClienti), "Prenotazione cancellata", "La tua prenotazione è stata cancellata");
+    }
+
     private function generateRecipients($listaClienti){
         $recipients = array();
         foreach ($listaClienti as $cliente){
