@@ -1,15 +1,14 @@
 <?php
 
-require_once __DIR__ . "/../core/Controller.php";
+require_once "../app/core/Controller.php";
 
 class VenditaController extends Controller
 {
 	//TODO: DB
 	public function consultaVoli($partenza, $destinazione, $data, $nPosti) {
-	    var_dump($partenza . " " . $destinazione . " " . $data . " " . $nPosti);
 		$registro = $this->model('volo/RegistroVoli');
 		$voli = $registro->cercaVoli($partenza, $destinazione, $data, $nPosti);
-		$this->view('vendita/consulta', json_encode($voli));
+		$this->view('vendita/consulta', ["voli" => $voli]);
 	}
 	
 	//TODO: DB e restituire voli anziché date
@@ -27,11 +26,11 @@ class VenditaController extends Controller
 		$cliente = $registroClienti->getCliente($idCliente);
 		$prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
 		$volo = $prenotazione->getVolo();
-		$nuovoVolo = $registroVoli->getVolo($idVolo);
+		$nuovoVolo = $registroVoli->getVolo($idNuovoVolo);
 		$esitoCambioData = $registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta);
 		if($esitoCambioData) {
 			//Aggiornare prenotazione (anche biglietti e acquisto), cliente, volo vecchio e volo nuovo per i posti
-			$registroPrenotazione->generaBiglietti($prenotazione, $cliente);
+            $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
 			$registroPrenotazioni->aggiornaPrenotazione($prenotazione);
 			$registroClienti->aggiornaCliente($cliente);
 			$registroVoli->aggiornaVolo($volo);
@@ -50,7 +49,7 @@ class VenditaController extends Controller
 		$prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
 		$esitoPagamento = $registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
 		if($esitoPagamento) {
-			$registroPrenotazione->generaBiglietti($prenotazione, $cliente);
+            $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
 			$registroPrenotazioni->aggiornaPrenotazione($prenotazione);
 			$registroClienti->aggiornaCliente($cliente);
 			//TODO: view con successo

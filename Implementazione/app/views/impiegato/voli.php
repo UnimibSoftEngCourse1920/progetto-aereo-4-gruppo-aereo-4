@@ -20,7 +20,7 @@
                 <div class="row text-center mb-3">
                     <div class="col-md-3">
                         <a href="admin">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#nuovoVoloModal"> <i class="fas fa-arrow-left"></i> Indietro </button>
+                            <button class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Indietro </button>
                         </a>
                     </div>
                     <div class="col-md-6">
@@ -91,38 +91,45 @@
             <div class="modal fade" id="nuovoVoloModal" tabindex="-1" role="dialog" aria-labelledby="nuovoVoloModal" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Nuovo volo</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="title">Partenza</label>
-                                <input type="text" class="form-control" id="title" placeholder="">
+                        <form action="inserisciVolo" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Nuovo volo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
                             </div>
-                            <div class="form-group">
-                                <label for="dataset">Destinazione</label>
-                                <input type="text" class="form-control" id="dataset" placeholder="">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="model">Ora di partenza</label>
+                                    <input type="time" class="form-control" name="orapartenza" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="model">Ora di arrivo</label>
+                                    <input type="time" class="form-control" name="oraarrivo" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="model">Data</label>
+                                    <input type="date" class="form-control" name="data" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Partenza</label>
+                                    <input type="text" class="form-control" name="partenza" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dataset">Destinazione</label>
+                                    <input type="text" class="form-control" name="destinazione" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Codice Aereo</label>
+                                    <input type="text" class="form-control" name="aereo" placeholder="">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="model">Miglia</label>
-                                <input type="text" class="form-control" id="model" placeholder="">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
+                                <button type="submit" class="btn btn-success">Salva</button>
                             </div>
-                            <div class="form-group">
-                                <label for="model">Data</label>
-                                <input type="date" class="form-control" id="model" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="model">Ora</label>
-                                <input type="time" class="form-control" id="model" placeholder="">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal" id="add-request">Salva</button>
-                        </div>
+
+                        </form>
                     </div>
                 </div>
             </div>

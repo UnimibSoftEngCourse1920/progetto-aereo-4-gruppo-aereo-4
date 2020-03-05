@@ -64,19 +64,18 @@ class ClienteController extends Controller{
         }
     }
 
-<<<<<<< HEAD
-    public function avvisaPromozioniFedelta(){
+    public function avvisaPromozioniFedelta() {
         $listaClienti = DB::getIstance()->getClientiFedelta();
         $listaPromozioni = $this->registroPromozioni->getPromozioniFedelta();
-        $this->mailer -> avvisaClientiPromozioni($listaClienti, $listaPromozioni);
-=======
+        $this->mailer->avvisaClientiPromozioni($listaClienti, $listaPromozioni);
+    }
+
     public function login() {
         $this->view('cliente/login');
     }
 
     public function registrazione() {
         $this->view('cliente/registrazione');
->>>>>>> 29ea33f6a4ea2601f6bc81a01f225a3209ead39c
     }
 
 }
