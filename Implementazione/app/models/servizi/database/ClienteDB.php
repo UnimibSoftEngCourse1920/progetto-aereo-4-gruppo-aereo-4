@@ -2,6 +2,7 @@
 
 
 namespace model\servizi;
+require_once("AbstractDB.php");
 
 use model\cliente\Cliente;
 use model\cliente\ClienteFedelta;
@@ -10,33 +11,19 @@ use model\cliente\ClienteFedelta;
 class ClienteDB extends AbstractDB
 {
 
-    public function get($OID){
-        $query = "Select * from Cliente where OID = '$OID'";
-        $statement = $this->connection->prepare($query);
-        $statement->execute();
-        
-    }
-
     public function generatePutQuery($object)
     {
         $indirizzo = $codiceFedelta = $stato = $password = null;
-        if($object->isClienteFedelta()){
+        if($this->getClassName($object) == 'ClienteFedelta'){
             $indirizzo = $object->getIndirizzo();
             $codiceFedelta = $object-> getCodiceFedelta();
             $stato = $object->getStato();
             $password = $object-> getPassword();
         }
 
-        $query = "INSERT INTO Cliente VALUES('$object->getOID()',
-                                             '$object->getNome()',
-                                             '$object->getCognome()',
-                                             '$object->getDataNascita()',
-                                             '$indirizzo',
-                                             '$codiceFedelta',
-                                             '$stato',
-                                             '$password'
-                                             '$object->getEmail()' 
-                                             );";
+        $query = "INSERT INTO Cliente VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s');";
+
+        return sprinft($query, $object->getOID(), $object->getNome(), $object->getCognome(), $object->getDataNascita(), $indirizzo, $codiceFedelta, $stato, $password, $object->getEmail());
     }
 
 }

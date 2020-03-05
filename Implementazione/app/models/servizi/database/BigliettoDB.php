@@ -2,12 +2,14 @@
 
 
 namespace model\servizi;
+require_once("AbstractDB.php");
 
 
 class BigliettoDB extends AbstractDB{
 
     protected function generatePutQuery($obj){
-        return "INSERT INTO Biglietto 
-                VALUES ('$obj->getOID()', '$obj->getTariffa()', '$obj->getNominativo()')";
+        $query = "INSERT INTO Biglietto VALUES ('%s', '%s', '%s')";
+        return sprintf($query,$obj->getOID() , $obj->getTariffa(), $obj->getNominativo());
+
     }
 }

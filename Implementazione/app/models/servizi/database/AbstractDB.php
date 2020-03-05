@@ -21,7 +21,7 @@ abstract class AbstractDB
         }
     }
 
-    protected function get($OID, $class){
+    public function get($OID, $class){
         //Ad ora non vale per cliente
 
         $stmt = $this->connection->prepare($this->generateGetQuery()); //manca la query
@@ -31,17 +31,17 @@ abstract class AbstractDB
         return $obj = $stmt->fetchAll();
     }
 
-    protected function delete($OID, $class){
+    public function delete($OID, $class){
         $result = $this->connection->exec($this->generateDeleteQuery($OID, $class));
         return $result;
     }
 
-    protected function update($object){
+    public function update($object){
         $result = $this->connection->exec($this->generateUpdateQuery($object));
         return $result;
     }
 
-    protected function put($object){
+    public function put($object){
         $result = $this->connection->exec($this->generatePutQuery($object));
         return $result;
     }

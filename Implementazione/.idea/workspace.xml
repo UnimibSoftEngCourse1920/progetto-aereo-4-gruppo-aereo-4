@@ -2,7 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c0c4cbf-8d77-49a9-967c-4ff2964d93f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/models/servizi/Mailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/Mailer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/models/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/DBFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/DBFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/AbstractDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/AbstractDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/AcquistoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/AcquistoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/AereoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/AereoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/AereoportoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/AereoportoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/BigliettoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/BigliettoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/ClienteDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/ClienteDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/ImpiegatoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/ImpiegatoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/IstitutoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/IstitutoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/PagamentoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/PagamentoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/PostoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/PostoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/PrenotazioneDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/PrenotazioneDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/PromozioneDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/PromozioneDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/VoloDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/VoloDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/volo/Aereoporto.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/volo/Aereoporto.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,9 +74,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/models/prenotazione" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/models" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/models" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/models/servizi" />
       <recent name="$PROJECT_DIR$/app/models/servizi/database" />

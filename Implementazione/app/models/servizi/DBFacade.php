@@ -3,24 +3,24 @@
 
 namespace model\servizi;
 
-//Require di tutto il sottopackage database
-use model\acquisto\Acquisto;
-use model\servizi\database\ImpiegatoDB;
-use model\servizi\database\IstitutoDB;
-use model\volo\Volo;
-
-$folder =   "./database/";
-$files = glob($folder."*.php");
-foreach($files as $phpFile){
-    require_once("$phpFile");
-}
+require_once("./database/AcquistoDB.php");
+require_once("./database/AereoDB.php");
+require_once("./database/AereoportoDB.php");
+require_once("./database/BigliettoDB.php");
+require_once("./database/ClienteDB.php");
+require_once("./database/ImpiegatoDB.php");
+require_once("./database/IstitutoDB.php");
+require_once("./database/PagamentoDB.php");
+require_once("./database/PostoDB.php");
+require_once("./database/PrenotazioneDB.php");
+require_once("./database/PromozioneDB.php");
+require_once("./database/VoloDB.php");
 
 
 class DBFacade{
+
     private static $instance = null;
-
     private $gestori = array();
-
 
     private function __construct(){
         //factory ??
@@ -60,8 +60,13 @@ class DBFacade{
         return $returnObject;
     }
 
+    public function delete($OID, $class){
+        $this->gestori[$this->getClassName($class)] -> delete($OID);
+    }
+
     private function getClassName($class){
-        return substr(strrchr(get_class($class), "\\"), 1);
+        return get_class($class);
+        //return substr(strrchr(get_class($class), "\\"), 1);
     }
 
     //Metodi Facade

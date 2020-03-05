@@ -2,18 +2,21 @@
 
 
 namespace model\servizi;
+require_once("AbstractDB.php");
 
 
 class AereoDB extends AbstractDB
 {
     protected function generatePutQuery($obj){
-        return "INSERT INTO Aereo 
-                VALUES ('$obj->getOID()', $obj->getNumeroPosti(), '$obj->getNumeroSerie()', '$obj->getMarcaModello()')";
+        $query = "INSERT INTO Aereo 
+                    VALUES ('%s', %d , '%s', '%s')";
+        return spirntf($query, $obj->getOID(), $obj->getNumeroPosti(), $obj->getNumeroSerie(), $obj->getMarcaModello());
     }
 
     protected function generateUpdateQuery($obj){
-        return "UPDATE ".$this->getClassName($obj)." 
-                SET marcaModello = '$obj->marcaModello', numeroPosti = $obj->numeroPosti, numeroSerie = '$obj->numeroSerie'
-                WHERE OID = '$obj->OID'";
+        $query = "UPDATE ".$this->getClassName($obj)." 
+                    SET marcaModello = '%s', numeroPosti = , numeroSerie = '%s'
+                    WHERE OID = '$obj->OID'";
+        return sprintf($query, $obj->getMarcaModello(), $obj->getNumeroPosti(), $obj->getNumeroSerie());
     }
 }
