@@ -28,16 +28,16 @@
                                 <h5>Dettagli Volo</h5>
                             </div>
                             <div class="col-md-6 p-0">
-                                <b>Da:</b>
+                                <b>Da:</b> <?=$data["volo"]->getAeroportoPartenza()?>
                             </div>
                             <div class="col-md-6 ">
-                                <b>A:</b>
+                                <b>A:</b> <?=$data["volo"]->getAeroportoDestinazione()?>
                             </div>
                             <div class="col-md-6 p-0">
-                                <b>Il giorno:</b>
+                                <b>Il giorno:</b> <?=$data["volo"]->getData()?>
                             </div>
                             <div class="col-md-6 ">
-                                <b>Alle ore:</b>
+                                <b>Alle ore:</b> <?=$data["volo"]->getOrarioPartenza()?>
                             </div>
                         </div>
                     </div>

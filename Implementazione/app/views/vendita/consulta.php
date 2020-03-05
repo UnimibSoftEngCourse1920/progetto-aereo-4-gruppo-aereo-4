@@ -38,7 +38,11 @@
                         <td><?=$volo->getOrarioPartenza()?></td>
                         <td><?=$volo->getData()?></td>
                         <td><?=$volo->getPrezzoBiglietto()?></td>
-                        <td><button class="btn btn-select-flight"> Scegli questo volo <i class="fas fa-arrow-right"></i> </button></td>
+                        <td>
+                            <a href="/public/prenotazione/prenota/<?=$volo->getOID()?>"">
+                                <button class="btn btn-select-flight"> Scegli questo volo <i class="fas fa-arrow-right"></i> </button>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
                 <?php }?>

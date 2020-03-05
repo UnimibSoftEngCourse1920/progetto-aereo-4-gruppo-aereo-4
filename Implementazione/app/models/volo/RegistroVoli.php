@@ -64,7 +64,8 @@ class RegistroVoli{
 	}
 	
 	public function getVolo($idVolo) {
-		$volo = DB::getIstance()->getVolo($idVolo);
+		//$volo = DB::getIstance()->getVolo($idVolo);
+        $volo = new Volo("1", "1", "1", "1", "1", "1");
 		return $volo;
 	}
 	

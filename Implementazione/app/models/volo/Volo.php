@@ -21,6 +21,7 @@ class Volo {
     public function __construct($orarioPartenza, $orarioArrivo, $data, $AereoportoPart, $AereoportArr, $Aereo){
         //$database = DB::getIstance();
         //$this->OID = OIDGenerator::getIstance()->getNewOID();
+        $this->OID = $data; //Per test
         $this->orarioPartenza = $orarioPartenza;
         $this->orarioArrivo = $orarioArrivo;
         $this->data = $data;
