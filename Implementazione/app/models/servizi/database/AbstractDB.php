@@ -1,10 +1,10 @@
 <?php
 
 
-namespace model\servizi;
+//namespace model\servizi;
 
-use PDO;
-
+//use PDO;
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aereoporto.php";
 
 abstract class AbstractDB
 {
@@ -73,6 +73,6 @@ abstract class AbstractDB
     }
 
     protected function generateGetAllQuery($class){
-        return "SELECT * from $class";
+        return "SELECT * from ".$class;
     }
 }

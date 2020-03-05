@@ -1,9 +1,12 @@
 <?php
 
+
+
 require_once __DIR__ . "/../core/Controller.php";
 require_once __DIR__ . "/../models/volo/RegistroVoli.php";
 require_once __DIR__ . "/../models/prenotazione/RegistroPrenotazioni.php";
 require_once __DIR__ . "/../models/servizi/Mailer.php";
+require_once __DIR__ . "/../models/servizi/DBFacade.php";
 class VoloController extends Controller {
 
     private $registroVoli;
@@ -19,7 +22,9 @@ class VoloController extends Controller {
     }
 
     public function voli($name = '') {
-        $this->view('impiegato/voli');
+        $aeroporti = DBFacade::getIstance()->getAll("Aereoporto");
+        //var_dump($aeroporti);
+        $this->view('impiegato/voli',["aeroporti"=>$aeroporti]);
     }
 
     public function promozioni($name = '') {
@@ -32,17 +37,17 @@ class VoloController extends Controller {
         $this->mailer = new Mailer();
     }
 
-    public function modificaVolo($OIDVolo, $nuovaDataOraPart, $nuovaDataOraArr){
-        $voloMod = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataOraPart, $nuovaDataOraArr);
+    public function modificaVolo($OIDVolo, $nuovaData, $nuovoOrarioPart, $nuovoOrarioArr){
+        $voloMod = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaData, $nuovoOrarioPart, $nuovoOrarioArr);
         // vedo esito delle op. prima
         //
         $listaClienti = $this->registroPrenotazioni -> getClientiVolo($voloMod -> OIDVolo);
         $this->mailer -> inviaEmailModificaVolo($listaClienti, $voloMod);
     }
 
-    public function inserisciVolo($nuovaDataOraPart, $nuovaDataOraArr, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
+    public function inserisciVolo($giornopartenza, $giornoarrivo, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
         //manca esito operazione
-        $this->registroVoli -> inserisciVolo($nuovaDataOraPart, $nuovaDataOraArr, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo);
+        $this->registroVoli -> inserisciVolo($giornopartenza, $giornoarrivo,  $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo);
     }
 
     public function cancellaVolo($OIDVolo){

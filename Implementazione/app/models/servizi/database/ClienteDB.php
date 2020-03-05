@@ -1,7 +1,7 @@
 <?php
 
 
-namespace model\servizi;
+//namespace model\servizi;
 require_once("AbstractDB.php");
 
 use model\cliente\Cliente;
