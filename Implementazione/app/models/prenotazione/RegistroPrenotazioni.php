@@ -20,8 +20,11 @@ class RegistroPrenotazioni{
     public function effettuaPrenotazione($cliente,$codVolo,$numPosti,$tariffa){
         $univoca = DB::getIstance()->checkPrenotazioneUnivoca($cliente->email,$codVolo);
         if($univoca){
-            $disp = RegistroVoli::checkDisponibilitaPosti($numPosti,$codVolo);
+            $registroVoli = new RegistroVoli();
+            $disp = $registroVoli->checkDisponibilitaPosti($numPosti,$codVolo);
+
             if($disp){
+                $v = $registroVoli->getVolo($codVolo);
                 $nuovaPrenotazione = new Prenotazione($cliente,$codVolo,$numPosti,$tariffa,date("d/m/Y"));
                 $nuovaPrenotazione->registraPrenotazione();
                 $volo = DB::getIstance()->getVolo($codVolo);
@@ -90,10 +93,6 @@ class RegistroPrenotazioni{
 	public function aggiornaPrenotazione($prenotazione) {
 		DB::getIstance()->aggiornaPrenotazione($prenotazione);
 	}
-
-	public function cancellaPrenotazioniScadute(){
-        \model\servizi\DBFacade::getIstance() -> getPrenotazioniScadute(24);
-    }
 	
 }
 ?>

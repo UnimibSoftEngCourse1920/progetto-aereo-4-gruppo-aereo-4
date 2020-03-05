@@ -1,8 +1,5 @@
 <?php
 
-require_once('./models/servizi/OIDGenerator.php');
-require_once('./models/servizi/DBFacade.php');
-
 
 class Aereoporto{
 

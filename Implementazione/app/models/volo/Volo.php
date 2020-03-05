@@ -114,16 +114,36 @@ class Volo {
     public function prenota($numPosti){
         $postiRimanenti = $numPosti;
         $listaPostiPrenotati = array();
-        foreach ($this->listaPosti as $posto){
-            if($postiRimanenti>0) {
-                if ($posto->isOccupato() == 0) {
-                    $posto->cambiaStato();
-                    array_push($listaPostiPrenotati,$posto);
-                    $postiRimanenti--;
+        foreach ($this->listaPosti as $posto){ //per ogni posto del volo
+            if($postiRimanenti>0) { //controllo che ci siano ancora posti da prenotare
+                if ($posto->isOccupato() == 0) { //se non è occupato
+                    $posto->cambiaStato(); //lo occupo
+                    array_push($listaPostiPrenotati,$posto); //lo aggiungo alla lista dei posti prenotati
+                    DB::getIstance()->update($posto); //aggiorno anche sul DB
+                    $postiRimanenti--; // diminuisco i posti da prenotare
                 }
             }
 
         }
         return $listaPostiPrenotati;
     }
+
+    public function calcolaPrezzo($isFedelta){
+        $prezzo = $this->miglia/10;
+        if((isset($this->promozione))) { //se esiste una promozione per questo volo
+            //se è per fedeltà e cliente è fedeltà o non è per fedeltà
+            if (($this->promozione->promozioneFedelta && $isFedelta) || !$this->promozione->promozioneFedelta){
+                $sconto = $this->promozione->percentualeSconto;
+                $prezzo = $prezzo - (($prezzo*$sconto)/100);
+            } else {
+                $registroPromozioni = new RegistroPromozioni();
+                $migliorPromozione = $registroPromozioni->getMigliorePromozioneAttiva();
+                if (($migliorPromozione->promozioneFedelta && $isFedelta) || !$migliorPromozione->promozioneFedelta) {
+                    $prezzo = $prezzo - (($prezzo * $migliorPromozione->percentualeSconto) / 100);
+                }
+            }
+        }
+        return $prezzo;
+    }
+
 }
