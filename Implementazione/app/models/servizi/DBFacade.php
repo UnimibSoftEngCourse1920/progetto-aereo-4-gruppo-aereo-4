@@ -82,7 +82,7 @@ class DBFacade{
     }
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
-        return $this->gestori['Volo']->getVoli($partenza, $destinazione, $data, $nPosti);
+        return $this->gestori['Volo']->cercaVoli($partenza, $destinazione, $data, $nPosti);
     }
 
     public function getPrenotazioniScaduteIn($ore){
