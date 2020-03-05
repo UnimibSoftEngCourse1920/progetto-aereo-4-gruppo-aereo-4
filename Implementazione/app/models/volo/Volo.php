@@ -4,9 +4,8 @@ require_once "../app/models/servizi/DB.php";
 
 class Volo {
     private $OID;
-    private $data;
-    private $orarioPartenza;
-    private $orarioArrivo;
+    private $dataOraPartenza;
+    private $dataOraArrivo;
     private $stato;
     private $codiceVolo;
     private $miglia;
@@ -18,13 +17,12 @@ class Volo {
 
     private $listaPosti; //posti del volo
 
-    public function __construct($orarioPartenza, $orarioArrivo, $data, $AereoportoPart, $AereoportArr, $Aereo){
+    public function __construct($dataOraPartenza, $dataOraArrivo, $AereoportoPart, $AereoportArr, $Aereo){
         //$database = DB::getIstance();
         //$this->OID = OIDGenerator::getIstance()->getNewOID();
-        $this->OID = $data; //Per test
-        $this->orarioPartenza = $orarioPartenza;
-        $this->orarioArrivo = $orarioArrivo;
-        $this->data = $data;
+        //$this->OID = $data; //Per test
+        $this->dataOraPartenza = $dataOraPartenza;
+        $this->dataOraArrivo = $dataOraArrivo;
         //$this->miglia = $this->calcolaMiglia();
         $this->stato = 'ATTIVO';
         //codice volo??
@@ -40,29 +38,24 @@ class Volo {
         }*/
     }
 
-    public function setData($data){
-        //if($data >= date("Ymd"))
-            $this->data = $data;
+    public function setDataOraPartenza($dataOraPartenza){
+        $this->dataOraPartenza = $dataOraPartenza;
     }
 
-    public function setOrarioPartenza($orarioPartenza){
-        $this->orarioPartenza = $orarioPartenza;
-    }
-
-    public function setOrarioArrivo($orarioArrivo){
-        $this->orarioArrivo = $orarioArrivo;
+    public function setDataOraArrivo($dataOraArrivo){
+        $this->dataOraArrivo = $dataOraArrivo;
     }
 
     public function setStato($stato){
         $this->stato = $stato;
     }
 
-    public function getOrarioPartenza(){
-        return $this->orarioPartenza;
+    public function getDataOraPartenza(){
+        return $this->dataOraPartenza;
     }
 
-    public function getOrarioArrivo(){
-        return $this->orarioArrivo;
+    public function getDataOraArrivo(){
+        return $this->dataOraArrivo;
     }
 
     public function getAeroportoPartenza(){
@@ -75,10 +68,6 @@ class Volo {
 
     public function getOID() {
         return $this->OID;
-    }
-
-    public function getData() {
-        return $this->data;
     }
 
     public function getDisponibilitaPosti($numPosti){

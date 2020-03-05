@@ -32,17 +32,17 @@ class VoloController extends Controller {
         $this->mailer = new Mailer();
     }
 
-    public function modificaVolo($OIDVolo, $nuovaData, $nuovoOrarioPart, $nuovoOrarioArr){
-        $voloMod = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaData, $nuovoOrarioPart, $nuovoOrarioArr);
+    public function modificaVolo($OIDVolo, $nuovaDataOraPart, $nuovaDataOraArr){
+        $voloMod = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataOraPart, $nuovaDataOraArr);
         // vedo esito delle op. prima
         //
         $listaClienti = $this->registroPrenotazioni -> getClientiVolo($voloMod -> OIDVolo);
         $this->mailer -> inviaEmailModificaVolo($listaClienti, $voloMod);
     }
 
-    public function inserisciVolo($orarioPartenza, $orarioArrivo, $data, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
+    public function inserisciVolo($nuovaDataOraPart, $nuovaDataOraArr, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
         //manca esito operazione
-        $this->registroVoli -> inserisciVolo($orarioPartenza, $orarioArrivo, $data, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo);
+        $this->registroVoli -> inserisciVolo($nuovaDataOraPart, $nuovaDataOraArr, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo);
     }
 
     public function cancellaVolo($OIDVolo){

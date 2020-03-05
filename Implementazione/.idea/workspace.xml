@@ -2,24 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c0c4cbf-8d77-49a9-967c-4ff2964d93f8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/models/volo/CatalogoVoli.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/ClienteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ClienteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/PrenotazioneController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/PrenotazioneController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/VenditaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/VenditaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/init.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/cliente/Cliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/cliente/Cliente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/prenotazione/Prenotazione.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/prenotazione/Prenotazione.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/prenotazione/RegistroPrenotazioni.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/prenotazione/RegistroPrenotazioni.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/volo/Aereoporto.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/volo/Aereoporto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/volo/Posto.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/volo/Posto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/volo/Promozione.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/volo/Promozione.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/volo/RegistroPromozioni.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/volo/RegistroPromozioni.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/VoloController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/VoloController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/VoloDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/VoloDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/volo/RegistroVoli.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/volo/RegistroVoli.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/volo/Volo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/volo/Volo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/template/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/template/menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/cliente/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/cliente/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/home/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/prenotazione/prenotazione.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/prenotazione/prenotazione.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +105,7 @@
       <workItem from="1583351756208" duration="819000" />
       <workItem from="1583361431127" duration="2620000" />
       <workItem from="1583425514066" duration="2683000" />
-      <workItem from="1583431644134" duration="6171000" />
+      <workItem from="1583431644134" duration="8139000" />
     </task>
     <servers />
   </component>

@@ -8,7 +8,7 @@ class RegistroVoli{
     public static $AVVISAMODIFICAVOLO='MODIFICA';
     public static $AVVISACANCELLAZIONEVOLO='CANCELLAZIONE';
 
-    public function inserisciVolo($orarioPartenza, $orarioArrivo, $data, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
+    public function inserisciVolo($dataOraArrivo, $dataOraPart, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
         //controllo che i dati forniti siano validi
         //$codiceVolo = $this -> generaCodiceVolo($datiVolo); //Come viene generato? A questo punto ha senso generarlo?
 
@@ -18,15 +18,14 @@ class RegistroVoli{
         $aereoportoArr = $database->get($OIDAereoportArr);
         $aereo = $database->get($OIDAereo);
 
-        $nuovoVolo = new Volo($orarioPartenza, $orarioArrivo, $data,$aereoportoPart, $aereoportoArr, $aereo);
+        $nuovoVolo = new Volo($dataOraPart, $dataOraArrivo,$aereoportoPart, $aereoportoArr, $aereo);
         DB::getInstance() -> put($nuovoVolo);
     }
 
-    public function modificaVolo($OIDVolo, $nuovaData, $nuovoOrarioPart, $nuovoOrarioArr){
+    public function modificaVolo($OIDVolo, $nuovaDataOraPart, $nuovaDataOraArr){
         $voloMod = DB::getIstance()->get($OIDVolo);
-        $voloMod->setData($nuovaData);
-        $voloMod->setOrarioPartenza($nuovoOrarioPart);
-        $voloMod->setOrarioArrivo($nuovoOrarioArr);
+        $voloMod->setDataOraPartenza($nuovaDataOraPart);
+        $voloMod->setDataOraArrivo($nuovaDataOraArr);
         DB::getIstance()->update($voloMod);
         return true; //ritornare esito
     }
