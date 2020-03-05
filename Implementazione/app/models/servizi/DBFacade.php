@@ -77,8 +77,8 @@ class DBFacade{
 
     //Metodi Facade
 
-    public function emailExists($email){
-        return $this->gestori['Cliente'] -> emailExists($email);
+    public function emailFedeltaExists($email){
+        return $this->gestori['Cliente'] -> emailFedeltaExists($email);
     }
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
@@ -95,6 +95,20 @@ class DBFacade{
 
     public function impiegatoLogin($username, $password){
         return $this->gestori['Impiegato'] -> login($username, $password);
+    }
+
+    public function getClientiFedelta(){
+        return $this->gestori['Cliente'] -> getClientiFedelta();
+    }
+
+    public function checkPrenotazioneUnivoca($email,$OIDVolo){
+        return $this->gestori['Prenotazione'] -> checkUnivoca($email, $OIDVolo);
+    }
+
+    public function getFedeltaUltimaPrenotazione($anni){
+        //select * from prenot join cliente WHERE (clienteFedelta) and OIDCli not in (SELECT codcli from pr where diff(today, data)>= $anni)
+        //ritorna lista di clienti da aggiornare
+        return array();
     }
 
 
