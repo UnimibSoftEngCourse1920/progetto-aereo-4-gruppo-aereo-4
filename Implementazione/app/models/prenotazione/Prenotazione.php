@@ -14,7 +14,7 @@ class Prenotazione{
         $this->tariffa=$tariffa;
         $this->cliente = $cliente;
         $this->volo = $volo;
-        $this->listaPosti = $volo->prenota($numPosti);
+        //$this->listaPosti = $volo->prenota($numPosti);
     }
 
     public function generaEstrattoContoParziale(){
