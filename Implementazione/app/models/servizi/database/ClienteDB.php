@@ -26,4 +26,10 @@ class ClienteDB extends AbstractDB
         return sprinft($query, $object->getOID(), $object->getNome(), $object->getCognome(), $object->getDataNascita(), $indirizzo, $codiceFedelta, $stato, $password, $object->getEmail());
     }
 
+    public function emailExists($email){
+        $query = "SELECT * from Cliente where email = $email";
+        $stmt = $this->connection->query($query);
+        return ($stmt->rowCount() > 0);
+    }
+
 }

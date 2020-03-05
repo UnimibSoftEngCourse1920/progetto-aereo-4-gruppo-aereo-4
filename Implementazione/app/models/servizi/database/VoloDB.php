@@ -23,7 +23,6 @@ class VoloDB extends AbstractDB
             $query .= sprintf("INSERT INTO VoloPosto values ('%s', '%s')", $obj->getOID(), $posto->getOID());
 
         return $query;
-
     }
 
     protected function generateUpdateQuery($object){

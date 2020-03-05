@@ -46,6 +46,13 @@ abstract class AbstractDB
         return $result;
     }
 
+    public function getAll($class){
+        $query = $this->generateGetAllQuery($class);
+        $stmt = $this->connection->query($query);
+        $lista = $stmt->fetchAll(PDO::FETCH_CLASS, $class);
+        return $lista;
+    }
+
     protected function getClassName($object){
         return substr(strrchr(get_class($object), "\\"), 1);
     }
@@ -63,5 +70,9 @@ abstract class AbstractDB
 
     protected function generateDeleteQuery($OID, $class){
         return "DELETE FROM ".$class." WHERE OID ='".$OID."'";
+    }
+
+    protected function generateGetAllQuery($class){
+        return "SELECT * from $class";
     }
 }

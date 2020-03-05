@@ -9,8 +9,8 @@ class AcquistoDB extends AbstractDB
 {
     protected function generatePutQuery($obj)
     {
-        //$pagamento = $obj->getPagamento() == null ? null : $obj->getPagamento()->getOID();
+        $pagamento = $this->getClassName($obj->getPagamento()) == "Pagamento" ? $obj->getPagamento()->getOID() : $obj->getPagamento(); //materializzazione pigra
         $query = "INSERT INTO Acquisto VALUES ('%s', %d, '%s')";
-        return sprintf($query,$obj->getOID(), $obj->getPuntiAccumulati(), $obj->getPagamento()->getOID());
+        return sprintf($query,$obj->getOID(), $obj->getPuntiAccumulati(), $pagamento);
     }
 }
