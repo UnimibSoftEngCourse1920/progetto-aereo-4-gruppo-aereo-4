@@ -8,7 +8,7 @@ class Mailer{
     public function inviaCancellazioneFedelta($cliente){
 
     }
-    
+
     public function inviaEmailModificaVolo($listaClienti, $volo){
 
         $recipients = $this->generateRecipients($listaClienti);
