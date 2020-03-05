@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                <form>
+                <form action="/public/prenotazione/prenota" method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

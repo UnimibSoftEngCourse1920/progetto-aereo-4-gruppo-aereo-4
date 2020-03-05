@@ -1,5 +1,7 @@
 <?php
 
+require_once "../app/models/servizi/OIDGenerator.php";
+
 class Cliente{
     protected $OID;
     protected $nome;
@@ -17,6 +19,18 @@ class Cliente{
 
     public function getEmail(){
         return $this->email;
+    }
+
+    public function getNome() {
+        return $this->nome;
+    }
+
+    public function getCognome() {
+        return $this->cognome;
+    }
+
+    public function getOID() {
+        return $this->OID;
     }
 
 }

@@ -57,4 +57,8 @@ class VenditaController extends Controller
 			//TODO: view con errore
 		}
 	}
+
+	public function acquista() {
+        $this->view('vendita/acquisto');
+    }
 }

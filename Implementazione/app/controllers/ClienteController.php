@@ -1,9 +1,12 @@
 <?php
 
-require_once __DIR__ . "/../models/servizi/Mailer.php";
-require_once __DIR__ . "/../models/cliente/RegistroClienti.php";
-require_once __DIR__ . "/../models/prenotazione/RegistroPrenotazioni.php";
-require_once __DIR__ . "/../core/Controller.php";
+require_once "../app/models/servizi/Mailer.php";
+require_once "../app/models/cliente/RegistroClienti.php";
+require_once "../app/models/prenotazione/RegistroPrenotazioni.php";
+require_once "../app/core/Controller.php";
+require_once "../app/models/cliente/Cliente.php";
+require_once "../app/models/prenotazione/Prenotazione.php";
+//require_once "../app/models/prenotazione/RegistroPromozioni.php";
 
 class ClienteController extends Controller{
 
@@ -16,7 +19,7 @@ class ClienteController extends Controller{
         $this->mailer = new Mailer();
         $this->registroClienti = new RegistroClienti();
         $this->registroPrenotazioni = new RegistroPrenotazioni();
-        $this->registroPromozioni = new RegistroPromozioni();
+        //$this->registroPromozioni = new RegistroPromozioni();
     }
 
     public function iscrizioneFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $username, $password){
@@ -70,12 +73,31 @@ class ClienteController extends Controller{
         $this->mailer->avvisaClientiPromozioni($listaClienti, $listaPromozioni);
     }
 
-    public function login() {
-        $this->view('cliente/login');
+    public function login($email = "", $password = "") {
+        $error = "";
+        if($email == "test" && $password == "test") {
+            //Cliente che verrà preso dal db (?), per ora è fake
+            $cliente = new Cliente("test", "test", "test", "test", "test");
+            $_SESSION['id_cliente'] = $cliente->getOID();
+            $_SESSION['nome_cliente'] = $cliente->getNome() . " " . $cliente->getCognome();
+            header('Location: /');
+        } else if ($email != "" && $email != "") {
+            $error = "Credenziali Errate";
+        }
+        $this->view('cliente/login', ["error" => $error]);
     }
 
     public function registrazione() {
         $this->view('cliente/registrazione');
+    }
+
+    public function prenotazioni() {
+        $prenotazioni = array(new Prenotazione("1", "1", "1", "1", "1"),
+                                new Prenotazione("1", "1", "1", "1", "1"),
+                                new Prenotazione("1", "1", "1", "1", "1"),
+                                new Prenotazione("1", "1", "1", "1", "1"));
+        $cliente = new Cliente("test", "test", "test", "test", "test");
+        $this->view('cliente/fedelta', ["prenotazioni" => $prenotazioni, "cliente" => $cliente]);
     }
 
 }
