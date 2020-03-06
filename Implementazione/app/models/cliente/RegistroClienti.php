@@ -24,16 +24,15 @@ class RegistroClienti
 
     private function generaCodiceFedelta()
     {
-        //La generazione del codice è ancora da vedere
-        //Chiede al DB oppure lui sa qual'è l'ultimo (Attenzione! Se sono più di uno è un macello)
-        return '';
+        $ultimoCodice = DBFacade::getIstance()->getUltimoCodiceFedelta();
+        return "F" . sprintf('%07d', substr($ultimoCodice, 1) + 1);
     }
 
     public function nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $username, $password)
     {
         $codice = $this -> generaCodiceFedelta();
         $OID = OIDGenerator::getIstance()->getNewOID();
-        $nuovoCliente = new ClienteFedelta($nome, $cognome, $email, $dataNascita, $codice, $indirizzo, $username, $password, $OID);
+        $nuovoCliente = new ClienteFedelta($nome, $cognome, $email, $dataNascita, $codice, $indirizzo, $username, $password);
         $esito = DBFacade::getIstance() -> put($nuovoCliente);
         //devo controllare che esito mi ritorna il DB e tornarlo al controller
         //per ora ritorno sempre true

@@ -109,6 +109,10 @@ class DBFacade{
         return $this->gestori['Prenotazione'] -> getFedeltaUltimaPrenotazione();
     }
 
+    public function getUltimoCodiceFedelta(){
+        return $this->gestori['Cliente'] -> getUltimoCodiceFedelta();
+    }
+
 
 }
 
