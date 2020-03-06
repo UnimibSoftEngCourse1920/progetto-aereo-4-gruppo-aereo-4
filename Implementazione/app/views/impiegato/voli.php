@@ -112,15 +112,20 @@
                                     <select name="partenza" class="form-control">
                                         <?php
                                             foreach ($data["aeroporti"] as $aeroporto){
-                                               echo $aeroporto->getCodice();
+                                               echo "<option value='".$aeroporto->getOID()."'>".$aeroporto->getNome()."</option>";
                                             }
                                         ?>
                                     </select>
-                                    <input type="text" class="form-control" name="partenza" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label for="dataset">Destinazione</label>
-                                    <input type="text" class="form-control" name="destinazione" placeholder="">
+                                    <select name="destinazione" class="form-control">
+                                        <?php
+                                        foreach ($data["aeroporti"] as $aeroporto){
+                                            echo "<option value='".$aeroporto->getOID()."'>".$aeroporto->getNome()."</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="title">Codice Aereo</label>

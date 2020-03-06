@@ -12,7 +12,7 @@ class Aereoporto{
     private $codice;
 
 
-    public function __construct($nome = "", $continente= "", $nazione= "", $citta= "", $codice= "")
+    public function __construct($nome = "cazz", $continente= "", $nazione= "", $citta= "", $codice= "")
     {
         $this->OID = OIDGenerator::getIstance()->getNewOID();
         $this->nome = $nome;

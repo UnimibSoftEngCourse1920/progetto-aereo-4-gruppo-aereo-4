@@ -26,8 +26,8 @@ class ClienteDB extends AbstractDB
         return sprinft($query, $object->getOID(), $object->getNome(), $object->getCognome(), $object->getDataNascita(), $indirizzo, $codiceFedelta, $stato, $password, $object->getEmail());
     }
 
-    public function emailExists($email){
-        $query = "SELECT * from Cliente where email = $email";
+    public function emailFedeltaExists($email){
+        $query = "SELECT * from CLIENTE WHERE EMAIL = '$email' and codiceFedelta is not null";
         $stmt = $this->connection->query($query);
         return ($stmt->rowCount() > 0);
     }
@@ -39,6 +39,13 @@ class ClienteDB extends AbstractDB
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $obj = (object)($row);
         return $this->objectToObject($obj, "Cliente");
+    }
+
+    public function getClientiFedelta(){
+        $query = "SELECT * FROM CLIENTE WHERE codiceFedelta is null";
+        $stmt = $this->connection->query($query);
+        $lista = $stmt->fetchAll(PDO::FETCH_CLASS, "ClienteFedelta");
+        return $lista;
     }
 
 }

@@ -16,7 +16,7 @@ class RegistroPrenotazioni{
     }
 
     public function getClientiVolo($OIDVolo){
-        $listaClienti = DB::getIstance() -> getClientiVolo($OIDVolo);
+        $listaClienti = DBFacade::getIstance() -> getClientiVolo($OIDVolo);
         return $listaClienti;
     }
 
@@ -25,7 +25,7 @@ class RegistroPrenotazioni{
     }
 
     public function effettuaPrenotazione($cliente,$codVolo,$numPosti,$tariffa){
-        $univoca = DB::getIstance()->checkPrenotazioneUnivoca($cliente->email,$codVolo);
+        $univoca = DBFacade::getIstance()->checkPrenotazioneUnivoca($cliente->email,$codVolo);
         if($univoca){
             $registroVoli = new RegistroVoli();
             $disp = $registroVoli->checkDisponibilitaPosti($numPosti,$codVolo);
@@ -34,7 +34,7 @@ class RegistroPrenotazioni{
                 $v = $registroVoli->getVolo($codVolo);
                 $nuovaPrenotazione = new Prenotazione($cliente,$codVolo,$numPosti,$tariffa,date("d/m/Y"));
                 $nuovaPrenotazione->registraPrenotazione();
-                $volo = DB::getIstance()->getVolo($codVolo);
+                $volo = DBFacade::getIstance()->getVolo($codVolo);
                 $nuovaPrenotazione->listaPosti = $volo->prenota($numPosti);
 
             }
@@ -47,7 +47,7 @@ class RegistroPrenotazioni{
     public function getFedeltaUltimaPrenotazione($anniTrascorsi){
         //ritorna la lista di clienti che hanno fatto l'ultima prenotazione $anniTrascorsi anni fa
         //NB!! Questo metodo mi DOVREBBE ritornare una lista di clienti, la chiamata al DB probabilmente ritorna la lista di prenotazioni
-        return DB::getIstance()->getFedeltaUltimaPrenotazione($anniTrascorsi);
+        return DBFacade::getIstance()->getFedeltaUltimaPrenotazione($anniTrascorsi);
     }
 	
 	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta) {
@@ -93,12 +93,12 @@ class RegistroPrenotazioni{
 	}
 	
 	public function getPrenotazione($idCliente) {
-		$cliente = DB::getIstance()->getCliente($idCliente);
+		$cliente = DBFacade::getIstance()->getCliente($idCliente);
 		return $cliente;
 	}
 	
 	public function aggiornaPrenotazione($prenotazione) {
-		DB::getIstance()->aggiornaPrenotazione($prenotazione);
+		DBFacade::getIstance()->aggiornaPrenotazione($prenotazione);
 	}
 
 	public function cancellaPrenotazioniScadute(){

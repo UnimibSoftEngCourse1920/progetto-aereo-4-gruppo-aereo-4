@@ -22,7 +22,7 @@ class Prenotazione{
     }
 
     public function registraPrenotazione(){
-        $this->OID = DB::getIstance()->salvaPrenotazione($this);
+        $this->OID = DBFacade::getIstance()->salvaPrenotazione($this);
     }
 
     //getClienteCode() !!

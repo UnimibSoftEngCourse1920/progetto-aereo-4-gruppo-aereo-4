@@ -1,7 +1,8 @@
 <?php
 
 
-//namespace model\servizi;
+use PDO;
+
 require_once("AbstractDB.php");
 
 
@@ -54,5 +55,29 @@ class PrenotazioneDB extends AbstractDB
         $stmt = $this->connection->query($query);
         $listaPrenotazioni = $stmt->fetchAll(PDO::FETCH_CLASS, "Prenotazione");
         return $listaPrenotazioni;
+    }
+
+    public function checkUnivoca($email, $OIDVolo)
+    {
+        $query = "SELECT * from Prenotazione p JOIN PrenotazioneCliente as pc JOIN Cliente as c JOIN PrenotazioneVolo as pv on c.OID=pc.cliente and p.OID = pc.prenotazione and pv.prenotazione=p.OID
+                    WHERE c.email = '$email' and  pv.volo='$OIDVolo' and p.OID NOT IN (select OID from PrenotazioneAcquisto)";
+        $result = $this->connection->query($query);
+        return $result->rowCount() == 0;
+    }
+
+    public function getFedeltaUltimaPrenotazione($anni){
+        $result = array();
+        $query = "select c.OID,max(data) from Prenotazione p JOIN PrenotazioneCliente pc JOIN Cliente c on p.OID=pc.prenotazione and c.OID = pc.cliente where c.codiceFedelta is not null group by c.OID;";
+        $stmt = $this->connection->query($query);
+        $stmt->bindColumn(1, $OIDCliente);
+        $stmt->bindColumn(2, $data);
+        while($cli = $stmt->fetch(PDO::FETCH_BOUND))
+        {
+            $result[] = array($OIDCliente, $data);
+        }
+        return $result;
+
+
+        //select * from prenot join cliente WHERE (clienteFedelta) and OIDCli not in (SELECT codcli from pr where diff(today, data)>= $anni)
     }
 }

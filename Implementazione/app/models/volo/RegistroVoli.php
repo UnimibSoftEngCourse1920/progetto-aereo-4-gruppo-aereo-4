@@ -14,25 +14,25 @@ class RegistroVoli{
         //$codiceVolo = $this -> generaCodiceVolo($datiVolo); //Come viene generato? A questo punto ha senso generarlo?
 
         //Recupero gli oggetti dal db
-        $database = DB::getIstance();
+        $database = DBFacade::getIstance();
         $aereoportoPart = $database->get($OIDAereoportoPart);
         $aereoportoArr = $database->get($OIDAereoportArr);
         $aereo = $database->get($OIDAereo);
 
         $nuovoVolo = new Volo($dataOraPart, $dataOraArrivo,$aereoportoPart, $aereoportoArr, $aereo);
-        DB::getInstance() -> put($nuovoVolo);
+        DBFacade::getInstance() -> put($nuovoVolo);
     }
 
     public function modificaVolo($OIDVolo, $nuovaDataOraPart, $nuovaDataOraArr){
-        $voloMod = DB::getIstance()->get($OIDVolo);
+        $voloMod = DBFacade::getIstance()->get($OIDVolo);
         $voloMod->setDataOraPartenza($nuovaDataOraPart);
         $voloMod->setDataOraArrivo($nuovaDataOraArr);
-        DB::getIstance()->update($voloMod);
+        DBFacade::getIstance()->update($voloMod);
         return true; //ritornare esito
     }
 
     public function rimuoviVolo($OIDVolo){
-        $database = DB::getIstance();
+        $database = DBFacade::getIstance();
         $volo = $database ->get($OIDVolo);
         $volo->setStato('CANCELLATO');
         $database->update($volo);
@@ -59,18 +59,18 @@ class RegistroVoli{
 	}
 	
 	public function cercaDateDisponibili($idVolo, $nPosti) {
-		$voli = DB::getIstance()->cercaDateDisponibili($idVolo, $nPosti);
+		$voli = DBFacade::getIstance()->cercaDateDisponibili($idVolo, $nPosti);
 		return $voli;
 	}
 	
 	public function getVolo($idVolo) {
-		//$volo = DB::getIstance()->getVolo($idVolo);
+		//$volo = DBFacade::getIstance()->getVolo($idVolo);
         $volo = new Volo("1", "1", "1", "1", "1", "1");
 		return $volo;
 	}
 	
 	public function aggiornaVolo($idVolo) {
-		DB::getIstance()->aggiornaVolo($idVolo);
+		DBFacade::getIstance()->aggiornaVolo($idVolo);
 	}
 
     //public function avvisaPasseggeri($OIDVolo, )
