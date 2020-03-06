@@ -2,21 +2,20 @@
 
 
 //namespace model\servizi;
-require_once("AbstractDB.php");
-
+require_once "AbstractDB.php";
 
 class VoloDB extends AbstractDB
 {
 
-    protected function generateCreateQuery($obj){
-        $promozione = $obj.getPromozione()!=null ? $obj->getPromozione().getOID() : null;
+    protected function generatePutQuery($obj){
+        //$promozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
         
-        $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s','%s','%s'); ",
-                        $obj->getOID(),$obj->getOrarioPartenza(),$obj->getOrarioArrivo(),$obj->getData(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo().getOID(), $promozione);
+        $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s'); ",
+                        $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo()->getOID());
 
 
         //VoloAereoporto
-        $query .= sprintf("Insert into VoloAereoporto values ('%s', '%s', '%s' ); ", $obj->getOID(), $obj->getAereoportoPart().getOID(), $obj->getAereoportoArrivo().getOID());
+        $query .= sprintf("Insert into VoloAereoporto values ('%s', '%s', '%s' ); ", $obj->getOID(), $obj->getAereoportoPart()->getOID(), $obj->getAereoportoArrivo()->getOID());
 
         //VoloPosto
         foreach ($obj->getPosti() as $posto)

@@ -15,12 +15,12 @@ class RegistroVoli{
 
         //Recupero gli oggetti dal db
         $database = DBFacade::getIstance();
-        $aereoportoPart = $database->get($OIDAereoportoPart);
-        $aereoportoArr = $database->get($OIDAereoportArr);
-        $aereo = $database->get($OIDAereo);
+        $aereoportoPart = $database->get($OIDAereoportoPart,"Aereoporto");
+        $aereoportoArr = $database->get($OIDAereoportArr, "Aereoporto");
+        $aereo = $database->get($OIDAereo,"Aereo");
 
         $nuovoVolo = new Volo($dataOraPart, $dataOraArrivo,$aereoportoPart, $aereoportoArr, $aereo);
-        DBFacade::getInstance() -> put($nuovoVolo);
+        $database->put($nuovoVolo);
     }
 
     public function modificaVolo($OIDVolo, $nuovaDataOraPart, $nuovaDataOraArr){
