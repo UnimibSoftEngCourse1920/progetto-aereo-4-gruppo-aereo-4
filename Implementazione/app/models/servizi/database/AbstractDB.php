@@ -4,7 +4,7 @@
 //namespace model\servizi;
 
 //use PDO;
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aereoporto.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/app/models/volo/Aeroporto.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aereo.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Volo.php";
 

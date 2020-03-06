@@ -9,7 +9,7 @@ class ClienteFedelta extends Cliente{
 
     private $indirizzo;
     private $codiceFedelta;
-    private $username;
+    //private $username;
     private $password;
     private $stato;
 

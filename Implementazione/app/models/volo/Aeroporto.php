@@ -2,24 +2,22 @@
 
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
-class Aereoporto{
+class Aeroporto{
 
     private $OID;
     private $nome;
     private $continente;
     private $nazione;
     private $citta;
-    private $codice;
 
 
-    public function __construct($nome = "cazz", $continente= "", $nazione= "", $citta= "", $codice= "")
+    public function __construct($nome, $continente, $nazione, $citta)
     {
         $this->OID = OIDGenerator::getIstance()->getNewOID();
         $this->nome = $nome;
         $this->continente = $continente;
         $this->nazione = $nazione;
         $this->citta = $citta;
-        $this->codice = $codice;
     }
 
     /**
@@ -60,14 +58,6 @@ class Aereoporto{
     public function getCitta()
     {
         return $this->citta;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCodice()
-    {
-        return $this->codice;
     }
 
 }

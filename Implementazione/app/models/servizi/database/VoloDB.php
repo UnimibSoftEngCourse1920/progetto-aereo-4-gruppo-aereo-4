@@ -8,11 +8,11 @@ require_once("AbstractDB.php");
 class VoloDB extends AbstractDB
 {
 
-    protected function generateCreateQuery($obj){
+    protected function generatePutQuery($obj){
         $promozione = $obj.getPromozione()!=null ? $obj->getPromozione().getOID() : null;
         
-        $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s','%s','%s'); ",
-                        $obj->getOID(),$obj->getOrarioPartenza(),$obj->getOrarioArrivo(),$obj->getData(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo().getOID(), $promozione);
+        $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s','%s'); ",
+                        $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo().getOID(), $promozione);
 
 
         //VoloAereoporto
@@ -22,18 +22,20 @@ class VoloDB extends AbstractDB
         foreach ($obj->getPosti() as $posto)
             $query .= sprintf("INSERT INTO VoloPosto values ('%s', '%s')", $obj->getOID(), $posto->getOID());
 
+        //TODO: Promozione??
+
         return $query;
     }
 
     protected function generateUpdateQuery($object){
-        return sprintf("UPDATE ".get_class($object)." SET stato = '%s', data = '%s', orarioPartenza='%s', orarioArrivo='%s' WHERE OID = '%s'",
-                    $object->getStato(), $object->getData(), $object->getOrarioPartenza(), $object->getOrarioArrivo(), $object->getOID() );
+        return sprintf("UPDATE ".get_class($object)." SET stato = '%s', dataOraPartenza='%s', dataOraArrivo='%s' WHERE OID = '%s'",
+                    $object->getStato(), $object->getDataOraPartenza(), $object->getDataOraArrivo(), $object->getOID() );
     }
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
         $query = "SELECT v.* from Volo as v JOIN VoloAereoporto as va on v.OID = va.volo 
                     WHERE va.aereoportoPartenza = '$partenza' AND va.aereoportoArrivo = '$destinazione' 
-                        AND v.data = '$data'
+                        AND DATE(v.dataOraPartenza) = '$data'
                         AND $nPosti < (SELECT count(*) from VoloPosto where volo = v.OID)";
 
         $stmt = $this->connection->query($query);

@@ -7,7 +7,7 @@ class Volo {
     private $dataOraPartenza;
     private $dataOraArrivo;
     private $stato;
-    private $codiceVolo;
+    //private $codiceVolo;
     private $miglia;
 
     private $aereoportoPart;
@@ -18,24 +18,24 @@ class Volo {
     private $listaPosti; //posti del volo
 
     public function __construct($dataOraPartenza, $dataOraArrivo, $AereoportoPart, $AereoportArr, $Aereo){
-        //$database = DBFacade::getIstance();
-        //$this->OID = OIDGenerator::getIstance()->getNewOID();
+        $database = DBFacade::getIstance();
+        $this->OID = OIDGenerator::getIstance()->getNewOID();
         //$this->OID = $data; //Per test
         $this->dataOraPartenza = $dataOraPartenza;
         $this->dataOraArrivo = $dataOraArrivo;
-        //$this->miglia = $this->calcolaMiglia();
+        $this->miglia = $this->calcolaMiglia();
         $this->stato = 'ATTIVO';
         //codice volo??
-        //$this->aereoportoPart = $database->get($AereoportoPart);
-        //$this->aereoportoDest = $database->get($AereoportArr);
-        //$this->aereo = $database->get($Aereo);
+        $this->aereoportoPart = $database->get($AereoportoPart);
+        $this->aereoportoDest = $database->get($AereoportArr);
+        $this->aereo = $database->get($Aereo);
         $this->promozione = null;
         $this->listaPosti = array();
 
-        /*for($i=0; $i<$this->aereo->getPostiDisponibili(); $i++){
-            $p = new Posto($i+1);
+        for($i=0; $i<$this->aereo->getPostiDisponibili(); $i++) {
+            $p = new Posto($i + 1);
             $this->listaPosti[] = $p;
-        }*/
+        }
     }
 
     public function setDataOraPartenza($dataOraPartenza){

@@ -7,7 +7,7 @@ require_once("AbstractDB.php");
 
 class PagamentoDB extends AbstractDB
 {
-    protected function generateCreateQuery($obj){
+    protected function generatePutQuery($obj){
         if($this->getClassName($obj) == "PagamentoConCarta")
             $carta = true;
 

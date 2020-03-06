@@ -7,7 +7,7 @@ require_once("AbstractDB.php");
 
 class PostoDB extends AbstractDB
 {
-    protected function generateCreateQuery($obj){
+    protected function generatePutQuery($obj){
         $query = "INSERT INTO Posto VALUES ('%s',%b ,%d )";
         return sprintf($query, $obj->getOID(), $obj->getStato(), $obj->getNumeroPosto());
     }
