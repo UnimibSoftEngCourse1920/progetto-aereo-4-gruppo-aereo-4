@@ -20,7 +20,7 @@
                 <div class="row text-center mb-3">
                     <div class="col-md-3">
                         <a href="admin">
-                            <button class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Indietro </button>
+                            <button class="btn btn-primary"> <em class="fas fa-arrow-left"></em> Indietro </button>
                         </a>
                     </div>
                     <div class="col-md-6">
@@ -53,8 +53,8 @@
                                 <td>20%</td>
                                 <td>Sì</td>
                                 <td>
-                                    <button class="btn btn-danger"> <i class="fas fa-trash-alt"></i> Elimina </button>
-                                    <button class="btn btn-warning"> <i class="fas fa-pencil-alt"></i> Modifica </button>
+                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
+                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             <tr>
@@ -65,8 +65,8 @@
                                 <td>20%</td>
                                 <td>No</td>
                                 <td>
-                                    <button class="btn btn-danger"> <i class="fas fa-trash-alt"></i> Elimina </button>
-                                    <button class="btn btn-warning"> <i class="fas fa-pencil-alt"></i> Modifica </button>
+                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
+                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             <tr>
@@ -77,8 +77,8 @@
                                 <td>20%</td>
                                 <td>Sì</td>
                                 <td>
-                                    <button class="btn btn-danger"> <i class="fas fa-trash-alt"></i> Elimina </button>
-                                    <button class="btn btn-warning"> <i class="fas fa-pencil-alt"></i> Modifica </button>
+                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
+                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             </tbody>

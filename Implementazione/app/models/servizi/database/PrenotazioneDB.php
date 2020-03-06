@@ -1,7 +1,7 @@
 <?php
 
 
-use PDO;
+//use PDO;
 
 require_once("AbstractDB.php");
 
