@@ -73,18 +73,31 @@ class ClienteController extends Controller{
         $this->mailer->avvisaClientiPromozioni($listaClienti, $listaPromozioni);
     }
 
-    public function login($email = "", $password = "") {
+    public function loginView($email = "", $password = "") {
         $error = "";
-        if($email == "test" && $password == "test") {
-            //Cliente che verrà preso dal db (?), per ora è fake
-            $cliente = new Cliente("test", "test", "test", "test", "test");
-            $_SESSION['id_cliente'] = $cliente->getOID();
-            $_SESSION['nome_cliente'] = $cliente->getNome() . " " . $cliente->getCognome();
-            header('Location: /');
-        } else if ($email != "" && $email != "") {
-            $error = "Credenziali Errate";
+        if($email != "" && $password != "") {
+            $esitoLogin = $this->login($email, $password);
+            if($esitoLogin) {
+                header("Location: /");
+            } else {
+                $error = "Combinazione email/password non trovata!";
+            }
         }
         $this->view('cliente/login', ["error" => $error]);
+    }
+
+    public function login($email, $password) {
+        $registroClienti = $this->model('cliente/RegistroClienti');
+        $cliente = $registroClienti->login($email, $password);
+        var_dump($cliente);
+        exit;
+        if ($cliente) {
+            $_SESSION['id_cliente'] = $cliente->getOID();
+            $_SESSION['nome_cliente'] = $cliente->getNome() . " " . $cliente->getCognome();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function registrazione() {

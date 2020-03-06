@@ -33,9 +33,12 @@ class ClienteDB extends AbstractDB
     }
 
     public function login($email, $password){
-        $query = "SELECT * from Impiegato where email = '$email' and password='$password'";
+        $query = "SELECT * from Cliente where email = '$email' and password='$password'";
+        var_dump($query);
         $stmt = $this->connection->query($query);
-        return ($stmt->rowCount() > 0);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $obj = (object)($row);
+        return $this->objectToObject($obj, "Cliente");
     }
 
 }

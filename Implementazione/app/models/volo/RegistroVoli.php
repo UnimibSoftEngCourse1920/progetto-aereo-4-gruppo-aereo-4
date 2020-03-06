@@ -1,6 +1,7 @@
 <?php
 
 require_once "../app/models/volo/Volo.php";
+require_once "../app/models/servizi/DBFacade.php";
 
 
 class RegistroVoli{
@@ -50,10 +51,10 @@ class RegistroVoli{
     }
 	
 	public function cercaVoli($partenza, $destinazione, $data, $nPosti) {
-		//$voli = DBFacade::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
-        $voli = array(new Volo("1", "1", "1", "1", "1", "1"),
+		$voli = DBFacade::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
+        /*$voli = array(new Volo("1", "1", "1", "1", "1", "1"),
                 new Volo("2", "2", "2", "2", "2", "2"),
-                new Volo("3", "3", "3", "3", "3", "3"));
+                new Volo("3", "3", "3", "3", "3", "3"));*/
 		return $voli;
 	}
 	

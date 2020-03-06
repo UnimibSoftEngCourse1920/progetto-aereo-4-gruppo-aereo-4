@@ -1,5 +1,7 @@
 <?php
 
+require_once "../app/models/servizi/DBFacade.php";
+
 class RegistroClienti
 {
     public static $AVVISACANCELLAZIONEFEDELTA = "CANCELLAZIONEFEDELTA";
@@ -88,6 +90,11 @@ class RegistroClienti
 	public function aggiornaCliente($cliente) {
 		DB::getIstance()->aggiornaCliente($cliente);
 	}
+
+	public function login($email, $password) {
+        $cliente = DBFacade::getIstance()->userLogin($email, md5($password));
+        return $cliente;
+    }
 
 }
 
