@@ -1,7 +1,7 @@
 <?php
 
 
-namespace model\volo;
+//namespace model\volo;
 
 
 class RegistroPromozioni
