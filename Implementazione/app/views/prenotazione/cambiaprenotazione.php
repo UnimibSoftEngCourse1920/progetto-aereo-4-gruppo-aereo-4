@@ -25,16 +25,16 @@
                     <div class="container">
                         <div class="row mb-3">
                             <div class="col-md-6 p-0">
-                                <b>#:</b>
+                                <strong>#:</strong>
                             </div>
                             <div class="col-md-6 ">
-                                <b>Numero persone:</b>
+                                <strong>Numero persone:</strong>
                             </div>
                             <div class="col-md-6 p-0">
-                                <b>Da:</b>
+                                <strong>Da:</strong>
                             </div>
                             <div class="col-md-6 ">
-                                <b>A:</b>
+                                <strong>A:</strong>
                             </div>
                         </div>
                     </div>
