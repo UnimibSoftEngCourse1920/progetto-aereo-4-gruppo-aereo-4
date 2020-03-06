@@ -56,26 +56,6 @@ class ClienteController extends Controller{
                 $this->registroClienti->setClienteInfedele($clientePrenotazione[0]);
             }
         }
-
-
-        //ricerca 3 anni
-        $listaOIDCli = $this->registroPrenotazioni -> getFedeltaUltimaPrenotazione(3);
-        foreach ($listaOIDCli as $OIDcliente){
-            $esito = $this->registroClienti -> annullaIscrizione($OIDcliente);
-            if($esito)
-                $this->registroClienti->avvisaCliente($OIDcliente, RegistroClienti::$AVVISACANCELLAZIONEFEDELTA);
-            else
-                $x='ERRORE';
-        }
-        //ricerca 2 anni
-        $listaOIDCli = $this->registroPrenotazioni -> getFedeltaUltimaPrenotazione(2);
-        foreach ($listaOIDCli as $OIDcliente){
-            $esito = $this->registroClienti -> setClienteInfedele($OIDcliente);
-            if($esito)
-                $this->registroClienti->avvisaCliente($OIDcliente, RegistroClienti::$AVVISACANCELLAZIONEFEDELTA);
-            else
-                $x='ERRORE';
-        }
     }
 
     private function anniPassati($data){
