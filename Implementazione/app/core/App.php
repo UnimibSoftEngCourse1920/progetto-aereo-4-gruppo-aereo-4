@@ -20,7 +20,7 @@ class App {
 
 		//Recupero metodo e parametri
 		if(isset($url[1])) {
-			if(1 == 1 || method_exists($this->controller, $url[1])) {
+			if(method_exists($this->controller, $url[1])) {
 				$this->method = $url[1];
 				unset($url[1]);
 			}
