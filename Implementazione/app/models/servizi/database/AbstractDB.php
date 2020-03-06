@@ -84,7 +84,7 @@ abstract class AbstractDB
         return "SELECT * from ".$class;
     }
 
-    private function objectToObject($instance, $className) {
+    protected function objectToObject($instance, $className) {
         return unserialize(sprintf(
             'O:%d:"%s"%s',
             strlen($className),

@@ -89,8 +89,6 @@ class ClienteController extends Controller{
     public function login($email, $password) {
         $registroClienti = $this->model('cliente/RegistroClienti');
         $cliente = $registroClienti->login($email, $password);
-        var_dump($cliente);
-        exit;
         if ($cliente) {
             $_SESSION['id_cliente'] = $cliente->getOID();
             $_SESSION['nome_cliente'] = $cliente->getNome() . " " . $cliente->getCognome();
