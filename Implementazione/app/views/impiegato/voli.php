@@ -59,8 +59,8 @@
                                 <td>9:30</td>
                                 <td>100</td>
                                 <td>
-                                    <button class="btn btn-danger"> <i class="fas fa-trash-alt"></i> Elimina </button>
-                                    <button class="btn btn-warning"> <i class="fas fa-pencil-alt"></i> Modifica </button>
+                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
+                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             <tr>
@@ -71,8 +71,8 @@
                                 <td>6:30</td>
                                 <td>100</td>
                                 <td>
-                                    <button class="btn btn-danger"> <i class="fas fa-trash-alt"></i> Elimina </button>
-                                    <button class="btn btn-warning"> <i class="fas fa-pencil-alt"></i> Modifica </button>
+                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
+                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             <tr>
@@ -83,8 +83,8 @@
                                 <td>14:30</td>
                                 <td>100</td>
                                 <td>
-                                    <button class="btn btn-danger"> <i class="fas fa-trash-alt"></i> Elimina </button>
-                                    <button class="btn btn-warning"> <i class="fas fa-pencil-alt"></i> Modifica </button>
+                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
+                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             </tbody>

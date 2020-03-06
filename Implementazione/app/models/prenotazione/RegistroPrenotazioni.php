@@ -36,7 +36,7 @@ class RegistroPrenotazioni{
                 $nuovaPrenotazione->registraPrenotazione();
                 $volo = DBFacade::getIstance()->getVolo($codVolo);
                 $nuovaPrenotazione->listaPosti = $volo->prenota($numPosti);
-
+                return $nuovaPrenotazione;
             }
             else
                 return false;
@@ -44,8 +44,10 @@ class RegistroPrenotazioni{
             return false;
     }
 
-    public function getFedeltaUltimaPrenotazione(){
-        return DBFacade::getIstance()->getFedeltaUltimaPrenotazione();
+    public function getFedeltaUltimaPrenotazione($anniTrascorsi){
+        //ritorna la lista di clienti che hanno fatto l'ultima prenotazione $anniTrascorsi anni fa
+        //NB!! Questo metodo mi DOVREBBE ritornare una lista di clienti, la chiamata al DB probabilmente ritorna la lista di prenotazioni
+        return DBFacade::getIstance()->getFedeltaUltimaPrenotazione($anniTrascorsi);
     }
 	
 	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta) {

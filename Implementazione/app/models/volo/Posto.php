@@ -57,8 +57,4 @@ class Posto{
         }
         return $this;
     }
-
-    public function creaBiglietto($numPosto,$prezzo, $tariffa){
-
-    }
 }

@@ -6,6 +6,20 @@ namespace model\volo;
 
 class RegistroPromozioni
 {
+    public function creaPromozione($sconto, $dataInizio,$dataFine, $nome, $codVolo, $promozioneFedelta){
+
+        $promozione = new Promozione($dataInizio, $dataFine, $nome, $sconto, $promozioneFedelta);
+        DBFacade::getIstance()->put($promozione);
+
+        if($codVolo!=""){
+            $registroVoli = new RegistroVoli();
+            $v = $registroVoli->getVolo($codVolo);
+            $v -> setPromozione($promozione);
+            DBFacade::getIstance()->update($v);
+        }
+
+    }
+
     public function getPromozioniFedelta(){
         //ritorna lista delle promozioni fedelta attive
         return array();

@@ -46,6 +46,9 @@ class Volo {
         $this->dataOraArrivo = $dataOraArrivo;
     }
 
+    public function setPromozione($promozione){
+        $this->promozione = $promozione;
+    }
     public function setStato($stato){
         $this->stato = $stato;
     }

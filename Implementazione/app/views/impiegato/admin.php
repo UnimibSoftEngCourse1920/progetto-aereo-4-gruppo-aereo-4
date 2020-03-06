@@ -22,12 +22,12 @@
                     <div class="col-md-6">
                        <a href="voli">
                            <button class="btn btn-primary btn-lg mb-3">
-                            <h4> <i class="fas fa-plane-departure"></i> Gestione dei voli</h4>
+                            <h4> <em class="fas fa-plane-departure"></em> Gestione dei voli</h4>
                         </button>
                        </a><br>
                         <a href="promozioni">
                         <button  class="btn btn-primary btn-lg mt-3">
-                            <h4> <i class="fas fa-percentage"></i> Gestione delle promozioni</h4>
+                            <h4> <em class="fas fa-percentage"></em> Gestione delle promozioni</h4>
                         </button>
                         </a>
                     </div>
