@@ -44,10 +44,8 @@ class RegistroPrenotazioni{
             return false;
     }
 
-    public function getFedeltaUltimaPrenotazione($anniTrascorsi){
-        //ritorna la lista di clienti che hanno fatto l'ultima prenotazione $anniTrascorsi anni fa
-        //NB!! Questo metodo mi DOVREBBE ritornare una lista di clienti, la chiamata al DB probabilmente ritorna la lista di prenotazioni
-        return DBFacade::getIstance()->getFedeltaUltimaPrenotazione($anniTrascorsi);
+    public function getFedeltaUltimaPrenotazione(){
+        return DBFacade::getIstance()->getFedeltaUltimaPrenotazione();
     }
 	
 	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta) {

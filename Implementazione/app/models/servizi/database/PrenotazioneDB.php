@@ -65,7 +65,7 @@ class PrenotazioneDB extends AbstractDB
         return $result->rowCount() == 0;
     }
 
-    public function getFedeltaUltimaPrenotazione($anni){
+    public function getFedeltaUltimaPrenotazione(){
         $result = array();
         $query = "select c.OID,max(data) from Prenotazione p JOIN PrenotazioneCliente pc JOIN Cliente c on p.OID=pc.prenotazione and c.OID = pc.cliente where c.codiceFedelta is not null group by c.OID;";
         $stmt = $this->connection->query($query);

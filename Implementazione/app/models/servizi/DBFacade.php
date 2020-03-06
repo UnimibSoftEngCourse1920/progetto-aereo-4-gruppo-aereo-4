@@ -105,8 +105,8 @@ class DBFacade{
         return $this->gestori['Prenotazione'] -> checkUnivoca($email, $OIDVolo);
     }
 
-    public function getFedeltaUltimaPrenotazione($anni){
-        return $this->gestori['Prenotazione'] -> getFedeltaUltimaPrenotazione($anni);
+    public function getFedeltaUltimaPrenotazione(){
+        return $this->gestori['Prenotazione'] -> getFedeltaUltimaPrenotazione();
     }
 
 

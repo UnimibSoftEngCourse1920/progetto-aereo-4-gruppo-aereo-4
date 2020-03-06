@@ -47,6 +47,17 @@ class ClienteController extends Controller{
     }
 
     public function ricercaClientiInfedeli(){
+        $clientePrenotazione = $this->registroPrenotazioni->getFedeltaUltimaPrenotazione();
+        foreach ($clientePrenotazione as $CliData) {
+            $anniPassati = $this->anniPassati($clientePrenotazione[1]);
+            if($anniPassati == 3)
+                $this->registroClienti->annullaIscrizione($clientePrenotazione[0]);
+            else if ($anniPassati == 2){
+                $this->registroClienti->setClienteInfedele($clientePrenotazione[0]);
+            }
+        }
+
+
         //ricerca 3 anni
         $listaOIDCli = $this->registroPrenotazioni -> getFedeltaUltimaPrenotazione(3);
         foreach ($listaOIDCli as $OIDcliente){
@@ -65,6 +76,12 @@ class ClienteController extends Controller{
             else
                 $x='ERRORE';
         }
+    }
+
+    private function anniPassati($data){
+        $data = new DateTime($data);
+        $oggi = new DateTime(date('Y-m-d'));
+        return ($oggi->diff($data)) -> y;
     }
 
     public function avvisaPromozioniFedelta() {

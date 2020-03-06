@@ -48,15 +48,16 @@ class RegistroClienti
         return DBFacade::getIstance() -> get($codiceFedelta);
     }
 
-    public function annullaIscrizione($codiceFedelta){
+    public function annullaIscrizione($OID){
         $db = DBFacade::getIstance();
-        $cliente = $db->get($codiceFedelta);
+        $cliente = $db->get($OID);
         if ($cliente != null) {
             $cliente->annullaIscrizioneFedelta();
-            DBFacade::getIstance()->update($cliente);
-            //cosa faccio se non va a buon fine
+            $esito = DBFacade::getIstance()->update($cliente);
+            $this->mailer->inviaCancellazioneFedelta($cliente);
+            return true && $esito;
         }
-        return $cliente;
+        return false;
     }
 
     public function avvisaCliente($OID, $tipologiaAvviso){
@@ -75,12 +76,17 @@ class RegistroClienti
     }
 
     public function setClienteInfedele($OID){
-        $cli = DBFacade::getIstance()->get($OID);
-        $cli->setStato(ClienteFedelta::$STATOINFEDELE);
-        DBFacade::getIstance()->update($cli);
-        //ritorno esito di tutte le op.
-        return true;
+        $cliente = DBFacade::getIstance()->get($OID);
+        if($cliente!=null) {
+            $cliente->setStato(ClienteFedelta::$STATOINFEDELE);
+            $esito = DBFacade::getIstance()->update($cliente);
+            $this->mailer->inviaComunicazioneInfedelta($cliente);
+            //Controllo anche esito del mailer? NO
+            return $esito;
+        }
+        return false;
     }
+
 	
 	/*public function getCliente($idCliente) {
 		$cliente = DBFacade::getIstance()->getCliente($idCliente);
