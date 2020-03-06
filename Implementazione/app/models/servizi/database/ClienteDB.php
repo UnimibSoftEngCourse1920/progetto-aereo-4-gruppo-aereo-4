@@ -47,6 +47,7 @@ class ClienteDB extends AbstractDB
     }
 
     public function getUltimoCodiceFedelta(){
+        //TODO: metodo di Omar??
         $query = "select IFNULL(max(codiceFedelta), 'F0') from Cliente;";
         $result = $this->connection->query($query)->fetch();
         return $result[0];
