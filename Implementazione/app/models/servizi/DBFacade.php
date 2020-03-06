@@ -58,7 +58,7 @@ class DBFacade{
     }
 
     public function get($OID, $class){
-        $returnObject = $this -> gestori[$class]->get($OID);
+        $returnObject = $this -> gestori[$class]->get($OID,$class);
         return $returnObject;
     }
 

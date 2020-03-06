@@ -50,6 +50,7 @@ class VoloController extends Controller {
     public function inserisciVolo($giornopartenza, $giornoarrivo, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
         //manca esito operazione
         $this->registroVoli -> inserisciVolo($giornopartenza, $giornoarrivo,  $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo);
+        $this->voli();
     }
 
     public function cancellaVolo($OIDVolo){

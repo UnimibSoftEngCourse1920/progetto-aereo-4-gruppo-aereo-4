@@ -26,12 +26,23 @@ abstract class AbstractDB
 
     public function get($OID, $class){
         //Ad ora non vale per cliente
-
-        $stmt = $this->connection->prepare($this->generateGetQuery()); //manca la query
+        /*$stmt = $this->connection->prepare($this->generateGetQuery($OID,$class)); //manca la query
         //template method
         $stmt->execute();
         $stmt -> setFetchMode(PDO::FETCH_CLASS, $class);
-        return $obj = $stmt->fetchAll();
+        return $obj = $stmt->fetchAll(); */
+        $query = $this->generateGetQuery($OID,$class); //creo la query
+        $stmt = $this->connection->query($query); //la eseguo
+        $lista = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
+            $obj = (object)($row);
+            array_push($lista,$obj);
+        }
+        $listaDef = array();
+        foreach ($lista as $el){
+            array_push($listaDef,$this->objectToObject($el,$class)); //eseguo il cast dell'oggetto generico
+        }
+        return $listaDef;
     }
 
     public function delete($OID, $class){
@@ -75,7 +86,9 @@ abstract class AbstractDB
         return "SELECT * FROM " . $class . " WHERE OID = '" . $OID . "'";
     }
 
-    protected function generatePutQuery($object){ return '';}
+    protected function generatePutQuery($object){
+        return '';
+    }
 
     protected function generateUpdateQuery($object){ return '';}
 
