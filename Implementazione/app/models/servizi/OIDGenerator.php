@@ -12,16 +12,12 @@ class OIDGenerator
     private $date;
     private $seqnumber;
     private static $instance;
-    private static $fname = "oid.txt";
+    private static $fname = "../app/oid.txt";
 
     private function __construct(){
-        $fp = fopen(self::$fname, "w+");
-        $oid = fread($fp, 20);
-
+        $oid = file_get_contents(self::$fname);
         $this->seqnumber = (substr($oid, 0, 8) == date("Ymd")) ? (substr($oid, 8) + 1) : 1 ;
         $this->date = date("Ymd");
-
-        fclose($fp);
     }
 
     public static function getIstance(){
@@ -40,9 +36,7 @@ class OIDGenerator
         $this->seqnumber += 1;
         $oid = strval($this->date) . sprintf('%05d', $this->seqnumber);
 
-        $fp = fopen(self::$fname, "w+");
-        fwrite($fp, $oid);
-        fclose($fp);
+        file_put_contents(self::$fname, $oid);
 
         return $oid;
     }
