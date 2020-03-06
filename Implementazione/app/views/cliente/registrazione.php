@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="login-form col-md-6">
-                <form>
+                <form action="/public/cliente/registrati" method="post">
                     <div class="container">
                         <div class="row text-center mb-3">
                             <h2>Registrati al programma fedeltà</h2>
@@ -27,13 +27,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <span class="form-label">Nome</span>
-                                <input class="form-control" type="text" placeholder="Nome">
+                                <input class="form-control" type="text" placeholder="Nome" name="nome">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <span class="form-label">Cognome</span>
-                                <input class="form-control" type="text" placeholder="Cognome">
+                                <input class="form-control" type="text" placeholder="Cognome" name="cognome">
                             </div>
                         </div>
                     </div>
@@ -41,13 +41,13 @@
                         <div class="col-md-7">
                             <div class="form-group">
                                 <span class="form-label">Indirizzo</span>
-                                <input class="form-control" type="text" placeholder="Indirizzo">
+                                <input class="form-control" type="text" placeholder="Indirizzo" name="indirizzo">
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <span class="form-label">Data di nascita</span>
-                                <input class="form-control" type="date" placeholder="">
+                                <input class="form-control" type="date" placeholder="" name="data_nascita">
                             </div>
                         </div>
                     </div>
@@ -55,19 +55,19 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <span class="form-label">E-mail</span>
-                                <input class="form-control" type="text" placeholder="Email">
+                                <input class="form-control" type="text" placeholder="Email" name="email">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <span class="form-label">Password</span>
-                                <input class="form-control" type="password" placeholder="Password">
+                                <input class="form-control" type="password" placeholder="Password" name="password">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <span class="form-label">Ripeti password</span>
-                                <input class="form-control" type="password" placeholder="Password">
+                                <input class="form-control" type="password" placeholder="Password" name="conferma_password">
                             </div>
                         </div>
                     </div>

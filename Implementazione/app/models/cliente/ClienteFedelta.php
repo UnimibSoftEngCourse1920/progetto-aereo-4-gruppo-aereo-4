@@ -9,17 +9,32 @@ class ClienteFedelta extends Cliente{
 
     private $indirizzo;
     private $codiceFedelta;
-    //private $username;
     private $password;
     private $stato;
 
-    public function __construct($nome, $cognome, $email, $dataNascita, $codiceFedelta, $indirizzo, $username, $password){
-            parent::__construct($nome, $cognome, $email, $dataNascita);
+    public function __construct($nome, $cognome, $email, $dataNascita, $codiceFedelta, $indirizzo, $password, $OID){
+            parent::__construct($nome, $cognome, $email, $dataNascita, $OID);
             $this->codiceFedelta = $codiceFedelta;
             $this->indirizzo = $indirizzo;
-            $this->username = $username;
             $this->password = $password;
             $this->stato = ClienteFedelta::$STATOFEDELE;
+    }
+
+    public function getCodiceFedelta() {
+        return $this->codiceFedelta;
+    }
+
+
+    public function getIndirizzo() {
+        return $this->indirizzo;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function getStato() {
+        return $this->stato;
     }
 
     public function annullaIscrizioneFedelta(){

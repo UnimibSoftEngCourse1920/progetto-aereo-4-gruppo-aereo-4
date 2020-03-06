@@ -29,9 +29,9 @@
             <li class="nav-item">
                 <?php
                 if(!isset($_SESSION["id_cliente"])) {?>
-                    <a class="nav-link" href="/public/cliente/loginView">Login/Registrazione</a>
+                    <a class="nav-link" href="/public/cliente/accedi">Login/Registrazione</a>
                 <?php } else { ?>
-                    <a class="nav-link" href="/public/cliente/prenotazioni"><?=$_SESSION["nome_cliente"];?> </a>
+                    <a class="nav-link" href="/public/cliente/prenotazioni"><?=$_SESSION["nome_cliente"];?> (<a href="/public/cliente/esci">Esci</a>)</a>
                 <?php } ?>
             </li>
         </ul>

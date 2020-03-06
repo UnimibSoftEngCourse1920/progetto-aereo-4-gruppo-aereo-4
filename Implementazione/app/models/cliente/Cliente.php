@@ -9,8 +9,12 @@ class Cliente{
     protected $email;
     protected $dataNascita;
 
-    public function __construct($nome, $cognome, $email, $dataNascita){
-        $this->OID = OIDGenerator::getIstance()->getNewOID();
+    public function __construct($nome, $cognome, $email, $dataNascita, $OID = ""){
+        if($OID == "") {
+            $this->OID = OIDGenerator::getIstance()->getNewOID();
+        } else {
+            $this->OID = $OID;
+        }
         $this->nome = $nome;
         $this->cognome = $cognome;
         $this->email = $email;
@@ -19,6 +23,10 @@ class Cliente{
 
     public function getEmail(){
         return $this->email;
+    }
+
+    public function getDataNascita() {
+        return $this->dataNascita;
     }
 
     public function getNome() {
@@ -32,7 +40,6 @@ class Cliente{
     public function getOID() {
         return $this->OID;
     }
-
 }
 
  ?>
