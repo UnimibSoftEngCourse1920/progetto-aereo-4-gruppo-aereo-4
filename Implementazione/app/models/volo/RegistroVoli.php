@@ -2,7 +2,7 @@
 
 require_once "../app/models/volo/Volo.php";
 require_once "../app/models/servizi/DBFacade.php";
-
+require_once "../app/models/volo/Aeroporto.php";
 
 class RegistroVoli{
 
@@ -10,15 +10,12 @@ class RegistroVoli{
     public static $AVVISACANCELLAZIONEVOLO='CANCELLAZIONE';
 
     public function inserisciVolo($dataOraArrivo, $dataOraPart, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
-        //controllo che i dati forniti siano validi
-        //$codiceVolo = $this -> generaCodiceVolo($datiVolo); //Come viene generato? A questo punto ha senso generarlo?
 
         //Recupero gli oggetti dal db
         $database = DBFacade::getIstance();
-        $aereoportoPart = $database->get($OIDAereoportoPart,"Aereoporto");
-        $aereoportoArr = $database->get($OIDAereoportArr, "Aereoporto");
+        $aereoportoPart = $database->get($OIDAereoportoPart,"Aeroporto");
+        $aereoportoArr = $database->get($OIDAereoportArr, "Aeroporto");
         $aereo = $database->get($OIDAereo,"Aereo");
-
         $nuovoVolo = new Volo($dataOraPart, $dataOraArrivo,$aereoportoPart, $aereoportoArr, $aereo);
         $database->put($nuovoVolo);
     }

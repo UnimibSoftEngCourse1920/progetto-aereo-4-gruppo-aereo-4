@@ -33,16 +33,11 @@ abstract class AbstractDB
         return $obj = $stmt->fetchAll(); */
         $query = $this->generateGetQuery($OID,$class); //creo la query
         $stmt = $this->connection->query($query); //la eseguo
-        $lista = array();
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
-            $obj = (object)($row);
-            array_push($lista,$obj);
-        }
-        $listaDef = array();
-        foreach ($lista as $el){
-            array_push($listaDef,$this->objectToObject($el,$class)); //eseguo il cast dell'oggetto generico
-        }
-        return $listaDef;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);//per ogni riga creo un oggetto generico
+        $obj = (object)($row);
+        $ris = $this->objectToObject($obj,$class); //eseguo il cast dell'oggetto generico
+
+        return $ris;
     }
 
     public function delete($OID, $class){
@@ -68,10 +63,12 @@ abstract class AbstractDB
             $obj = (object)($row);
             array_push($lista,$obj);
         }
+
         $listaDef = array();
         foreach ($lista as $el){
             array_push($listaDef,$this->objectToObject($el,$class)); //eseguo il cast dell'oggetto generico
         }
+
         return $listaDef;
     }
 

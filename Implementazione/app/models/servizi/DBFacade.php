@@ -75,7 +75,7 @@ class DBFacade{
     }
 
     public function getAll($class){
-        return $this->gestori[$class] ->getAll($class);
+        return $this->gestori[$class]->getAll($class);
     }
 
     //Metodi Facade

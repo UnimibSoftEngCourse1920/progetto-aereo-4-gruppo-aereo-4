@@ -9,13 +9,13 @@ class VoloDB extends AbstractDB
 
     protected function generatePutQuery($obj){
 
-        $promozione = $obj.getPromozione()!=null ? $obj->getPromozione().getOID() : null;
+        $promozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
         
-        $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s','%s'); ",
-                        $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo().getOID(), $promozione);
+        $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s'); ",
+                        $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo()->getOID());
 
         //VoloAereoporto
-        $query .= sprintf("Insert into VoloAereoporto values ('%s', '%s', '%s' ); ", $obj->getOID(), $obj->getAereoportoPart()->getOID(), $obj->getAereoportoArrivo()->getOID());
+        $query .= sprintf("Insert into VoloAereoporto values ('%s', '%s', '%s' ); ", $obj->getOID(), $obj->getAeroportoPartenza()->getOID(), $obj->getAeroportoDestinazione()->getOID());
 
         //VoloPosto
         foreach ($obj->getPosti() as $posto)

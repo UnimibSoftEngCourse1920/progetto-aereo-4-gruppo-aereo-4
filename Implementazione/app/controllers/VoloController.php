@@ -7,6 +7,7 @@ require_once __DIR__ . "/../models/volo/RegistroVoli.php";
 require_once __DIR__ . "/../models/prenotazione/RegistroPrenotazioni.php";
 require_once __DIR__ . "/../models/servizi/Mailer.php";
 require_once __DIR__ . "/../models/servizi/DBFacade.php";
+require_once __DIR__ . "/../models/volo/Aeroporto.php";
 class VoloController extends Controller {
 
     private $registroVoli;
@@ -25,7 +26,7 @@ class VoloController extends Controller {
         $aeroporti = DBFacade::getIstance()->getAll("Aeroporto");
         $aerei = DBFacade::getIstance()->getAll("Aereo");
         $voli = DBFacade::getIstance()->getAll("Volo");
-        //var_dump($aeroporti);
+        //var_dump($voli);
         $this->view('impiegato/voli',["aeroporti"=>$aeroporti,"aerei"=>$aerei,"voli"=>$voli]);
     }
 

@@ -1,39 +1,37 @@
 <?php
 
-require_once "../app/models/servizi/DB.php";
-
+require_once "../app/models/servizi/DBFacade.php";
+require_once "../app/models/volo/Posto.php";
+require_once "../app/models/volo/Aeroporto.php";
 class Volo {
     private $OID;
     private $dataOraPartenza;
     private $dataOraArrivo;
     private $stato;
-    //private $codiceVolo;
     private $miglia;
 
-    private $aereoportoPart;
-    private $aereoportoDest;
+    private $aeroportoPart;
+    private $aeroportoDest;
     private $aereo;
     private $promozione;
 
     private $listaPosti; //posti del volo
 
-    public function __construct($dataOraPartenza, $dataOraArrivo, $AereoportoPart, $AereoportArr, $Aereo){
+    public function __construct($dataOraPartenza, $dataOraArrivo, $AeroportoPart, $AeroportArr, $Aereo){
         $database = DBFacade::getIstance();
         $this->OID = OIDGenerator::getIstance()->getNewOID();
-        //$this->OID = $data; //Per test
         $this->dataOraPartenza = $dataOraPartenza;
         $this->dataOraArrivo = $dataOraArrivo;
-
-        $this->aereoportoPart = $database->get($AereoportoPart,"Aereoporto");
-        $this->aereoportoDest = $database->get($AereoportArr,"Aereoporto");
+        var_dump($AeroportoPart);
+        $this->aeroportoPart = $database->get($AeroportoPart->getOID(),"Aeroporto");
+        $this->aeroportoDest = $database->get($AeroportArr->getOID(),"Aeroporto");
         $this->miglia = $this->calcolaMiglia();
         $this->stato = 'ATTIVO';
-        //codice volo??
-        $this->aereo = $database->get($Aereo,"Aereo");
+        $this->aereo = $database->get($Aereo->getOID(),"Aereo");
         $this->promozione = null;
         $this->listaPosti = array();
 
-        for($i=0; $i<$this->aereo->getPostiDisponibili(); $i++){
+        for($i=0; $i<$this->aereo->getNumeroPosti(); $i++){
             $p = new Posto($i+1);
             $this->listaPosti[] = $p;
         }
@@ -74,16 +72,20 @@ class Volo {
         return $this->stato;
     }
 
+    public function getPosti(){
+        return $this->listaPosti;
+    }
+
     public function getAereo(){
         return $this->aereo;
     }
 
     public function getAeroportoPartenza(){
-        return $this->aereoportoPart;
+        return $this->aeroportoPart;
     }
 
     public function getAeroportoDestinazione(){
-        return $this->aereoportoDest;
+        return $this->aeroportoDest;
     }
 
     public function getOID() {
@@ -105,10 +107,10 @@ class Volo {
     }
 
     private function calcolaMiglia(){
-        if($this->aereoportoPart->getNazione() == $this->aereoportoDest->getNazione()){
+        if($this->aeroportoPart->getNazione() == $this->aeroportoDest->getNazione()){
             return rand(200,600);
         }
-        else if($this->aereoportoPart->getContinente() == $this->aereoportoDest->getContinente()){
+        else if($this->aeroportoPart->getContinente() == $this->aeroportoDest->getContinente()){
             return rand(300,1500);
         }
         else{
