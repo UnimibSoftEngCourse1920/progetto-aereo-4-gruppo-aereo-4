@@ -3,6 +3,7 @@
 
 class Biglietto{
 
+    private $numPosto;
     private $tariffa;
     private $nominativo;
     private $OID;
@@ -13,8 +14,9 @@ class Biglietto{
      * @param $nominativo
      * @param $OID
      */
-    public function __construct($tariffa, $nominativo)
+    public function __construct($numPosto, $tariffa, $nominativo)
     {
+        $this->numPosto=$numPosto;
         $this->tariffa = $tariffa;
         $this->nominativo = $nominativo;
         $this->OID = OIDGenerator::getIstance()->getNewOID();

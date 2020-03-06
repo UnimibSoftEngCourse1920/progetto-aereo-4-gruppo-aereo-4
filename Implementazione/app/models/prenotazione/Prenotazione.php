@@ -14,7 +14,9 @@ class Prenotazione{
         $this->tariffa=$tariffa;
         $this->cliente = $cliente;
         $this->volo = $volo;
-        //$this->listaPosti = $volo->prenota($numPosti);
+        $this->listaPosti = $this->volo->prenota($numPosti);
+        $prezzo = $this->volo->calcolaPrezzo($this->cliente->isFedelta());
+        $this->listaBiglietti = $this->generaBiglietti($prezzo);
     }
 
     public function generaEstrattoContoParziale(){
@@ -38,6 +40,15 @@ class Prenotazione{
             $this->$attributo = $valore;
         }
         return $this;
+    }
+
+    public function generaBiglietti($prezzo){
+        $lista = array();
+        foreach ($this->listaPosti as $posto){
+            $b = new Biglietto($posto->numeroPosto,$this->tariffa,$this->cliente->getEmail());
+            array_push($lista,$b);
+        }
+        return $lista;
     }
 	
 	public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta) {
