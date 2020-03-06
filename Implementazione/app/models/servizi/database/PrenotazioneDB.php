@@ -1,7 +1,6 @@
 <?php
 
 
-namespace model\servizi;
 use PDO;
 
 require_once("AbstractDB.php");
@@ -52,7 +51,7 @@ class PrenotazioneDB extends AbstractDB
     }
 
     public function getScadute($ore){
-        $query = "select * from Prenotazione as p JOIN volo as v where p.OID NOT IN (select OID from PrenotazioneAcquisto) AND TIMESTAMPDIFF(HOUR, v.dataOraPartenza, NOW()) >= '$ore'";
+        $query = "select * from Prenotazione as p JOIN volo as v where p.OID NOT IN (select OID from PrenotazioneAcquisto) AND TIMESTAMPDIFF(HOUR, v.dataora, NOW()) >= '$ore'";
         $stmt = $this->connection->query($query);
         $listaPrenotazioni = $stmt->fetchAll(PDO::FETCH_CLASS, "Prenotazione");
         return $listaPrenotazioni;

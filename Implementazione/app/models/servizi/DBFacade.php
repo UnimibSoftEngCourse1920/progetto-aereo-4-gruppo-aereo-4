@@ -1,20 +1,20 @@
 <?php
 
 
-namespace model\servizi;
+//namespace model\servizi;
 
-require_once("./database/AcquistoDB.php");
-require_once("./database/AereoDB.php");
-require_once("./database/AereoportoDB.php");
-require_once("./database/BigliettoDB.php");
-require_once("./database/ClienteDB.php");
-require_once("./database/ImpiegatoDB.php");
-require_once("./database/IstitutoDB.php");
-require_once("./database/PagamentoDB.php");
-require_once("./database/PostoDB.php");
-require_once("./database/PrenotazioneDB.php");
-require_once("./database/PromozioneDB.php");
-require_once("./database/VoloDB.php");
+require_once("database/AcquistoDB.php");
+require_once("database/AereoDB.php");
+require_once("database/AereoportoDB.php");
+require_once("database/BigliettoDB.php");
+require_once("database/ClienteDB.php");
+require_once("database/ImpiegatoDB.php");
+require_once("database/IstitutoDB.php");
+require_once("database/PagamentoDB.php");
+require_once("database/PostoDB.php");
+require_once("database/PrenotazioneDB.php");
+require_once("database/PromozioneDB.php");
+require_once("database/VoloDB.php");
 
 
 class DBFacade{
@@ -82,7 +82,7 @@ class DBFacade{
     }
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
-        return $this->gestori['Volo']->getVoli($partenza, $destinazione, $data, $nPosti);
+        return $this->gestori['Volo']->cercaVoli($partenza, $destinazione, $data, $nPosti);
     }
 
     public function getPrenotazioniScaduteIn($ore){

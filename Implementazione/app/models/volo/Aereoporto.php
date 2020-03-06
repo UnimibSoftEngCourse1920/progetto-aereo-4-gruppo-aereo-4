@@ -1,5 +1,6 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 class Aereoporto{
 
@@ -10,7 +11,8 @@ class Aereoporto{
     private $citta;
     private $codice;
 
-    public function __construct($nome, $continente, $nazione, $citta, $codice)
+
+    public function __construct($nome = "cazz", $continente= "", $nazione= "", $citta= "", $codice= "")
     {
         $this->OID = OIDGenerator::getIstance()->getNewOID();
         $this->nome = $nome;
@@ -67,8 +69,6 @@ class Aereoporto{
     {
         return $this->codice;
     }
-
-
 
 }
 

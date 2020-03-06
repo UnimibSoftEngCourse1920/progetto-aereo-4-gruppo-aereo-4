@@ -100,24 +100,32 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="model">Ora di partenza</label>
-                                    <input type="time" class="form-control" name="orapartenza" placeholder="">
+                                    <label for="model">Data e ora di partenza</label>
+                                    <input type="datetime-local" class="form-control" name="giornopartenza" placeholder="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="model">Ora di arrivo</label>
-                                    <input type="time" class="form-control" name="oraarrivo" placeholder="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="model">Data</label>
-                                    <input type="date" class="form-control" name="data" placeholder="">
+                                    <label for="model">Data e ora di partenza</label>
+                                    <input type="datetime-local" class="form-control" name="giornoarrivo" placeholder="">
                                 </div>
                                 <div class="form-group">
                                     <label for="title">Partenza</label>
-                                    <input type="text" class="form-control" name="partenza" placeholder="">
+                                    <select name="partenza" class="form-control">
+                                        <?php
+                                            foreach ($data["aeroporti"] as $aeroporto){
+                                               echo "<option value='".$aeroporto->getOID()."'>".$aeroporto->getNome()."</option>";
+                                            }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="dataset">Destinazione</label>
-                                    <input type="text" class="form-control" name="destinazione" placeholder="">
+                                    <select name="destinazione" class="form-control">
+                                        <?php
+                                        foreach ($data["aeroporti"] as $aeroporto){
+                                            echo "<option value='".$aeroporto->getOID()."'>".$aeroporto->getNome()."</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="title">Codice Aereo</label>

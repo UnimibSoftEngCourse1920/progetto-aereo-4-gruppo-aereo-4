@@ -1,10 +1,10 @@
 <?php
 
 
-namespace model\servizi;
+//namespace model\servizi;
 
-use PDO;
-
+//use PDO;
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aereoporto.php";
 
 abstract class AbstractDB
 {
@@ -47,10 +47,18 @@ abstract class AbstractDB
     }
 
     public function getAll($class){
-        $query = $this->generateGetAllQuery($class);
-        $stmt = $this->connection->query($query);
-        $lista = $stmt->fetchAll(PDO::FETCH_CLASS, $class);
-        return $lista;
+        $query = $this->generateGetAllQuery($class); //creo la query
+        $stmt = $this->connection->query($query); //la eseguo
+        $lista = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
+            $obj = (object)($row);
+            array_push($lista,$obj);
+        }
+        $listaDef = array();
+        foreach ($lista as $el){
+            array_push($listaDef,$this->objectToObject($el,$class)); //eseguo il cast dell'oggetto generico
+        }
+        return $listaDef;
     }
 
     protected function getClassName($object){
@@ -73,6 +81,15 @@ abstract class AbstractDB
     }
 
     protected function generateGetAllQuery($class){
-        return "SELECT * from $class";
+        return "SELECT * from ".$class;
+    }
+
+    private function objectToObject($instance, $className) {
+        return unserialize(sprintf(
+            'O:%d:"%s"%s',
+            strlen($className),
+            $className,
+            strstr(strstr(serialize($instance), '"'), ':')
+        ));
     }
 }
