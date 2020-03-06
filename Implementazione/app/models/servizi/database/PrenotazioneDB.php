@@ -8,8 +8,8 @@ require_once("AbstractDB.php");
 
 class PrenotazioneDB extends AbstractDB
 {
-    protected function generateCreateQuery($obj){
-        $query = sprintf("INSERT INTO Prenotazione VALUES ('%s', '%s')",$obj->getOID(), $obj->getData());
+    protected function generatePutQuery($obj){
+        $query = sprintf("INSERT INTO Prenotazione VALUES ('%s', '%s', '%s')",$obj->getOID(), $obj->getData(), $obj->getTariffa());
         $query .= sprintf("INSERT INTO PrenotazioneCliente VALUES ('%s', '%s');", $obj->getOID(), $obj->getCliente()->getOID());
         $query .= sprintf("INSERT INTO PrenotazioneVolo VALUES ('%s', '%s');", $obj->getOID(), $obj->getVolo()->getOID());
 

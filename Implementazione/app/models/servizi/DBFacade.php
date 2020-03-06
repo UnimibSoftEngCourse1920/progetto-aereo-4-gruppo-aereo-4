@@ -5,7 +5,7 @@
 
 require_once("database/AcquistoDB.php");
 require_once("database/AereoDB.php");
-require_once("database/AereoportoDB.php");
+require_once("database/AeroportoDB.php");
 require_once("database/BigliettoDB.php");
 require_once("database/ClienteDB.php");
 require_once("database/ImpiegatoDB.php");
@@ -23,13 +23,13 @@ class DBFacade{
     private $gestori = array();
 
     private function __construct(){
-        //factory ??
+        // TODO: Factory mapper?
         $cli = new ClienteDB();
         $this->gestori['Cliente'] = $cli;
         $this->gestori['ClienteFedelta'] = $cli;
         $this->gestori['Acquisto'] = new AcquistoDB();
         $this->gestori['Aereo'] = new AereoDB();
-        $this->gestori['Aereoporto'] = new AereoportoDB();
+        $this->gestori['Aeroporto'] = new AeroportoDB();
         $this->gestori['Biglietto'] = new BigliettoDB();
         $this->gestori['Impiegato'] = new ImpiegatoDB();
         $this->gestori['Istituto'] = new IstitutoDB();
@@ -108,6 +108,10 @@ class DBFacade{
 
     public function getFedeltaUltimaPrenotazione(){
         return $this->gestori['Prenotazione'] -> getFedeltaUltimaPrenotazione();
+    }
+
+    public function getUltimoCodiceFedelta(){
+        return $this->gestori['Cliente'] -> getUltimoCodiceFedelta();
     }
 
 

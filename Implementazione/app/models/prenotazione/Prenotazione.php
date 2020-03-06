@@ -3,20 +3,24 @@
 class Prenotazione{
     private $data;
     private $OID;
-    private $tariffa;
-    private $listaPosti;
+    private $tariffa; //TODO: inserire nei vari diagrammi
+
     private $cliente;
     private $volo;
+
+    private $listaPosti;
     private $listaBiglietti;
+    private $listaAcquisti;
 
     public function __construct($cliente,$volo,$numPosti,$tariffa,$data){
-        $this->data=$data;
+        $this->data=$data; //TODO: da rimuovere dai parametri
         $this->tariffa=$tariffa;
         $this->cliente = $cliente;
         $this->volo = $volo;
         $this->listaPosti = $this->volo->prenota($numPosti);
         $prezzo = $this->volo->calcolaPrezzo($this->cliente->isFedelta());
         $this->listaBiglietti = $this->generaBiglietti($prezzo);
+        $this->listaAcquisti = array();
     }
 
     public function generaEstrattoContoParziale(){

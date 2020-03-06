@@ -26,7 +26,7 @@
                     <div class="col-md-6">
                         <h2>Gestione promozioni</h2>
                     </div>
-                    <div class="col-md-3"> <button class="btn btn-primary" data-toggle="modal" data-target="#nuovoVoloModal"> + Aggiungi promozione </button></div>
+                    <div class="col-md-3"> <button class="btn btn-primary" data-toggle="modal" data-target="#nuovaPromozioneModal"> + Aggiungi promozione </button></div>
                 </div>
             </div>
             <div class="container">
@@ -36,9 +36,10 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Inizio</th>
-                                <th scope="col">Fine</th>
-                                <th scope="col">Volo</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Data di inizio</th>
+                                <th scope="col">Data di fine</th>
+                                <th scope="col">Codice volo</th>
                                 <th scope="col">Sconto</th>
                                 <th scope="col">Fedeltà</th>
                                 <th scope="col">Operazioni</th>
@@ -54,7 +55,6 @@
                                 <td>Sì</td>
                                 <td>
                                     <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
-                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             <tr>
@@ -66,7 +66,6 @@
                                 <td>No</td>
                                 <td>
                                     <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
-                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             <tr>
@@ -78,7 +77,6 @@
                                 <td>Sì</td>
                                 <td>
                                     <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
-                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -86,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="nuovoVoloModal" tabindex="-1" role="dialog" aria-labelledby="nuovoVoloModal" style="display: none;" aria-hidden="true">
+            <div class="modal fade" id="nuovaPromozioneModal" tabindex="-1" role="dialog" aria-labelledby="nuovaPromozioneModal" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -119,7 +117,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal" id="add-request">Salva</button>
+                            <button type="submit" class="btn btn-success" data-dismiss="modal" id="add-request">Salva</button>
                         </div>
                     </div>
                 </div>

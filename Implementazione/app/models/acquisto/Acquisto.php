@@ -13,6 +13,7 @@ class Acquisto{
 
     private $puntiAccumulati;
     private $OID;
+    private $pagamento;
 	
 	public function __construct($metodoPagamento, $importo) {
 		$this->OID = OIDGenerator::getIstance()->getNewOID();
@@ -23,14 +24,18 @@ class Acquisto{
 		$metodoPagamento = $this->getMetodoPagamento();
 		if($metodoPagamento == MetodoPagamento::Punti && $cliente->getCodiceFedelta()) {
 			$punti = $this->costoToPunti($this->getImporto());
-			$pagamento = new PagamentoConPunti($punti);			
+			$this->pagamento = new PagamentoConPunti($punti);
 		} else if ($metodoPagamento == MetodoPagamento::Carta && $carta != "") {
 			$importo = $this->getImporto();
-			$pagamento = new PagamentoConCarta($importo, $carta);
+			$this->pagamento = new PagamentoConCarta($importo, $carta);
 		}
-		$esitoPagamento =  $pagamento->effettua($cliente);
+		$esitoPagamento =  $this->pagamento->effettua($cliente);
 		return $esitoPagamento;
 	}
+
+	private function calcolaPuntiAccumulati(){
+	    //TODO: fare il metodo per il calcolo controllando se il cliente passato è fedelta
+    }
 	
 	private function costoToPunti($importo) {
 		//TODO: Stabilire come effettuare la conversione

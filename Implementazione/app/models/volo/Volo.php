@@ -7,7 +7,7 @@ class Volo {
     private $dataOraPartenza;
     private $dataOraArrivo;
     private $stato;
-    private $codiceVolo;
+    //private $codiceVolo;
     private $miglia;
 
     private $aereoportoPart;
@@ -18,24 +18,25 @@ class Volo {
     private $listaPosti; //posti del volo
 
     public function __construct($dataOraPartenza, $dataOraArrivo, $AereoportoPart, $AereoportArr, $Aereo){
-        //$database = DBFacade::getIstance();
-        //$this->OID = OIDGenerator::getIstance()->getNewOID();
+        $database = DBFacade::getIstance();
+        $this->OID = OIDGenerator::getIstance()->getNewOID();
         //$this->OID = $data; //Per test
         $this->dataOraPartenza = $dataOraPartenza;
         $this->dataOraArrivo = $dataOraArrivo;
-        //$this->miglia = $this->calcolaMiglia();
+
+        $this->aereoportoPart = $database->get($AereoportoPart,"Aereoporto");
+        $this->aereoportoDest = $database->get($AereoportArr,"Aereoporto");
+        $this->miglia = $this->calcolaMiglia();
         $this->stato = 'ATTIVO';
         //codice volo??
-        //$this->aereoportoPart = $database->get($AereoportoPart);
-        //$this->aereoportoDest = $database->get($AereoportArr);
-        //$this->aereo = $database->get($Aereo);
+        $this->aereo = $database->get($Aereo,"Aereo");
         $this->promozione = null;
         $this->listaPosti = array();
 
-        /*for($i=0; $i<$this->aereo->getPostiDisponibili(); $i++){
+        for($i=0; $i<$this->aereo->getPostiDisponibili(); $i++){
             $p = new Posto($i+1);
             $this->listaPosti[] = $p;
-        }*/
+        }
     }
 
     public function setDataOraPartenza($dataOraPartenza){
@@ -61,8 +62,20 @@ class Volo {
         return $this->dataOraArrivo;
     }
 
+    public function getPromozione(){
+        return $this->promozione;
+    }
+
     public function getMiglia(){
         return $this->miglia;
+    }
+
+    public function getStato(){
+        return $this->stato;
+    }
+
+    public function getAereo(){
+        return $this->aereo;
     }
 
     public function getAeroportoPartenza(){
@@ -92,10 +105,10 @@ class Volo {
     }
 
     private function calcolaMiglia(){
-        if($this->aereoportoPart.getNazione() == $this->aereoportoDest.getNazione()){
+        if($this->aereoportoPart->getNazione() == $this->aereoportoDest->getNazione()){
             return rand(200,600);
         }
-        else if($this->aereoportoPart.getContinente() == $this.$this->aereoportoDest.getContinente()){
+        else if($this->aereoportoPart->getContinente() == $this->aereoportoDest->getContinente()){
             return rand(300,1500);
         }
         else{

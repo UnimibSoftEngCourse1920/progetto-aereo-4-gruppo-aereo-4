@@ -27,7 +27,10 @@ class RegistroClienti
     {
         //La generazione del codice è ancora da vedere
         //Chiede al DB oppure lui sa qual'è l'ultimo (Attenzione! Se sono più di uno è un macello)
-        return md5(uniqid(rand(), true));
+
+        //return md5(uniqid(rand(), true));
+        $ultimoCodice = DBFacade::getIstance()->getUltimoCodiceFedelta();
+        return "F" . sprintf('%07d', substr($ultimoCodice, 1) + 1);
     }
 
     public function nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $password)

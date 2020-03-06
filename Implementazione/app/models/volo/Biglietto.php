@@ -38,6 +38,10 @@ class Biglietto{
         return $this->nominativo;
     }
 
+    public function getNumPosto(){
+        return $this->numPosto;
+    }
+
     /**
      * @return string
      */
