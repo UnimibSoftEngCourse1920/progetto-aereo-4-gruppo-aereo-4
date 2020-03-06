@@ -12,7 +12,7 @@ class ClienteController extends Controller{
 
     private $registroClienti;
     private $registroPrenotazioni;
-    private $registroPromozioni;
+    //private $registroPromozioni;
     private $mailer;
 
     public function __construct(){
