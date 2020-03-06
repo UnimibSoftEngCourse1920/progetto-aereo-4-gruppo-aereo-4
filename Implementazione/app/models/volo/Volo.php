@@ -61,6 +61,10 @@ class Volo {
         return $this->dataOraArrivo;
     }
 
+    public function getMiglia(){
+        return $this->miglia;
+    }
+
     public function getAeroportoPartenza(){
         return $this->aereoportoPart;
     }

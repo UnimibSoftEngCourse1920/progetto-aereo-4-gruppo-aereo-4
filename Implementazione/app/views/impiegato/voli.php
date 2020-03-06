@@ -34,59 +34,35 @@
             <div class="container">
                 <div class="row text-center mb-3">
                     <div class="col-md-12">
-                        <table class="table table-striped ">
+                        <table class="table table-striped " aria-describedby="tabella_voli">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Da</th>
                                 <th scope="col">A</th>
-                                <th scope="col">Data</th>
-                                <th scope="col">Ora</th>
+                                <th scope="col">Data e ora partenza</th>
+                                <th scope="col">Data e ora arrivo</th>
                                 <th scope="col">Miglia</th>
                                 <th scope="col">Operazioni</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-
-
+                                foreach ($data["voli"] as $volo){
+                                    echo "<tr>
+                                            <th scope='row'>".$volo->getOID()."</th>
+                                            <td>".$volo->getAeroportoPartenza()." </td>
+                                            <td>".$volo->getAeroportoDestinazione()."</td>
+                                            <td>".$volo->getDataOraPartenza()."</td>
+                                            <td>".$volo->getDataOraArrivo()."</td>
+                                            <td>".$volo->getMiglia()."</td>
+                                            <td>
+                                                <button class='btn btn-danger'> <em class='fas fa-trash-alt'></em> Elimina </button>
+                                                <button class='btn btn-warning'> <em class='fas fa-pencil-alt'></em> Modifica </button>
+                                            </td>
+                                            </tr>";
+                                }
                             ?>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Milano </td>
-                                <td>Barcellona</td>
-                                <td>2/3/2020</td>
-                                <td>9:30</td>
-                                <td>100</td>
-                                <td>
-                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
-                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Milano </td>
-                                <td>Barcellona</td>
-                                <td>2/3/2020</td>
-                                <td>6:30</td>
-                                <td>100</td>
-                                <td>
-                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
-                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Milano </td>
-                                <td>Barcellona</td>
-                                <td>2/3/2020</td>
-                                <td>14:30</td>
-                                <td>100</td>
-                                <td>
-                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
-                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>

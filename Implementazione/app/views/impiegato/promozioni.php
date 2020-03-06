@@ -20,7 +20,7 @@
                 <div class="row text-center mb-3">
                     <div class="col-md-3">
                         <a href="admin">
-                            <button class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Indietro </button>
+                            <button class="btn btn-primary"> <em class="fas fa-arrow-left"></em> Indietro </button>
                         </a>
                     </div>
                     <div class="col-md-6">
@@ -32,7 +32,7 @@
             <div class="container">
                 <div class="row text-center mb-3">
                     <div class="col-md-12">
-                        <table class="table table-striped ">
+                        <table class="table table-striped " aria-describedby="tabella_promozioni">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -53,8 +53,8 @@
                                 <td>20%</td>
                                 <td>Sì</td>
                                 <td>
-                                    <button class="btn btn-danger"> <i class="fas fa-trash-alt"></i> Elimina </button>
-                                    <button class="btn btn-warning"> <i class="fas fa-pencil-alt"></i> Modifica </button>
+                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
+                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             <tr>
@@ -65,8 +65,8 @@
                                 <td>20%</td>
                                 <td>No</td>
                                 <td>
-                                    <button class="btn btn-danger"> <i class="fas fa-trash-alt"></i> Elimina </button>
-                                    <button class="btn btn-warning"> <i class="fas fa-pencil-alt"></i> Modifica </button>
+                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
+                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             <tr>
@@ -77,8 +77,8 @@
                                 <td>20%</td>
                                 <td>Sì</td>
                                 <td>
-                                    <button class="btn btn-danger"> <i class="fas fa-trash-alt"></i> Elimina </button>
-                                    <button class="btn btn-warning"> <i class="fas fa-pencil-alt"></i> Modifica </button>
+                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
+                                    <button class="btn btn-warning"> <em class="fas fa-pencil-alt"></em> Modifica </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -90,15 +90,15 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Nuovo volo</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Nuova promozione</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="title">Partenza</label>
-                                <input type="text" class="form-control" id="title" placeholder="">
+                                <label for="title">Nome</label>
+                                <input type="text" class="form-control" name="nome" id="nome" placeholder="">
                             </div>
                             <div class="form-group">
                                 <label for="dataset">Destinazione</label>

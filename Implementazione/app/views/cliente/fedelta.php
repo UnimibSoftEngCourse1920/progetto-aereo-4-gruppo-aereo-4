@@ -29,7 +29,7 @@
         </div>
         <div class="col-md-10 px-5 table-responsive">
             <h4 class="py-2">Le tue prenotazioni:</h4>
-            <table class="table table-striped ">
+            <table class="table table-striped " aria-describedby="tabella_prenotazioni">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
