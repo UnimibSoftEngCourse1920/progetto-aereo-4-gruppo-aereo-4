@@ -20,7 +20,7 @@
                 <div class="row text-center mb-3">
                     <div class="col-md-3">
                         <a href="admin">
-                            <button class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Indietro </button>
+                            <button class="btn btn-primary"> <em class="fas fa-arrow-left"></em> Indietro </button>
                         </a>
                     </div>
                     <div class="col-md-6">
