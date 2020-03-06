@@ -22,7 +22,6 @@ class Volo {
         $this->OID = OIDGenerator::getIstance()->getNewOID();
         $this->dataOraPartenza = $dataOraPartenza;
         $this->dataOraArrivo = $dataOraArrivo;
-        var_dump($AeroportoPart);
         $this->aeroportoPart = $database->get($AeroportoPart->getOID(),"Aeroporto");
         $this->aeroportoDest = $database->get($AeroportArr->getOID(),"Aeroporto");
         $this->miglia = $this->calcolaMiglia();
