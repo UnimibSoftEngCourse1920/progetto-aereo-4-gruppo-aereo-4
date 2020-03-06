@@ -1,6 +1,7 @@
 <?php
 
 require_once "../app/models/servizi/DBFacade.php";
+require_once "../app/models/cliente/ClienteFedelta.php";
 
 class RegistroClienti
 {
@@ -26,21 +27,22 @@ class RegistroClienti
     {
         //La generazione del codice è ancora da vedere
         //Chiede al DB oppure lui sa qual'è l'ultimo (Attenzione! Se sono più di uno è un macello)
-        return '';
+        return md5(uniqid(rand(), true));
     }
 
-    public function nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $username, $password)
+    public function nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $password)
     {
-        $codice = $this -> generaCodiceFedelta();
+        $codice = $this->generaCodiceFedelta();
         $OID = OIDGenerator::getIstance()->getNewOID();
-        $nuovoCliente = new ClienteFedelta($nome, $cognome, $email, $dataNascita, $codice, $indirizzo, $username, $password, $OID);
-        $esito = DBFacade::getIstance() -> put($nuovoCliente);
+        $nuovoCliente = new ClienteFedelta($nome, $cognome, $email, $dataNascita, $codice, $indirizzo, md5($password), $OID);
+        $esito = DBFacade::getIstance()->put($nuovoCliente);
         //devo controllare che esito mi ritorna il DB e tornarlo al controller
         //per ora ritorno sempre true
-        if ($esito)
+        if ($esito) {
             return $nuovoCliente;
-        else
+        } else {
             return null;
+        }
     }
 
     public function getCliente($codiceFedelta){

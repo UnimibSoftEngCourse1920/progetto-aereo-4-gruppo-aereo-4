@@ -18,27 +18,25 @@ class ClienteDB extends AbstractDB
             $indirizzo = $object->getIndirizzo();
             $codiceFedelta = $object-> getCodiceFedelta();
             $stato = $object->getStato();
-            $password = $object-> getPassword();
+            $password = $object->getPassword();
         }
 
         $query = "INSERT INTO Cliente VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s');";
-
-        return sprinft($query, $object->getOID(), $object->getNome(), $object->getCognome(), $object->getDataNascita(), $indirizzo, $codiceFedelta, $stato, $password, $object->getEmail());
+        return sprintf($query, $object->getOID(), $object->getNome(), $object->getCognome(), $object->getDataNascita(), $indirizzo, $codiceFedelta, $stato, $password, $object->getEmail());
     }
 
     public function emailFedeltaExists($email){
-        $query = "SELECT * from CLIENTE WHERE EMAIL = '$email' and codiceFedelta is not null";
+        $query = "SELECT * from Cliente WHERE email = '$email' and codiceFedelta is not null";
         $stmt = $this->connection->query($query);
         return ($stmt->rowCount() > 0);
     }
 
     public function login($email, $password){
-        $query = "SELECT * from Cliente where email = '$email' and password='$password'";
-        var_dump($query);
+        $query = "SELECT * from Cliente where email = '$email' and password='$password'  and codiceFedelta is not null";
         $stmt = $this->connection->query($query);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $obj = (object)($row);
-        return $this->objectToObject($obj, "Cliente");
+        return $this->objectToObject($obj, "ClienteFedelta");
     }
 
     public function getClientiFedelta(){

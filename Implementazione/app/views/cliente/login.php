@@ -57,7 +57,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-center pt-2">
-                            <a href="/public/cliente/registrazione" style="font-size:20px;"> Registrati </a>
+                            <a href="/public/cliente/registrati" style="font-size:20px;"> Registrati </a>
                         </div>
                     </div>
                 </div>

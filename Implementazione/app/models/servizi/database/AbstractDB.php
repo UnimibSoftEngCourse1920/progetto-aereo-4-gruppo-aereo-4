@@ -76,7 +76,7 @@ abstract class AbstractDB
     }
 
     protected function getClassName($object){
-        return substr(strrchr(get_class($object), "\\"), 1);
+        return get_class($object);
     }
 
     //Metodi hook

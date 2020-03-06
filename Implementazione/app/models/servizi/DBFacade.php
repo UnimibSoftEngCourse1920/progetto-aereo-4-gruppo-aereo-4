@@ -55,6 +55,7 @@ class DBFacade{
 
     public function put($object){
         $esito = $this -> gestori[$this->getClassName($object)] -> put($object);
+        return $esito;
     }
 
     public function get($OID, $class){
