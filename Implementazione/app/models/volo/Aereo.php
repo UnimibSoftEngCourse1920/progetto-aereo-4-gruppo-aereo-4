@@ -19,5 +19,15 @@ class Aereo{
     {
         return $this->numeroPosti;
     }
+
+    public function getMarcaModello()
+    {
+        return $this->marcaModello;
+    }
+
+    public function getOID()
+    {
+        return $this->OID;
+    }
 }
 

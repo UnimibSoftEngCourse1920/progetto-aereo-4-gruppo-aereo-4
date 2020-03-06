@@ -47,6 +47,10 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <?php
+
+
+                            ?>
                             <tr>
                                 <th scope="row">1</th>
                                 <td>Milano </td>
@@ -129,7 +133,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="title">Codice Aereo</label>
-                                    <input type="text" class="form-control" name="aereo" placeholder="">
+                                    <select name="aereo" class="form-control">
+                                        <?php
+                                        foreach ($data["aerei"] as $aereo){
+                                            echo "<option value='".$aereo->getOID()."'>".$aereo->getMarcaModello()."</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">

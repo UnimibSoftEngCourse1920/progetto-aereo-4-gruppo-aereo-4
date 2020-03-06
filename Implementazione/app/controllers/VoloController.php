@@ -23,8 +23,10 @@ class VoloController extends Controller {
 
     public function voli($name = '') {
         $aeroporti = DBFacade::getIstance()->getAll("Aereoporto");
+        $aerei = DBFacade::getIstance()->getAll("Aereo");
+        $voli = DBFacade::getIstance()->getAll("Volo");
         //var_dump($aeroporti);
-        $this->view('impiegato/voli',["aeroporti"=>$aeroporti]);
+        $this->view('impiegato/voli',["aeroporti"=>$aeroporti,"aerei"=>$aerei,"voli"=>$voli]);
     }
 
     public function promozioni($name = '') {
