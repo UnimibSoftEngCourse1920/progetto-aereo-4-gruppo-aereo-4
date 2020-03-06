@@ -15,6 +15,7 @@ require_once("database/PostoDB.php");
 require_once("database/PrenotazioneDB.php");
 require_once("database/PromozioneDB.php");
 require_once("database/VoloDB.php");
+require_once("database/OIDDB.php");
 
 
 class DBFacade{
@@ -38,6 +39,7 @@ class DBFacade{
         $this->gestori['Prenotazione'] = new PrenotazioneDB();
         $this->gestori['Promozione'] = new PromozioneDB();
         $this->gestori['Volo'] = new VoloDB();
+        $this->gestori['OID'] = new OIDDB();
     }
 
     public static function getIstance(){
@@ -112,7 +114,6 @@ class DBFacade{
     public function getUltimoCodiceFedelta(){
         return $this->gestori['Cliente'] -> getUltimoCodiceFedelta();
     }
-
 
 }
 
