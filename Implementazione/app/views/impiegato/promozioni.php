@@ -32,7 +32,7 @@
             <div class="container">
                 <div class="row text-center mb-3">
                     <div class="col-md-12">
-                        <table class="table table-striped ">
+                        <table class="table table-striped " aria-describedby="tabella_promozioni">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -90,15 +90,15 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Nuovo volo</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Nuova promozione</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="title">Partenza</label>
-                                <input type="text" class="form-control" id="title" placeholder="">
+                                <label for="title">Nome</label>
+                                <input type="text" class="form-control" name="nome" id="nome" placeholder="">
                             </div>
                             <div class="form-group">
                                 <label for="dataset">Destinazione</label>

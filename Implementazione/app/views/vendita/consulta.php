@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-12 px-5 table-responsive">
             <h4 class="py-2">La tua ricerca ha prodotto i seguenti risultati:</h4>
-            <table class="table table-striped ">
+            <table class="table table-striped " aria-describedby="tabella_voli_disponibili">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
