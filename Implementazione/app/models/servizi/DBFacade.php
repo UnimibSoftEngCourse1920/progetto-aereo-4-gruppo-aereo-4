@@ -116,6 +116,10 @@ class DBFacade{
         return $this->gestori['Cliente'] -> getUltimoCodiceFedelta();
     }
 
+    public function getClientiVolo($OID){
+        return null;
+    }
+
 }
 
 

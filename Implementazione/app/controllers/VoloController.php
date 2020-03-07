@@ -55,9 +55,10 @@ class VoloController extends Controller {
     }
 
     public function cancellaVolo($OIDVolo){
-        $volo = $this->registroVoli -> rimuoviVolo($OIDVolo);
-        $listaClienti = $this->registroPrenotazioni -> getClientiVolo($volo -> OIDVolo);
+        $volo = $this->registroVoli->rimuoviVolo($OIDVolo);
+        $listaClienti = $this->registroPrenotazioni->getClientiVolo($volo->getOID());
         $this->mailer -> inviaEmailCancellazioneVolo($listaClienti, $volo);
+        $this->voli();
     }
 
 

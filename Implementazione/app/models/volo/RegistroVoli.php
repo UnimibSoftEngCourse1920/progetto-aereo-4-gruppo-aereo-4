@@ -30,11 +30,11 @@ class RegistroVoli{
 
     public function rimuoviVolo($OIDVolo){
         $database = DBFacade::getIstance();
-        $volo = $database ->get($OIDVolo);
+        $volo = $database ->get($OIDVolo,"Volo");
         $volo->setStato('CANCELLATO');
         $database->update($volo);
         //ritorna esito
-        return true;
+        return $volo;
     }
 
     private function generaCodiceVolo($datiVolo){

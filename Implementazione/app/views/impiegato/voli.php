@@ -43,6 +43,7 @@
                                 <th scope="col">Data e ora partenza</th>
                                 <th scope="col">Data e ora arrivo</th>
                                 <th scope="col">Miglia</th>
+                                <th scope="col">Stato del volo</th>
                                 <th scope="col">Operazioni</th>
                             </tr>
                             </thead>
@@ -56,9 +57,10 @@
                                             <td>".$volo->getDataOraPartenza()."</td>
                                             <td>".$volo->getDataOraArrivo()."</td>
                                             <td>".$volo->getMiglia()."</td>
+                                            <td>".$volo->getStato()."</td>
                                             <td>
-                                                <button class='btn btn-danger'> <em class='fas fa-trash-alt'></em> Elimina </button>
                                                 <button class='btn btn-warning'> <em class='fas fa-pencil-alt'></em> Modifica </button>
+                                                <a href='cancellaVolo/".$volo->getOID()."'><button class='btn btn-danger'> <em class='fas fa-trash-alt'></em> Cancella </button></a>
                                             </td>
                                             </tr>";
                                 }
