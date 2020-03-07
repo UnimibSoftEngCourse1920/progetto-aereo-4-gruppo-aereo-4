@@ -1,5 +1,8 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+
+
 class Posto{
     private $OID;
     private $numeroPosto;
@@ -40,6 +43,7 @@ class Posto{
      */
     public function isStato()
     {
+        //TODO rinominare
         return $this->stato;
     }
 

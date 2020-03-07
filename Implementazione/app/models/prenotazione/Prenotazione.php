@@ -1,6 +1,11 @@
 <?php
 
+require_once("../app/models/volo/Biglietto.php");
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+
+
 class Prenotazione{
+
     private $data;
     private $OID;
     private $tariffa; //TODO: inserire nei vari diagrammi
@@ -13,6 +18,7 @@ class Prenotazione{
     private $listaAcquisti;
 
     public function __construct($cliente,$volo,$numPosti,$tariffa,$data){
+        $this->OID = OIDGenerator::getIstance() -> getNewOID();
         $this->data=$data; //TODO: da rimuovere dai parametri
         $this->tariffa=$tariffa;
         $this->cliente = $cliente;
@@ -62,7 +68,7 @@ class Prenotazione{
 			if($esitoPagamentoTassa) {
 				$nuoviPosti = $nuovoVolo->occupaPosti($nPosti, $this->getCodice());
 				$volo = $this->getVolo();
-				$volo->liberaPosti($this->getPosti());
+				$volo->liberaPosti($this->getListaPosti());
 				$this->setVolo($nuovoVolo);		
 				$biglietti = $this->getBiglietti();
 				for($i = 0; $i < $nPosti; $i++) {
@@ -84,29 +90,88 @@ class Prenotazione{
 	}
 	
 	//TODO: Prevedere logica di recupero per i get su volo, acquisto e posti?
-	
-	public function getVolo() {
-		return $this->volo;
-	}	
-	
+
 	public function setVolo($volo) {
 		$this->volo = $volo;
 	}
-	
+
+    public function setCliente($cliente)
+    {
+        $this->cliente = $cliente;
+    }
+
+    public function setListaPosti($listaPosti)
+    {
+        $this->listaPosti = $listaPosti;
+    }
+
+    public function setListaBiglietti($listaBiglietti)
+    {
+        $this->listaBiglietti = $listaBiglietti;
+    }
+
+    public function setListaAcquisti($listaAcquisti)
+    {
+        $this->listaAcquisti = $listaAcquisti;
+    }
+
 	public function getAcquisto() {
+        //TODO
 		return $this->acquisto;
 	}
-	
-	public function getPosti() {
-		return $this->posti;
-	}
-	
-	public function getCodice() {
-		return $this->codicePrenotazione;
+
+	public function getOID() {
+		return $this->OID;
 	}
 	
 	public function getNumeroPosti() {
 		
 	}
-	
+
+    public function getVolo() {
+        return $this->volo;
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function getTariffa()
+    {
+        return $this->tariffa;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCliente()
+    {
+        return $this->cliente;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getListaPosti()
+    {
+        return $this->listaPosti;
+    }
+
+    /**
+     * @return array
+     */
+    public function getListaBiglietti()
+    {
+        return $this->listaBiglietti;
+    }
+
+    /**
+     * @return array
+     */
+    public function getListaAcquisti()
+    {
+        return $this->listaAcquisti;
+    }
+
 }

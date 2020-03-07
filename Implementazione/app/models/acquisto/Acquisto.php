@@ -1,6 +1,9 @@
 <?php
 
 
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+
+
 abstract class MetodoPagamento
 {
     const Punti = "punti";

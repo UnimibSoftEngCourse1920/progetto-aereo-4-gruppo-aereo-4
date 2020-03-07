@@ -1,6 +1,6 @@
 <?php
 
-require_once "../app/models/servizi/OIDGenerator.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 class Cliente{
     protected $OID;
@@ -39,6 +39,11 @@ class Cliente{
 
     public function getOID() {
         return $this->OID;
+    }
+
+    public function isFedelta(){
+        //TODO: da rivedere
+        return false;
     }
 }
 

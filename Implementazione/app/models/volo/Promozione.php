@@ -1,5 +1,8 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+
+
 class Promozione{
 
     private $dataInizio;
@@ -26,6 +29,7 @@ class Promozione{
         $this->promozioneFedelta = $promozioneFedelta;
         $this->OID = OIDGenerator::getIstance()->getNewOID();
     }
+
 
     public function __get($attributo) {
         if (property_exists($this, $attributo)) {

@@ -1,5 +1,8 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+
+
 class Aereo{
     private $OID;
     private $marcaModello;
@@ -23,6 +26,14 @@ class Aereo{
     public function getMarcaModello()
     {
         return $this->marcaModello;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumeroSerie()
+    {
+        return $this->numeroSerie;
     }
 
     public function getOID()

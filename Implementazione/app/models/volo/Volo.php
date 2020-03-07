@@ -3,17 +3,20 @@
 require_once "../app/models/servizi/DBFacade.php";
 require_once "../app/models/volo/Posto.php";
 require_once "../app/models/volo/Aeroporto.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+
+
 class Volo {
     private $OID;
     private $dataOraPartenza;
     private $dataOraArrivo;
     private $stato;
     private $miglia;
+    private $aereo;
 
     private $aeroportoPart;
     private $aeroportoDest;
-    private $aereo;
-    private $promozione;
+    private $promozione; //TODO: vedere se ora è diventato 1:1
 
     private $listaPosti; //posti del volo
 
@@ -34,6 +37,21 @@ class Volo {
             $p = new Posto($i+1);
             $this->listaPosti[] = $p;
         }
+    }
+
+
+    public function setAeroportoDest($aeroportoDest)
+    {
+        $this->aeroportoDest = $aeroportoDest;
+    }
+
+    public function setAeroportoPart($aeroportoPart)
+    {
+        $this->aeroportoPart = $aeroportoPart;
+    }
+
+    public function setPosti($listaPosti){
+        $this->listaPosti = $listaPosti;
     }
 
     public function setDataOraPartenza($dataOraPartenza){

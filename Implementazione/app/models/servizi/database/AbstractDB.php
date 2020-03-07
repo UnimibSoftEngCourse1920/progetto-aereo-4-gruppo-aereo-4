@@ -37,7 +37,7 @@ abstract class AbstractDB
         $obj = (object)($row);
         $ris = $this->objectToObject($obj,$class); //eseguo il cast dell'oggetto generico
 
-        return $ris;
+        return $this->getAssociazioni($ris);
     }
 
     public function delete($OID, $class){
@@ -95,6 +95,10 @@ abstract class AbstractDB
 
     protected function generateGetAllQuery($class){
         return "SELECT * from ".$class;
+    }
+
+    protected function getAssociazioni($obj){
+        return $obj;
     }
 
     protected function objectToObject($instance, $className) {
