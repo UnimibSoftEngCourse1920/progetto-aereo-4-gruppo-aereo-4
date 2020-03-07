@@ -15,7 +15,10 @@ class OIDGenerator
     private static $fname = "../app/oid.txt";
 
     private function __construct(){
-        $oid = file_get_contents(self::$fname);
+        $oid = "";
+        if (is_file(self::$fname))
+            $oid = file_get_contents(self::$fname);
+
         $this->seqnumber = (substr($oid, 0, 8) == date("Ymd")) ? (substr($oid, 8) + 1) : 1 ;
         $this->date = date("Ymd");
     }
@@ -42,3 +45,5 @@ class OIDGenerator
     }
 
 }
+
+
