@@ -80,6 +80,7 @@ class Volo {
     }
 
     public function getAeroportoPartenza(){
+        //occhio a materializzazione
         return $this->aeroportoPart;
     }
 

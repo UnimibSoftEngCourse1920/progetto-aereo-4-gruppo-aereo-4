@@ -15,13 +15,13 @@ class Mailer{
         $message = "Gentile cliente, \n
                     Ti informiamo che il tuo volo è stato modificato. \n
                     Riportiamo di seguito le nuove informazioni aggiornate:\n
-                    Partenza: $volo->getAereoportoPart()->getNome() \n
-                    $volo->getData() - $volo->getOrarioPartenza() \n\n
-                    Arrivo: $volo->getAereoportoDest()->getNome()\n
-                    $volo->getOrarioArrivo()\n\n
+                    Partenza: %s    %s\n
+                    Arrivo:   %s    %s\n
                     Ci scusiamo per il disguido,
                     Buona giornata\n\n
                     GruppoAereo4";
+
+        $message = sprintf($message, $volo->getAereoportoPartenza()->getNome(), $volo->getDataOraPartenza(), $volo->getAereoportoArrivo(), $volo -> getDataOraArrivo());
 
         mail($recipients , "Avviso modifica volo",$message);
     }
@@ -32,14 +32,14 @@ class Mailer{
         $recipients = $this->generateRecipients($listaClienti);
         $message = "Gentile cliente, \n
                     Ti informiamo che il tuo volo \n
-                    Partenza: $volo->getAereoportoPart()->getNome() \n
-                    $volo->getData() - $volo->getOrarioPartenza() \n\n
-                    Arrivo: $volo->getAereoportoDest()->getNome()\n
-                    $volo->getOrarioArrivo()\n\n
+                    Partenza: %s    %s \n
+                    Arrivo:   %s    %s \n
                     E' stato cancellato. \n
                     Ci scusiamo per il disguido,
                     Buona giornata\n\n
                     GruppoAereo4";
+
+        $message = sprintf($message, $volo->getAereoportoPartenza()->getNome(), $volo->getDataOraPartenza(), $volo->getAereoportoArrivo(), $volo -> getDataOraArrivo());
 
         mail($recipients , "Avviso cancellazione volo",$message);
     }
