@@ -25,18 +25,21 @@ class ClienteController extends Controller{
 
     public function annullaIscrizione($codiceFedelta){
         $cliente = $this->registroClienti -> annullaIscrizione($codiceFedelta);
-        if($cliente != null)
-            $this->mailer -> inviaEmailConfermaCancellazione($cliente);
-        else
+        if($cliente != null) {
+            $this->mailer->inviaEmailConfermaCancellazione($cliente);
+        }
+        else {
             $error = 'ERRORE'; //Da implementare errori
+        }
     }
 
     public function ricercaClientiInfedeli(){
         $clientePrenotazione = $this->registroPrenotazioni->getFedeltaUltimaPrenotazione();
         foreach ($clientePrenotazione as $CliData) {
             $anniPassati = $this->anniPassati($clientePrenotazione[1]);
-            if($anniPassati == 3)
+            if($anniPassati == 3) {
                 $this->registroClienti->annullaIscrizione($clientePrenotazione[0]);
+            }
             else if ($anniPassati == 2){
                 $this->registroClienti->setClienteInfedele($clientePrenotazione[0]);
             }

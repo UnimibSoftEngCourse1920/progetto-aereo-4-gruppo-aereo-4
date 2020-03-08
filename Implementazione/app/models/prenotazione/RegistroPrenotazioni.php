@@ -2,8 +2,10 @@
 
 abstract class Tariffa
 {
-    const Standard = "standard";
-    const Plus = "plus";
+    //TODO: sistemare tutti in base a questo formato??
+    //Fare maiuscoli?
+    const STANDARD = "standard";
+    const PLUS = "plus";
 }
 
 class RegistroPrenotazioni{
@@ -38,10 +40,12 @@ class RegistroPrenotazioni{
                 $nuovaPrenotazione->listaPosti = $volo->prenota($numPosti);
                 return $nuovaPrenotazione;
             }
-            else
+            else{
                 return false;
-        } else
+            }
+        } else{
             return false;
+        }
     }
 
     public function getFedeltaUltimaPrenotazione($anniTrascorsi){
@@ -59,9 +63,9 @@ class RegistroPrenotazioni{
 	
 	private function calcolaTassa($tariffa, $nuovaTariffa) {
 		$tassa = 0;
-		if($tariffa != Tariffa::Plus) {
+		if($tariffa != Tariffa::PLUS) {
 			$tassa += 10;		
-			if($nuovaTariffa == Tariffa::Plus) {
+			if($nuovaTariffa == Tariffa::PLUS) {
 				$tassa += 10;
 			}
 		}
@@ -74,7 +78,7 @@ class RegistroPrenotazioni{
 		if($esitoPagamento) {
 			$punti = $this->calcolaPunti($importo);
 			$cliente->aggiungiPunti($punti);
-			$cliente->setStato("fedele");
+			$cliente->setStato(ClienteFedelta::$STATOFEDELE);
 		}
 		return $esitoPagamento;
 	}
@@ -109,8 +113,9 @@ class RegistroPrenotazioni{
         }
 
         $listaPrenotazioni = \model\servizi\DBFacade::getIstance() -> getPrenotazioniScaduteIn(96);
-        foreach ($listaPrenotazioni as $prenotazione)
+        foreach ($listaPrenotazioni as $prenotazione){
             $listaClienti[] = $prenotazione->getCliente()->getEmail();
+        }
         $this->mailer->avvisaPrenotazioneInScadenza($listaClienti);
     }
 	

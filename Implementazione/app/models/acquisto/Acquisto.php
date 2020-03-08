@@ -3,8 +3,8 @@
 
 abstract class MetodoPagamento
 {
-    const Punti = "punti";
-    const Carta = "carta";
+    const PUNTI = "punti";
+    const CARTA = "carta";
 }
 
 class Acquisto{
@@ -22,10 +22,10 @@ class Acquisto{
 	
 	public function effettuaPagamento($metodoPagamento, $cliente, $carta) {
 		$metodoPagamento = $this->getMetodoPagamento();
-		if($metodoPagamento == MetodoPagamento::Punti && $cliente->getCodiceFedelta()) {
+		if($metodoPagamento == MetodoPagamento::PUNTI && $cliente->getCodiceFedelta()) {
 			$punti = $this->costoToPunti($this->getImporto());
 			$this->pagamento = new PagamentoConPunti($punti);
-		} else if ($metodoPagamento == MetodoPagamento::Carta && $carta != "") {
+		} else if ($metodoPagamento == MetodoPagamento::CARTA && $carta != "") {
 			$importo = $this->getImporto();
 			$this->pagamento = new PagamentoConCarta($importo, $carta);
 		}

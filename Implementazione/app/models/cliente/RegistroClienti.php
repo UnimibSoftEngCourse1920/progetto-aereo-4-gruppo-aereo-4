@@ -72,11 +72,12 @@ class RegistroClienti
             case RegistroClienti::$AVVISACANCELLAZIONEFEDELTA:
                 $this->mailer->inviaCancellazioneFedelta($cliente);
                 break;
-
             case RegistroClienti::$AVVISACLIENTEINFEDELE:
                 $this->mailer->inviaComunicazioneInfedelta($cliente);
                 break;
-
+            default:
+                return false;
+                //TODO vedere questo return
         }
     }
 
