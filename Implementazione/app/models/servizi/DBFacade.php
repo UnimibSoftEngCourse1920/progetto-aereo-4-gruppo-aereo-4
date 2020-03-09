@@ -67,7 +67,7 @@ class DBFacade{
     }
 
     public function delete($OID, $class){
-        $this->gestori[$class] -> delete($OID);
+        $this->gestori[$class]->delete($OID,$class);
     }
 
     private function getClassName($class){
