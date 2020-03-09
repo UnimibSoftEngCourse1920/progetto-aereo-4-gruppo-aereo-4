@@ -5,13 +5,14 @@
 require_once __DIR__ . "/../core/Controller.php";
 require_once __DIR__ . "/../models/volo/RegistroVoli.php";
 require_once __DIR__ . "/../models/prenotazione/RegistroPrenotazioni.php";
+require_once __DIR__ . "/../models/volo/RegistroPromozioni.php";
 require_once __DIR__ . "/../models/servizi/Mailer.php";
 require_once __DIR__ . "/../models/servizi/DBFacade.php";
 require_once __DIR__ . "/../models/volo/Aeroporto.php";
 class VoloController extends Controller {
 
     private $registroVoli;
-    private $registroPrenotazioni;
+    private $registroPromozioni;
     private $mailer;
 
     public function login($name = '') {
@@ -31,12 +32,14 @@ class VoloController extends Controller {
     }
 
     public function promozioni($name = '') {
-        $this->view('impiegato/promozioni');
+        $promozioni = DBFacade::getIstance()->getAll("Promozione");
+        $voli = DBFacade::getIstance()->getAll("Volo");
+        $this->view('impiegato/promozioni', ["promozioni"=>$promozioni,"voli"=>$voli]);
     }
 
     public function __construct(){
         $this->registroVoli = new RegistroVoli();
-        $this->registroPrenotazioni = new RegistroPrenotazioni();
+        $this->registroPromozioni = new RegistroPromozioni();
         $this->mailer = new Mailer();
     }
 
@@ -61,5 +64,9 @@ class VoloController extends Controller {
         $this->voli();
     }
 
+    public function inserisciPromozione($nome, $sconto, $dataInizio,$dataFine, $codVolo, $promozioneFedelta){
+        $this->registroPromozioni->creaPromozione($nome, (int)$sconto, $dataInizio,$dataFine, $codVolo, (int)$promozioneFedelta);
+        $this->promozioni();
+    }
 
 }

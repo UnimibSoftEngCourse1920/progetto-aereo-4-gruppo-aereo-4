@@ -46,39 +46,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>2/3/2020 </td>
-                                <td>20/3/2020</td>
-                                <td>-----</td>
-                                <td>20%</td>
-                                <td>Sì</td>
-                                <td>
-                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>2/3/2020 </td>
-                                <td>20/3/2020</td>
-                                <td>-----</td>
-                                <td>20%</td>
-                                <td>No</td>
-                                <td>
-                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>-----</td>
-                                <td>-----</td>
-                                <td>1465</td>
-                                <td>20%</td>
-                                <td>Sì</td>
-                                <td>
-                                    <button class="btn btn-danger"> <em class="fas fa-trash-alt"></em> Elimina </button>
-                                </td>
-                            </tr>
+                            <?php
+                            foreach ($data["promozioni"] as $promozione){
+                                echo "<tr>
+                                            <th scope='row'>".$promozione->getOID()."</th>
+                                            <td>".$promozione->getNome()." </td>
+                                            <td>".$promozione->getDataInizio()."</td>
+                                            <td>".$promozione->getDataFine()."</td>
+                                            <td> WIP </td>
+                                            <td>".$promozione->getSconto()."</td>
+                                            <td>".$promozione->isFedelta()."</td>
+                                            <td>
+                                                <a href='cancellaPromozione/".$promozione->getOID()."'><button class='btn btn-danger'> <em class='fas fa-trash-alt'></em> Cancella </button></a>
+                                            </td>
+                                            </tr>";
+                            }
+                            ?>
                             </tbody>
                         </table>
                     </div>
@@ -87,38 +70,54 @@
             <div class="modal fade" id="nuovaPromozioneModal" tabindex="-1" role="dialog" aria-labelledby="nuovaPromozioneModal" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Nuova promozione</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="title">Nome</label>
-                                <input type="text" class="form-control" name="nome" id="nome" placeholder="">
+                        <form action="inserisciPromozione" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Nuova promozione</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
                             </div>
-                            <div class="form-group">
-                                <label for="dataset">Destinazione</label>
-                                <input type="text" class="form-control" id="dataset" placeholder="">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="title">Nome</label>
+                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dataset">Sconto (in percentuale)</label>
+                                    <input type="text" class="form-control" name="sconto" id="sconto" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="model">Data inizio</label>
+                                    <input type="date" class="form-control" name="datainizio" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="model">Data fine</label>
+                                    <input type="date" class="form-control" name="datafine" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="model">Volo</label>
+                                    <select name="volo" class="form-control">
+                                        <option value="no">Nessuno</option>
+                                        <?php
+                                        foreach ($data["voli"] as $volo){
+                                            echo "<option value='".$volo->getOID()."'>".$volo->getOID()."</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="model">Promozione fedeltà</label><br>
+                                    <input type="radio" id="si" name="fedelta" value=1>
+                                    <label for="male">Si</label><br>
+                                    <input type="radio" id="no" name="fedelta" value=0>
+                                    <label for="female">No</label><br>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="model">Miglia</label>
-                                <input type="text" class="form-control" id="model" placeholder="">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
+                                <button type="submit" class="btn btn-success">Salva</button>
                             </div>
-                            <div class="form-group">
-                                <label for="model">Data</label>
-                                <input type="date" class="form-control" id="model" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="model">Ora</label>
-                                <input type="time" class="form-control" id="model" placeholder="">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
-                            <button type="submit" class="btn btn-success" data-dismiss="modal" id="add-request">Salva</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

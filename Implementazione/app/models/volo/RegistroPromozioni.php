@@ -3,9 +3,15 @@
 
 //namespace model\volo;
 
+require_once "Promozione.php";
 
 class RegistroPromozioni
 {
+    public function __construct()
+    {
+
+    }
+
     public function creaPromozione($sconto, $dataInizio,$dataFine, $nome, $codVolo, $promozioneFedelta){
 
         $promozione = new Promozione($dataInizio, $dataFine, $nome, $sconto, $promozioneFedelta);

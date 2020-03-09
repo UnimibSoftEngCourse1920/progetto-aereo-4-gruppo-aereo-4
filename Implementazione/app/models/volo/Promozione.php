@@ -40,5 +40,29 @@ class Promozione{
         return $this;
     }
 
+    public function getOID(){
+        return $this->OID;
+    }
+    public function getNome(){
+        return $this->nome;
+    }
+
+    public function getDataInizio(){
+        return $this->dataInizio;
+    }
+
+    public function getDataFine(){
+        return $this->dataFine;
+    }
+
+    public function getSconto(){
+        return $this->percentualeSconto;
+    }
+
+    public function isFedelta(){
+        return $this->promozioneFedelta;
+    }
+
+
 
 }
