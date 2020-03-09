@@ -8,6 +8,7 @@ class Cliente{
     public static $STATO_OSPITE= 'OSPITE';
     public static $STATO_FEDELE = 'FEDELE';
     public static $STATO_INFEDELE = 'INFEDELE';
+    public static $STATO_CANCELLATO = 'CANCELLATO';
 
     private $OID;
     private $nome;
@@ -91,7 +92,7 @@ class Cliente{
         $this->username = null;
         $this->password = null;
         //TODO:: se si cancella imposto solamente lo stato 'Cancellato' ?
-        $this->stato = Cliente::$STATO_OSPITE;
+        $this->stato = Cliente::$STATO_CANCELLATO;
     }
 
     public function setStato($stato){

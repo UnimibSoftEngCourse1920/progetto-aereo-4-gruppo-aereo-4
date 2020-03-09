@@ -24,13 +24,36 @@ class ClienteController extends Controller{
     }
 
     public function annullaIscrizione($codiceFedelta){
-        $cliente = $this->registroClienti -> annullaIscrizione($codiceFedelta);
-        if($cliente != null) {
-            $this->mailer->inviaEmailConfermaCancellazione($cliente);
+        $esito = $this->registroClienti -> annullaIscrizione($codiceFedelta);
+        if($esito) {
+            //TODO esito positivo
         }
         else {
-            $error = 'ERRORE'; //Da implementare errori
+            //TODO esito negativo
         }
+    }
+
+    public function iscrizioneFedelta($nome = "", $cognome = "", $email = "", $dataNascita = "", $indirizzo = "", $citta = "",
+                                      $cap = "", $password = "", $confermaPassword = "") {
+        //$registroClienti = $this->model('cliente/RegistroClienti');
+
+        $error = "";
+        if($nome != "" && $cognome != "" && $indirizzo != "" && $citta != "" && $cap != "" && $dataNascita != "" &&
+            $email != "" && $password != "") {
+            if($password == $confermaPassword) {
+                //Converto il formato della data
+                $esito = $this->registroClienti ->nuovoClienteFedelta($nome, $cognome, $indirizzo." ".$citta." ".$cap,
+                    $dataNascita, $email, $password);
+                if ($esito) {
+                    header("Location: /public/cliente/registrato");
+                } else {
+                    $error = "L'indirizzo e-mail è già registrato.";
+                }
+            } else {
+                $error = "Le due password non coincidono.";
+            }
+        }
+        $this->view('cliente/registrazione', ["error" => $error]);
     }
 
     public function ricercaClientiInfedeli(){
@@ -112,30 +135,6 @@ class ClienteController extends Controller{
         }
         $this->view('cliente/registrazione', ["error" => $error]);
     }
-
-    public function iscrizioneFedelta($nome = "", $cognome = "", $email = "", $dataNascita = "", $indirizzo = "", $citta = "",
-                                      $cap = "", $password = "", $confermaPassword = "") {
-        //$registroClienti = $this->model('cliente/RegistroClienti');
-
-        $error = "";
-        if($nome != "" && $cognome != "" && $indirizzo != "" && $citta != "" && $cap != "" && $dataNascita != "" &&
-            $email != "" && $password != "") {
-            if($password == $confermaPassword) {
-                //Converto il formato della data
-                $esito = $this->registroClienti ->nuovoClienteFedelta($nome, $cognome, $indirizzo." ".$citta." ".$cap,
-                    $dataNascita, $email, $password);
-                if ($esito) {
-                    header("Location: /public/cliente/registrato");
-                } else {
-                    $error = "L'indirizzo e-mail è già registrato.";
-                }
-            } else {
-                $error = "Le due password non coincidono.";
-            }
-        }
-        $this->view('cliente/registrazione', ["error" => $error]);
-    }
-
 
     public function prenotazioni() {
         $prenotazioni = array(new Prenotazione("1", "1", "1", "1", "1"),

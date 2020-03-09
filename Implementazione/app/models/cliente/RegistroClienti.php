@@ -52,14 +52,16 @@ class RegistroClienti
         return DBFacade::getIstance() -> get($codiceFedelta);
     }
 
-    public function annullaIscrizione($OID){
+    public function annullaIscrizione($OIDCliente){
         $db = DBFacade::getIstance();
-        $cliente = $db->get($OID);
+        $cliente = $db->get($OIDCliente, Cliente::class);
         if ($cliente != null) {
             $cliente->annullaIscrizioneFedelta();
             $esito = DBFacade::getIstance()->update($cliente);
-            $this->mailer->inviaCancellazioneFedelta($cliente);
-            return true && $esito;
+            if($esito){
+                $this->mailer->inviaCancellazioneFedelta($cliente);
+            }
+            return $esito;
         }
         return false;
     }
