@@ -1,25 +1,23 @@
-<!--<div class="pos-f-t">
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark p-4">
-            <h4 class="text-white title-menu">Gruppo Aereo 4</h4>
-                <div class="menu-voice">
-                    <a href="<?php echo $dir ?>"> <span>Home</span> </a>
-                </div>
-                <div class="menu-account">
-                    <a href="/public/cliente/login">
-                        <span> <i class="fas fa-user"></i> Login / Registrati </span>
-                    </a>
-                </div>
-        </div>
+<nav class="navbar navbar-light bg-light navbar-expand-lg px-4 py-3">
+    <a class="navbar-brand" href="/"><img id="logo" src="/public/img/logo.png"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/public/cliente/registrati">Registrati</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/public/cliente/accedi">Accedi</a>
+            </li>
+        </ul>
+
     </div>
-    <nav class="navbar navbar-dark bg-transparent">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a href="/"><img id="logo" src="<?php echo $dir ?>img/logo.png" /></a>
-    </nav>
-</div>-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+</nav>
+
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/public/">Gruppo Aereo 4</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -36,4 +34,4 @@
             </li>
         </ul>
     </div>
-</nav>
+</nav>-->
