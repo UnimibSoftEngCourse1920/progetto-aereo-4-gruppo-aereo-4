@@ -63,8 +63,7 @@ class RegistroVoli{
 	}
 	
 	public function getVolo($idVolo) {
-		//$volo = DBFacade::getIstance()->getVolo($idVolo);
-        $volo = new Volo("1", "1", "1", "1", "1", "1");
+		$volo = DBFacade::getIstance()->get($idVolo,"Volo");
 		return $volo;
 	}
 	

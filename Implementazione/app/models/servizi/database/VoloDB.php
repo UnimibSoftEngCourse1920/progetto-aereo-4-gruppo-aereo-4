@@ -14,8 +14,8 @@ class VoloDB extends AbstractDB
         $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s', '%s'); ",
                         $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo()->getOID(), $promozione);
 
-        //VoloAereoporto
-        $query .= sprintf("Insert into VoloAereoporto values ('%s', '%s', '%s' ); ", $obj->getOID(), $obj->getAeroportoPartenza()->getOID(), $obj->getAeroportoDestinazione()->getOID());
+        //VoloAeroporto
+        $query .= sprintf("Insert into VoloAeroporto values ('%s', '%s', '%s' ); ", $obj->getOID(), $obj->getAeroportoPartenza()->getOID(), $obj->getAeroportoDestinazione()->getOID());
 
         //VoloPosto
         foreach ($obj->getPosti() as $posto)
@@ -44,7 +44,7 @@ class VoloDB extends AbstractDB
     }
 
     private function DEPRECATO_setAereoporti(Volo $volo){
-        $query = sprintf("Select aereoportoPartenza, aereoportoDestinazione from VoloAereoporto where volo='%s'", $volo->getOID());
+        $query = sprintf("Select aeroportoPartenza, aeroportoDestinazione from VoloAeroporto where volo='%s'", $volo->getOID());
         $aereoporti = $this->connection->query($query)->fetch();
         //TODO: controlli
         $volo->setAeroportoPart($aereoporti[0]);
@@ -58,8 +58,8 @@ class VoloDB extends AbstractDB
     }
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
-        $query = "SELECT v.* from Volo as v JOIN VoloAereoporto as va on v.OID = va.volo 
-                    WHERE va.aereoportoPartenza = '$partenza' AND va.aereoportoArrivo = '$destinazione' 
+        $query = "SELECT v.* from Volo as v JOIN VoloAeroporto as va on v.OID = va.volo 
+                    WHERE va.aeroportoPartenza = '$partenza' AND va.aeroportoArrivo = '$destinazione' 
                         AND DATE(v.dataOraPartenza) = '$data'
                         AND $nPosti < (SELECT count(*) from VoloPosto where volo = v.OID)";
         $stmt = $this->connection->query($query);

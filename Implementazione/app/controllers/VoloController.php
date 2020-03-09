@@ -54,25 +54,25 @@ class VoloController extends Controller {
     public function inserisciVolo($giornopartenza, $giornoarrivo, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
         //manca esito operazione
         $this->registroVoli -> inserisciVolo($giornopartenza, $giornoarrivo,  $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo);
-        $this->voli();
+        header("Location: /public/volo/voli");
     }
 
     public function cancellaVolo($OIDVolo){
         $volo = $this->registroVoli->rimuoviVolo($OIDVolo);
         $listaClienti = $this->registroPrenotazioni->getClientiVolo($volo->getOID());
         $this->mailer -> inviaEmailCancellazioneVolo($listaClienti, $volo);
-        $this->voli();
+        header("Location: /public/volo/voli");
     }
 
     public function inserisciPromozione($nome, $sconto, $dataInizio,$dataFine, $codVolo, $promozioneFedelta){
 
         $this->registroPromozioni->creaPromozione((int)$sconto, $dataInizio, $dataFine, $nome, $codVolo, (int)$promozioneFedelta);
-        $this->promozioni();
+        header("Location: /public/volo/promozioni");
     }
 
     public function cancellaPromozione($OIDPromozione){
         $this->registroPromozioni->cancellaPrenotazione($OIDPromozione);
-        $this->promozioni();
+        header("Location: /public/volo/promozioni");
     }
 
 }

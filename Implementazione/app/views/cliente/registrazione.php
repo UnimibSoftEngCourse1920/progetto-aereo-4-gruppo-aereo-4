@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 mt-auto">
-            <form class="py-md-4 px-md-5" action="/public/cliente/registrati" method="post">
+            <form id="form-registrazione" class="py-md-4 px-md-5" action="/public/cliente/registrati" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nome">Nome</label>
@@ -39,16 +39,17 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="indirizzo">Indirizzo</label>
-                        <input type="text" class="form-control" id="indirizzo" name="indirizzo" placeholder="Indirizzo" required>
+                        <input type="text" class="form-control" id="indirizzo" placeholder="Indirizzo" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="città">Città</label>
-                        <input type="text" class="form-control" id="città" name="città" placeholder="Città" required>
+                        <input type="text" class="form-control" id="citta" placeholder="Citta" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="cap">CAP</label>
-                        <input type="number" class="form-control" id="cap" name="cap" placeholder="CAP" required>
+                        <input type="number" class="form-control" id="cap" placeholder="CAP" required>
                     </div>
+                    <input type="hidden" name="indirizzo" id="hidden_indirizzo">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
