@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c0c4cbf-8d77-49a9-967c-4ff2964d93f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/cliente/Cliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/cliente/Cliente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/cliente/ClienteFedelta.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/ClienteDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/ClienteDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/DBFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/DBFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/PagamentoDB.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
