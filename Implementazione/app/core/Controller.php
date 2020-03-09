@@ -4,7 +4,8 @@ class Controller {
 	
 	public function model($model) {
 		require_once '../app/models/'.$model.'.php';
-		$model = end(explode("/", $model));
+		$splitted = explode("/", $model);
+		$model = end($splitted);
 		return new $model();
 	}
 	
