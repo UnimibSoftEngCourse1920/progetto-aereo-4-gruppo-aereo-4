@@ -4,19 +4,11 @@ require_once __DIR__ . "/Pagamento.php";
 
 class PagamentoConCarta extends Pagamento{
 	
-	private $carta;
-	
-	public function __construct($importo, $carta) {
+	public function __construct($importo) {
 	    parent::__construct($importo);
-	    $this->carta = $carta;
 	}
-
-	public function setCarta($carta) {
-		//TODO: Vedere come arriva la carta
-		$this->carta = $carta;
-	}	
     
-	public function effettua($cliente) {
+	public function effettua($carta) {
 		$istituto = new IstitutoDiCredito();
 		$esitoPagamento = $istituto->autorizzaPagamento($this->carta);
 		return $esitoPagamento;

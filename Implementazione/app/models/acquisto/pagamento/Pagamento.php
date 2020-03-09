@@ -32,7 +32,7 @@ abstract class Pagamento{
         return $this->importo;
     }
 
-    public abstract function effettua($cliente);
+    public abstract function effettua($parametro);
 
 	
 } 
