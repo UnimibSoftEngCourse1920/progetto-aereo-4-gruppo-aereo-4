@@ -20,6 +20,8 @@ class PrenotazioneDB extends AbstractDB
 
     //TODO estraggo direttamente l'obj?
 
+    //TODO faccio la join direttamente nella generateGetQuery così da no dover chiamare la setXX anche sui campi singoli ù(Cioè anche dove non serve)
+
     private function setCliente(Prenotazione $prenotazione){
         $query = sprintf("Select cliente from PrenotazioneCliente where prenotazione = '%s'", $prenotazione->getOID());
         $cliente = $this->connection->query($query)->fetch()[0];
