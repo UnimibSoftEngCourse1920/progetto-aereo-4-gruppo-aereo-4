@@ -15,57 +15,56 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 mt-auto">
-            <form class="py-md-4 px-md-5">
-                <!--<div class="form-row px-3 mb-4">
-                  <div class="success mx-auto">Account registrato! Accedi compilando il form.</div>
-                </div>-->
+            <form class="py-md-4 px-md-5" action="/public/cliente/registrati" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="cognome">Cognome</label>
-                        <input type="text" class="form-control" id="cognome" name="cognome" placeholder="Cognome">
+                        <input type="text" class="form-control" id="cognome" name="cognome" placeholder="Cognome" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="email">E-mail</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="E-mail">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="data_nascita">Data</label>
-                        <input type="text" class="form-control datepicker" id="data_nascita" name="data_nascita" placeholder="Data di nascita">
+                        <input type="text" class="form-control datepicker" id="data_nascita" name="data_nascita" placeholder="Data di nascita" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="indirizzo">Indirizzo</label>
-                        <input type="text" class="form-control" id="indirizzo" name="indirizzo" placeholder="Indirizzo">
+                        <input type="text" class="form-control" id="indirizzo" name="indirizzo" placeholder="Indirizzo" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="città">Città</label>
-                        <input type="text" class="form-control" id="città" name="città" placeholder="Città">
+                        <input type="text" class="form-control" id="città" name="città" placeholder="Città" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="cap">CAP</label>
-                        <input type="number" class="form-control" id="cap" name="cap" placeholder="CAP">
+                        <input type="number" class="form-control" id="cap" name="cap" placeholder="CAP" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="conferma_password">Conferma password</label>
-                        <input type="password" class="form-control" id="conferma_password" name="conferma_password" placeholder="Conferma la password">
+                        <input type="password" class="form-control" id="conferma_password" name="conferma_password" placeholder="Conferma la password" required>
                     </div>
                 </div>
-                <div class="form-row px-3 pt-4 pb-3">
-                    <div class="error mx-auto">Indirizzo e-mail già registrato.</div>
-                </div>
+                <?php if(isset($data["error"]) && $data["error"] != "") { ?>
+                    <div class="form-row px-3 pt-4 pb-3">
+                        <div class="error mx-auto"><?=$data["error"]?></div>
+                    </div>
+                <?php } ?>
                 <div class="form-row pt-4">
                     <div class="form-group col-md-4 mx-auto">
                         <button type="submit" class="btn btn-primary w-100">Registrati</button>

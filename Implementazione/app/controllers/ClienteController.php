@@ -58,7 +58,11 @@ class ClienteController extends Controller{
         $this->mailer->avvisaClientiPromozioni($listaClienti, $listaPromozioni);
     }
 
-    public function accedi($email = "", $password = "") {
+    public function registrato() {
+        $this->accedi("", "", "Account registrato! Accedi compilando il form.");
+    }
+
+    public function accedi($email = "", $password = "", $success = "") {
         $error = "";
         if($email != "" && $password != "") {
             $esitoLogin = $this->login($email, $password);
@@ -68,7 +72,7 @@ class ClienteController extends Controller{
                 $error = "Combinazione email/password non trovata.";
             }
         }
-        $this->view('cliente/login', ["error" => $error]);
+        $this->view('cliente/login', ["error" => $error, "success" => $success]);
     }
 
     public function login($email, $password) {
@@ -88,18 +92,23 @@ class ClienteController extends Controller{
         header('Location: /');
     }
 
-    public function registrati($nome = "", $cognome = "", $indirizzo = "", $dataNascita = "", $email = "", $password = "", $confermaPassword = "") {
+    public function registrati($nome = "", $cognome = "", $email = "", $dataNascita = "", $indirizzo = "", $citta = "",
+                                $cap = "", $password = "", $confermaPassword = "") {
         $error = "";
-        if($nome != "" && $cognome != "" && $indirizzo != "" && $dataNascita != "" && $email != "" && $password != "") {
+        if($nome != "" && $cognome != "" && $indirizzo != "" && $citta != "" && $cap != "" && $dataNascita != "" &&
+            $email != "" && $password != "") {
             if($password == $confermaPassword) {
-                $esitoRegistrazione = $this->iscrizioneFedelta($nome, $cognome, $indirizzo, $dataNascita, $email, $password, $confermaPassword);
+                //Converto il formato della data
+                $dataNascita = join("-", array_reverse(explode("/", $dataNascita)));
+                $esitoRegistrazione = $this->iscrizioneFedelta($nome, $cognome, $indirizzo." ".$citta." ".$cap,
+                                                                $dataNascita, $email, $password, $confermaPassword);
                 if ($esitoRegistrazione) {
-                    header("Location: /public/cliente/accedi");
+                    header("Location: /public/cliente/registrato");
                 } else {
                     $error = "L'indirizzo e-mail è già registrato.";
                 }
             } else {
-                $errore = "Le due password non coincidono.";
+                $error = "Le due password non coincidono.";
             }
         }
         $this->view('cliente/registrazione', ["error" => $error]);

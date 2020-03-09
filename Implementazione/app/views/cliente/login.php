@@ -15,10 +15,10 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6 mt-auto">
-            <form class="py-md-4 px-md-5" action="" method="post">
+            <form class="py-md-4 px-md-5" action="/public/cliente/accedi" method="post">
                 <?php if(isset($data["success"]) && $data["success"] != "") { ?>
                 <div class="form-row px-3 mb-4">
-                    <div class="success mx-auto">Account registrato! Accedi compilando il form.</div>
+                    <div class="success mx-auto"><?=$data["success"]?></div>
                 </div>
                 <?php } ?>
                 <div class="form-row">
