@@ -38,11 +38,13 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="da">Da</label>
-                            <input type="text" class="form-control aeroporto" id="da" name="da" placeholder="Città o aeroporto" required>
+                            <input type="text" class="form-control aeroporto" id="da" placeholder="Città o aeroporto" required>
+                            <input id="hidden_da" type="hidden" name="da">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="a">A</label>
                             <input type="text" class="form-control aeroporto" id="a" name="a" placeholder="Città o aeroporto" required>
+                            <input id="hidden_a" type="hidden" name="a">
                         </div>
                     </div>
                     <div class="form-row">

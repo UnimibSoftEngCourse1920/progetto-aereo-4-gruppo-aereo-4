@@ -20,10 +20,8 @@ $(function() {
         var aeroportoPartenza = codiciAeroporti[$("#form-ricerca #da").val()];
         var aeroportoDestinazione = codiciAeroporti[$("#form-ricerca #a").val()];
         if(aeroportoPartenza && aeroportoDestinazione) {
-            $("#form-ricerca #da").css('color', 'white');
-            $("#form-ricerca #a").css('color', 'white');
-            $("#form-ricerca #da").val(aeroportoPartenza);
-            $("#form-ricerca #a").val(aeroportoDestinazione);
+            $("#form-ricerca #hidden_da").val(aeroportoPartenza);
+            $("#form-ricerca #hidden_a").val(aeroportoDestinazione);
             return true;
         }
         return false;
