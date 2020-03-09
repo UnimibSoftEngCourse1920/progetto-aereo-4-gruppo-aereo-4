@@ -50,6 +50,7 @@ class Prenotazione{
         $lista = array();
         foreach ($this->listaPosti as $posto){
             $b = new Biglietto($posto->numeroPosto,$this->tariffa,$this->cliente->getEmail());
+            DBFacade::getIstance()->put($b);
             array_push($lista,$b);
         }
         return $lista;
