@@ -3,14 +3,16 @@
 require_once __DIR__ . "/Pagamento.php";
 
 class PagamentoConCarta extends Pagamento{
-	
+
+    private $istituto;
+
 	public function __construct($importo) {
 	    parent::__construct($importo);
 	}
     
 	public function effettua($carta) {
-		$istituto = new IstitutoDiCredito();
-		$esitoPagamento = $istituto->autorizzaPagamento($this->carta);
+		$this->istituto = new IstitutoDiCredito("Banca Bicocca");
+		$esitoPagamento = $this->istituto->autorizzaPagamento($this->carta);
 		return $esitoPagamento;
 	}
 
