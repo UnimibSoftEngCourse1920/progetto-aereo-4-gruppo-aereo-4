@@ -64,9 +64,13 @@
         </div>
     </div>
     <div class="container pb-5 mb-5">
+        <?php foreach($data["voli"] as $volo) {?>
+            <?php var_dump($volo) ?>
+            <?php var_dump($volo->getOID()); ?>
+            <?php var_dump($volo->getAeroportoPartenza()); ?>
         <div class="row volo p-md-5">
             <div class="col-md-2 text-center">
-                <div class="orario">13:00 MXP</div>
+                <div class="orario">13:00 <?=$volo->getAeroportoPartenza()?></div>
                 <div class="data">18/03/2020</div>
             </div>
             <div class="col-md-2 align-self-center" style="position:relative;">
@@ -84,41 +88,17 @@
                 <div class="data">18/03/2020</div>
             </div>
             <div class="col-md-3 text-center">
-                <div class="prezzo">60€</div>
+                <div class="prezzo"><?=$volo->getPrezzoBiglietto()?>€</div>
                 <div class="totale">120€ totale</div>
             </div>
             <div class="col-md-3 text-center">
-                <button class="mx-auto">Prenota questo volo</button>
+                <a href="/public/prenotazione/prenota/<?=$volo->getOID()?>/<?=$data["viaggiatori"]?>">
+                    <button class="mx-auto">Prenota questo volo</button>
+                </a>
             </div>
         </div>
-        <div class="row volo p-md-5">
-            <div class="col-md-2 text-center">
-                <div class="orario">13:00 MXP</div>
-                <div class="data">18/03/2020</div>
-            </div>
-            <div class="col-md-2 align-self-center" style="position:relative;">
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8  px-0">
-                        <div class="flight-line"></div>
-                        <i class="fas fa-plane-departure float-left pr-1"></i>
-                        <i class="fas fa-plane-arrival float-right pl-1"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 text-center">
-                <div class="orario">14:30 ORY</div>
-                <div class="data">18/03/2020</div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="prezzo">60€</div>
-                <div class="totale">120€ totale</div>
-            </div>
-            <div class="col-md-3 text-center">
-                <button class="mx-auto">Prenota questo volo</button>
-            </div>
-        </div>
-        <div class="row volo p-md-5">
+        <?php }?>
+        <!--<div class="row volo p-md-5">
             <div class="col-md-2 text-center">
                 <div class="orario">13:00 MXP</div>
                 <div class="data">18/03/2020</div>
@@ -145,34 +125,7 @@
             <div class="col-md-3 text-center">
                 <button class="mx-auto">Prenota questo volo</button>
             </div>
-        </div>
-        <div class="row volo p-md-5">
-            <div class="col-md-2 text-center">
-                <div class="orario">13:00 MXP</div>
-                <div class="data">18/03/2020</div>
-            </div>
-            <div class="col-md-2 align-self-center" style="position:relative;">
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8  px-0">
-                        <div class="flight-line"></div>
-                        <i class="fas fa-plane-departure float-left pr-1"></i>
-                        <i class="fas fa-plane-arrival float-right pl-1"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 text-center">
-                <div class="orario">14:30 ORY</div>
-                <div class="data">18/03/2020</div>
-            </div>
-            <div class="col-md-3 text-center">
-                <div class="prezzo">60€</div>
-                <div class="totale">120€ totale</div>
-            </div>
-            <div class="col-md-3 text-center">
-                <button class="mx-auto">Prenota questo volo</button>
-            </div>
-        </div>
+        </div>-->
     </div>
     <?php include("../app/template/footer.php") ?>
 </body>

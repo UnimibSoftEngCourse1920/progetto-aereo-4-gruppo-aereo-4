@@ -10,7 +10,6 @@ class VenditaController extends Controller
         $aeroporti = DBFacade::getIstance()->getAll("Aeroporto");
 		$registro = $this->model('volo/RegistroVoli');
 		$voli = $registro->cercaVoli($partenza, $destinazione, $data, $nPosti);
-		var_dump($voli);
 		$this->view('vendita/consulta', ["voli" => $voli, "partenza" => $partenza, "destinazione" => $destinazione,
                                                 "data" => $data, "viaggiatori" => $nPosti, "aeroporti" => $aeroporti]);
 	}

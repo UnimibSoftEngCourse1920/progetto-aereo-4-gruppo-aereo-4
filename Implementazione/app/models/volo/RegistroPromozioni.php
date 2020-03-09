@@ -13,11 +13,17 @@ class RegistroPromozioni
     }
 
     public function creaPromozione($sconto, $dataInizio,$dataFine, $nome, $codVolo, $promozioneFedelta){
+        if($dataInizio==""){
+            $dataInizio = date("Y-m-g");
+        }
+        if($dataFine==""){
+            $dataFine = date("Y-m-g");
+        }
 
         $promozione = new Promozione($dataInizio, $dataFine, $nome, $sconto, $promozioneFedelta);
         DBFacade::getIstance()->put($promozione);
 
-        if($codVolo!=""){
+        if($codVolo!="no"){
             $registroVoli = new RegistroVoli();
             $v = $registroVoli->getVolo($codVolo);
             $v -> setPromozione($promozione);
@@ -25,6 +31,11 @@ class RegistroPromozioni
         }
 
     }
+
+    public function cancellaPrenotazione($OID){
+        DBFacade::getIstance()->delete($OID, "Promozione");
+    }
+
 
     public function getPromozioniFedelta(){
         //ritorna lista delle promozioni fedelta attive
