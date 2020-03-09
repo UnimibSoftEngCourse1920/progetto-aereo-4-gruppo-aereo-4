@@ -1,9 +1,8 @@
 <?php
 
 
-namespace model\acquisto\pagamento;
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
-use model\servizi\OIDGenerator;
 
 abstract class Pagamento{
 	
@@ -33,7 +32,7 @@ abstract class Pagamento{
         return $this->importo;
     }
 
-    public abstract function effettua($cliente);
+    public abstract function effettua($parametro);
 
 	
 } 

@@ -10,7 +10,7 @@ class AereoDB extends AbstractDB
     protected function generatePutQuery($obj){
         $query = "INSERT INTO Aereo 
                     VALUES ('%s', %d , '%s', '%s')";
-        return spirntf($query, $obj->getOID(), $obj->getNumeroPosti(), $obj->getNumeroSerie(), $obj->getMarcaModello());
+        return sprintf($query, $obj->getOID(), $obj->getNumeroPosti(), $obj->getNumeroSerie(), $obj->getMarcaModello());
     }
 
     protected function generateUpdateQuery($obj){

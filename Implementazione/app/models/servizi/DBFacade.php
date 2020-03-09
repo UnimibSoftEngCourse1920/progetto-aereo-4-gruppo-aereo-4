@@ -10,7 +10,8 @@ require_once("database/BigliettoDB.php");
 require_once("database/ClienteDB.php");
 require_once("database/ImpiegatoDB.php");
 require_once("database/IstitutoDB.php");
-require_once("database/PagamentoDB.php");
+require_once("database/PagamentoConCartaDB.php");
+require_once("database/PagamentoConPuntiDB.php");
 require_once("database/PostoDB.php");
 require_once("database/PrenotazioneDB.php");
 require_once("database/PromozioneDB.php");
@@ -34,12 +35,12 @@ class DBFacade{
         $this->gestori['Biglietto'] = new BigliettoDB();
         $this->gestori['Impiegato'] = new ImpiegatoDB();
         $this->gestori['Istituto'] = new IstitutoDB();
-        $this->gestori['Pagamento'] = new PagamentoDB();
+        $this->gestori['PagamentoConPunti'] = new PagamentoConPuntiDB();
+        $this->gestori['PagamentoConCarta'] = new PagamentoConCartaDB();
         $this->gestori['Posto'] = new PostoDB();
         $this->gestori['Prenotazione'] = new PrenotazioneDB();
         $this->gestori['Promozione'] = new PromozioneDB();
         $this->gestori['Volo'] = new VoloDB();
-        //$this->gestori['OID'] = new OIDDB();
     }
 
     public static function getIstance(){
@@ -66,7 +67,7 @@ class DBFacade{
     }
 
     public function delete($OID, $class){
-        $this->gestori[$this->getClassName($class)] -> delete($OID);
+        $this->gestori[$class] -> delete($OID);
     }
 
     private function getClassName($class){

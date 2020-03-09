@@ -8,18 +8,62 @@ require_once("AbstractDB.php");
 
 class PrenotazioneDB extends AbstractDB
 {
+    public function get($OID, $class){
+        $prenotazione = parent::get($OID, $class);
+        $this->setCliente($prenotazione);
+        $this->setVolo($prenotazione);
+        $this->setPosti($prenotazione);
+        $this->setBiglietti($prenotazione);
+        $this->setAcquisti($prenotazione);
+        return $prenotazione;
+    }
+
+    //TODO estraggo direttamente l'obj?
+
+    //TODO faccio la join direttamente nella generateGetQuery così da no dover chiamare la setXX anche sui campi singoli ù(Cioè anche dove non serve)
+
+    private function setCliente(Prenotazione $prenotazione){
+        $query = sprintf("Select cliente from PrenotazioneCliente where prenotazione = '%s'", $prenotazione->getOID());
+        $cliente = $this->connection->query($query)->fetch()[0];
+        $prenotazione->setCliente($cliente);
+    }
+
+    private function setVolo(Prenotazione $prenotazione){
+        $query = sprintf("Select volo from PrenotazioneVolo where prenotazione = '%s'", $prenotazione->getOID());
+        $volo = $this->connection->query($query)->fetch()[0];
+        $prenotazione->setVolo($volo);
+    }
+
+    private function setPosti(Prenotazione $prenotazione){
+        $query = sprintf("Select posto from PrenotazionePosto where prenotazione = '%s'", $prenotazione->getOID());
+        $posti = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+        $prenotazione->setListaPosti($posti);
+    }
+
+    private function setBiglietti(Prenotazione $prenotazione){
+        $query = sprintf("Select biglietto from PrenotazioneBiglietto where prenotazione = '%s'", $prenotazione->getOID());
+        $biglietti = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+        $prenotazione->setListaBiglietti($biglietti);
+    }
+
+    private function setAcquisti(Prenotazione $prenotazione){
+        $query = sprintf("Select acquisto from PrenotazioneAcquisto where prenotazione = '%s'", $prenotazione->getOID());
+        $acquisti = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+        $prenotazione->setListaAcquisti($acquisti);
+    }
+
     protected function generatePutQuery($obj){
-        $query = sprintf("INSERT INTO Prenotazione VALUES ('%s', '%s', '%s')",$obj->getOID(), $obj->getData(), $obj->getTariffa());
+        $query = sprintf("INSERT INTO Prenotazione VALUES ('%s', '%s', '%s');",$obj->getOID(), $obj->getData(), $obj->getTariffa());
         $query .= sprintf("INSERT INTO PrenotazioneCliente VALUES ('%s', '%s');", $obj->getOID(), $obj->getCliente()->getOID());
         $query .= sprintf("INSERT INTO PrenotazioneVolo VALUES ('%s', '%s');", $obj->getOID(), $obj->getVolo()->getOID());
 
-        foreach($obj->getBiglietti() as $biglietto)
+        foreach($obj->getListaBiglietti() as $biglietto)
             $query .= sprintf("INSERT INTO PrenotazioneBiglietto VALUES ('%s', '%s');", $obj->getOID(), $biglietto->getOID());
 
-        foreach($obj->getPosti() as $posto)
+        foreach($obj->getListaPosti() as $posto)
             $query .= sprintf("INSERT INTO PrenotazionePosto VALUES ('%s', '%s');", $obj->getOID(), $posto->getOID());
 
-        foreach($obj->getAcquisti() as $acquisto)
+        foreach($obj->getListaAcquisti() as $acquisto)
             $query .= sprintf("INSERT INTO PrenotazioneAcquisto VALUES ('%s', '%s');", $obj->getOID(), $acquisto->getOID());
 
         return $query;
@@ -30,13 +74,13 @@ class PrenotazioneDB extends AbstractDB
 
         $query = sprintf("UPDATE PrenotazioneVolo  SET volo = '%s' where OID = '%s';", $obj->getVolo()->getOID() ,$obj->getOID());
 
-        foreach($obj->getBiglietti() as $biglietto)
+        foreach($obj->getListaBiglietti() as $biglietto)
             $query .= sprintf("UPDATE PrenotazioneBiglietto SET biglietto = '%s' where OID = '%s';", $biglietto->getOID(), $obj->getOID());
 
-        foreach($obj->getPosti() as $posto)
+        foreach($obj->getListaPosti() as $posto)
             $query .= sprintf("UPDATE PrenotazionePosto SET posto = '%s' where OID = '%s';", $posto->getOID(), $obj->getOID());
 
-        foreach($obj->getAcquisti() as $acquisto)
+        foreach($obj->getListaAcquisti() as $acquisto)
             $query .= sprintf("UPDATE PrenotazioneAcquisto  SET acquisto = '%s' where OID = '%s';",$acquisto->getOID() ,$obj->getOID());
     }
 

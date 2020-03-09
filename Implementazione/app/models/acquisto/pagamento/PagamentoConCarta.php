@@ -3,24 +3,27 @@
 require_once __DIR__ . "/Pagamento.php";
 
 class PagamentoConCarta extends Pagamento{
-	
-	private $carta;
-	
-	public function __construct($importo, $carta) {
-	    parent::__construct($importo);
-	    $this->carta = $carta;
-	}
 
-	public function setCarta($carta) {
-		//TODO: Vedere come arriva la carta
-		$this->carta = $carta;
-	}	
+    private $istituto;
+
+	public function __construct($importo) {
+	    parent::__construct($importo);
+	}
     
-	public function effettua($cliente) {
-		$istituto = new IstitutoDiCredito();
-		$esitoPagamento = $istituto->autorizzaPagamento($this->carta);
+	public function effettua($carta) {
+		$this->istituto = new IstitutoDiCredito("Banca Bicocca");
+		$esitoPagamento = $this->istituto->autorizzaPagamento($this->carta);
 		return $esitoPagamento;
 	}
+
+	public function getIstituto(){
+	    if(get_class($this->istituto) != IstitutoDiCredito::class){
+            return DBFacade::getIstance() ->get($this->istituto, IstitutoDiCredito::class);
+        }
+	    else {
+            return $this->istituto;
+        }
+    }
 
 	//Secondo me la carta arriva direttamente dalla chiamata effettua
 	

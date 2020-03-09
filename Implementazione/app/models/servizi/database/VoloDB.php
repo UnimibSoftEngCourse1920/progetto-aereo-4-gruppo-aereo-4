@@ -29,6 +29,33 @@ class VoloDB extends AbstractDB
                     $object->getStato(), $object->getDataOraPartenza(), $object->getDataOraArrivo(), $object->getOID() );
     }
 
+    protected function generateGetQuery($OID, $class)
+    {
+        return "SELECT * from Volo v join VoloAeroporto va on v.OID = va.volo";
+    }
+
+    public function get($OID, $class){
+        $volo = parent::get($OID, $class);
+        //$this->setAereoporti($volo);
+        $this->setPosti($volo);
+        //TODO: Promozione
+        return $volo;
+    }
+
+    private function DEPRECATO_setAereoporti(Volo $volo){
+        $query = sprintf("Select aereoportoPartenza, aereoportoDestinazione from VoloAereoporto where volo='%s'", $volo->getOID());
+        $aereoporti = $this->connection->query($query)->fetch();
+        //TODO: controlli
+        $volo->setAeroportoPart($aereoporti[0]);
+        $volo->setAeroportoDest($aereoporti[1]);
+    }
+
+    private function setPosti(Volo $volo){
+        $query = sprintf("Select posto from VoloPosto where volo='%s'", $volo->getOID());
+        $listaPosti = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+        $volo->setPosti($listaPosti);
+    }
+
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
         $query = "SELECT v.* from Volo as v JOIN VoloAereoporto as va on v.OID = va.volo 
                     WHERE va.aereoportoPartenza = '$partenza' AND va.aereoportoArrivo = '$destinazione' 
@@ -40,4 +67,8 @@ class VoloDB extends AbstractDB
         return $listaVoli;
 
     }
+
+    //Modifico direttamente la get richiamando quella del padre
+
+
 }

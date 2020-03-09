@@ -10,19 +10,12 @@ use model\cliente\ClienteFedelta;
 
 class ClienteDB extends AbstractDB
 {
-
-    public function generatePutQuery($object)
+    public function generatePutQuery($cliente)
     {
-        $indirizzo = $codiceFedelta = $stato = $password = null;
-        if($this->getClassName($object) == 'ClienteFedelta'){
-            $indirizzo = $object->getIndirizzo();
-            $codiceFedelta = $object-> getCodiceFedelta();
-            $stato = $object->getStato();
-            $password = $object->getPassword();
-        }
-
-        $query = "INSERT INTO Cliente VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s');";
-        return sprintf($query, $object->getOID(), $object->getNome(), $object->getCognome(), $object->getDataNascita(), $indirizzo, $codiceFedelta, $stato, $password, $object->getEmail());
+        $query = sprintf("INSERT INTO Cliente VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s');",
+            $cliente-getOID(), $cliente->getNome(), $cliente->getCognome(), $cliente->getDataNascita(), $cliente->getIndirizzo(),
+                  $cliente->getCodiceFedelta(), $cliente->getStato(), $cliente->getPassword(), $cliente->getEmail());
+        return $query;
     }
 
     public function emailFedeltaExists($email){

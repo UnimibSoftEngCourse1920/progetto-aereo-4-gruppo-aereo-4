@@ -1,5 +1,7 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+
 
 class IstitutoDiCredito
 {
