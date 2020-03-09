@@ -65,7 +65,13 @@ class VoloController extends Controller {
     }
 
     public function inserisciPromozione($nome, $sconto, $dataInizio,$dataFine, $codVolo, $promozioneFedelta){
-        $this->registroPromozioni->creaPromozione($nome, (int)$sconto, $dataInizio,$dataFine, $codVolo, (int)$promozioneFedelta);
+
+        $this->registroPromozioni->creaPromozione((int)$sconto, $dataInizio, $dataFine, $nome, $codVolo, (int)$promozioneFedelta);
+        $this->promozioni();
+    }
+
+    public function cancellaPromozione($OIDPromozione){
+        $this->registroPromozioni->cancellaPrenotazione($OIDPromozione);
         $this->promozioni();
     }
 

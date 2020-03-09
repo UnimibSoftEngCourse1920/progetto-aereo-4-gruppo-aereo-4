@@ -9,6 +9,8 @@ class RegistroVoli{
     public static $AVVISAMODIFICAVOLO='MODIFICA';
     public static $AVVISACANCELLAZIONEVOLO='CANCELLAZIONE';
 
+    public function __construct(){}
+
     public function inserisciVolo($dataOraArrivo, $dataOraPart, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
 
         //Recupero gli oggetti dal db
