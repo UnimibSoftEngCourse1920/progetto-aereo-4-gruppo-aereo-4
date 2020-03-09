@@ -27,4 +27,12 @@ $(function() {
         return false;
     });
 
+    $('#form-registrazione').submit(function() {
+        var indirizzo = $("#form-registrazione #indirizzo").val();
+        var citta = $("#form-registrazione #citta").val();
+        var cap = $("#form-registrazione #cap").val();
+        $("#form-ricerca #hidden_indirizzo").val(indirizzo + " " + citta + " " + cap);
+        return true;
+    });
+
 } );
