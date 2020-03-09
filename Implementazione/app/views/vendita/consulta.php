@@ -12,6 +12,28 @@
                 <center><a href="#">Sconto del 20% fino al 20/03/2020 su una selezione di voli.</a></center>
             </div>
         </div>
+        <script>
+            var aeroporti = [];
+            var codiciAeroporti = [];
+            <?php
+            $index = 0;
+            foreach($data["aeroporti"] as $aeroporto) {
+                $oid = $aeroporto->getOID();
+                $nome = $aeroporto->getCitta()." ".$aeroporto->getNome();
+            ?>
+                aeroporti["<?=$index?>"] = "<?=$nome?>";
+                codiciAeroporti["<?=$nome?>"] = "<?=$oid?>";
+            <?php
+                if($oid == $data["partenza"]) {
+                    $data["partenza"] = $nome;
+                }
+                if($oid == $data["destinazione"]) {
+                    $data["destinazione"] = $nome;
+                }
+                $index++;
+            }
+            ?>
+        </script>
         <div class="row bg-dark">
             <div class="col-md-12 mt-auto">
                 <form class="bg-dark py-md-4 px-md-5" id="form-ricerca" action="consulta.html" method="post">
@@ -19,19 +41,19 @@
                         <div class="form-group col-md-2"></div>
                         <div class="form-group col-md-2">
                             <label for="inputCity">Da</label>
-                            <input type="text" class="form-control aeroporto" id="inputEmail4" value="Milano Malpensa (MXP)" placeholder="Città o aeroporto">
+                            <input type="text" class="form-control aeroporto" id="inputEmail4" value="<?=$data["partenza"]?>" placeholder="Città o aeroporto">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="inputCity">A</label>
-                            <input type="text" class="form-control aeroporto" id="inputPassword4" value="Parigi Orly (ORY)" placeholder="Città o aeroporto">
+                            <input type="text" class="form-control aeroporto" id="inputPassword4" value="<?=$data["destinazione"]?>" placeholder="Città o aeroporto">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="inputCity">Data</label>
-                            <input type="text" class="form-control datepicker" id="datepicker" value="18/03/2020" placeholder="Data di partenza">
+                            <input type="text" class="form-control datepicker" id="datepicker" value="<?=$data["data"]?>" placeholder="Data di partenza">
                         </div>
                         <div class="form-group col-md-1">
                             <label for="inputState">Viaggiatori</label>
-                            <input type="number" id="inputNumber" name="inputNumber" value="2" min="1">
+                            <input type="number" id="inputNumber" name="inputNumber" value="<?=$data["viaggiatori"]?>"" min="1">
                         </div>
                         <div class="form-group col-md-1 mt-auto">
                             <button type="submit" class="btn btn-primary w-100">Cerca voli</button>

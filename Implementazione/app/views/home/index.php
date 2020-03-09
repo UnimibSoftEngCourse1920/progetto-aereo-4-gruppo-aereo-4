@@ -12,6 +12,22 @@
                 <center><a href="#">Sconto del 20% fino al 20/03/2020 su una selezione di voli.</a></center>
             </div>
         </div>
+        <script>
+            var aeroporti = [];
+            var codiciAeroporti = [];
+            <?php
+            $index = 0;
+            foreach($data["aeroporti"] as $aeroporto) {
+                $oid = $aeroporto->getOID();
+                $nome = $aeroporto->getCitta()." ".$aeroporto->getNome();
+            ?>
+                aeroporti["<?=$index?>"] = "<?=$nome?>";
+                codiciAeroporti["<?=$nome?>"] = "<?=$oid?>";
+            <?php
+                $index++;
+            }
+            ?>
+        </script>
         <div class="row" id="header">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="position: absolute;  bottom: 0;">
                 <path fill="#fff" fill-opacity="1" d="M0,160L48,165.3C96,171,192,181,288,170.7C384,160,480,128,576,117.3C672,107,768,117,864,138.7C960,160,1056,192,1152,192C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
@@ -22,21 +38,21 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="da">Da</label>
-                            <input type="text" class="form-control aeroporto" id="da" name="da" placeholder="Città o aeroporto">
+                            <input type="text" class="form-control aeroporto" id="da" name="da" placeholder="Città o aeroporto" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="a">A</label>
-                            <input type="text" class="form-control aeroporto" id="a" name="a" placeholder="Città o aeroporto">
+                            <input type="text" class="form-control aeroporto" id="a" name="a" placeholder="Città o aeroporto" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="data_partenza">Data</label>
-                            <input type="text" class="form-control datepicker" id="data_partenza" name="data_partenza" placeholder="Data di partenza">
+                            <input type="text" class="form-control datepicker" id="data_partenza" name="data_partenza" placeholder="Data di partenza" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="viaggiatori">Viaggiatori</label>
-                            <input type="number" id="viaggiatori" name=viaggiatori" name="inputNumber" value="1" min="1">
+                            <input type="number" id="viaggiatori" name=viaggiatori" name="inputNumber" value="1" min="1" required>
                         </div>
                         <div class="form-group col-md-3 mt-auto">
                             <button type="submit" class="btn btn-primary w-100">Cerca voli</button>
