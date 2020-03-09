@@ -99,7 +99,6 @@ class ClienteController extends Controller{
             $email != "" && $password != "") {
             if($password == $confermaPassword) {
                 //Converto il formato della data
-                $dataNascita = join("-", array_reverse(explode("/", $dataNascita)));
                 $esitoRegistrazione = $this->iscrizioneFedelta($nome, $cognome, $indirizzo." ".$citta." ".$cap,
                                                                 $dataNascita, $email, $password, $confermaPassword);
                 if ($esitoRegistrazione) {

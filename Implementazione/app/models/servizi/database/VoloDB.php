@@ -34,9 +34,18 @@ class VoloDB extends AbstractDB
                     WHERE va.aereoportoPartenza = '$partenza' AND va.aereoportoArrivo = '$destinazione' 
                         AND DATE(v.dataOraPartenza) = '$data'
                         AND $nPosti < (SELECT count(*) from VoloPosto where volo = v.OID)";
-
         $stmt = $this->connection->query($query);
-        $listaVoli = $stmt->fetchAll(PDO::FETCH_CLASS, "Volo");
+        $lista = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
+            $obj = (object)($row);
+            array_push($lista,$obj);
+        }
+
+        $listaVoli = array();
+        foreach ($lista as $el){
+            array_push($listaVoli,$this->objectToObject($el,"Volo")); //eseguo il cast dell'oggetto generico
+        }
+
         return $listaVoli;
 
     }
