@@ -78,6 +78,9 @@ class Volo {
     }
 
     public function getPromozione(){
+        if(get_class($this->promozione) != Promozione::class){
+            $this->promozione = DBFacade::getIstance() ->get($this->promozione, Promozione::class);
+        }
         return $this->promozione;
     }
 
@@ -90,19 +93,32 @@ class Volo {
     }
 
     public function getPosti(){
+        if(get_class($this->listaPosti[0]) != Posto::class){
+            for($i=0; $i< count($this->listaPosti); $i++){
+                $this->listaPosti[$i] = DBFacade::getIstance()->get($this->listaPosti[i], Posto::class);
+            }
+        }
         return $this->listaPosti;
     }
 
     public function getAereo(){
+        if(get_class($this->aereo) != Aereo::class){
+            $this->aereo = DBFacade::getIstance() ->get($this->aereo, Aereo::class);
+        }
         return $this->aereo;
     }
 
     public function getAeroportoPartenza(){
-        //occhio a materializzazione
+        if(get_class($this->aeroportoPart) != Aeroporto::class){
+            $this->aeroportoPart = DBFacade::getIstance() ->get($this->aeroportoPart, Aeroporto::class);
+        }
         return $this->aeroportoPart;
     }
 
     public function getAeroportoDestinazione(){
+        if(get_class($this->aeroportoDest) != Aeroporto::class){
+            $this->aeroportoDest = DBFacade::getIstance() ->get($this->aeroportoDest, Aeroporto::class);
+        }
         return $this->aeroportoDest;
     }
 
@@ -118,10 +134,7 @@ class Volo {
                 $contaLiberi++;
         }
 
-        if($numPosti<=$contaLiberi)
-            return true;
-        else
-            return false;
+        return ($numPosti <= $contaLiberi);
     }
 
     private function calcolaMiglia(){

@@ -16,6 +16,15 @@ class PagamentoConCarta extends Pagamento{
 		return $esitoPagamento;
 	}
 
+	public function getIstituto(){
+	    if(get_class($this->istituto) != IstitutoDiCredito::class){
+            return DBFacade::getIstance() ->get($this->istituto, IstitutoDiCredito::class);
+        }
+	    else {
+            return $this->istituto;
+        }
+    }
+
 	//Secondo me la carta arriva direttamente dalla chiamata effettua
 	
 } 

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1c0c4cbf-8d77-49a9-967c-4ff2964d93f8" name="Default Changelist" comment="" />
+    <list default="true" id="1c0c4cbf-8d77-49a9-967c-4ff2964d93f8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/acquisto/Acquisto.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/acquisto/Acquisto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/acquisto/pagamento/PagamentoConCarta.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/acquisto/pagamento/PagamentoConCarta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/prenotazione/Prenotazione.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/prenotazione/Prenotazione.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/OIDGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/OIDGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/servizi/database/AcquistoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/servizi/database/AcquistoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/volo/Volo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/volo/Volo.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,10 +131,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="215" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1583340153215" />
-    <state x="734" y="272" width="451" height="583" key="#com.intellij.ide.util.MemberChooser" timestamp="1583709995107">
+    <state x="734" y="272" width="451" height="583" key="#com.intellij.ide.util.MemberChooser" timestamp="1583774142128">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="734" y="272" width="451" height="583" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1583709995107" />
+    <state x="734" y="272" width="451" height="583" key="#com.intellij.ide.util.MemberChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1583774142128" />
     <state x="622" y="71" width="657" height="979" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1583693913859">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -160,6 +168,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="704" y="197" width="501" height="720" key="refactoring.ChangeSignatureDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1583435230384" />
+    <state x="624" y="252" key="run.anything.popup" timestamp="1583767381172">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="624" y="252" key="run.anything.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1583767381172" />
     <state x="623" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1583594171062">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

@@ -44,5 +44,38 @@ class Acquisto{
 		//TODO: Stabilire come effettuare la conversione
 		return $importo * 100;
 	}
+
+    public function getPuntiAccumulati()
+    {
+        return $this->puntiAccumulati;
+    }
+
+    public function getOID()
+    {
+        return $this->OID;
+    }
+
+    public function getPagamento()
+    {
+        //Pagamento non ha la materializzazione pigra
+        /*
+         * Ci sono tre possibili strade da seguire:
+         * 1) Non c'è la materializzazione pigra del pagamento
+         * 2) getPagamento chiede al DB a quale pagamento appartiene quell'OID
+         * 3) getPagamento ha il campo metodoPagamento
+         *
+         * Ad oggi (09/03) è stata scelta la soluzione 1)
+         * */
+        return $this->pagamento;
+    }
+
+    public function setPagamento($pagamento)
+    {
+        $this->pagamento = $pagamento;
+    }
+
+
+
+
 	
 } 

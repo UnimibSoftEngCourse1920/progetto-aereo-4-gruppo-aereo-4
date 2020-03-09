@@ -128,10 +128,6 @@ class Prenotazione{
 		
 	}
 
-    public function getVolo() {
-        return $this->volo;
-    }
-
     public function getData()
     {
         return $this->data;
@@ -142,36 +138,54 @@ class Prenotazione{
         return $this->tariffa;
     }
 
-    /**
-     * @return mixed
-     */
+    public function getVolo() {
+        if(get_class($this->volo) != Volo::class){
+            $this->cliente = DBFacade::getIstance() ->get($this->volo, Volo::class);
+        }
+        return $this->volo;
+    }
+
     public function getCliente()
     {
+        //TODO:: se divido il cliente va aggiornata anche questa get!!
+        if(get_class($this->cliente) != Cliente::class){
+            $this->cliente = DBFacade::getIstance() ->get($this->cliente, Cliente::class);
+        }
         return $this->cliente;
     }
 
-    /**
-     * @return mixed
-     */
+    //TODO rivedere il metodo materializaAll
+
     public function getListaPosti()
     {
+        if(get_class($this->listaPosti[0]) != Posto::class){
+            $this->listaPosti = $this->materializeAll($this->listaPosti, Posto::class);
+        }
         return $this->listaPosti;
     }
 
-    /**
-     * @return array
-     */
     public function getListaBiglietti()
     {
+        if(get_class($this->listaBiglietti[0]) != Biglietto::class){
+            $this->listaBiglietti = $this->materializeAll($this->listaBiglietti, Biglietto::class);
+        }
         return $this->listaBiglietti;
     }
 
-    /**
-     * @return array
-     */
     public function getListaAcquisti()
     {
+        if(get_class($this->listaAcquisti[0]) != Acquisto::class){
+            $this->listaAcquisti = $this->materializeAll($this->listaAcquisti, Acquisto::class);
+        }
         return $this->listaAcquisti;
+    }
+
+    private function materializeAll($lista, $class){
+        $listaRitorno = array();
+        for($i=0; $i< count($lista); $i++){
+            $listaRitorno[$i] = DBFacade::getIstance()->get($lista[i], $class);
+        }
+        return $listaRitorno;
     }
 
 }
