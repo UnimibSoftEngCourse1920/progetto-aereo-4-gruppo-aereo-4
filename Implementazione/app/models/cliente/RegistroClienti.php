@@ -35,17 +35,16 @@ class RegistroClienti
 
     public function nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $password)
     {
-        $codice = $this->generaCodiceFedelta();
-        $OID = OIDGenerator::getIstance()->getNewOID();
-        $nuovoCliente = new ClienteFedelta($nome, $cognome, $email, $dataNascita, $codice, $indirizzo, md5($password), $OID);
-        $esito = DBFacade::getIstance()->put($nuovoCliente);
-        //devo controllare che esito mi ritorna il DB e tornarlo al controller
-        //per ora ritorno sempre true
-        if ($esito) {
-            return $nuovoCliente;
-        } else {
-            return null;
+        $mailExists = DBFacade::getIstance()->emailFedeltaExists($email);
+        if(!$mailExists){
+            $codice = $this->generaCodiceFedelta();
+            $cliente = new Cliente($nome, $cognome, $email, $dataNascita, $codice, $indirizzo, md5($password));
+            $esito = DBFacade::getIstance()->put($cliente);
+            if ($esito) {
+                $this->mailer->inviaEmailCodiceFedelta($email, $codice);
+            }
         }
+        return $esito;
     }
 
     public function getCliente($codiceFedelta){

@@ -113,35 +113,29 @@ class ClienteController extends Controller{
         $this->view('cliente/registrazione', ["error" => $error]);
     }
 
-    public function iscrizioneFedelta($nome, $cognome, $indirizzo, $dataNascita, $email, $password, $confermaPassword) {
-        $registroClienti = $this->model('cliente/RegistroClienti');
-        $mail_exists = $registroClienti->checkEmailClienteFedelta($email);
-        if (!$mail_exists) {
-            $nuovoCliente = $registroClienti->nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $password);
-            if ($nuovoCliente != null) {
-                $this->mailer->inviaEmailCodiceFedelta($email, $nuovoCliente->getCodiceFedelta());
-                return true;
+    public function iscrizioneFedelta($nome = "", $cognome = "", $email = "", $dataNascita = "", $indirizzo = "", $citta = "",
+                                      $cap = "", $password = "", $confermaPassword = "") {
+        //$registroClienti = $this->model('cliente/RegistroClienti');
+
+        $error = "";
+        if($nome != "" && $cognome != "" && $indirizzo != "" && $citta != "" && $cap != "" && $dataNascita != "" &&
+            $email != "" && $password != "") {
+            if($password == $confermaPassword) {
+                //Converto il formato della data
+                $esito = $this->registroClienti ->nuovoClienteFedelta($nome, $cognome, $indirizzo." ".$citta." ".$cap,
+                    $dataNascita, $email, $password);
+                if ($esito) {
+                    header("Location: /public/cliente/registrato");
+                } else {
+                    $error = "L'indirizzo e-mail è già registrato.";
+                }
+            } else {
+                $error = "Le due password non coincidono.";
             }
         }
-        return false;
+        $this->view('cliente/registrazione', ["error" => $error]);
     }
 
-    /*
-    public function iscrizioneFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $username, $password){
-        $mail_exists = $this -> registroClienti -> checkEmailClienteFedelta(mail);
-        if (!$mail_exists) {
-            $nuovoCliente = $this -> $registroClienti -> nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $username, $password);
-            if ($nuovoCliente != null) {
-                $this -> mailer -> inviaEmailCodiceFedelta($email, $nuovoCliente->codiceFedelta);
-            }
-            else{
-                //Scrive operazione non andata a buon fine e l'user deve rifare tutta la trafila
-            }
-        }
-        else {
-            //mostra errore sulla view (manca anche sul diagrm. di seq)
-        }
-    }*/
 
     public function prenotazioni() {
         $prenotazioni = array(new Prenotazione("1", "1", "1", "1", "1"),
