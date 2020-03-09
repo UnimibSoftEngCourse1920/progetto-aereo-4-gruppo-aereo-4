@@ -11,7 +11,6 @@ class PromozioneDB extends AbstractDB{
     //percentuale
     protected function generatePutQuery($obj){
         $var = sprintf("INSERT INTO Promozione VALUES ('%s', '%s', '%s', '%s', '%s', '%s')", $obj->getOID(), $obj->getDataInizio(), $obj->getDataFine(), $obj->getNome(), $obj->isFedelta(), $obj->getSconto());
-        var_dump($var);
         return $var;
     }
 }
