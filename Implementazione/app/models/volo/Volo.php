@@ -16,7 +16,7 @@ class Volo {
 
     private $aeroportoPart;
     private $aeroportoDest;
-    private $promozione; //TODO: vedere se ora è diventato 1:1
+    private $promozione;
 
     private $listaPosti; //posti del volo
 

@@ -11,8 +11,8 @@ class VoloDB extends AbstractDB
 
         $promozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
         
-        $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s'); ",
-                        $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo()->getOID());
+        $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s', '%s'); ",
+                        $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo()->getOID(), $promozione);
 
         //VoloAereoporto
         $query .= sprintf("Insert into VoloAereoporto values ('%s', '%s', '%s' ); ", $obj->getOID(), $obj->getAeroportoPartenza()->getOID(), $obj->getAeroportoDestinazione()->getOID());
@@ -24,9 +24,10 @@ class VoloDB extends AbstractDB
         return $query;
     }
 
-    protected function generateUpdateQuery($object){
-        return sprintf("UPDATE ".get_class($object)." SET stato = '%s', dataOraPartenza='%s', dataOraArrivo='%s' WHERE OID = '%s'",
-                    $object->getStato(), $object->getDataOraPartenza(), $object->getDataOraArrivo(), $object->getOID() );
+    protected function generateUpdateQuery($obj){
+        $OIDpromozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
+        return sprintf("UPDATE ".get_class($obj)." SET stato = '%s', dataOraPartenza='%s', dataOraArrivo='%s' , promozione = '$OIDpromozione' WHERE OID = '%s'",
+                    $obj->getStato(), $obj->getDataOraPartenza(), $obj->getDataOraArrivo(), $OIDpromozione, $obj->getOID() );
     }
 
     protected function generateGetQuery($OID, $class)
@@ -38,7 +39,7 @@ class VoloDB extends AbstractDB
         $volo = parent::get($OID, $class);
         //$this->setAereoporti($volo);
         $this->setPosti($volo);
-        //TODO: Promozione
+        //setPromozione non serve perchè promo è attributo
         return $volo;
     }
 
