@@ -1,4 +1,163 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Gruppo Aereo 4</title>
+    <?php include("../app/template/header.php") ?>
+</head>
+<body>
+    <?php include("../app/template/menu.php") ?>
+    <div class="container-fluid mb-5">
+        <div class="row" id="promozione">
+            <div class="col p-2">
+                <center><a href="#">Sconto del 20% fino al 20/03/2020 su una selezione di voli.</a></center>
+            </div>
+        </div>
+        <div class="row bg-dark">
+            <div class="col-md-12 mt-auto">
+                <form class="bg-dark py-md-4 px-md-5" id="form-ricerca" action="consulta.html" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-2"></div>
+                        <div class="form-group col-md-2">
+                            <label for="inputCity">Da</label>
+                            <input type="text" class="form-control aeroporto" id="inputEmail4" value="Milano Malpensa (MXP)" placeholder="Città o aeroporto">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputCity">A</label>
+                            <input type="text" class="form-control aeroporto" id="inputPassword4" value="Parigi Orly (ORY)" placeholder="Città o aeroporto">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputCity">Data</label>
+                            <input type="text" class="form-control datepicker" id="datepicker" value="18/03/2020" placeholder="Data di partenza">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="inputState">Viaggiatori</label>
+                            <input type="number" id="inputNumber" name="inputNumber" value="2" min="1">
+                        </div>
+                        <div class="form-group col-md-1 mt-auto">
+                            <button type="submit" class="btn btn-primary w-100">Cerca voli</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container pb-5 mb-5">
+        <div class="row volo p-md-5">
+            <div class="col-md-2 text-center">
+                <div class="orario">13:00 MXP</div>
+                <div class="data">18/03/2020</div>
+            </div>
+            <div class="col-md-2 align-self-center" style="position:relative;">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8  px-0">
+                        <div class="flight-line"></div>
+                        <i class="fas fa-plane-departure float-left pr-1"></i>
+                        <i class="fas fa-plane-arrival float-right pl-1"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <div class="orario">14:30 ORY</div>
+                <div class="data">18/03/2020</div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="prezzo">60€</div>
+                <div class="totale">120€ totale</div>
+            </div>
+            <div class="col-md-3 text-center">
+                <button class="mx-auto">Prenota questo volo</button>
+            </div>
+        </div>
+        <div class="row volo p-md-5">
+            <div class="col-md-2 text-center">
+                <div class="orario">13:00 MXP</div>
+                <div class="data">18/03/2020</div>
+            </div>
+            <div class="col-md-2 align-self-center" style="position:relative;">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8  px-0">
+                        <div class="flight-line"></div>
+                        <i class="fas fa-plane-departure float-left pr-1"></i>
+                        <i class="fas fa-plane-arrival float-right pl-1"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <div class="orario">14:30 ORY</div>
+                <div class="data">18/03/2020</div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="prezzo">60€</div>
+                <div class="totale">120€ totale</div>
+            </div>
+            <div class="col-md-3 text-center">
+                <button class="mx-auto">Prenota questo volo</button>
+            </div>
+        </div>
+        <div class="row volo p-md-5">
+            <div class="col-md-2 text-center">
+                <div class="orario">13:00 MXP</div>
+                <div class="data">18/03/2020</div>
+            </div>
+            <div class="col-md-2 align-self-center" style="position:relative;">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8  px-0">
+                        <div class="flight-line"></div>
+                        <i class="fas fa-plane-departure float-left pr-1"></i>
+                        <i class="fas fa-plane-arrival float-right pl-1"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <div class="orario">14:30 ORY</div>
+                <div class="data">18/03/2020</div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="prezzo">48€ <div class="prezzo-precedente"><strike>60€</strike></div></div>
+                <div class="totale">96€ totale</div>
+                <div class="totale"><strike>120€ totale</strike></div>
+            </div>
+            <div class="col-md-3 text-center">
+                <button class="mx-auto">Prenota questo volo</button>
+            </div>
+        </div>
+        <div class="row volo p-md-5">
+            <div class="col-md-2 text-center">
+                <div class="orario">13:00 MXP</div>
+                <div class="data">18/03/2020</div>
+            </div>
+            <div class="col-md-2 align-self-center" style="position:relative;">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8  px-0">
+                        <div class="flight-line"></div>
+                        <i class="fas fa-plane-departure float-left pr-1"></i>
+                        <i class="fas fa-plane-arrival float-right pl-1"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <div class="orario">14:30 ORY</div>
+                <div class="data">18/03/2020</div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="prezzo">60€</div>
+                <div class="totale">120€ totale</div>
+            </div>
+            <div class="col-md-3 text-center">
+                <button class="mx-auto">Prenota questo volo</button>
+            </div>
+        </div>
+    </div>
+    <?php include("../app/template/footer.php") ?>
+</body>
+
+</html>
+
+<?php /*<!DOCTYPE html>
 <html lang="it">
 
 <head>
@@ -54,4 +213,5 @@
 <?php include("../app/template/footer.php") ?>
 </body>
 
-</html>
+</html>*/
+?>

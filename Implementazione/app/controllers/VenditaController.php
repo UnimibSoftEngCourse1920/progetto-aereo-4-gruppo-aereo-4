@@ -8,7 +8,8 @@ class VenditaController extends Controller
 	public function consultaVoli($partenza, $destinazione, $data, $nPosti) {
 		$registro = $this->model('volo/RegistroVoli');
 		$voli = $registro->cercaVoli($partenza, $destinazione, $data, $nPosti);
-		$this->view('vendita/consulta', ["voli" => $voli]);
+		$this->view('vendita/consulta', ["voli" => $voli, "partenza" => $partenza, "destinazione" => $destinazione,
+                                                "data" => $data, "viaggiatori" => $nPosti]);
 	}
 	
 	//TODO: DB e restituire voli anziché date

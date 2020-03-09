@@ -18,25 +18,25 @@
             </svg>
             <div class="col-md-3"></div>
             <div class="col-md-6 mt-auto">
-                <form class="bg-dark py-md-4 px-md-5" id="form-ricerca" action="consulta.html" method="post">
+                <form class="bg-dark py-md-4 px-md-5" id="form-ricerca" action="/public/vendita/consultaVoli" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputCity">Da</label>
-                            <input type="text" class="form-control aeroporto" id="inputEmail4" placeholder="Città o aeroporto">
+                            <label for="da">Da</label>
+                            <input type="text" class="form-control aeroporto" id="da" name="da" placeholder="Città o aeroporto">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputCity">A</label>
-                            <input type="text" class="form-control aeroporto" id="inputPassword4" placeholder="Città o aeroporto">
+                            <label for="a">A</label>
+                            <input type="text" class="form-control aeroporto" id="a" name="a" placeholder="Città o aeroporto">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputCity">Data</label>
-                            <input type="text" class="form-control datepicker" id="datepicker" placeholder="Data di partenza">
+                            <label for="data_partenza">Data</label>
+                            <input type="text" class="form-control datepicker" id="data_partenza" name="data_partenza" placeholder="Data di partenza">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="inputState">Viaggiatori</label>
-                            <input type="number" id="inputNumber" name="inputNumber" value="1" min="1">
+                            <label for="viaggiatori">Viaggiatori</label>
+                            <input type="number" id="viaggiatori" name=viaggiatori" name="inputNumber" value="1" min="1">
                         </div>
                         <div class="form-group col-md-3 mt-auto">
                             <button type="submit" class="btn btn-primary w-100">Cerca voli</button>
