@@ -1,8 +1,8 @@
 <?php
 
-require_once "../app/models/servizi/DBFacade.php";
-require_once "../app/models/volo/Posto.php";
-require_once "../app/models/volo/Aeroporto.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Posto.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aeroporto.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 

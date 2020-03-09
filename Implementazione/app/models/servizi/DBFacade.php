@@ -10,6 +10,7 @@ require_once("database/BigliettoDB.php");
 require_once("database/ClienteDB.php");
 require_once("database/ImpiegatoDB.php");
 require_once("database/IstitutoDB.php");
+require_once("database/PagamentoConCartaDB.php");
 require_once("database/PagamentoConPuntiDB.php");
 require_once("database/PostoDB.php");
 require_once("database/PrenotazioneDB.php");
