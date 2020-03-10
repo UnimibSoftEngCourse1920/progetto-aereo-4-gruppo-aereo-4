@@ -39,12 +39,10 @@
                         <div class="form-group col-md-6">
                             <label for="da">Da</label>
                             <input type="text" class="form-control aeroporto" id="da" placeholder="Città o aeroporto" required>
-                            <input id="hidden_da" type="hidden" name="da">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="a">A</label>
                             <input type="text" class="form-control aeroporto" id="a" name="a" placeholder="Città o aeroporto" required>
-                            <input id="hidden_a" type="hidden" name="a">
                         </div>
                     </div>
                     <div class="form-row">
@@ -54,7 +52,7 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="viaggiatori">Viaggiatori</label>
-                            <input type="number" id="viaggiatori" name=viaggiatori" name="inputNumber" value="1" min="1" required>
+                            <input type="number" id="viaggiatori" name=viaggiatori" value="1" min="1" required>
                         </div>
                         <div class="form-group col-md-3 mt-auto">
                             <button type="submit" class="btn btn-primary w-100">Cerca voli</button>

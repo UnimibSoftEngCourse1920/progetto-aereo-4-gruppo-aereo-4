@@ -9,7 +9,7 @@
             <?php
             if(!isset($_SESSION["id_cliente"])) {?>
             <li class="nav-item">
-                <a class="nav-link" href="/public/cliente/registrati">Registrati</a>
+                <a class="nav-link" href="/public/cliente/iscrizioneFedelta">Registrati</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/public/cliente/accedi">Accedi</a>

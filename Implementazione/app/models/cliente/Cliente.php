@@ -31,13 +31,13 @@ class Cliente{
             $this->codiceFedelta = $codiceFedelta;
             $this->indirizzo = $indirizzo;
             $this->password = $password;
-            $this->stato = ClienteFedelta::$STATO_FEDELE;
+            $this->stato = self::$STATO_FEDELE;
         }
         else{
             $this->codiceFedelta = null;
             $this->indirizzo = null;
             $this->password = null;
-            $this->stato = ClienteFedelta::$STATO_OSPITE;
+            $this->stato = self::$STATO_OSPITE;
         }
     }
 
