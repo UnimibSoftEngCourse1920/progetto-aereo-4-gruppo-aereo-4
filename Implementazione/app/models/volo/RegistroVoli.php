@@ -17,18 +17,20 @@ class RegistroVoli{
         $this->registroPrenotazioni = new RegistroPrenotazioni();
     }
 
-    public function inserisciVolo($dataOraArrivo, $dataOraPart, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo)
+    public function inserisciVolo($dataOraPart, $dataOraArr, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo)
     {
         $database = DBFacade::getIstance();
-        if($database->isAereoDisponibile($dataOraPart, $dataOraArrivo, $OIDAereo)){
-            //genero codice del volo
-            $aeroportoPart = $database->get($OIDAeroportoPart,Aeroporto::class);
-            $aeroportoDest = $database->get($OIDAeroportoDest, Aeroporto::class);
-            $aereo = $database->get($OIDAereo,Aereo::class);
-            if($aereo!=null and $aeroportoDest!=null and $aeroportoPart!=null) {
-                $nuovoVolo = new Volo($dataOraPart, $dataOraArrivo, $aeroportoPart, $aeroportoDest, $aereo);
-                $esito = $database->put($nuovoVolo);
-                return $esito;
+        if($this->validaDate($dataOraPart, $dataOraArr)){
+            if($database->isAereoDisponibile($dataOraPart, $dataOraArr, $OIDAereo)){
+                //genero codice del volo
+                $aeroportoPart = $database->get($OIDAeroportoPart,Aeroporto::class);
+                $aeroportoDest = $database->get($OIDAeroportoDest, Aeroporto::class);
+                $aereo = $database->get($OIDAereo,Aereo::class);
+                if($aereo!=null and $aeroportoDest!=null and $aeroportoPart!=null) {
+                    $nuovoVolo = new Volo($dataOraPart, $dataOraArr, $aeroportoPart, $aeroportoDest, $aereo);
+                    $esito = $database->put($nuovoVolo);
+                    return $esito;
+                }
             }
         }
         return false;

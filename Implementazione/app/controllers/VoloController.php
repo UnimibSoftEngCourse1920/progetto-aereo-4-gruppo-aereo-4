@@ -52,9 +52,8 @@ class VoloController extends Controller {
         }
     }
 
-    public function inserisciVolo($dataoraPartenza, $dataoraArrivo, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo){
-        //manca esito operazione
-        $esito = $this->registroVoli -> inserisciVolo($dataoraPartenza, $dataoraArrivo,  $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo);
+    public function inserisciVolo($dataoraPart, $dataoraArr, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo){
+        $esito = $this->registroVoli -> inserisciVolo($dataoraPart, $dataoraArr,  $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo);
         //TODO esito??
         header("Location: /public/volo/voli");
     }
