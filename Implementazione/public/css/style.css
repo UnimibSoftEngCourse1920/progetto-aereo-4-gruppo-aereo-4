@@ -199,6 +199,10 @@ h2{
     margin-top: 10px;
 }
 
+.btn .fa-plane-departure{
+    background: none;
+    color: white;
+}
 
 /*
 Colori della palette:
