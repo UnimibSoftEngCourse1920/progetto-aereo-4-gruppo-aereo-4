@@ -24,9 +24,8 @@ $(function() {
         var aeroportoPartenza = codiciAeroporti[$("#form-ricerca #da").val()];
         var aeroportoDestinazione = codiciAeroporti[$("#form-ricerca #a").val()];
         if(aeroportoPartenza && aeroportoDestinazione) {
-            $("#form-ricerca #hidden_da").val(aeroportoPartenza);
-            $("#form-ricerca #hidden_a").val(aeroportoDestinazione);
-            return true;
+            location.href= "/public/vendita/consultaVoli/" + aeroportoPartenza + "/" + aeroportoDestinazione + "/" +
+                            $("#form-ricerca #data_partenza").val() + "/" + $("#form-ricerca #viaggiatori").val();
         }
         return false;
     });

@@ -63,7 +63,7 @@ class VoloDB extends AbstractDB
     }
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
-        $query = "SELECT v.* from Volo as v JOIN VoloAeroporto as va on v.OID = va.volo 
+        $query = "SELECT v.*, va.aeroportoPartenza, va.aeroportoDestinazione from Volo as v JOIN VoloAeroporto as va on v.OID = va.volo 
                     WHERE va.aeroportoPartenza = '$partenza' AND va.aeroportoDestinazione = '$destinazione' 
                         AND DATE(v.dataOraPartenza) = '$data'
                         AND $nPosti < (SELECT count(*) from VoloPosto where volo = v.OID)";
