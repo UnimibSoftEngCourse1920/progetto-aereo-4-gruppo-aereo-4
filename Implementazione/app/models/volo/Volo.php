@@ -31,7 +31,7 @@ class Volo {
         $this->aeroportoPartenza = $aeroportoPartenza;
         $this->aeroportoDestinazione = $aeroportoDestinazione;
         $this->miglia = $this->calcolaMiglia();
-        $this->stato = Volo::$STATO_ATTIVO;
+        $this->stato = self::STATO_ATTIVO;
         $this->aereo = $aereo;
         $this->promozione = null;
         $this->listaPosti = array();

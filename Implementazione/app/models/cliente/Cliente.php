@@ -31,13 +31,13 @@ class Cliente{
             $this->codiceFedelta = $codiceFedelta;
             $this->indirizzo = $indirizzo;
             $this->password = $password;
-            $this->stato = ClienteFedelta::$STATO_FEDELE;
+            $this->stato = self::$STATO_FEDELE;
         }
         else{
             $this->codiceFedelta = null;
             $this->indirizzo = null;
             $this->password = null;
-            $this->stato = ClienteFedelta::$STATO_OSPITE;
+            $this->stato = self::$STATO_OSPITE;
         }
     }
 
@@ -92,7 +92,7 @@ class Cliente{
         $this->username = null;
         $this->password = null;
         //TODO:: se si cancella imposto solamente lo stato 'Cancellato' ?
-        $this->stato = Cliente::$STATO_CANCELLATO;
+        $this->stato = self::$STATO_CANCELLATO;
     }
 
     public function setStato($stato){
@@ -101,7 +101,7 @@ class Cliente{
 
     public function isFedelta(){
         //Fatto così e non controllando direttamente == OSPITE perchè se un giorno si aggiungono nuovi stati questo funziona comunque
-        return ($this->stato == Cliente::$STATO_FEDELE) || ($this->stato == Cliente::$STATO_INFEDELE);
+        return ($this->stato == self::$STATO_FEDELE) || ($this->stato == self::$STATO_INFEDELE);
     }
 }
 
