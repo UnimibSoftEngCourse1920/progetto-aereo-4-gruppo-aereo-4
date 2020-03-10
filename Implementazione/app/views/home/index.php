@@ -8,8 +8,8 @@
     <?php include("../app/template/menu.php") ?>
     <div class="container-fluid">
         <div class="row" id="promozione">
-            <div class="col p-2">
-                <center><a href="#">Sconto del 20% fino al 20/03/2020 su una selezione di voli.</a></center>
+            <div class="col p-2 text-center">
+                <a href="#">Sconto del 20% fino al 20/03/2020 su una selezione di voli.</a>
             </div>
         </div>
         <script>
