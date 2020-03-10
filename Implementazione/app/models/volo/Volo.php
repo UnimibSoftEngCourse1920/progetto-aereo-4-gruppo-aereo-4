@@ -67,7 +67,7 @@ class Volo {
     }
 
     public function setPromozione($promozione){
-        $this->promozione = DBFacade::getIstance() ->get($promozione, "Promozione");
+        $this->promozione = $promozione;
     }
     public function setStato($stato){
         $this->stato = $stato;

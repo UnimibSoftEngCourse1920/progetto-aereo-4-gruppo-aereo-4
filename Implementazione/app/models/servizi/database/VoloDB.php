@@ -26,8 +26,10 @@ class VoloDB extends AbstractDB
 
     protected function generateUpdateQuery($obj){
         $OIDpromozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
-        return sprintf("UPDATE ".get_class($obj)." SET stato = '%s', dataOraPartenza='%s', dataOraArrivo='%s' , promozione = '$OIDpromozione' WHERE OID = '%s'",
+        $var =  sprintf("UPDATE ".get_class($obj)." SET stato = '%s', dataOraPartenza='%s', dataOraArrivo='%s' , promozione = '%s' WHERE OID = '%s'",
                     $obj->getStato(), $obj->getDataOraPartenza(), $obj->getDataOraArrivo(), $OIDpromozione, $obj->getOID() );
+        var_dump($var);
+        return $var;
     }
 
     protected function generateGetQuery($OID, $class)
@@ -63,7 +65,7 @@ class VoloDB extends AbstractDB
     }
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
-        $query = "SELECT v.* from Volo as v JOIN VoloAeroporto as va on v.OID = va.volo 
+        $query = "SELECT v.*, va.aeroportoPartenza, va.aeroportoDestinazione from Volo as v JOIN VoloAeroporto as va on v.OID = va.volo 
                     WHERE va.aeroportoPartenza = '$partenza' AND va.aeroportoDestinazione = '$destinazione' 
                         AND DATE(v.dataOraPartenza) = '$data'
                         AND $nPosti < (SELECT count(*) from VoloPosto where volo = v.OID)";

@@ -70,7 +70,7 @@ class VoloController extends Controller {
     public function inserisciPromozione($nome, $sconto, $dataInizio,$dataFine, $codVolo, $promozioneFedelta){
 
         $this->registroPromozioni->creaPromozione((int)$sconto, $dataInizio, $dataFine, $nome, $codVolo, (int)$promozioneFedelta);
-        header("Location: /public/volo/promozioni");
+        //header("Location: /public/volo/promozioni");
     }
 
     public function cancellaPromozione($OIDPromozione){

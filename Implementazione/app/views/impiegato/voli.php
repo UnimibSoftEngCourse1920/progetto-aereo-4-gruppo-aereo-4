@@ -52,8 +52,8 @@
                                 foreach ($data["voli"] as $volo){
                                     echo "<tr>
                                             <th scope='row'>".$volo->getOID()."</th>
-                                            <td>".$volo->getAeroportoPartenza()->getCitta()." ".$volo->getAeroportoPartenza()->getNome()." </td>
-                                            <td>".$volo->getAeroportoDestinazione()->getCitta()." ".$volo->getAeroportoDestinazione()->getNome()."</td>
+                                            <td>".$volo->getAeroportoPartenza()->getCitta()." ".$volo->getAeroportoPartenza()->getNome()." (".$volo->getAeroportoPartenza()->getCodice().")"." </td>
+                                            <td>".$volo->getAeroportoDestinazione()->getCitta()." ".$volo->getAeroportoDestinazione()->getNome()." (".$volo->getAeroportoDestinazione()->getCodice().")"."</td>
                                             <td>".$volo->getDataOraPartenza()."</td>
                                             <td>".$volo->getDataOraArrivo()."</td>
                                             <td>".$volo->getMiglia()."</td>
@@ -86,7 +86,7 @@
                                     <input type="datetime-local" class="form-control" name="giornopartenza" placeholder="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="model">Data e ora di partenza</label>
+                                    <label for="model">Data e ora di arrivo</label>
                                     <input type="datetime-local" class="form-control" name="giornoarrivo" placeholder="">
                                 </div>
                                 <div class="form-group">
@@ -94,7 +94,7 @@
                                     <select name="partenza" class="form-control">
                                         <?php
                                             foreach ($data["aeroporti"] as $aeroporto){
-                                               echo "<option value='".$aeroporto->getOID()."'>".$aeroporto->getNome()."</option>";
+                                               echo "<option value='".$aeroporto->getOID()."'>".$aeroporto->getCitta()." ".$aeroporto->getNome()." (".$aeroporto->getCodice().")"."</option>";
                                             }
                                         ?>
                                     </select>
