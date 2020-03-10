@@ -17,8 +17,8 @@ class RegistroPrenotazioni{
         $this->mailer = new Mailer();
     }
 
-    public function getClientiVolo($OIDVolo){
-        $listaClienti = DBFacade::getIstance() -> getClientiVolo($OIDVolo);
+    public function getListaClientiVolo($OIDVolo){
+        $listaClienti = DBFacade::getIstance() -> getPasseggeriVolo($OIDVolo);
         return $listaClienti;
     }
 

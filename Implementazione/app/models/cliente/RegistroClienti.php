@@ -66,7 +66,7 @@ class RegistroClienti
         return false;
     }
 
-    public function avvisaCliente($OID, $tipologiaAvviso){
+    public function avvisaPasseggeri($OID, $tipologiaAvviso){
         $cliente = DBFacade::getIstance()->get($OID);
 
         switch ($tipologiaAvviso){

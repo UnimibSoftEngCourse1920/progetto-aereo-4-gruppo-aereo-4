@@ -9,7 +9,13 @@ class RegistroVoli{
     public static $AVVISAMODIFICAVOLO='MODIFICA';
     public static $AVVISACANCELLAZIONEVOLO='CANCELLAZIONE';
 
-    public function __construct(){}
+    private $mailer;
+    private $registroPrenotazioni;
+
+    public function __construct(){
+        $this->mailer = new Mailer();
+        $this->registroPrenotazioni = new RegistroPrenotazioni();
+    }
 
     public function inserisciVolo($dataOraArrivo, $dataOraPart, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo)
     {
@@ -28,12 +34,15 @@ class RegistroVoli{
         return false;
     }
 
-    public function modificaVolo($OIDVolo, $nuovaDataOraPart, $nuovaDataOraArr){
-        $voloMod = DBFacade::getIstance()->get($OIDVolo);
-        $voloMod->setDataOraPartenza($nuovaDataOraPart);
-        $voloMod->setDataOraArrivo($nuovaDataOraArr);
-        DBFacade::getIstance()->update($voloMod);
-        return true; //ritornare esito
+    public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraArr){
+        if($this->validaDate($nuovaDataoraPart, $nuovaDataoraArr)) {
+            $voloMod = DBFacade::getIstance()->get($OIDVolo, Volo::class);
+            $voloMod->setDataOraPartenza($nuovaDataoraPart);
+            $voloMod->setDataOraArrivo($nuovaDataoraArr);
+            $esito = DBFacade::getIstance()->update($voloMod);
+            return $esito;
+        }
+        return false;
     }
 
     public function rimuoviVolo($OIDVolo){
@@ -43,6 +52,28 @@ class RegistroVoli{
         $database->update($volo);
         //ritorna esito
         return $volo;
+    }
+
+    public function avvisaPasseggeri($OIDVolo, $tipologiaAvviso){
+        $volo = DBFacade::getIstance() ->get($OIDVolo, Volo::class);
+        //TODO perchè passo dal registro Voli ?? Devo fare come prima e passare dal controller!!
+        $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
+        switch ($tipologiaAvviso){
+            case self::$AVVISAMODIFICAVOLO:
+                $this->mailer->inviaEmailModificaVolo($listaClienti, $volo);
+                break;
+            case self::$AVVISACANCELLAZIONEVOLO:
+                break;
+            default:
+                return false;
+        }
+    }
+
+    private function validaDate($data1, $data2){
+        //TODO deve esserci un minimo di tot minuti tra le due date?
+        $formato = strtotime($data1) && strtotime($data2);
+        $date = $data1 < $data2;
+        return $formato && $date;
     }
 
     private function generaCodiceVolo($datiVolo){

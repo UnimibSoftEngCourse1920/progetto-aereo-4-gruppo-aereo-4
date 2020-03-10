@@ -115,8 +115,8 @@ class DBFacade{
         return $this->gestori['Cliente'] -> getUltimoCodiceFedelta();
     }
 
-    public function getClientiVolo($OID){
-        return null;
+    public function getPasseggeriVolo($OIDVolo){
+        return $this->gestori['Volo'] -> getPasseggeriVolo($OIDVolo);
     }
 
     public function isAereoDisponibile($dataoraPartenza, $dataoraArrivo, $OIDAereo){

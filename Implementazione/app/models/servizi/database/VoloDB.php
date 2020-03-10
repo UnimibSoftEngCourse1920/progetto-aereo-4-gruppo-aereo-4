@@ -13,14 +13,11 @@ class VoloDB extends AbstractDB
         
         $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s', '%s'); ",
                         $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo()->getOID(), $promozione);
-
         //VoloAeroporto
         $query .= sprintf("Insert into VoloAeroporto values ('%s', '%s', '%s' ); ", $obj->getOID(), $obj->getAeroportoPartenza()->getOID(), $obj->getAeroportoDestinazione()->getOID());
-
         //VoloPosto
         foreach ($obj->getPosti() as $posto)
             $query .= sprintf("INSERT INTO VoloPosto values ('%s', '%s')", $obj->getOID(), $posto->getOID());
-
         return $query;
     }
 
@@ -80,14 +77,28 @@ class VoloDB extends AbstractDB
         return $listaVoli;
     }
 
+    public function getPasseggeriVolo($OIDVolo){
+        //TODO ritorno solamente la mail?
+        $query = "select c.* from PrenotazioneVolo pv join Prenotazione p join PrenotazioneCliente pc join Cliente c 
+                    on c.OID = pc.cliente and pv.prenotazione = p.OID and pc.prenotazione = p.OID where pv.volo = '$OIDVolo'";
+        $stmt = $this->connection->query($query); //la eseguo
+        $lista = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
+            $obj = (object)($row);
+            array_push($lista,$obj);
+        }
+        $listaDef = array();
+        foreach ($lista as $el){
+            array_push($listaDef,$this->objectToObject($el,'Cliente')); //eseguo il cast dell'oggetto generico
+        }
+        return $listaDef;
+    }
+
     public function isAereoDisponibile($partenza, $arrivo, $OIDAereo){
         $query = "select * from Volo where aereo = '$OIDAereo' and stato= '".Volo::$STATO_ATTIVO."' AND ((dataOraPartenza BETWEEN '$partenza' and '$arrivo') 
                 OR (dataOraArrivo BETWEEN '$partenza' and '$arrivo') OR (dataOraPartenza < '$partenza' AND dataOraArrivo > '$arrivo'))";
         $result = $this->connection->query($query);
         return $result->rowCount() == 0;
     }
-
-    //Modifico direttamente la get richiamando quella del padre
-
 
 }

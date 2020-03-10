@@ -44,12 +44,11 @@ class VoloController extends Controller {
         $this->mailer = new Mailer();
     }
 
-    public function modificaVolo($OIDVolo, $nuovaData, $nuovoOrarioPart, $nuovoOrarioArr){
-        $voloMod = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaData, $nuovoOrarioPart, $nuovoOrarioArr);
-        // vedo esito delle op. prima
-        //
-        $listaClienti = $this->registroPrenotazioni -> getClientiVolo($voloMod -> OIDVolo);
-        $this->mailer -> inviaEmailModificaVolo($listaClienti, $voloMod);
+    public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest){
+        $esito = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest);
+        if($esito){
+            $this->registroVoli->avvisaPasseggeri($OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
+        }
     }
 
     public function inserisciVolo($dataoraPartenza, $dataoraArrivo, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo){
