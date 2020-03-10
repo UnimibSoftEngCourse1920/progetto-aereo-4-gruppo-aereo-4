@@ -37,12 +37,16 @@ class RegistroVoli{
     }
 
     public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraArr){
+        $db = DBFacade::getIstance();
         if($this->validaDate($nuovaDataoraPart, $nuovaDataoraArr)) {
-            $voloMod = DBFacade::getIstance()->get($OIDVolo, Volo::class);
-            $voloMod->setDataOraPartenza($nuovaDataoraPart);
-            $voloMod->setDataOraArrivo($nuovaDataoraArr);
-            $esito = DBFacade::getIstance()->update($voloMod);
-            return $esito;
+            $volo = $db -> get($OIDVolo, Volo::class);
+            if($db->isAereoDisponibile($nuovaDataoraPart, $nuovaDataoraArr, $volo->getAereo()->getOID())) {
+                $voloMod = DBFacade::getIstance()->get($OIDVolo, Volo::class);
+                $voloMod->setDataOraPartenza($nuovaDataoraPart);
+                $voloMod->setDataOraArrivo($nuovaDataoraArr);
+                $esito = DBFacade::getIstance()->update($voloMod);
+                return $esito;
+            }
         }
         return false;
     }
