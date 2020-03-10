@@ -98,11 +98,7 @@ class VoloDB extends AbstractDB
     }
 
     public function isAereoDisponibile($partenza, $arrivo, $OIDAereo){
-<<<<<<< HEAD
         $query = "select * from Volo where aereo = '$OIDAereo' and stato= '".Volo::$STATO_ATTIVO."' AND ((dataOraPartenza BETWEEN '$partenza' and '$arrivo') 
-=======
-        $query = "select * from Volo where aereo = '$OIDAereo' and stato= '' AND ((dataOraPartenza BETWEEN '$partenza' and '$arrivo') 
->>>>>>> 614db447cde30ae41129d07d70e080d1abe1b30b
                 OR (dataOraArrivo BETWEEN '$partenza' and '$arrivo') OR (dataOraPartenza < '$partenza' AND dataOraArrivo > '$arrivo'))";
         $result = $this->connection->query($query);
         return $result->rowCount() == 0;
