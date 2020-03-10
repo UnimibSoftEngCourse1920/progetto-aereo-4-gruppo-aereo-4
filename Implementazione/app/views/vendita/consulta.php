@@ -19,7 +19,7 @@
             $index = 0;
             foreach($data["aeroporti"] as $aeroporto) {
                 $oid = $aeroporto->getOID();
-                $nome = $aeroporto->getCitta()." ".$aeroporto->getNome();
+                $nome = $aeroporto->getCitta()." ".$aeroporto->getNome()." (".$aeroporto->getCodice().")";
             ?>
                 aeroporti["<?=$index?>"] = "<?=$nome?>";
                 codiciAeroporti["<?=$nome?>"] = "<?=$oid?>";
@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label for="inputCity">Data</label>
-                            <input type="text" class="form-control datepicker" id="datepicker" value="<?=$data["data"]?>" placeholder="Data di partenza">
+                            <input type="text" autocomplete="off" class="form-control datepicker" id="datepicker" value="<?=$data["data"]?>" placeholder="Data di partenza">
                         </div>
                         <div class="form-group col-md-1">
                             <label for="inputState">Viaggiatori</label>

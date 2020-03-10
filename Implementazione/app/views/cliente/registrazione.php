@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="data_nascita">Data</label>
-                        <input type="text" class="form-control datepicker" id="data_nascita" name="data_nascita" placeholder="Data di nascita" required>
+                        <input type="text" autocomplete="off" class="form-control datepicker" id="data_nascita" name="data_nascita" placeholder="Data di nascita" required>
                     </div>
                 </div>
                 <div class="form-row">

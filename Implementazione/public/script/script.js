@@ -16,6 +16,10 @@ $(function() {
         source: aeroporti
     });
 
+    $(".datepicker").keydown(function(e){
+        e.preventDefault();
+    });
+
     $('#form-ricerca').submit(function() {
         var aeroportoPartenza = codiciAeroporti[$("#form-ricerca #da").val()];
         var aeroportoDestinazione = codiciAeroporti[$("#form-ricerca #a").val()];
