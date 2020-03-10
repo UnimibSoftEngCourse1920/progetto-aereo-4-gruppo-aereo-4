@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-light navbar-expand-lg px-4 py-3">
-    <a class="navbar-brand" href="/"><img id="logo" src="/public/img/logo.png"></a>
+    <a class="navbar-brand" href="/"><img id="logo" src="/public/img/logo.png" alt="Gruppo Aereo 4"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,7 +9,7 @@
             <?php
             if(!isset($_SESSION["id_cliente"])) {?>
             <li class="nav-item">
-                <a class="nav-link" href="/public/cliente/registrati">Registrati</a>
+                <a class="nav-link" href="/public/cliente/iscrizioneFedelta">Registrati</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/public/cliente/accedi">Accedi</a>

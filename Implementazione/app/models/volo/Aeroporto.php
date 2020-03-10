@@ -9,15 +9,17 @@ class Aeroporto{
     private $continente;
     private $nazione;
     private $citta;
+    private $codice;
 
 
-    public function __construct($nome, $continente, $nazione, $citta)
+    public function __construct($nome, $continente, $nazione, $citta, $codice)
     {
         $this->OID = OIDGenerator::getIstance()->getNewOID();
         $this->nome = $nome;
         $this->continente = $continente;
         $this->nazione = $nazione;
         $this->citta = $citta;
+        $this->codice = $codice;
     }
 
     /**
@@ -58,6 +60,10 @@ class Aeroporto{
     public function getCitta()
     {
         return $this->citta;
+    }
+
+    public function getCodice() {
+        return $this->codice;
     }
 
 }

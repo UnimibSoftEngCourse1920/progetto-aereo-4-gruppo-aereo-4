@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 mt-auto">
-            <form id="form-registrazione" class="py-md-4 px-md-5" action="/public/cliente/registrati" method="post">
+            <form id="form-registrazione" class="py-md-4 px-md-5" action="/public/cliente/iscrizioneFedelta" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nome">Nome</label>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="data_nascita">Data</label>
-                        <input type="text" class="form-control datepicker" id="data_nascita" name="data_nascita" placeholder="Data di nascita" required>
+                        <input type="text" autocomplete="off" class="form-control datepicker" id="data_nascita" name="data_nascita" placeholder="Data di nascita" required>
                     </div>
                 </div>
                 <div class="form-row">

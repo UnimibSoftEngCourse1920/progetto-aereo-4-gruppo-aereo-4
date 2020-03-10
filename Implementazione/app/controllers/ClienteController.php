@@ -5,9 +5,7 @@ require_once "../app/models/cliente/RegistroClienti.php";
 require_once "../app/models/prenotazione/RegistroPrenotazioni.php";
 require_once "../app/core/Controller.php";
 require_once "../app/models/cliente/Cliente.php";
-require_once "../app/models/cliente/ClienteFedelta.php";
 require_once "../app/models/prenotazione/Prenotazione.php";
-//require_once "../app/models/prenotazione/RegistroPromozioni.php";
 
 class ClienteController extends Controller{
 
@@ -33,17 +31,15 @@ class ClienteController extends Controller{
         }
     }
 
-    public function iscrizioneFedelta($nome = "", $cognome = "", $email = "", $dataNascita = "", $indirizzo = "", $citta = "",
-                                      $cap = "", $password = "", $confermaPassword = "") {
+    public function iscrizioneFedelta($nome = "", $cognome = "", $email = "", $dataNascita = "", $indirizzo = "",
+                                        $password = "", $confermaPassword = "") {
         //$registroClienti = $this->model('cliente/RegistroClienti');
-
         $error = "";
-        if($nome != "" && $cognome != "" && $indirizzo != "" && $citta != "" && $cap != "" && $dataNascita != "" &&
-            $email != "" && $password != "") {
+        if($nome != "" && $cognome != "" && $indirizzo != "" && $dataNascita != "" && $email != "" && $password != "") {
             if($password == $confermaPassword) {
                 //Converto il formato della data
-                $esito = $this->registroClienti ->nuovoClienteFedelta($nome, $cognome, $indirizzo." ".$citta." ".$cap,
-                    $dataNascita, $email, $password);
+                $esito = $this->registroClienti ->nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo,
+                                                                        $password);
                 if ($esito) {
                     header("Location: /public/cliente/registrato");
                 } else {
@@ -134,10 +130,7 @@ class ClienteController extends Controller{
     }
 */
     public function prenotazioni() {
-        $prenotazioni = array(new Prenotazione("1", "1", "1", "1", "1"),
-                                new Prenotazione("1", "1", "1", "1", "1"),
-                                new Prenotazione("1", "1", "1", "1", "1"),
-                                new Prenotazione("1", "1", "1", "1", "1"));
+        $prenotazioni = array();
         $cliente = new Cliente("test", "test", "test", "test", "test");
         $this->view('cliente/fedelta', ["prenotazioni" => $prenotazioni, "cliente" => $cliente]);
     }

@@ -1,19 +1,13 @@
 <?php
 
-
-//namespace model\servizi;
 require_once("AbstractDB.php");
-
-use model\cliente\Cliente;
-use model\cliente\ClienteFedelta;
-
 
 class ClienteDB extends AbstractDB
 {
     public function generatePutQuery($cliente)
     {
         $query = sprintf("INSERT INTO Cliente VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s');",
-            $cliente-getOID(), $cliente->getNome(), $cliente->getCognome(), $cliente->getDataNascita(), $cliente->getIndirizzo(),
+            $cliente->getOID(), $cliente->getNome(), $cliente->getCognome(), $cliente->getDataNascita(), $cliente->getIndirizzo(),
                   $cliente->getCodiceFedelta(), $cliente->getStato(), $cliente->getPassword(), $cliente->getEmail());
         return $query;
     }
@@ -29,13 +23,13 @@ class ClienteDB extends AbstractDB
         $stmt = $this->connection->query($query);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $obj = (object)($row);
-        return $this->objectToObject($obj, "ClienteFedelta");
+        return $this->objectToObject($obj, "Cliente");
     }
 
     public function getClientiFedelta(){
         $query = "SELECT * FROM CLIENTE WHERE codiceFedelta is null";
         $stmt = $this->connection->query($query);
-        $lista = $stmt->fetchAll(PDO::FETCH_CLASS, "ClienteFedelta");
+        $lista = $stmt->fetchAll(PDO::FETCH_CLASS, "Cliente");
         return $lista;
     }
 

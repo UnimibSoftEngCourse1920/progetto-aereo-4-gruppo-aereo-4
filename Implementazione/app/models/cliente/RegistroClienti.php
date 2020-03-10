@@ -1,7 +1,6 @@
 <?php
 
 require_once "../app/models/servizi/DBFacade.php";
-require_once "../app/models/cliente/ClienteFedelta.php";
 
 class RegistroClienti
 {

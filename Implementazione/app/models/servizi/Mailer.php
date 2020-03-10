@@ -40,7 +40,6 @@ class Mailer{
                     GruppoAereo4";
 
         $message = sprintf($message, $volo->getAeroportoPartenza()->getNome(), $volo->getDataOraPartenza(), $volo->getaeroportoDestinazione()->getNome(), $volo -> getDataOraArrivo());
-
         mail($recipients , "Avviso cancellazione volo",$message);
     }
 

@@ -8,8 +8,8 @@
     <?php include("../app/template/menu.php") ?>
     <div class="container-fluid">
         <div class="row" id="promozione">
-            <div class="col p-2">
-                <center><a href="#">Sconto del 20% fino al 20/03/2020 su una selezione di voli.</a></center>
+            <div class="col p-2 text-center">
+                <a href="#">Sconto del 20% fino al 20/03/2020 su una selezione di voli.</a>
             </div>
         </div>
         <script>
@@ -19,7 +19,7 @@
             $index = 0;
             foreach($data["aeroporti"] as $aeroporto) {
                 $oid = $aeroporto->getOID();
-                $nome = $aeroporto->getCitta()." ".$aeroporto->getNome();
+                $nome = $aeroporto->getCitta()." ".$aeroporto->getNome()." (".$aeroporto->getCodice().")";
             ?>
                 aeroporti["<?=$index?>"] = "<?=$nome?>";
                 codiciAeroporti["<?=$nome?>"] = "<?=$oid?>";
@@ -39,22 +39,20 @@
                         <div class="form-group col-md-6">
                             <label for="da">Da</label>
                             <input type="text" class="form-control aeroporto" id="da" placeholder="Città o aeroporto" required>
-                            <input id="hidden_da" type="hidden" name="da">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="a">A</label>
                             <input type="text" class="form-control aeroporto" id="a" name="a" placeholder="Città o aeroporto" required>
-                            <input id="hidden_a" type="hidden" name="a">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="data_partenza">Data</label>
-                            <input type="text" class="form-control datepicker" id="data_partenza" name="data_partenza" placeholder="Data di partenza" required>
+                            <input type="text" autocomplete="off" class="form-control datepicker" id="data_partenza" name="data_partenza" placeholder="Data di partenza" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="viaggiatori">Viaggiatori</label>
-                            <input type="number" id="viaggiatori" name=viaggiatori" name="inputNumber" value="1" min="1" required>
+                            <input type="number" id="viaggiatori" name=viaggiatori" value="1" min="1" required>
                         </div>
                         <div class="form-group col-md-3 mt-auto">
                             <button type="submit" class="btn btn-primary w-100">Cerca voli</button>

@@ -14,6 +14,7 @@ class VoloController extends Controller {
 
     private $registroVoli;
     private $registroPromozioni;
+    private $registroPrenotazioni;
     private $mailer;
 
     public function login($name = '') {
@@ -41,6 +42,7 @@ class VoloController extends Controller {
     public function __construct(){
         $this->registroVoli = new RegistroVoli();
         $this->registroPromozioni = new RegistroPromozioni();
+        $this->registroPrenotazioni = new RegistroPrenotazioni();
         $this->mailer = new Mailer();
     }
 
@@ -69,7 +71,7 @@ class VoloController extends Controller {
     public function inserisciPromozione($nome, $sconto, $dataInizio,$dataFine, $codVolo, $promozioneFedelta){
 
         $this->registroPromozioni->creaPromozione((int)$sconto, $dataInizio, $dataFine, $nome, $codVolo, (int)$promozioneFedelta);
-        header("Location: /public/volo/promozioni");
+        //header("Location: /public/volo/promozioni");
     }
 
     public function cancellaPromozione($OIDPromozione){
