@@ -11,15 +11,21 @@ class RegistroVoli{
 
     public function __construct(){}
 
-    public function inserisciVolo($dataOraArrivo, $dataOraPart, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
-
-        //Recupero gli oggetti dal db
+    public function inserisciVolo($dataOraArrivo, $dataOraPart, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo)
+    {
         $database = DBFacade::getIstance();
-        $aereoportoPart = $database->get($OIDAereoportoPart,"Aeroporto");
-        $aereoportoArr = $database->get($OIDAereoportArr, "Aeroporto");
-        $aereo = $database->get($OIDAereo,"Aereo");
-        $nuovoVolo = new Volo($dataOraPart, $dataOraArrivo,$aereoportoPart, $aereoportoArr, $aereo);
-        $database->put($nuovoVolo);
+        if($database->isAereoDisponibile($dataOraPart, $dataOraArrivo, $OIDAereo)){
+            //genero codice del volo
+            $aereoportoPart = $database->get($OIDAereoportoPart,Aeroporto::class);
+            $aereoportoArr = $database->get($OIDAereoportArr, Aeroporto::class);
+            $aereo = $database->get($OIDAereo,Aereo::class);
+            if($aereo!=null and $aereoportoArr!=null and $aereoportoPart!=null) {
+                $nuovoVolo = new Volo($dataOraPart, $dataOraArrivo, $aereoportoPart, $aereoportoArr, $aereo);
+                $esito = $database->put($nuovoVolo);
+                return $esito;
+            }
+        }
+        return false;
     }
 
     public function modificaVolo($OIDVolo, $nuovaDataOraPart, $nuovaDataOraArr){

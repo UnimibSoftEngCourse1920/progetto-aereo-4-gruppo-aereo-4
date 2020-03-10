@@ -7,6 +7,10 @@ require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 
 class Volo {
+
+    static $STATO_ATTIVO = "ATTIVO";
+    static $STATO_CANCELLATO = "CANCELLATO";
+
     private $OID;
     private $dataOraPartenza;
     private $dataOraArrivo;
@@ -20,16 +24,16 @@ class Volo {
 
     private $listaPosti; //posti del volo
 
-    public function __construct($dataOraPartenza, $dataOraArrivo, $AeroportoPart, $AeroportArr, $Aereo){
+    public function __construct($dataOraPartenza, $dataOraArrivo, $aeroportoPart, $aeroportoArr, $aereo){
         $database = DBFacade::getIstance();
         $this->OID = OIDGenerator::getIstance()->getNewOID();
         $this->dataOraPartenza = $dataOraPartenza;
         $this->dataOraArrivo = $dataOraArrivo;
-        $this->aeroportoPart = $database->get($AeroportoPart->getOID(),"Aeroporto");
-        $this->aeroportoDest = $database->get($AeroportArr->getOID(),"Aeroporto");
+        $this->aeroportoPart = $aeroportoPart;
+        $this->aeroportoDest = $aeroportoArr;
         $this->miglia = $this->calcolaMiglia();
-        $this->stato = 'ATTIVO';
-        $this->aereo = $database->get($Aereo->getOID(),"Aereo");
+        $this->stato = Volo::$STATO_ATTIVO;
+        $this->aereo = $aereo;
         $this->promozione = null;
         $this->listaPosti = array();
 
@@ -78,7 +82,7 @@ class Volo {
     }
 
     public function getPromozione(){
-        if(get_class($this->promozione) != Promozione::class){
+        if(is_string($this->promozione)){
             $this->promozione = DBFacade::getIstance() ->get($this->promozione, Promozione::class);
         }
         return $this->promozione;
@@ -93,7 +97,7 @@ class Volo {
     }
 
     public function getPosti(){
-        if(get_class($this->listaPosti[0]) != Posto::class){
+        if(is_string($this->listaPosti[0])){
             for($i=0; $i< count($this->listaPosti); $i++){
                 $this->listaPosti[$i] = DBFacade::getIstance()->get($this->listaPosti[i], Posto::class);
             }
@@ -102,21 +106,21 @@ class Volo {
     }
 
     public function getAereo(){
-        if(get_class($this->aereo) != Aereo::class){
+        if(is_string($this->aereo)){
             $this->aereo = DBFacade::getIstance() ->get($this->aereo, Aereo::class);
         }
         return $this->aereo;
     }
 
     public function getAeroportoPartenza(){
-        if(get_class($this->aeroportoPart) != Aeroporto::class){
+        if(is_string($this->aeroportoPart)){
             $this->aeroportoPart = DBFacade::getIstance() ->get($this->aeroportoPart, Aeroporto::class);
         }
         return $this->aeroportoPart;
     }
 
     public function getAeroportoDestinazione(){
-        if(get_class($this->aeroportoDest) != Aeroporto::class){
+        if(is_string($this->aeroportoDest)){
             $this->aeroportoDest = DBFacade::getIstance() ->get($this->aeroportoDest, Aeroporto::class);
         }
         return $this->aeroportoDest;

@@ -19,4 +19,5 @@ class AereoDB extends AbstractDB
                     WHERE OID = '$obj->OID'";
         return sprintf($query, $obj->getMarcaModello(), $obj->getNumeroPosti(), $obj->getNumeroSerie());
     }
+
 }

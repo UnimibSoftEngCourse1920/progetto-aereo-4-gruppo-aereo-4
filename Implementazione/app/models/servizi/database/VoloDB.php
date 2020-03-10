@@ -32,6 +32,11 @@ class VoloDB extends AbstractDB
 
     protected function generateGetQuery($OID, $class)
     {
+        return "SELECT * from Volo v join VoloAeroporto va on v.OID = va.volo WHERE v.OID = '$OID'";
+    }
+
+    protected function generateGetAllQuery($class)
+    {
         return "SELECT * from Volo v join VoloAeroporto va on v.OID = va.volo";
     }
 
@@ -68,14 +73,18 @@ class VoloDB extends AbstractDB
             $obj = (object)($row);
             array_push($lista,$obj);
         }
-
         $listaVoli = array();
         foreach ($lista as $el){
             array_push($listaVoli,$this->objectToObject($el,"Volo")); //eseguo il cast dell'oggetto generico
         }
-
         return $listaVoli;
+    }
 
+    public function isAereoDisponibile($partenza, $arrivo, $OIDAereo){
+        $query = "select *,$partenza,$arrivo from Volo where aereo = '$OIDAereo' and stato= '' AND ((dataOraPartenza BETWEEN '$partenza' and '$arrivo') 
+                OR (dataOraArrivo BETWEEN '$partenza' and '$arrivo') OR (dataOraPartenza < '$partenza' AND dataOraArrivo > '$arrivo'))";
+        $result = $this->connection->query($query);
+        return $result->rowCount() == 0;
     }
 
     //Modifico direttamente la get richiamando quella del padre

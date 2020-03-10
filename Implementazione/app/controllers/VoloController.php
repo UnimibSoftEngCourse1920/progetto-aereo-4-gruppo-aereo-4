@@ -9,6 +9,7 @@ require_once __DIR__ . "/../models/volo/RegistroPromozioni.php";
 require_once __DIR__ . "/../models/servizi/Mailer.php";
 require_once __DIR__ . "/../models/servizi/DBFacade.php";
 require_once __DIR__ . "/../models/volo/Aeroporto.php";
+
 class VoloController extends Controller {
 
     private $registroVoli;
@@ -51,9 +52,9 @@ class VoloController extends Controller {
         $this->mailer -> inviaEmailModificaVolo($listaClienti, $voloMod);
     }
 
-    public function inserisciVolo($giornopartenza, $giornoarrivo, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
+    public function inserisciVolo($dataoraPartenza, $dataoraArrivo, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
         //manca esito operazione
-        $this->registroVoli -> inserisciVolo($giornopartenza, $giornoarrivo,  $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo);
+        $esito = $this->registroVoli -> inserisciVolo($dataoraPartenza, $dataoraArrivo,  $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo);
         header("Location: /public/volo/voli");
     }
 

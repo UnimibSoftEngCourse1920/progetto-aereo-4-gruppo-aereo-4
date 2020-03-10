@@ -26,11 +26,9 @@ class DBFacade{
 
     private function __construct(){
         // TODO: Factory mapper?
-        $cli = new ClienteDB();
-        $this->gestori['Cliente'] = $cli;
-        $this->gestori['ClienteFedelta'] = $cli;
+        $this->gestori['Cliente'] = new ClienteDB();
         $this->gestori['Acquisto'] = new AcquistoDB();
-        $this->gestori['Aereo'] = new AereoDB();
+        $this->gestori[Aereo::class] = new AereoDB();
         $this->gestori['Aeroporto'] = new AeroportoDB();
         $this->gestori['Biglietto'] = new BigliettoDB();
         $this->gestori['Impiegato'] = new ImpiegatoDB();
@@ -119,6 +117,10 @@ class DBFacade{
 
     public function getClientiVolo($OID){
         return null;
+    }
+
+    public function isAereoDisponibile($dataoraPartenza, $dataoraArrivo, $OIDAereo){
+        return $this->gestori[Volo::class] -> isAereoDisponibile($dataoraPartenza, $dataoraArrivo, $OIDAereo);
     }
 
 }

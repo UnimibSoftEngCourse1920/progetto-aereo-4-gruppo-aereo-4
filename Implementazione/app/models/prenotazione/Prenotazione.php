@@ -140,7 +140,7 @@ class Prenotazione{
     }
 
     public function getVolo() {
-        if(get_class($this->volo) != Volo::class){
+        if(is_string($this->volo)){
             $this->cliente = DBFacade::getIstance() ->get($this->volo, Volo::class);
         }
         return $this->volo;
@@ -149,7 +149,7 @@ class Prenotazione{
     public function getCliente()
     {
         //TODO:: se divido il cliente va aggiornata anche questa get!!
-        if(get_class($this->cliente) != Cliente::class){
+        if(is_string($this->cliente)){
             $this->cliente = DBFacade::getIstance() ->get($this->cliente, Cliente::class);
         }
         return $this->cliente;
@@ -159,7 +159,7 @@ class Prenotazione{
 
     public function getListaPosti()
     {
-        if(get_class($this->listaPosti[0]) != Posto::class){
+        if(is_string($this->listaPosti[0])){
             $this->listaPosti = $this->materializeAll($this->listaPosti, Posto::class);
         }
         return $this->listaPosti;
@@ -167,7 +167,7 @@ class Prenotazione{
 
     public function getListaBiglietti()
     {
-        if(get_class($this->listaBiglietti[0]) != Biglietto::class){
+        if(is_string($this->listaBiglietti[0])){
             $this->listaBiglietti = $this->materializeAll($this->listaBiglietti, Biglietto::class);
         }
         return $this->listaBiglietti;
@@ -175,7 +175,7 @@ class Prenotazione{
 
     public function getListaAcquisti()
     {
-        if(get_class($this->listaAcquisti[0]) != Acquisto::class){
+        if(is_string($this->listaAcquisti[0])){
             $this->listaAcquisti = $this->materializeAll($this->listaAcquisti, Acquisto::class);
         }
         return $this->listaAcquisti;
