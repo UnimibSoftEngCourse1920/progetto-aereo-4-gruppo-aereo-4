@@ -13,8 +13,8 @@ class PrenotazioneController extends Controller
 
     //Metodo temporaneo
     public function prenota($idVolo, $viaggiatori, $nome = "", $cognome = "", $email = "", $nPosti = "") {
-        if(isset($idVolo) && isset($nome) && isset($cognome) && isset($email) && isset($nPosti)) {
-            header('Location: /public/vendita/acquista');
+        if(isset($idVolo) && isset($viaggiatori) && isset($nome) && isset($cognome) && isset($email) && isset($nPosti)) {
+            //header('Location: /public/vendita/acquista');
         }
         $registro = $this->model('volo/RegistroVoli');
         $volo = $registro->getVolo($idVolo);

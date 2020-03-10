@@ -133,10 +133,7 @@ class ClienteController extends Controller{
     }
 
     public function prenotazioni() {
-        $prenotazioni = array(new Prenotazione("1", "1", "1", "1", "1"),
-                                new Prenotazione("1", "1", "1", "1", "1"),
-                                new Prenotazione("1", "1", "1", "1", "1"),
-                                new Prenotazione("1", "1", "1", "1", "1"));
+        $prenotazioni = array();
         $cliente = new Cliente("test", "test", "test", "test", "test");
         $this->view('cliente/fedelta', ["prenotazioni" => $prenotazioni, "cliente" => $cliente]);
     }
