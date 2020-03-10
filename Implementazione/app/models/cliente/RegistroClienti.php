@@ -87,13 +87,13 @@ class RegistroClienti
         if($cliente!=null) {
             $cliente->setStato(ClienteFedelta::$STATOINFEDELE);
             $esito = DBFacade::getIstance()->update($cliente);
-            $this->mailer->inviaComunicazioneInfedelta($cliente);
-            //Controllo anche esito del mailer? NO
+            if($esito) {
+                $this->mailer->inviaComunicazioneInfedelta($cliente);
+            }
             return $esito;
         }
         return false;
     }
-
 	
 	/*public function getCliente($idCliente) {
 		$cliente = DBFacade::getIstance()->getCliente($idCliente);

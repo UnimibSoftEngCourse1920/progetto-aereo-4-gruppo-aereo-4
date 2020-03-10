@@ -110,6 +110,7 @@ class PrenotazioneDB extends AbstractDB
     }
 
     public function getFedeltaUltimaPrenotazione(){
+        //Per ogni codice fedeltà, ritorna l'ultima prenotazione effettuata
         $result = array();
         $query = "select c.OID,max(data) from Prenotazione p JOIN PrenotazioneCliente pc JOIN Cliente c on p.OID=pc.prenotazione and c.OID = pc.cliente where c.codiceFedelta is not null group by c.OID;";
         $stmt = $this->connection->query($query);
@@ -120,8 +121,6 @@ class PrenotazioneDB extends AbstractDB
             $result[] = array($OIDCliente, $data);
         }
         return $result;
-
-
         //select * from prenot join cliente WHERE (clienteFedelta) and OIDCli not in (SELECT codcli from pr where diff(today, data)>= $anni)
     }
 }

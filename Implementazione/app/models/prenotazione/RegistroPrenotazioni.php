@@ -11,10 +11,12 @@ abstract class Tariffa
 class RegistroPrenotazioni{
 
     private $mailer;
+    private $registroClienti;
 
     public function __construct()
     {
         $this->mailer = new Mailer();
+        $this->registroClienti = new RegistroClienti();
     }
 
     public function getListaClientiVolo($OIDVolo){
@@ -24,6 +26,27 @@ class RegistroPrenotazioni{
 
     public function generaEstrattoConto($codiceFedelta){
 
+    }
+
+    public function controlloInfedeli(){
+        //ritorna la lista di clienti che hanno fatto l'ultima prenotazione $anniTrascorsi anni fa
+        //NB!! Questo metodo mi DOVREBBE ritornare una lista di clienti, la chiamata al DB probabilmente ritorna la lista di prenotazioni
+         $clientePrenotazione = DBFacade::getIstance()->getFedeltaUltimaPrenotazione();
+        foreach ($clientePrenotazione as $cliente) {
+            $anni = $this->anniPassati($cliente[1]);
+            if($anni == 3) {
+                $this->registroClienti->annullaIscrizione($cliente[0]);
+            }
+            else if(anni == 2){
+                $this->registroClienti->setClienteInfedele($cliente[0]);
+            }
+         }
+    }
+
+    private function anniPassati($data){
+        $data = new DateTime($data);
+        $oggi = new DateTime(date('Y-m-d'));
+        return ($oggi->diff($data)) -> y;
     }
 
     public function effettuaPrenotazione($cliente,$codVolo,$numPosti,$tariffa){
@@ -47,12 +70,6 @@ class RegistroPrenotazioni{
         } else{
             return false;
         }
-    }
-
-    public function getFedeltaUltimaPrenotazione($anniTrascorsi){
-        //ritorna la lista di clienti che hanno fatto l'ultima prenotazione $anniTrascorsi anni fa
-        //NB!! Questo metodo mi DOVREBBE ritornare una lista di clienti, la chiamata al DB probabilmente ritorna la lista di prenotazioni
-        return DBFacade::getIstance()->getFedeltaUltimaPrenotazione($anniTrascorsi);
     }
 	
 	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta) {

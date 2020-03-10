@@ -57,6 +57,9 @@ class ClienteController extends Controller{
     }
 
     public function ricercaClientiInfedeli(){
+        $this->registroPrenotazioni->controlloInfedeli();
+
+        //OLD
         $clientePrenotazione = $this->registroPrenotazioni->getFedeltaUltimaPrenotazione();
         foreach ($clientePrenotazione as $CliData) {
             $anniPassati = $this->anniPassati($clientePrenotazione[1]);
@@ -67,12 +70,6 @@ class ClienteController extends Controller{
                 $this->registroClienti->setClienteInfedele($clientePrenotazione[0]);
             }
         }
-    }
-
-    private function anniPassati($data){
-        $data = new DateTime($data);
-        $oggi = new DateTime(date('Y-m-d'));
-        return ($oggi->diff($data)) -> y;
     }
 
     public function avvisaPromozioniFedelta() {
@@ -114,7 +111,7 @@ class ClienteController extends Controller{
         session_destroy();
         header('Location: /');
     }
-
+/*
     public function registrati($nome = "", $cognome = "", $email = "", $dataNascita = "", $indirizzo = "", $citta = "",
                                 $cap = "", $password = "", $confermaPassword = "") {
         $error = "";
@@ -135,7 +132,7 @@ class ClienteController extends Controller{
         }
         $this->view('cliente/registrazione', ["error" => $error]);
     }
-
+*/
     public function prenotazioni() {
         $prenotazioni = array(new Prenotazione("1", "1", "1", "1", "1"),
                                 new Prenotazione("1", "1", "1", "1", "1"),
