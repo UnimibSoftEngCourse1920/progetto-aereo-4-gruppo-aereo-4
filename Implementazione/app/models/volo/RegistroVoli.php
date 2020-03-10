@@ -11,7 +11,7 @@ class RegistroVoli{
 
     public function __construct(){}
 
-    public function inserisciVolo($dataOraArrivo, $dataOraPart, $OIDaeroportoPartenza, $OIDAereoportArr, $OIDAereo)
+    public function inserisciVolo( $dataOraPart, $dataOraArrivo, $OIDaeroportoPartenza, $OIDAereoportArr, $OIDAereo)
     {
         $database = DBFacade::getIstance();
         if($database->isAereoDisponibile($dataOraPart, $dataOraArrivo, $OIDAereo)){

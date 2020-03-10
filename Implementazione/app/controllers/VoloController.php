@@ -14,6 +14,7 @@ class VoloController extends Controller {
 
     private $registroVoli;
     private $registroPromozioni;
+    private $registroPrenotazioni;
     private $mailer;
 
     public function login($name = '') {
@@ -41,6 +42,7 @@ class VoloController extends Controller {
     public function __construct(){
         $this->registroVoli = new RegistroVoli();
         $this->registroPromozioni = new RegistroPromozioni();
+        $this->registroPrenotazioni = new RegistroPrenotazioni();
         $this->mailer = new Mailer();
     }
 

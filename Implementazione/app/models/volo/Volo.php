@@ -38,6 +38,7 @@ class Volo {
 
         for($i=0; $i<$this->aereo->getNumeroPosti(); $i++){
             $p = new Posto($i+1);
+            DBFacade::getIstance()->put($p);
             $this->listaPosti[] = $p;
         }
     }
