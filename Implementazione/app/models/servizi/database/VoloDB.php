@@ -19,7 +19,7 @@ class VoloDB extends AbstractDB
 
         //VoloPosto
         foreach ($obj->getPosti() as $posto)
-            $query .= sprintf("INSERT INTO VoloPosto values ('%s', '%s')", $obj->getOID(), $posto->getOID());
+            $query .= sprintf("INSERT INTO VoloPosto values ('%s', '%s');", $obj->getOID(), $posto->getOID());
 
         return $query;
     }
@@ -64,7 +64,7 @@ class VoloDB extends AbstractDB
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
         $query = "SELECT v.* from Volo as v JOIN VoloAeroporto as va on v.OID = va.volo 
-                    WHERE va.aeroportoPartenza = '$partenza' AND va.aeroportoDestinazioneivo = '$destinazione' 
+                    WHERE va.aeroportoPartenza = '$partenza' AND va.aeroportoDestinazione = '$destinazione' 
                         AND DATE(v.dataOraPartenza) = '$data'
                         AND $nPosti < (SELECT count(*) from VoloPosto where volo = v.OID)";
         $stmt = $this->connection->query($query);
@@ -81,13 +81,10 @@ class VoloDB extends AbstractDB
     }
 
     public function isAereoDisponibile($partenza, $arrivo, $OIDAereo){
-        $query = "select *,$partenza,$arrivo from Volo where aereo = '$OIDAereo' and stato= '' AND ((dataOraPartenza BETWEEN '$partenza' and '$arrivo') 
+        $query = "select * from Volo where aereo = '$OIDAereo' and stato= '' AND ((dataOraPartenza BETWEEN '$partenza' and '$arrivo') 
                 OR (dataOraArrivo BETWEEN '$partenza' and '$arrivo') OR (dataOraPartenza < '$partenza' AND dataOraArrivo > '$arrivo'))";
         $result = $this->connection->query($query);
         return $result->rowCount() == 0;
     }
-
-    //Modifico direttamente la get richiamando quella del padre
-
 
 }

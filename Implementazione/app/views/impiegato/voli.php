@@ -52,8 +52,8 @@
                                 foreach ($data["voli"] as $volo){
                                     echo "<tr>
                                             <th scope='row'>".$volo->getOID()."</th>
-                                            <td>".$volo->getAeroportoPartenza()->getNome()." </td>
-                                            <td>".$volo->getAeroportoDestinazione()->getNome()."</td>
+                                            <td>".$volo->getAeroportoPartenza()->getCitta()." ".$volo->getAeroportoPartenza()->getNome()." </td>
+                                            <td>".$volo->getAeroportoDestinazione()->getCitta()." ".$volo->getAeroportoDestinazione()->getNome()."</td>
                                             <td>".$volo->getDataOraPartenza()."</td>
                                             <td>".$volo->getDataOraArrivo()."</td>
                                             <td>".$volo->getMiglia()."</td>
