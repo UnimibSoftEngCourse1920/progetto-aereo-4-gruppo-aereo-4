@@ -45,6 +45,7 @@ class VoloController extends Controller {
     }
 
     public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest){
+        //TODO richiamare modifica e basta??
         $esito = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest);
         if($esito){
             $this->registroVoli->avvisaPasseggeri($OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
@@ -59,9 +60,10 @@ class VoloController extends Controller {
     }
 
     public function cancellaVolo($OIDVolo){
-        $volo = $this->registroVoli->rimuoviVolo($OIDVolo);
-        $listaClienti = $this->registroPrenotazioni->getClientiVolo($volo->getOID());
-        $this->mailer -> inviaEmailCancellazioneVolo($listaClienti, $volo);
+        $esito = $this->registroVoli->rimuoviVolo($OIDVolo);
+        if($esito){
+            $this->registroVoli->avvisaPasseggeri($OIDVolo, RegistroVoli::$AVVISACANCELLAZIONEVOLO);
+        }
         header("Location: /public/volo/voli");
     }
 

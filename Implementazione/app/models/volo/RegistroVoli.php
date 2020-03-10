@@ -47,22 +47,25 @@ class RegistroVoli{
 
     public function rimuoviVolo($OIDVolo){
         $database = DBFacade::getIstance();
-        $volo = $database ->get($OIDVolo,"Volo");
-        $volo->setStato('CANCELLATO');
-        $database->update($volo);
-        //ritorna esito
-        return $volo;
+        $volo = $database ->get($OIDVolo, Volo::class);
+        if($volo != null) {
+            $volo->setStato(Volo::$STATO_CANCELLATO);
+            $esito = $database->update($volo);
+            return $esito;
+        }
+        return false;
     }
 
     public function avvisaPasseggeri($OIDVolo, $tipologiaAvviso){
         $volo = DBFacade::getIstance() ->get($OIDVolo, Volo::class);
-        //TODO perchè passo dal registro Voli ?? Devo fare come prima e passare dal controller!!
+        //TODO perchè passo dal registro Voli ?? Devo fare come prima e passare dal controller?
         $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
         switch ($tipologiaAvviso){
             case self::$AVVISAMODIFICAVOLO:
                 $this->mailer->inviaEmailModificaVolo($listaClienti, $volo);
                 break;
             case self::$AVVISACANCELLAZIONEVOLO:
+                $this->mailer->inviaEmailCancellazioneVolo($listaClienti, $volo);
                 break;
             default:
                 return false;
