@@ -59,7 +59,7 @@
                                             <td>".$volo->getMiglia()."</td>
                                             <td>".$volo->getStato()."</td>
                                             <td>
-                                                <button class='btn btn-warning'> <em class='fas fa-pencil-alt'></em> Modifica </button>
+                                                <button class='btn btn-danger'> <em class='fas fa-pencil-alt'></em> Modifica </button>
                                                 <a href='cancellaVolo/".$volo->getOID()."'><button class='btn btn-danger'> <em class='fas fa-trash-alt'></em> Cancella </button></a>
                                             </td>
                                             </tr>";
