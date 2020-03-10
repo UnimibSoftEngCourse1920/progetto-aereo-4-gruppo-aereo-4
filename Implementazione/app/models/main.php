@@ -24,7 +24,7 @@ load_classphp('./prenotazione');
 load_classphp('./servizi');
 load_classphp('./volo');
 
-$aereoportoP = new Aeroporto('Malpensa', 'EU', 'ITALY', 'milano', 'MXP');
-\model\servizi\DBFacade::getIstance()->put($aereoportoP);
+$aeroportoP = new Aeroporto('Malpensa', 'EU', 'ITALY', 'milano', 'MXP');
+\model\servizi\DBFacade::getIstance()->put($aeroportoP);
 
 ?>

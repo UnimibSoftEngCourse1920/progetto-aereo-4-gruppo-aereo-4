@@ -11,16 +11,16 @@ class RegistroVoli{
 
     public function __construct(){}
 
-    public function inserisciVolo($dataOraArrivo, $dataOraPart, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo)
+    public function inserisciVolo($dataOraArrivo, $dataOraPart, $OIDaeroportoPartenza, $OIDAereoportArr, $OIDAereo)
     {
         $database = DBFacade::getIstance();
         if($database->isAereoDisponibile($dataOraPart, $dataOraArrivo, $OIDAereo)){
             //genero codice del volo
-            $aereoportoPart = $database->get($OIDAereoportoPart,Aeroporto::class);
-            $aereoportoArr = $database->get($OIDAereoportArr, Aeroporto::class);
+            $aeroportoPartenza = $database->get($OIDaeroportoPartenza,Aeroporto::class);
+            $aeroportoDestinazione = $database->get($OIDAereoportArr, Aeroporto::class);
             $aereo = $database->get($OIDAereo,Aereo::class);
-            if($aereo!=null and $aereoportoArr!=null and $aereoportoPart!=null) {
-                $nuovoVolo = new Volo($dataOraPart, $dataOraArrivo, $aereoportoPart, $aereoportoArr, $aereo);
+            if($aereo!=null and $aeroportoDestinazione!=null and $aeroportoPartenza!=null) {
+                $nuovoVolo = new Volo($dataOraPart, $dataOraArrivo, $aeroportoPartenza, $aeroportoDestinazione, $aereo);
                 $esito = $database->put($nuovoVolo);
                 return $esito;
             }

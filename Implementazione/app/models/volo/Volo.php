@@ -18,19 +18,18 @@ class Volo {
     private $miglia;
     private $aereo;
 
-    private $aeroportoPart;
-    private $aeroportoDest;
+    private $aeroportoPartenza;
+    private $aeroportoDestinazione;
     private $promozione;
 
     private $listaPosti; //posti del volo
 
-    public function __construct($dataOraPartenza, $dataOraArrivo, $aeroportoPart, $aeroportoArr, $aereo){
-        $database = DBFacade::getIstance();
+    public function __construct($dataOraPartenza, $dataOraArrivo, $aeroportoPartenza, $aeroportoDestinazione, $aereo){
         $this->OID = OIDGenerator::getIstance()->getNewOID();
         $this->dataOraPartenza = $dataOraPartenza;
         $this->dataOraArrivo = $dataOraArrivo;
-        $this->aeroportoPart = $aeroportoPart;
-        $this->aeroportoDest = $aeroportoArr;
+        $this->aeroportoPartenza = $aeroportoPartenza;
+        $this->aeroportoDestinazione = $aeroportoDestinazione;
         $this->miglia = $this->calcolaMiglia();
         $this->stato = Volo::$STATO_ATTIVO;
         $this->aereo = $aereo;
@@ -44,14 +43,14 @@ class Volo {
     }
 
 
-    public function setAeroportoDest($aeroportoDest)
+    public function setAeroportoDestinazione($aeroportoDestinazione)
     {
-        $this->aeroportoDest = $aeroportoDest;
+        $this->aeroportoDestinazione = $aeroportoDestinazione;
     }
 
-    public function setAeroportoPart($aeroportoPart)
+    public function setAeroportoPartenza($aeroportoPartenza)
     {
-        $this->aeroportoPart = $aeroportoPart;
+        $this->aeroportoPartenza = $aeroportoPartenza;
     }
 
     public function setPosti($listaPosti){
@@ -113,17 +112,17 @@ class Volo {
     }
 
     public function getAeroportoPartenza(){
-        if(is_string($this->aeroportoPart)){
-            $this->aeroportoPart = DBFacade::getIstance() ->get($this->aeroportoPart, Aeroporto::class);
+        if(is_string($this->aeroportoPartenza)){
+            $this->aeroportoPartenza = DBFacade::getIstance() ->get($this->aeroportoPartenza, Aeroporto::class);
         }
-        return $this->aeroportoPart;
+        return $this->aeroportoPartenza;
     }
 
     public function getAeroportoDestinazione(){
-        if(is_string($this->aeroportoDest)){
-            $this->aeroportoDest = DBFacade::getIstance() ->get($this->aeroportoDest, Aeroporto::class);
+        if(is_string($this->aeroportoDestinazione)){
+            $this->aeroportoDestinazione = DBFacade::getIstance() ->get($this->aeroportoDestinazione, Aeroporto::class);
         }
-        return $this->aeroportoDest;
+        return $this->aeroportoDestinazione;
     }
 
     public function getOID() {
@@ -142,10 +141,10 @@ class Volo {
     }
 
     private function calcolaMiglia(){
-        if($this->aeroportoPart->getNazione() == $this->aeroportoDest->getNazione()){
+        if($this->aeroportoPartenza->getNazione() == $this->aeroportoDestinazione->getNazione()){
             return rand(200,600);
         }
-        else if($this->aeroportoPart->getContinente() == $this->aeroportoDest->getContinente()){
+        else if($this->aeroportoPartenza->getContinente() == $this->aeroportoDestinazione->getContinente()){
             return rand(300,1500);
         }
         else{

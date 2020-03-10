@@ -52,9 +52,9 @@ class VoloController extends Controller {
         $this->mailer -> inviaEmailModificaVolo($listaClienti, $voloMod);
     }
 
-    public function inserisciVolo($dataoraPartenza, $dataoraArrivo, $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo){
+    public function inserisciVolo($dataoraPartenza, $dataoraArrivo, $OIDaeroportoPartenza, $OIDAereoportArr, $OIDAereo){
         //manca esito operazione
-        $esito = $this->registroVoli -> inserisciVolo($dataoraPartenza, $dataoraArrivo,  $OIDAereoportoPart, $OIDAereoportArr, $OIDAereo);
+        $esito = $this->registroVoli -> inserisciVolo($dataoraPartenza, $dataoraArrivo,  $OIDaeroportoPartenza, $OIDAereoportArr, $OIDAereo);
         header("Location: /public/volo/voli");
     }
 

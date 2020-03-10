@@ -52,8 +52,8 @@ class VoloDB extends AbstractDB
         $query = sprintf("Select aeroportoPartenza, aeroportoDestinazione from VoloAeroporto where volo='%s'", $volo->getOID());
         $aereoporti = $this->connection->query($query)->fetch();
         //TODO: controlli
-        $volo->setAeroportoPart($aereoporti[0]);
-        $volo->setAeroportoDest($aereoporti[1]);
+        $volo->setAeroportoPartenza($aereoporti[0]);
+        $volo->setAeroportoDestinazione($aereoporti[1]);
     }
 
     private function setPosti(Volo $volo){
@@ -64,7 +64,7 @@ class VoloDB extends AbstractDB
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){
         $query = "SELECT v.* from Volo as v JOIN VoloAeroporto as va on v.OID = va.volo 
-                    WHERE va.aeroportoPartenza = '$partenza' AND va.aeroportoArrivo = '$destinazione' 
+                    WHERE va.aeroportoPartenza = '$partenza' AND va.aeroportoDestinazioneivo = '$destinazione' 
                         AND DATE(v.dataOraPartenza) = '$data'
                         AND $nPosti < (SELECT count(*) from VoloPosto where volo = v.OID)";
         $stmt = $this->connection->query($query);

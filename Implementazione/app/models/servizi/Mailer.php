@@ -21,7 +21,7 @@ class Mailer{
                     Buona giornata\n\n
                     GruppoAereo4";
 
-        $message = sprintf($message, $volo->getAereoportoPartenza()->getNome(), $volo->getDataOraPartenza(), $volo->getAereoportoArrivo(), $volo -> getDataOraArrivo());
+        $message = sprintf($message, $volo->getaeroportoPartenza()->getNome(), $volo->getDataOraPartenza(), $volo->getaeroportoDestinazione(), $volo -> getDataOraArrivo());
 
         mail($recipients , "Avviso modifica volo",$message);
     }
@@ -39,7 +39,7 @@ class Mailer{
                     Buona giornata\n\n
                     GruppoAereo4";
 
-        $message = sprintf($message, $volo->getAereoportoPartenza()->getNome(), $volo->getDataOraPartenza(), $volo->getAereoportoArrivo(), $volo -> getDataOraArrivo());
+        $message = sprintf($message, $volo->getaeroportoPartenza()->getNome(), $volo->getDataOraPartenza(), $volo->getaeroportoDestinazione(), $volo -> getDataOraArrivo());
 
         mail($recipients , "Avviso cancellazione volo",$message);
     }
