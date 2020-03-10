@@ -2,11 +2,9 @@ $(function() {
 
     //TODO: https://stackoverflow.com/questions/7517188/how-can-you-tell-if-a-suggestion-was-selected-from-jquery-ui-autocomplete
 
-    /*var availableTags = [
-        "Milano Malpensa (MXP)",
-        "Milano Linate (LIN)",
-        "Parigi Orly (ORY)"
-    ];*/
+    if (typeof aeroporti === 'undefined') {
+        aeroporti = [];
+    }
 
     $( ".datepicker" ).datepicker({
         dateFormat: 'yy-mm-dd'
@@ -34,7 +32,7 @@ $(function() {
         var indirizzo = $("#form-registrazione #indirizzo").val();
         var citta = $("#form-registrazione #citta").val();
         var cap = $("#form-registrazione #cap").val();
-        $("#form-ricerca #hidden_indirizzo").val(indirizzo + " " + citta + " " + cap);
+        $("#form-registrazione #hidden_indirizzo").val(indirizzo + " " + citta + " " + cap);
         return true;
     });
 

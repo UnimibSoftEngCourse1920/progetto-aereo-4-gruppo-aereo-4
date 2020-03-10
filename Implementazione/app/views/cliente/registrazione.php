@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 mt-auto">
-            <form id="form-registrazione" class="py-md-4 px-md-5" action="/public/cliente/registrati" method="post">
+            <form id="form-registrazione" class="py-md-4 px-md-5" action="/public/cliente/iscrizioneFedelta" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nome">Nome</label>

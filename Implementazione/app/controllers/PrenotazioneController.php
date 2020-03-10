@@ -11,7 +11,8 @@ class PrenotazioneController extends Controller
         $this->registroPrenotazioni->cancellaPrenotazioniScadute();
     }
 
-    public function prenota($idVolo, $nome = "", $cognome = "", $email = "", $nPosti = "") {
+    //Metodo temporaneo
+    public function prenota($idVolo, $viaggiatori, $nome = "", $cognome = "", $email = "", $nPosti = "") {
         if(isset($idVolo) && isset($nome) && isset($cognome) && isset($email) && isset($nPosti)) {
             header('Location: /public/vendita/acquista');
         }

@@ -5,10 +5,10 @@ require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 class Cliente{
     //TODO:: Sostituire con i numeri !!
     // STATO_OSPITE = 0, ecc...
-    public static $STATO_OSPITE= 'OSPITE';
-    public static $STATO_FEDELE = 'FEDELE';
-    public static $STATO_INFEDELE = 'INFEDELE';
-    public static $STATO_CANCELLATO = 'CANCELLATO';
+    public $STATO_OSPITE= 'OSPITE';
+    public $STATO_FEDELE = 'FEDELE';
+    public $STATO_INFEDELE = 'INFEDELE';
+    public $STATO_CANCELLATO = 'CANCELLATO';
 
     private $OID;
     private $nome;
@@ -31,13 +31,13 @@ class Cliente{
             $this->codiceFedelta = $codiceFedelta;
             $this->indirizzo = $indirizzo;
             $this->password = $password;
-            $this->stato = ClienteFedelta::$STATO_FEDELE;
+            $this->stato = $this->STATO_FEDELE;
         }
         else{
             $this->codiceFedelta = null;
             $this->indirizzo = null;
             $this->password = null;
-            $this->stato = ClienteFedelta::$STATO_OSPITE;
+            $this->stato = $this->STATO_OSPITE;
         }
     }
 
