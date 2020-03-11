@@ -1,7 +1,9 @@
 <?php
 
 require_once "../app/models/servizi/DBFacade.php";
+require_once "../app/models/servizi/Mailer.php";
 require_once "../app/models/cliente/Cliente.php";
+
 
 class RegistroClienti
 {
@@ -12,29 +14,23 @@ class RegistroClienti
 
     //lista clienti
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->mailer = new Mailer();
     }
 
-    public function checkEmailClienteFedelta($email)
-    {
-        $mailExists = DBFacade::getIstance() -> emailFedeltaExists($email);
-        return $mailExists;
+    public function checkEmailClienteFedelta($email){
+        return DBFacade::getIstance() -> emailFedeltaExists($email);
     }
 
-    private function generaCodiceFedelta()
-    {
+    private function generaCodiceFedelta(){
         //La generazione del codice è ancora da vedere
         //Chiede al DB oppure lui sa qual'è l'ultimo (Attenzione! Se sono più di uno è un macello)
 
-        //return md5(uniqid(rand(), true));
         $ultimoCodice = DBFacade::getIstance()->getUltimoCodiceFedelta();
         return "F" . sprintf('%07d', substr($ultimoCodice, 1) + 1);
     }
 
-    public function nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $password)
-    {
+    public function nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $password){
         $mailExists = DBFacade::getIstance()->emailFedeltaExists($email);
         if(!$mailExists){
             $codice = $this->generaCodiceFedelta();
@@ -67,7 +63,7 @@ class RegistroClienti
     }
 
     public function avvisaPasseggeri($OID, $tipologiaAvviso){
-        $cliente = DBFacade::getIstance()->get($OID);
+        $cliente = DBFacade::getIstance()->get($OID, Cliente::class);
 
         switch ($tipologiaAvviso){
             case RegistroClienti::$AVVISACANCELLAZIONEFEDELTA:
@@ -83,9 +79,9 @@ class RegistroClienti
     }
 
     public function setClienteInfedele($OID){
-        $cliente = DBFacade::getIstance()->get($OID);
+        $cliente = DBFacade::getIstance()->get($OID, Cliente::class);
         if($cliente!=null) {
-            $cliente->setStato(ClienteFedelta::$STATOINFEDELE);
+            $cliente->setStato(Cliente::$STATO_INFEDELE);
             $esito = DBFacade::getIstance()->update($cliente);
             if($esito) {
                 $this->mailer->inviaComunicazioneInfedelta($cliente);
@@ -94,19 +90,18 @@ class RegistroClienti
         }
         return false;
     }
-	
+
 	public function getCliente($idCliente) {
-		$cliente = DBFacade::getIstance()->get($idCliente, 'Cliente');
-		return $cliente;
+        return DBFacade::getIstance()->get($idCliente, 'Cliente');
 	}
 		
 	public function aggiornaCliente($cliente) {
+        //TODO a cosa serve?
 		DBFacade::getIstance()->aggiornaCliente($cliente);
 	}
 
 	public function login($email, $password) {
-        $cliente = DBFacade::getIstance()->userLogin($email, md5($password));
-        return $cliente;
+        return DBFacade::getIstance()->userLogin($email, md5($password));
     }
 
 }

@@ -24,7 +24,4 @@ class PagamentoConCarta extends Pagamento{
             return $this->istituto;
         }
     }
-
-	//Secondo me la carta arriva direttamente dalla chiamata effettua
-	
-} 
+}

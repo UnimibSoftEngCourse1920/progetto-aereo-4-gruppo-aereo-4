@@ -1,24 +1,17 @@
 <?php
 
-require_once "../app/models/servizi/Mailer.php";
 require_once "../app/models/cliente/RegistroClienti.php";
 require_once "../app/models/prenotazione/RegistroPrenotazioni.php";
 require_once "../app/core/Controller.php";
-require_once "../app/models/cliente/Cliente.php";
-require_once "../app/models/prenotazione/Prenotazione.php";
 
 class ClienteController extends Controller{
 
     private $registroClienti;
     private $registroPrenotazioni;
-    //private $registroPromozioni;
-    private $mailer;
 
     public function __construct(){
-        $this->mailer = new Mailer();
         $this->registroClienti = new RegistroClienti();
         $this->registroPrenotazioni = new RegistroPrenotazioni();
-        //$this->registroPromozioni = new RegistroPromozioni();
     }
 
     public function annullaIscrizione($codiceFedelta){
@@ -54,24 +47,14 @@ class ClienteController extends Controller{
 
     public function ricercaClientiInfedeli(){
         $this->registroPrenotazioni->controlloInfedeli();
-
-        //OLD
-        $clientePrenotazione = $this->registroPrenotazioni->getFedeltaUltimaPrenotazione();
-        foreach ($clientePrenotazione as $CliData) {
-            $anniPassati = $this->anniPassati($clientePrenotazione[1]);
-            if($anniPassati == 3) {
-                $this->registroClienti->annullaIscrizione($clientePrenotazione[0]);
-            }
-            else if ($anniPassati == 2){
-                $this->registroClienti->setClienteInfedele($clientePrenotazione[0]);
-            }
-        }
     }
 
     public function avvisaPromozioniFedelta() {
+        /* DA FARE
+        Rimuovere mailer!!
         $listaClienti = DBFacade::getIstance()->getClientiFedelta();
         $listaPromozioni = $this->registroPromozioni->getPromozioniFedelta();
-        $this->mailer->avvisaClientiPromozioni($listaClienti, $listaPromozioni);
+        $this->mailer->avvisaClientiPromozioni($listaClienti, $listaPromozioni);*/
     }
 
     public function registrato() {
@@ -131,7 +114,8 @@ class ClienteController extends Controller{
 */
     public function prenotazioni() {
         $prenotazioni = array();
-        $cliente = new Cliente("test", "test", "test", "test", "test");
+        $cliente = 0;
+        //TODO
         $this->view('cliente/fedelta', ["prenotazioni" => $prenotazioni, "cliente" => $cliente]);
     }
 
@@ -139,9 +123,9 @@ class ClienteController extends Controller{
         //TODO implementare errori
         $estrattoConto = $this->registroPrenotazioni->generaEstrattoConto($OIDCliente);
         if($estrattoConto != null){
-            echo ('ESTRATTO OK');
+            echo "ESTRATTO OK";
         }
-        echo ('ERRORE');
+        echo "ERRORE";
     }
 
 }

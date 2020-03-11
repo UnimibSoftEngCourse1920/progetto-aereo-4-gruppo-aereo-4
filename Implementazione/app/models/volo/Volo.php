@@ -2,7 +2,8 @@
 
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Posto.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aeroporto.php";
+//require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aeroporto.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/RegistroPromozioni.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 
@@ -31,7 +32,7 @@ class Volo {
         $this->aeroportoPartenza = $aeroportoPartenza;
         $this->aeroportoDestinazione = $aeroportoDestinazione;
         $this->miglia = $this->calcolaMiglia();
-        $this->stato = self::STATO_ATTIVO;
+        $this->stato = self::$STATO_ATTIVO;
         $this->aereo = $aereo;
         $this->promozione = null;
         $this->listaPosti = array();

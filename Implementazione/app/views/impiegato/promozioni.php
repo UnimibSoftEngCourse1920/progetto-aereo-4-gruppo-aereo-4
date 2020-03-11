@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="model">Volo</label>
-                                    <select name="volo" class="form-control">
+                                    <select name="volo" class="form-control" multiple>
                                         <option value="no">Nessuno</option>
                                         <?php
                                         foreach ($data["voli"] as $volo){

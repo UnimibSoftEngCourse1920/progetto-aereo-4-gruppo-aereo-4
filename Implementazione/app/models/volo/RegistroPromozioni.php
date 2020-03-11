@@ -1,9 +1,10 @@
 <?php
 
 
-//namespace model\volo;
-
 require_once "Promozione.php";
+require_once "RegistroVoli.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
+
 
 class RegistroPromozioni
 {
@@ -19,7 +20,6 @@ class RegistroPromozioni
         if($dataFine==""){
             $dataFine = date("Y-m-g");
         }
-
         $promozione = new Promozione($dataInizio, $dataFine, $nome, $sconto, $promozioneFedelta);
         DBFacade::getIstance()->put($promozione);
 
@@ -29,7 +29,6 @@ class RegistroPromozioni
             $v -> setPromozione($promozione);
             DBFacade::getIstance()->update($v);
         }
-
     }
 
     public function cancellaPrenotazione($OID){
@@ -40,6 +39,10 @@ class RegistroPromozioni
     public function getPromozioniFedelta(){
         //ritorna lista delle promozioni fedelta attive
         return array();
+    }
+
+    public function getPromozioni(){
+        return DBFacade::getIstance()->getAll("Promozione");
     }
 
     public function getMigliorPromozioneAttiva(){

@@ -5,7 +5,6 @@ require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 class IstitutoDiCredito
 {
-
     private $OID;
     private $nome;
 
@@ -23,8 +22,6 @@ class IstitutoDiCredito
     {
         return $this->nome;
     }
-
-
 
     public function autorizzaPagamento($carta) {
 		if(mt_rand() / mt_getrandmax() <= 0.8) {

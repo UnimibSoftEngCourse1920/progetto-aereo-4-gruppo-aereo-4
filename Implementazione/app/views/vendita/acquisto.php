@@ -19,13 +19,13 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-4 text-center">
                     <div class="d-flex mx-auto tariffa selected" id="button-carta">
-                        <i class="fas fa-credit-card"></i>
+                        <em class="fas fa-credit-card"></em>
                         <p class="mt-auto mx-auto">Paga con la carta</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="d-flex mx-auto tariffa" id="button-punti">
-                        <i class="fas fa-coins"></i>
+                        <em class="fas fa-coins"></em>
                         <p class="mt-auto mx-auto">Paga con i punti</p>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                     <form class="pt-md-4 px-md-5" action="/public/vendita/acquistaPrenotazione" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <b>Punti acquisiti</b>
+                                <strong>Punti acquisiti</strong>
                             </div>
                             <div class="form-group col-md-6 text-right">
                                 12312312312
@@ -83,7 +83,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <b>Punti necessari</b>
+                                <strong>Punti necessari</strong>
                             </div>
                             <div class="form-group col-md-6 text-right">
                                 12312321
@@ -91,7 +91,7 @@
                         </div>
                         <div class="form-row pt-3" style="border-top: 1px solid #eee;">
                             <div class="form-group col-md-6">
-                                <b>Punti rimanenti</b>
+                                <strong>Punti rimanenti</strong>
                             </div>
                             <div class="form-group col-md-6 text-right">
                                 1231232112
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <?php } ?>
-            <center><small>oppure</small></center>
+            <small class="text-center">oppure</small>
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4 pt-md-4">
@@ -128,7 +128,7 @@
             <div class="row">
                 <div class="col">
                     <p>
-                        <b>Milano Malpensa (MXP)</b>
+                        <strong>Milano Malpensa (MXP)</strong>
                         <br>2020-04-04 04:30
                     </p>
                 </div>
@@ -136,7 +136,7 @@
             <div class="row">
                 <div class="col">
                     <p>
-                        <b>Londra Stansted (STN)</b>
+                        <strong>Londra Stansted (STN)</strong>
                         <br>2020-04-04 19:00
                     </p>
                 </div>
@@ -144,7 +144,7 @@
             <div class="row">
                 <div class="col">
                     <p>
-                        <b>Viaggiatori</b>
+                        <strong>Viaggiatori</strong>
                         <br>3
                     </p>
                 </div>
@@ -156,7 +156,7 @@
             <div class="row">
                 <div class="col">
                     <p>
-                        <b>Tariffa</b>
+                        <strong>Tariffa</strong>
                         <br>VoloPlus
                     </p>
                 </div>

@@ -1,14 +1,17 @@
 <?php
 
-require_once "../app/models/servizi/Mailer.php";
-require_once "../app/models/cliente/RegistroClienti.php";
-require_once "../app/models/prenotazione/Prenotazione.php";
-require_once "../app/models/cliente/EstrattoConto.php";
+
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/RegistroClienti.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/EstrattoConto.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/Cliente.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/Mailer.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/RegistroVoli.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/prenotazione/Prenotazione.php";
 
 abstract class Tariffa
 {
     //TODO: sistemare tutti in base a questo formato??
-    //Fare maiuscoli?
     const STANDARD = "standard";
     const PLUS = "plus";
 }
@@ -62,6 +65,7 @@ class RegistroPrenotazioni{
     }
 
     private function anniPassati($data){
+        //TODO forse non serve più
         $data = new DateTime($data);
         $oggi = new DateTime(date('Y-m-d'));
         return ($oggi->diff($data)) -> y;
@@ -134,13 +138,13 @@ class RegistroPrenotazioni{
 	}
 
 	public function cancellaPrenotazioniScadute(){
-        $listaPrenotazioni = \model\servizi\DBFacade::getIstance() -> getPrenotazioniScaduteIn(72);
+        $listaPrenotazioni = DBFacade::getIstance() -> getPrenotazioniScaduteIn(72);
         $listaClienti = array();
         foreach ($listaPrenotazioni as $prenotazione){
-            \model\servizi\DBFacade::getIstance()->delete($prenotazione->getOID(), "Prenotazione");
+            DBFacade::getIstance()->delete($prenotazione->getOID(), "Prenotazione");
         }
 
-        $listaPrenotazioni = \model\servizi\DBFacade::getIstance() -> getPrenotazioniScaduteIn(96);
+        $listaPrenotazioni = DBFacade::getIstance() -> getPrenotazioniScaduteIn(96);
         foreach ($listaPrenotazioni as $prenotazione){
             $listaClienti[] = $prenotazione->getCliente()->getEmail();
         }

@@ -1,8 +1,8 @@
 <?php
 
-require_once "../app/models/volo/Volo.php";
+require_once "Volo.php";
+require_once "Aeroporto.php";
 require_once "../app/models/servizi/DBFacade.php";
-require_once "../app/models/volo/Aeroporto.php";
 require_once "../app/models/servizi/Mailer.php";
 require_once "../app/models/prenotazione/RegistroPrenotazioni.php";
 
@@ -109,9 +109,6 @@ class RegistroVoli{
 	
 	public function cercaVoli($partenza, $destinazione, $data, $nPosti) {
 		$voli = DBFacade::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
-        /*$voli = array(new Volo("1", "1", "1", "1", "1", "1"),
-                new Volo("2", "2", "2", "2", "2", "2"),
-                new Volo("3", "3", "3", "3", "3", "3"));*/
 		return $voli;
 	}
 	
@@ -128,6 +125,18 @@ class RegistroVoli{
 	public function aggiornaVolo($idVolo) {
 		DBFacade::getIstance()->aggiornaVolo($idVolo);
 	}
+
+	//TODO funzione getAll per tutti?
+
+	public function getAeroporti(){
+        return DBFacade::getIstance()->getAll(Aeroporto::class);
+    }
+    public function getVoli(){
+        return DBFacade::getIstance()->getAll(Volo::class);
+    }
+    public function getAerei(){
+        return DBFacade::getIstance()->getAll(Aereo::class);
+    }
 
     //public function avvisaPasseggeri($OIDVolo, )
 
