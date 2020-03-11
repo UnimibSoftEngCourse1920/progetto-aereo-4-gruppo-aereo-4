@@ -19,6 +19,7 @@ class Cliente{
     private $codiceFedelta;
     private $password;
     private $stato;
+    private $punti;
 
     public function __construct($nome, $cognome, $email, $dataNascita, $codiceFedelta=null, $indirizzo=null, $password = null){
         $this->OID = OIDGenerator::getIstance()->getNewOID();
@@ -32,6 +33,7 @@ class Cliente{
             $this->indirizzo = $indirizzo;
             $this->password = $password;
             $this->stato = self::$STATO_FEDELE;
+            $this->punti = 0;
         }
         else{
             $this->codiceFedelta = null;
@@ -86,6 +88,10 @@ class Cliente{
         return $this->stato;
     }
 
+    public function getPunti() {
+        return $this->punti;
+    }
+
     public function annullaIscrizioneFedelta(){
         $this->indirizzo = null;
         $this->codiceFedelta = null;
@@ -103,6 +109,21 @@ class Cliente{
         //Fatto così e non controllando direttamente == OSPITE perchè se un giorno si aggiungono nuovi stati questo funziona comunque
         return ($this->stato == self::$STATO_FEDELE) || ($this->stato == self::$STATO_INFEDELE);
     }
+
+    public function sottraiPunti($punti)
+    {
+        if ($this->punti >= $punti) {
+            $this->punti = $this->punti - $punti;
+            return true;
+        }
+        return false;
+    }
+
+    public function aggiungiPunti($punti) {
+        $this->punti = $this->punti + $punti;
+        return true;
+    }
+
 }
 
  ?>

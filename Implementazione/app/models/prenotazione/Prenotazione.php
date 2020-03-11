@@ -1,6 +1,7 @@
 <?php
 
 require_once("../app/models/volo/Biglietto.php");
+require_once("../app/models/acquisto/Acquisto.php");
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 
@@ -76,7 +77,7 @@ class Prenotazione{
 
     public function getImporto(){
         $importo = 0;
-        foreach ($this->listaBiglietti as $biglietto){
+        foreach ($this->getListaBiglietti() as $biglietto){
             $importo += ( $biglietto->getPrezzo() + $biglietto->getTariffa());
         }
         return $importo;
@@ -104,9 +105,10 @@ class Prenotazione{
 	}
 	
 	public function acquista($metodoPagamento, $cliente, $importo, $carta) {
-		$acquisto = new Acquisto($metodoPagamento, $importo);		
-		$esitoPagamento = $acquisto->effettuaPagamento($cliente, $carta);
-		array_push($this->acquisti, $acquisto);
+		$acquisto = new Acquisto();
+		$esitoPagamento = $acquisto->effettuaPagamento($metodoPagamento, $cliente, $importo, $carta);
+        $this->getListaAcquisti();
+		array_push($this->listaAcquisti, $acquisto);
 		return $esitoPagamento;
 	}
 	
@@ -199,7 +201,7 @@ class Prenotazione{
     private function materializeAll($lista, $class){
         $listaRitorno = array();
         for($i=0; $i< count($lista); $i++){
-            $listaRitorno[$i] = DBFacade::getIstance()->get($lista[i], $class);
+            $listaRitorno[$i] = DBFacade::getIstance()->get($lista[$i], $class);
         }
         return $listaRitorno;
     }

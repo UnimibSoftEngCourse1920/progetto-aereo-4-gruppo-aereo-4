@@ -111,28 +111,17 @@ class RegistroPrenotazioni{
 	
 	public function acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta) {
 		$importo = $prenotazione->getImporto();
-		var_dump($importo);
-		exit;
 		$esitoPagamento = $prenotazione->acquista($metodoPagamento, $cliente, $importo, $carta);
-		if($esitoPagamento) {
-			$punti = $this->calcolaPunti($importo);
-			$cliente->aggiungiPunti($punti);
-			$cliente->setStato(ClienteFedelta::$STATOFEDELE);
-		}
 		return $esitoPagamento;
 	}
 	
 	public function generaBiglietti($prenotazione, $cliente) {
-		$biglietti = $prenotazione->getBiglietti();
+		$biglietti = $prenotazione->getListaBiglietti();
 		foreach($biglietti as $biglietto) {
 			$biglietto->generaPDF();
 		}
 		$email = $cliente->getEmail();
 		Mailer::getIstance()->inviaBiglietti($biglietti, $email);
-	}
-	
-	private function calcolaPunti($importo) {
-		return $importo/10;
 	}
 	
 	public function getPrenotazione($idPrenotazione) {

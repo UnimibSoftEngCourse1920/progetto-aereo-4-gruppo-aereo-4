@@ -1,8 +1,8 @@
 <?php
 
-
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
-
+require_once("../app/models/acquisto/pagamento/PagamentoConPunti.php");
+require_once("../app/models/acquisto/pagamento/PagamentoConCarta.php");
 
 abstract class MetodoPagamento
 {
@@ -12,33 +12,34 @@ abstract class MetodoPagamento
 
 class Acquisto{
 
-    //mettere importo qui??
-
     private $puntiAccumulati;
     private $OID;
     private $pagamento;
-    private $dataora;
 	
-	public function __construct($metodoPagamento, $importo) {
+	public function __construct() {
 		$this->OID = OIDGenerator::getIstance()->getNewOID();
 	}
 	
 	
-	public function effettuaPagamento($metodoPagamento, $cliente, $carta) {
-		$metodoPagamento = $this->getMetodoPagamento();
+	public function effettuaPagamento($metodoPagamento, $cliente, $importo, $carta) {
+        $esitoPagamento = false;
 		if($metodoPagamento == MetodoPagamento::PUNTI && $cliente->getCodiceFedelta()) {
-			$punti = $this->costoToPunti($this->getImporto());
-			$this->pagamento = new PagamentoConPunti($punti);
+			$this->pagamento = new PagamentoConPunti($importo);
+            $esitoPagamento =  $this->pagamento->effettua($cliente);
 		} else if ($metodoPagamento == MetodoPagamento::CARTA && $carta != "") {
-			$importo = $this->getImporto();
-			$this->pagamento = new PagamentoConCarta($importo, $carta);
+			$this->pagamento = new PagamentoConCarta($importo);
+            $esitoPagamento =  $this->pagamento->effettua($carta);
 		}
-		$esitoPagamento =  $this->pagamento->effettua($cliente);
+        if($esitoPagamento && $cliente->getCodiceFedelta()) {
+            $this->puntiAccumulati = $this->calcolaPuntiAccumulati($importo);
+            $cliente->aggiungiPunti($this->puntiAccumulati);
+            $cliente->setStato(Cliente::$STATO_FEDELE);
+        }
 		return $esitoPagamento;
 	}
 
-	private function calcolaPuntiAccumulati(){
-	    //TODO: fare il metodo per il calcolo controllando se il cliente passato è fedelta
+	private function calcolaPuntiAccumulati($importo){
+        return $importo/10;
     }
 	
 	private function costoToPunti($importo) {

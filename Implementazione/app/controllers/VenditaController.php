@@ -44,23 +44,28 @@ class VenditaController extends Controller
 		}
 	}
 
-	//TODO: DB
-	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento, $carta = "") {
-		$registroPrenotazioni = $this->model('prenotazione/RegistroPrenotazioni');
-		$registroClienti = $this->model('cliente/RegistroClienti');
-		$cliente = $registroClienti->getCliente($idCliente);
-		$prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
-		$esitoPagamento = $registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
-        var_dump($esitoPagamento);
-        exit;
-		if($esitoPagamento) {
-            $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
-			$registroPrenotazioni->aggiornaPrenotazione($prenotazione);
-			$registroClienti->aggiornaCliente($cliente);
-			//TODO: view con successo
-		} else {
-			//TODO: view con errore
-		}
+	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento, $carta = "")
+    {
+        $registroPrenotazioni = $this->model('prenotazione/RegistroPrenotazioni');
+        $prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
+        $cliente = $prenotazione->getCliente();
+        if ($idCliente == $cliente->getOID()) {
+            var_dump($prenotazione); echo "<br><br>";
+            var_dump($cliente); echo "<br><br>";
+            $esitoPagamento = $registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
+            var_dump($prenotazione); echo "<br><br>";
+            var_dump($cliente); echo "<br><br>";
+            exit;
+            if ($esitoPagamento) {
+                $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
+                $registroPrenotazioni->aggiornaPrenotazione($prenotazione);
+                $registroClienti = $this->model('cliente/RegistroClienti');
+                $registroClienti->aggiornaCliente($cliente);
+                //TODO: view con successo
+            } else {
+                //TODO: view con errore
+            }
+        }
 	}
 
 	public function acquista($idPrenotazione = "", $idCliente = "") {
