@@ -17,6 +17,7 @@ class Acquisto{
     private $puntiAccumulati;
     private $OID;
     private $pagamento;
+    private $dataora;
 	
 	public function __construct($metodoPagamento, $importo) {
 		$this->OID = OIDGenerator::getIstance()->getNewOID();

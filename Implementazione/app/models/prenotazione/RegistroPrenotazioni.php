@@ -3,6 +3,7 @@
 require_once "../app/models/servizi/Mailer.php";
 require_once "../app/models/cliente/RegistroClienti.php";
 require_once "../app/models/prenotazione/Prenotazione.php";
+require_once "../app/models/cliente/EstrattoConto.php";
 
 abstract class Tariffa
 {
@@ -28,8 +29,21 @@ class RegistroPrenotazioni{
         return $listaClienti;
     }
 
-    public function generaEstrattoConto($codiceFedelta){
-
+    public function generaEstrattoConto($OIDCliente){
+        //se faccio tutto con il codice fedelta non devo controllare sia fedelta
+        $db = DBFacade::getIstance();
+        $cli = $db->get($OIDCliente, Cliente::class);
+        if($cli != null && $cli->isFedelta()){
+            $listaPrenotazioni = $db->getPrenotazioniCliente($cli->getOID(), true);
+            $ec = new EstrattoConto();
+            foreach ($listaPrenotazioni as $prenotazione){
+                $prenotazione->generaEstrattoContoParziale($ec);
+                //Usare il return??
+            }
+            //$this->mailer->inviaEstrattoConto($cli, $estrattoConto);
+            return $ec;
+        }
+        return null;
     }
 
     public function controlloInfedeli(){

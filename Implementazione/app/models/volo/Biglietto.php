@@ -9,6 +9,7 @@ class Biglietto{
     private $tariffa;
     private $nominativo;
     private $OID;
+    private $prezzo;
 
     /**
      * Biglietto constructor.
@@ -22,6 +23,7 @@ class Biglietto{
         $this->tariffa = $tariffa;
         $this->nominativo = $nominativo;
         $this->OID = OIDGenerator::getIstance()->getNewOID();
+        $this->prezzo=$prezzo;
     }
 
     /**
@@ -50,6 +52,10 @@ class Biglietto{
     public function getOID()
     {
         return $this->OID;
+    }
+
+    public function getPrezzo(){
+        return $this->prezzo;
     }
 
 

@@ -8,7 +8,6 @@ class Prenotazione{
 
     private $data;
     private $OID;
-    private $tariffa;
     private $cliente;
     private $volo;
     private $listaPasseggeri;
@@ -18,19 +17,31 @@ class Prenotazione{
 
     public function __construct($cliente,$listaPasseggeri, $volo,$numPosti,$tariffa){
         $this->OID = OIDGenerator::getIstance() -> getNewOID();
-        $this->tariffa=$tariffa;
         $this->cliente = $cliente;
         $this->volo = $volo;
         $this->listaPosti = $this->volo->prenota($numPosti);
         $prezzo = $this->volo->calcolaPrezzo($this->cliente->isFedelta());
-        $this->listaBiglietti = $this->generaBiglietti($prezzo);
+        $this->listaBiglietti = $this->generaBiglietti($prezzo,$tariffa);
         $this->listaAcquisti = array();
         $this->data = date("Y-m-d");
         $this->listaPasseggeri = $listaPasseggeri;
     }
 
-    public function generaEstrattoContoParziale(){
-
+    public function generaEstrattoContoParziale(EstrattoConto $estrattoConto){
+        foreach ($this->listaAcquisti as $acquisto){
+            $punti = $acquisto->getPuntiAccumulati();
+            if($punti>0){
+                $estrattoConto->addRiga($this->volo, EstrattoConto::$ACQUISTO, $punti);
+            }
+            $pag = $acquisto->getPagamento();
+            if(get_class($pag) == PagamentoConPunti::class){
+                $punti = $pag->getPuntiUtilizzati();
+                if($punti>0){
+                    $estrattoConto->addRiga($this->volo, EstrattoConto::$PAGAMENTO, -$punti); //gli passo -punti
+                }
+            }
+        }
+        //non c'è nessuna return perchè lavora direttamente sull'obj
     }
 
     public function registraPrenotazione(){
@@ -52,17 +63,25 @@ class Prenotazione{
         return $this;
     }
 
-    public function generaBiglietti($prezzo){
+    public function generaBiglietti($prezzo,$tariffa){
         $lista = array();
         $i = 0;
         foreach ($this->listaPosti as $posto){
-            $b = new Biglietto($posto->numeroPosto,$this->tariffa,$this->listaPasseggeri[$i],$prezzo);
+            $b = new Biglietto($posto->numeroPosto,$tariffa,$this->listaPasseggeri[$i],$prezzo);
             DBFacade::getIstance()->put($b);
             array_push($lista,$b);
         }
         return $lista;
     }
-	
+
+    public function getImporto(){
+        $importo = 0;
+        foreach ($this->listaBiglietti as $biglietto){
+            $importo += ( $biglietto->getPrezzo() + $biglietto->getTariffa());
+        }
+        return $importo;
+    }
+
 	public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta) {
 		$nPosti = $this->getNumeroPosti();
 		if($nPosti <= $nuovoVolo->getNumeroPostiDisponibili()) {
@@ -116,11 +135,6 @@ class Prenotazione{
     {
         $this->listaAcquisti = $listaAcquisti;
     }
-
-	public function getAcquisto() {
-        //TODO
-		return $this->acquisto;
-	}
 
 	public function getOID() {
 		return $this->OID;
