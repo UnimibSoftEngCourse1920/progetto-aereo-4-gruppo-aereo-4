@@ -19,12 +19,11 @@ class App {
 		$this->controller = new $this->controller;
 
 		//Recupero metodo e parametri
-		if(isset($url[1])) {
-			if(method_exists($this->controller, $url[1])) {
+		if(isset($url[1]) && method_exists($this->controller, $url[1])) {
 				$this->method = $url[1];
 				unset($url[1]);
-			}
 		}
+
 		$this->params = $url ? array_values($url) : [];
 
 		//Chiamo il metodo, passando anche i parametri in post

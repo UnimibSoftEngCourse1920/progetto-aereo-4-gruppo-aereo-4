@@ -6,6 +6,8 @@ require_once __DIR__ . "/../models/volo/RegistroVoli.php";
 require_once __DIR__ . "/../models/prenotazione/RegistroPrenotazioni.php";
 require_once __DIR__ . "/../models/volo/RegistroPromozioni.php";
 
+define("LOCATIONVOLI","Location: /public/volo/voli");
+define("LOCATIONPROMOZIONI","Location: /public/volo/promozioni");
 
 class VoloController extends Controller {
 
@@ -52,13 +54,14 @@ class VoloController extends Controller {
         if($esito){
             $this->registroVoli->avvisaPasseggeri($OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
         }
-        header("Location: /public/volo/voli");
+        header(LOCATIONVOLI);
     }
 
     public function inserisciVolo($dataoraPart, $dataoraArr, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo){
         $esito = $this->registroVoli -> inserisciVolo($dataoraPart, $dataoraArr,  $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo);
-        //TODO esito??
-        header("Location: /public/volo/voli");
+        if($esito){
+            header(LOCATIONVOLI);
+        }
     }
 
     public function cancellaVolo($OIDVolo){
@@ -66,17 +69,17 @@ class VoloController extends Controller {
         if($esito){
             $this->registroVoli->avvisaPasseggeri($OIDVolo, RegistroVoli::$AVVISACANCELLAZIONEVOLO);
         }
-        header("Location: /public/volo/voli");
+        header(LOCATIONVOLI);
     }
 
     public function inserisciPromozione($nome, $sconto, $dataInizio,$dataFine, $codVolo, $promozioneFedelta){
         $this->registroPromozioni->creaPromozione((int)$sconto, $dataInizio, $dataFine, $nome, $codVolo, (int)$promozioneFedelta);
-        header("Location: /public/volo/promozioni");
+        header(LOCATIONPROMOZIONI);
     }
 
     public function cancellaPromozione($OIDPromozione){
         $this->registroPromozioni->cancellaPrenotazione($OIDPromozione);
-        header("Location: /public/volo/promozioni");
+        header(LOCATIONPROMOZIONI);
     }
 
 }
