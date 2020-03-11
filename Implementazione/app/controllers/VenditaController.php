@@ -43,19 +43,14 @@ class VenditaController extends Controller
 		}
 	}
 
-	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento, $carta = "")
-    {
+	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento, $carta = "") {
         $registroPrenotazioni = $this->model('prenotazione/RegistroPrenotazioni');
         $prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
         $cliente = $prenotazione->getCliente();
         if ($idCliente == $cliente->getOID()) {
-            var_dump($prenotazione); echo "<br><br>";
-            var_dump($cliente); echo "<br><br>";
             $esitoPagamento = $registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
-            var_dump($prenotazione); echo "<br><br>";
-            var_dump($cliente); echo "<br><br>";
-            exit;
             if ($esitoPagamento) {
+                //TODO: Testare queste istruzioni
                 $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
                 $registroPrenotazioni->aggiornaPrenotazione($prenotazione);
                 $registroClienti = $this->model('cliente/RegistroClienti');

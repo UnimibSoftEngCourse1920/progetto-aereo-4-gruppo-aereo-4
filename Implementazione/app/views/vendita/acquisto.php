@@ -33,7 +33,7 @@
             <?php }?>
             <div class="row mt-md-4" id="pagamento-carta">
                 <div class="col">
-                    <form class="px-md-5" action="logged.html" method="post">
+                    <form class="px-md-5" action="/public/vendita/acquistaPrenotazione" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Nome</label>
@@ -58,6 +58,10 @@
                                 <input autocomplete="off" type="text" class="form-control date-ym-picker" placeholder="Scadenza" required>
                             </div>
                         </div>
+                        <input type="hidden" name="id_prenotazione" value="<?=$data["id_prenotazione"]?>">
+                        <input type="hidden" name="id_cliente" value="<?=$data["id_cliente"]?>">
+                        <input type="hidden" name="metodo_pagamento" value="carta">
+                        <input type="hidden" name="carta" value="test">
                         <div class="form-row px-3 pt-4 pb-3">
                             <div class="error mx-auto">Non è stato possibile completare la transazione.</div>
                         </div>
@@ -112,7 +116,11 @@
                 </div>
             </div>
             <?php } ?>
-            <small class="text-center">oppure</small>
+            <div class="row">
+                <div class="col text-center">
+                    <small>oppure</small>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4 pt-md-4">

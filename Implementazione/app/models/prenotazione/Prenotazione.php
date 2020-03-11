@@ -81,7 +81,7 @@ class Prenotazione{
 
     public function getImporto(){
         $importo = 0;
-        foreach ($this->listaBiglietti as $biglietto){
+        foreach ($this->getListaBiglietti() as $biglietto){
             if($biglietto->getTariffa()=="Plus") {
                 $importo += ($biglietto->getPrezzo() + 20);
             } else {
