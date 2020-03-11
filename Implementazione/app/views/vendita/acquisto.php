@@ -24,21 +24,21 @@
             <div class="row mt-2">
                 <div class="col-md-2"></div>
                 <div class="col-md-4 text-center">
-                    <div class="d-flex mx-auto tariffa selected">
+                    <div class="d-flex mx-auto tariffa selected" id="button-carta">
                         <i class="fas fa-credit-card"></i>
                         <p class="mt-auto mx-auto">Paga con la carta</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
-                    <div class="d-flex mx-auto tariffa ">
+                    <div class="d-flex mx-auto tariffa" id="button-punti">
                         <i class="fas fa-coins"></i>
                         <p class="mt-auto mx-auto">Paga con i punti</p>
                     </div>
                 </div>
             </div>
-            <div class="row mt-md-4">
+            <div class="row mt-md-4" id="pagamento-carta">
                 <div class="col">
-                    <form class="py-md-4 px-md-5" action="logged.html" method="post">
+                    <form class="px-md-5" action="logged.html" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Nome</label>
@@ -52,7 +52,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputState">Numero Carta</label>
-                                <input type="number" class="form-control" placeholder="E-mail">
+                                <input type="number" class="form-control" placeholder="Numero carta">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputState">CVV</label>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputState">Scadenza</label>
-                                <input type="number" class="form-control" placeholder="Scadenza">
+                                <input autocomplete="off" type="text" class="form-control date-ym-picker" placeholder="Scadenza">
                             </div>
                         </div>
                         <div class="form-row px-3 pt-4 pb-3">
@@ -74,9 +74,9 @@
                     </form>
                 </div>
             </div>
-            <div class="row mt-md-4">
+            <div class="row mt-md-4" id="pagamento-punti" style="display:none">
                 <div class="col">
-                    <form class="py-md-4 px-md-5" action="logged.html" method="post">
+                    <form class="pt-md-4 px-md-5" action="logged.html" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <b>Punti acquisiti</b>

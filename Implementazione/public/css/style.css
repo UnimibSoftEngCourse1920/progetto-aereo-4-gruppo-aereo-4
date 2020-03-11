@@ -258,6 +258,20 @@ h2{
     color: #7876AE;
 }
 
+.ui-datepicker-year, .ui-datepicker-month {
+    padding: 0 !important;
+}
+
+.month_year_datepicker .ui-datepicker-calendar, .month_year_datepicker .ui-datepicker-current  {
+    display: none;
+}
+.ui-datepicker-buttonpane button {
+    background: #ddd!important;
+    border: 1px solid #aaa !important;
+    padding: 8px 15px !important;
+    border-radius: 3px !important;
+}
+
 /*
 Colori della palette:
 F5F4F6
