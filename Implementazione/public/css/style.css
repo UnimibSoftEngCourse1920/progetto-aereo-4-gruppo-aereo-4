@@ -204,6 +204,74 @@ h2{
     color: white;
 }
 
+.tariffa {
+    height: 200px;
+    width: 200px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    vertical-align:bottom;
+    color: #ddd;
+    position: relative;
+    cursor:pointer;
+}
+
+.tariffa .fas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -70%);
+    font-size: 50px;
+    color: #ddd;
+}
+
+.tariffa.selected, .tariffa.selected .fas {
+    color: #7876AE;
+    border-color: #7876AE;
+}
+
+.tariffa:not(.selected):hover, .tariffa:not(.selected):hover .fas {
+    color: #7091BE;
+    border-color: #7091BE;
+}
+
+.tariffa.selected:before {
+    content: '\f00c';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #7876AE;
+    width: 20px;
+    height: 20px;
+    color: white;
+    border-radius: 100%;
+    line-height: 20px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 10px;
+}
+
+#riepilogo {
+    border-left: 1px solid #eee;
+}
+
+#riepilogo h3 {
+    color: #7876AE;
+}
+
+.ui-datepicker-year, .ui-datepicker-month {
+    padding: 0 !important;
+}
+
+.month_year_datepicker .ui-datepicker-calendar, .month_year_datepicker .ui-datepicker-current  {
+    display: none;
+}
+.ui-datepicker-buttonpane button {
+    background: #ddd!important;
+    border: 1px solid #aaa !important;
+    padding: 8px 15px !important;
+    border-radius: 3px !important;
+}
+
 /*
 Colori della palette:
 F5F4F6
