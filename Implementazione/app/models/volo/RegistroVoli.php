@@ -28,12 +28,21 @@ class RegistroVoli{
                 $aereo = $database->get($OIDAereo,Aereo::class);
                 if($aereo!=null and $aeroportoDest!=null and $aeroportoPart!=null) {
                     $nuovoVolo = new Volo($dataOraPart, $dataOraArr, $aeroportoPart, $aeroportoDest, $aereo);
+                    $this->salvaPosti($nuovoVolo->getPosti()); //salvo sul DB i posti che sono stati creati col costruttore
                     $esito = $database->put($nuovoVolo);
                     return $esito;
                 }
             }
         }
         return false;
+    }
+
+    private function salvaPosti($listaPosti){
+        //Mettere esito anche qui?
+        $db = DBFacade::getIstance();
+        foreach ($listaPosti as $posto){
+            $db->put($posto);
+        }
     }
 
     public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraArr){

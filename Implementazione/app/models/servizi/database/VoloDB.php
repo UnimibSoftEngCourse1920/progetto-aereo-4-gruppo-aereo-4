@@ -7,11 +7,16 @@ require_once "AbstractDB.php";
 class VoloDB extends AbstractDB
 {
 
-    protected function generatePutQuery($obj){
-
+    protected function generatePutQuery(Volo $obj){
+        $query = "";
         $promozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
-        
-        $query = sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s', '%s'); ",
+       /*
+        //E' stato fatto direttamente in inserimentoVolo
+        foreach ($obj->getPosti() as $posto){
+            $query .= sprintf("INSERT INTO Posto VALUES ('%s',%b ,%d )", $posto->getOID(), $posto->isStato(), $posto->getNumeroPosto());
+        }
+        */
+        $query .= sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s', '%s'); ",
                         $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo()->getOID(), $promozione);
         //VoloAeroporto
         $query .= sprintf("Insert into VoloAeroporto values ('%s', '%s', '%s' ); ", $obj->getOID(), $obj->getAeroportoPartenza()->getOID(), $obj->getAeroportoDestinazione()->getOID());
