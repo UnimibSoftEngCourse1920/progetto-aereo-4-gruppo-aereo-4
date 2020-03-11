@@ -49,10 +49,10 @@ class RegistroClienti
         return $esito;
     }
 
-    public function getCliente($codiceFedelta){
+    /*public function getCliente($codiceFedelta){
         //per ora è deprecated
         return DBFacade::getIstance() -> get($codiceFedelta);
-    }
+    }*/
 
     public function annullaIscrizione($OIDCliente){
         $db = DBFacade::getIstance();
@@ -96,6 +96,11 @@ class RegistroClienti
         }
         return false;
     }
+
+	public function getCliente($idCliente) {
+		$cliente = DBFacade::getIstance()->get($idCliente, 'Cliente');
+		return $cliente;
+	}
 		
 	public function aggiornaCliente($cliente) {
         //TODO a cosa serve?

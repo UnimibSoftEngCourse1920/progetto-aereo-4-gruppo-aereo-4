@@ -45,11 +45,13 @@ class VenditaController extends Controller
 
 	//TODO: DB
 	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento, $carta = "") {
-		$registroPrenotazioni = $this->model('RegistroPrenotazioni');
-		$registroClienti = $this->model('RegistroClienti');
+		$registroPrenotazioni = $this->model('prenotazione/RegistroPrenotazioni');
+		$registroClienti = $this->model('cliente/RegistroClienti');
 		$cliente = $registroClienti->getCliente($idCliente);
 		$prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
 		$esitoPagamento = $registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
+        var_dump($esitoPagamento);
+        exit;
 		if($esitoPagamento) {
             $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
 			$registroPrenotazioni->aggiornaPrenotazione($prenotazione);
@@ -60,7 +62,7 @@ class VenditaController extends Controller
 		}
 	}
 
-	public function acquista() {
-        $this->view('vendita/acquisto');
+	public function acquista($idPrenotazione = "", $idCliente = "") {
+        $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente]);
     }
 }

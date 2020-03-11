@@ -1,5 +1,6 @@
 <?php
 
+
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/RegistroClienti.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/EstrattoConto.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/Cliente.php";
@@ -7,7 +8,6 @@ require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/Mailer.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/RegistroVoli.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/prenotazione/Prenotazione.php";
-
 
 abstract class Tariffa
 {
@@ -115,6 +115,8 @@ class RegistroPrenotazioni{
 	
 	public function acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta) {
 		$importo = $prenotazione->getImporto();
+		var_dump($importo);
+		exit;
 		$esitoPagamento = $prenotazione->acquista($metodoPagamento, $cliente, $importo, $carta);
 		if($esitoPagamento) {
 			$punti = $this->calcolaPunti($importo);
@@ -137,9 +139,9 @@ class RegistroPrenotazioni{
 		return $importo/10;
 	}
 	
-	public function getPrenotazione($idCliente) {
-		$cliente = DBFacade::getIstance()->getCliente($idCliente);
-		return $cliente;
+	public function getPrenotazione($idPrenotazione) {
+		$prenotazione = DBFacade::getIstance()->get($idPrenotazione, 'Prenotazione');
+		return $prenotazione;
 	}
 	
 	public function aggiornaPrenotazione($prenotazione) {
