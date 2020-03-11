@@ -6,7 +6,8 @@ class Mailer{
     private $password;
 
     public function inviaCancellazioneFedelta($cliente){
-
+        $message = "Sei stato cancellato dal progarmma fedeltà";
+        mail($cliente->getEmail(), "Cancellazione programma fedeltà", $message);
     }
 
     public function inviaEmailModificaVolo($listaClienti, $volo){
@@ -26,7 +27,6 @@ class Mailer{
         mail($recipients , "Avviso modifica volo",$message);
     }
 
-    //Sarebbe meglio fare un nuovo thread per questo
     public function inviaEmailCancellazioneVolo($listaClienti, $volo){
 
         $recipients = $this->generateRecipients($listaClienti);
