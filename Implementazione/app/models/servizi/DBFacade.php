@@ -112,6 +112,7 @@ class DBFacade{
     }
 
     public function getUltimoCodiceFedelta(){
+        //TODO cancellare a causa di generazione con conversione base64
         return $this->gestori['Cliente'] -> getUltimoCodiceFedelta();
     }
 
@@ -121,6 +122,10 @@ class DBFacade{
 
     public function isAereoDisponibile($dataoraPartenza, $dataoraArrivo, $OIDAereo){
         return $this->gestori[Volo::class] -> isAereoDisponibile($dataoraPartenza, $dataoraArrivo, $OIDAereo);
+    }
+
+    public function getPrenotazioniCliente($OIDCliente, $soloAcquistate = false){
+        return $this->gestori[Prenotazione::class] -> getPrenotazioniCliente($OIDCliente, $soloAcquistate);
     }
 
 }

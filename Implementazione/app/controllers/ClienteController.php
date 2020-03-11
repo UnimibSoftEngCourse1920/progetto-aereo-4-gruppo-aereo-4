@@ -135,4 +135,13 @@ class ClienteController extends Controller{
         $this->view('cliente/fedelta', ["prenotazioni" => $prenotazioni, "cliente" => $cliente]);
     }
 
+    public function richiediEstrattoConto($OIDCliente){
+        //TODO implementare errori
+        $estrattoConto = $this->registroPrenotazioni->generaEstrattoConto($OIDCliente);
+        if($estrattoConto != null){
+            echo ('ESTRATTO OK');
+        }
+        echo ('ERRORE');
+    }
+
 }

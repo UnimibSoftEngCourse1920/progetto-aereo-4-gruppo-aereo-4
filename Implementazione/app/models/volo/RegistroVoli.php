@@ -6,6 +6,7 @@ require_once "../app/models/volo/Aeroporto.php";
 require_once "../app/models/servizi/Mailer.php";
 require_once "../app/models/prenotazione/RegistroPrenotazioni.php";
 
+
 class RegistroVoli{
 
     public static $AVVISAMODIFICAVOLO='MODIFICA';

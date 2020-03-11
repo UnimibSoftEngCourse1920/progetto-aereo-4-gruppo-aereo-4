@@ -27,8 +27,21 @@ class Prenotazione{
         $this->listaPasseggeri = $listaPasseggeri;
     }
 
-    public function generaEstrattoContoParziale(){
-
+    public function generaEstrattoContoParziale(EstrattoConto $estrattoConto){
+        foreach ($this->listaAcquisti as $acquisto){
+            $punti = $acquisto->getPuntiAccumulati();
+            if($punti>0){
+                $estrattoConto->addRiga($this->volo, EstrattoConto::$ACQUISTO, $punti);
+            }
+            $pag = $acquisto->getPagamento();
+            if(get_class($pag) == PagamentoConPunti::class){
+                $punti = $pag->getPuntiUtilizzati();
+                if($punti>0){
+                    $estrattoConto->addRiga($this->volo, EstrattoConto::$PAGAMENTO, -$punti); //gli passo -punti
+                }
+            }
+        }
+        //non c'è nessuna return perchè lavora direttamente sull'obj
     }
 
     public function registraPrenotazione(){
@@ -122,11 +135,6 @@ class Prenotazione{
     {
         $this->listaAcquisti = $listaAcquisti;
     }
-
-	public function getAcquisto() {
-        //TODO
-		return $this->acquisto;
-	}
 
 	public function getOID() {
 		return $this->OID;

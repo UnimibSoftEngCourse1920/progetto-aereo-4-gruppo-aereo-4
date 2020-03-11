@@ -18,7 +18,7 @@ class PrenotazioneDB extends AbstractDB
         return $prenotazione;
     }
 
-    //TODO estraggo direttamente l'obj?
+    //TODO fare getAll sulla falsariga di getPrenotazioniCliente(così utilizzo solo una volta le set ecc...)
 
     //TODO faccio la join direttamente nella generateGetQuery così da no dover chiamare la setXX anche sui campi singoli ù(Cioè anche dove non serve)
 
@@ -122,5 +122,20 @@ class PrenotazioneDB extends AbstractDB
         }
         return $result;
         //select * from prenot join cliente WHERE (clienteFedelta) and OIDCli not in (SELECT codcli from pr where diff(today, data)>= $anni)
+    }
+
+    public function getPrenotazioniCliente($OID, $soloAcquistate){
+        //TODO guardo se funziona
+        $prenotazioni = array();
+        if($soloAcquistate) {
+            $query = "select prenotazione from PrenotazioneCliente where cliente = '$OID'";
+        } else{
+            $query = "select p.OID from PrenotazioneCliente pc join Prenotazione p join PrenotazioneAcquisto a on p.OID = pc.cliente and p.OID = a.prenotazione WHERE pc.cliente='$OID';";
+        }
+        $codiciPrenotazioni = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+        foreach ($codiciPrenotazioni as $OID){
+            $prenotazioni[] = $this->get($OID, Prenotazione::class);
+        }
+        return $prenotazioni;
     }
 }

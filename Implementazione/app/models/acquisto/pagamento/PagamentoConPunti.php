@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/Pagamento.php";
 
-class PagamentoconPunti extends Pagamento{
+class PagamentoConPunti extends Pagamento{
 
     //TODO rinominare variabile
     private $puntiUtilizzati;
@@ -24,5 +24,10 @@ class PagamentoconPunti extends Pagamento{
 		}
 		return $esitoPagamento;
 	}
+
+    public function getPuntiUtilizzati()
+    {
+        return $this->puntiUtilizzati;
+    }
 	
 }
