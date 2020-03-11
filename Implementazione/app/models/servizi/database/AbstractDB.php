@@ -80,7 +80,6 @@ abstract class AbstractDB
     //Sono comunque stati definiti qui perchè per molte operazioni il comportamento è comune per tutti (es. delete)
 
     protected function generateGetQuery($OID, $class){
-        //TODO usare where oid like '%$OID' così da eliminare la generateGetAll..?, NO
         return "SELECT * FROM " . $class . " WHERE OID = '" . $OID . "'";
     }
 

@@ -3,6 +3,7 @@
 require_once "../app/models/volo/Volo.php";
 require_once "../app/models/servizi/DBFacade.php";
 require_once "../app/models/volo/Aeroporto.php";
+require_once "../app/models/servizi/Mailer.php";
 
 class RegistroVoli{
 

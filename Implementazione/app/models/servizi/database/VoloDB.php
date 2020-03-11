@@ -7,7 +7,7 @@ require_once "AbstractDB.php";
 class VoloDB extends AbstractDB
 {
 
-    protected function generatePutQuery(Volo $obj){
+    protected function generatePutQuery($obj){
         $query = "";
         $promozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
        /*
