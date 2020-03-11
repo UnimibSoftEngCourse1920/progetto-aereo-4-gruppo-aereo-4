@@ -65,7 +65,7 @@ class RegistroPrenotazioni{
         return ($oggi->diff($data)) -> y;
     }
 
-    public function effettuaPrenotazione($cliente,$codVolo,$numPosti,$tariffa){
+    public function effettuaPrenotazione($cliente,$listaPasseggeri,$codVolo,$numPosti,$tariffa){
         $univoca = DBFacade::getIstance()->checkPrenotazioneUnivoca($cliente->email,$codVolo);
         if($univoca){
             DBFacade::getIstance()->put($cliente);
@@ -74,10 +74,11 @@ class RegistroPrenotazioni{
 
             if($disp){
                 $v = $registroVoli->getVolo($codVolo);
-                $nuovaPrenotazione = new Prenotazione($cliente,$codVolo,$numPosti,$tariffa,date("d/m/Y"));
+                $nuovaPrenotazione = new Prenotazione($cliente,$listaPasseggeri,$codVolo,$numPosti,$tariffa);
                 $nuovaPrenotazione->registraPrenotazione();
                 $volo = DBFacade::getIstance()->getVolo($codVolo);
                 $nuovaPrenotazione->listaPosti = $volo->prenota($numPosti);
+                $nuovaPrenotazione->generaBiglietti();
                 return $nuovaPrenotazione;
             }
             else{

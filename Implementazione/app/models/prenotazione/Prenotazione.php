@@ -8,18 +8,16 @@ class Prenotazione{
 
     private $data;
     private $OID;
-    private $tariffa; //TODO: inserire nei vari diagrammi
-
+    private $tariffa;
     private $cliente;
     private $volo;
-
+    private $listaPasseggeri;
     private $listaPosti;
     private $listaBiglietti;
     private $listaAcquisti;
 
-    public function __construct($cliente,$volo,$numPosti,$tariffa,$data){
+    public function __construct($cliente,$listaPasseggeri, $volo,$numPosti,$tariffa){
         $this->OID = OIDGenerator::getIstance() -> getNewOID();
-        $this->data=$data; //TODO: da rimuovere dai parametri
         $this->tariffa=$tariffa;
         $this->cliente = $cliente;
         $this->volo = $volo;
@@ -27,6 +25,8 @@ class Prenotazione{
         $prezzo = $this->volo->calcolaPrezzo($this->cliente->isFedelta());
         $this->listaBiglietti = $this->generaBiglietti($prezzo);
         $this->listaAcquisti = array();
+        $this->data = date("Y-m-d");
+        $this->listaPasseggeri = $listaPasseggeri;
     }
 
     public function generaEstrattoContoParziale(EstrattoConto $estrattoConto){
@@ -67,8 +67,9 @@ class Prenotazione{
 
     public function generaBiglietti($prezzo){
         $lista = array();
+        $i = 0;
         foreach ($this->listaPosti as $posto){
-            $b = new Biglietto($posto->numeroPosto,$this->tariffa,$this->cliente->getEmail());
+            $b = new Biglietto($posto->numeroPosto,$this->tariffa,$this->listaPasseggeri[$i],$prezzo);
             DBFacade::getIstance()->put($b);
             array_push($lista,$b);
         }

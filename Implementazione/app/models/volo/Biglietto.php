@@ -16,7 +16,7 @@ class Biglietto{
      * @param $nominativo
      * @param $OID
      */
-    public function __construct($numPosto, $tariffa, $nominativo)
+    public function __construct($numPosto, $tariffa, $nominativo,$prezzo)
     {
         $this->numPosto=$numPosto;
         $this->tariffa = $tariffa;

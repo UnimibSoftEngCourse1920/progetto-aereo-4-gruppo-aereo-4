@@ -31,7 +31,6 @@ class VoloDB extends AbstractDB
         $OIDpromozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
         $var =  sprintf("UPDATE ".get_class($obj)." SET stato = '%s', dataOraPartenza='%s', dataOraArrivo='%s' , promozione = '%s' WHERE OID = '%s'",
                     $obj->getStato(), $obj->getDataOraPartenza(), $obj->getDataOraArrivo(), $OIDpromozione, $obj->getOID() );
-        var_dump($var);
         return $var;
     }
 
@@ -109,5 +108,4 @@ class VoloDB extends AbstractDB
         $result = $this->connection->query($query);
         return $result->rowCount() == 0;
     }
-
 }
