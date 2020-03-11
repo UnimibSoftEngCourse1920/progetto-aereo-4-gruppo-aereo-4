@@ -61,6 +61,7 @@ class VoloController extends Controller {
         if($esito){
             $this->registroVoli->avvisaPasseggeri($OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
         }
+        header("Location: /public/volo/voli");
     }
 
     public function inserisciVolo($dataoraPart, $dataoraArr, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo){

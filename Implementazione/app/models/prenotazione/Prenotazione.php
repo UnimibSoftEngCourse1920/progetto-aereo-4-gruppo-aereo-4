@@ -8,7 +8,6 @@ class Prenotazione{
 
     private $data;
     private $OID;
-    private $tariffa;
     private $cliente;
     private $volo;
     private $listaPasseggeri;
@@ -18,12 +17,11 @@ class Prenotazione{
 
     public function __construct($cliente,$listaPasseggeri, $volo,$numPosti,$tariffa){
         $this->OID = OIDGenerator::getIstance() -> getNewOID();
-        $this->tariffa=$tariffa;
         $this->cliente = $cliente;
         $this->volo = $volo;
         $this->listaPosti = $this->volo->prenota($numPosti);
         $prezzo = $this->volo->calcolaPrezzo($this->cliente->isFedelta());
-        $this->listaBiglietti = $this->generaBiglietti($prezzo);
+        $this->listaBiglietti = $this->generaBiglietti($prezzo,$tariffa);
         $this->listaAcquisti = array();
         $this->data = date("Y-m-d");
         $this->listaPasseggeri = $listaPasseggeri;
@@ -52,17 +50,25 @@ class Prenotazione{
         return $this;
     }
 
-    public function generaBiglietti($prezzo){
+    public function generaBiglietti($prezzo,$tariffa){
         $lista = array();
         $i = 0;
         foreach ($this->listaPosti as $posto){
-            $b = new Biglietto($posto->numeroPosto,$this->tariffa,$this->listaPasseggeri[$i],$prezzo);
+            $b = new Biglietto($posto->numeroPosto,$tariffa,$this->listaPasseggeri[$i],$prezzo);
             DBFacade::getIstance()->put($b);
             array_push($lista,$b);
         }
         return $lista;
     }
-	
+
+    public function getImporto(){
+        $importo = 0;
+        foreach ($this->listaBiglietti as $biglietto){
+            $importo += ( $biglietto->getPrezzo() + $biglietto->getTariffa());
+        }
+        return $importo;
+    }
+
 	public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta) {
 		$nPosti = $this->getNumeroPosti();
 		if($nPosti <= $nuovoVolo->getNumeroPostiDisponibili()) {
