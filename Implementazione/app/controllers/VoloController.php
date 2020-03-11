@@ -17,6 +17,14 @@ class VoloController extends Controller {
     private $registroPrenotazioni;
     private $mailer;
 
+    public function __construct(){
+        $this->registroVoli = new RegistroVoli();
+        $this->registroPromozioni = new RegistroPromozioni();
+        $this->registroPrenotazioni = new RegistroPrenotazioni();
+        $this->mailer = new Mailer();
+    }
+
+
     public function login($name = '') {
         $this->view('impiegato/login');
     }
@@ -33,18 +41,19 @@ class VoloController extends Controller {
         $this->view('impiegato/voli',["aeroporti"=>$aeroporti,"aerei"=>$aerei,"voli"=>$voli]);
     }
 
+    public function modifica($OIDVolo){
+        $v = $this->registroVoli->getVolo($OIDVolo);
+        $this->view('impiegato/modifica', ["volo"=>$v]);
+    }
+
+
     public function promozioni($name = '') {
         $promozioni = DBFacade::getIstance()->getAll("Promozione");
         $voli = DBFacade::getIstance()->getAll("Volo");
         $this->view('impiegato/promozioni', ["promozioni"=>$promozioni,"voli"=>$voli]);
     }
 
-    public function __construct(){
-        $this->registroVoli = new RegistroVoli();
-        $this->registroPromozioni = new RegistroPromozioni();
-        $this->registroPrenotazioni = new RegistroPrenotazioni();
-        $this->mailer = new Mailer();
-    }
+
 
     public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest){
         //TODO richiamare modifica e basta??
@@ -69,9 +78,8 @@ class VoloController extends Controller {
     }
 
     public function inserisciPromozione($nome, $sconto, $dataInizio,$dataFine, $codVolo, $promozioneFedelta){
-
         $this->registroPromozioni->creaPromozione((int)$sconto, $dataInizio, $dataFine, $nome, $codVolo, (int)$promozioneFedelta);
-        //header("Location: /public/volo/promozioni");
+        header("Location: /public/volo/promozioni");
     }
 
     public function cancellaPromozione($OIDPromozione){

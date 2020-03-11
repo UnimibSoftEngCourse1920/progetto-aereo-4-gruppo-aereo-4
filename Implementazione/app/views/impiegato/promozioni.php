@@ -48,6 +48,11 @@
                             <tbody>
                             <?php
                             foreach ($data["promozioni"] as $promozione){
+                                $fed = "No";
+                                if($promozione->isFedelta()) {
+                                    $fed = "Si";
+                                }
+
                                 echo "<tr>
                                             <th scope='row'>".$promozione->getOID()."</th>
                                             <td>".$promozione->getNome()." </td>
@@ -55,7 +60,7 @@
                                             <td>".$promozione->getDataFine()."</td>
                                             <td> WIP </td>
                                             <td>".$promozione->getSconto()."</td>
-                                            <td>".$promozione->isFedelta()."</td>
+                                            <td>".$fed."</td>
                                             <td>
                                                 <a href='cancellaPromozione/".$promozione->getOID()."'><button class='btn btn-danger'> <em class='fas fa-trash-alt'></em> Cancella </button></a>
                                             </td>
