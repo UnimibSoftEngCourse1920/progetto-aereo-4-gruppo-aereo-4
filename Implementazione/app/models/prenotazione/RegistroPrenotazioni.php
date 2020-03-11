@@ -1,5 +1,9 @@
 <?php
 
+require_once "../app/models/servizi/Mailer.php";
+require_once "../app/models/cliente/RegistroClienti.php";
+require_once "../app/models/prenotazione/Prenotazione.php";
+
 abstract class Tariffa
 {
     //TODO: sistemare tutti in base a questo formato??
@@ -93,6 +97,8 @@ class RegistroPrenotazioni{
 	
 	public function acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta) {
 		$importo = $prenotazione->getImporto();
+		var_dump($importo);
+		exit;
 		$esitoPagamento = $prenotazione->acquista($metodoPagamento, $cliente, $importo, $carta);
 		if($esitoPagamento) {
 			$punti = $this->calcolaPunti($importo);
@@ -115,9 +121,9 @@ class RegistroPrenotazioni{
 		return $importo/10;
 	}
 	
-	public function getPrenotazione($idCliente) {
-		$cliente = DBFacade::getIstance()->getCliente($idCliente);
-		return $cliente;
+	public function getPrenotazione($idPrenotazione) {
+		$prenotazione = DBFacade::getIstance()->get($idPrenotazione, 'Prenotazione');
+		return $prenotazione;
 	}
 	
 	public function aggiornaPrenotazione($prenotazione) {

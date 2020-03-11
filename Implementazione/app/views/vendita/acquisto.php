@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="it">
-
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Gruppo Aereo 4 - Login</title>
+    <title>Gruppo Aereo 4</title>
     <?php include("../app/template/header.php") ?>
-    <link type="text/css" rel="stylesheet" href="../css/style.css" />
 </head>
-
 <body>
 <?php include("../app/template/menu.php") ?>
 <div class="container pb-5 pt-5 mt-5">
@@ -21,6 +14,7 @@
     </div>
     <div class="row">
         <div class="col-md-8 mt-md-4">
+            <?php if(isset($_SESSION["id_cliente"])) {?>
             <div class="row mt-2">
                 <div class="col-md-2"></div>
                 <div class="col-md-4 text-center">
@@ -36,31 +30,32 @@
                     </div>
                 </div>
             </div>
+            <?php }?>
             <div class="row mt-md-4" id="pagamento-carta">
                 <div class="col">
                     <form class="px-md-5" action="logged.html" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Nome</label>
-                                <input type="text" class="form-control" id="nome" placeholder="Nome">
+                                <input type="text" class="form-control" id="nome" placeholder="Nome" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Cognome</label>
-                                <input type="text" class="form-control" id="cognome" placeholder="Cognome">
+                                <input type="text" class="form-control" id="cognome" placeholder="Cognome" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputState">Numero Carta</label>
-                                <input type="number" class="form-control" placeholder="Numero carta">
+                                <input type="number" class="form-control" placeholder="Numero carta" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputState">CVV</label>
-                                <input type="number" class="form-control" placeholder="CVV">
+                                <input type="number" class="form-control" placeholder="CVV" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="inputState">Scadenza</label>
-                                <input autocomplete="off" type="text" class="form-control date-ym-picker" placeholder="Scadenza">
+                                <input autocomplete="off" type="text" class="form-control date-ym-picker" placeholder="Scadenza" required>
                             </div>
                         </div>
                         <div class="form-row px-3 pt-4 pb-3">
@@ -74,9 +69,10 @@
                     </form>
                 </div>
             </div>
+            <?php if(isset($_SESSION["id_cliente"])) {?>
             <div class="row mt-md-4" id="pagamento-punti" style="display:none">
                 <div class="col">
-                    <form class="pt-md-4 px-md-5" action="logged.html" method="post">
+                    <form class="pt-md-4 px-md-5" action="/public/vendita/acquistaPrenotazione" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <b>Punti acquisiti</b>
@@ -101,6 +97,9 @@
                                 1231232112
                             </div>
                         </div>
+                        <input type="hidden" name="id_prenotazione" value="<?=$data["id_prenotazione"]?>">
+                        <input type="hidden" name="id_cliente" value="<?=$data["id_cliente"]?>">
+                        <input type="hidden" name="metodo_pagamento" value="punti">
                         <div class="form-row px-3 pt-4 pb-3">
                             <div class="error mx-auto">Non hai punti a sufficienza.</div>
                         </div>
@@ -112,9 +111,11 @@
                     </form>
                 </div>
             </div>
-            <div class="row mt-md-3" style="border-top: 1px solid #eee">
+            <?php } ?>
+            <center><small>oppure</small></center>
+            <div class="row">
                 <div class="col-md-4"></div>
-                <div class="col-md-4 pt-md-5">
+                <div class="col-md-4 pt-md-4">
                     <button type="submit" class="btn btn-primary w-100">Paga più tardi</button>
                 </div>
             </div>
@@ -169,5 +170,4 @@
 </div>
 <?php include("../app/template/footer.php") ?>
 </body>
-
 </html>
