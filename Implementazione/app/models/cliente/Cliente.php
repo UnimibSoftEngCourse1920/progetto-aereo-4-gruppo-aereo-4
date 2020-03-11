@@ -3,8 +3,7 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 class Cliente{
-    //TODO:: Sostituire con i numeri !!
-    // STATO_OSPITE = 0, ecc...
+    //TODO:: Spostare in un'altra classe
     public static $STATO_OSPITE= 'OSPITE';
     public static $STATO_FEDELE = 'FEDELE';
     public static $STATO_INFEDELE = 'INFEDELE';

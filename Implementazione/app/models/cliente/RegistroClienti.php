@@ -1,6 +1,9 @@
 <?php
 
 require_once "../app/models/servizi/DBFacade.php";
+require_once "../app/models/servizi/Mailer.php";
+require_once "../app/models/cliente/Cliente.php";
+
 
 class RegistroClienti
 {
@@ -66,7 +69,7 @@ class RegistroClienti
     }
 
     public function avvisaPasseggeri($OID, $tipologiaAvviso){
-        $cliente = DBFacade::getIstance()->get($OID);
+        $cliente = DBFacade::getIstance()->get($OID, Cliente::class);
 
         switch ($tipologiaAvviso){
             case RegistroClienti::$AVVISACANCELLAZIONEFEDELTA:
@@ -82,9 +85,9 @@ class RegistroClienti
     }
 
     public function setClienteInfedele($OID){
-        $cliente = DBFacade::getIstance()->get($OID);
+        $cliente = DBFacade::getIstance()->get($OID, Cliente::class);
         if($cliente!=null) {
-            $cliente->setStato(ClienteFedelta::$STATOINFEDELE);
+            $cliente->setStato(Cliente::$STATO_INFEDELE);
             $esito = DBFacade::getIstance()->update($cliente);
             if($esito) {
                 $this->mailer->inviaComunicazioneInfedelta($cliente);
@@ -93,13 +96,9 @@ class RegistroClienti
         }
         return false;
     }
-	
-	/*public function getCliente($idCliente) {
-		$cliente = DBFacade::getIstance()->getCliente($idCliente);
-		return $cliente;
-	}*/
 		
 	public function aggiornaCliente($cliente) {
+        //TODO a cosa serve?
 		DBFacade::getIstance()->aggiornaCliente($cliente);
 	}
 

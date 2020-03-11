@@ -1,6 +1,9 @@
 <?php
 
-require_once("../app/models/volo/Biglietto.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/app/models/volo/Biglietto.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/app/models/acquisto/Acquisto.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/app/models/cliente/EstrattoConto.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/app/models/acquisto/pagamento/PagamentoConPunti.php");
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 
@@ -28,6 +31,7 @@ class Prenotazione{
     }
 
     public function generaEstrattoContoParziale(EstrattoConto $estrattoConto){
+        //TODO  faccio addRigaAcquisto e Pagamento cosi da togliere la require??
         foreach ($this->listaAcquisti as $acquisto){
             $punti = $acquisto->getPuntiAccumulati();
             if($punti>0){
@@ -141,7 +145,7 @@ class Prenotazione{
 	}
 	
 	public function getNumeroPosti() {
-		
+		//TODO a cosa serve
 	}
 
     public function getData()
@@ -199,7 +203,7 @@ class Prenotazione{
     private function materializeAll($lista, $class){
         $listaRitorno = array();
         for($i=0; $i< count($lista); $i++){
-            $listaRitorno[$i] = DBFacade::getIstance()->get($lista[i], $class);
+            $listaRitorno[$i] = DBFacade::getIstance()->get($lista[$i], $class);
         }
         return $listaRitorno;
     }

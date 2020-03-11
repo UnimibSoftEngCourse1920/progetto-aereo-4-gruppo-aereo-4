@@ -1,14 +1,13 @@
 <?php
 
 require_once "../app/core/Controller.php";
-require_once "../app/models/servizi/DBFacade.php";
 
 class VenditaController extends Controller
 {
 	//TODO: DB e controllo
 	public function consultaVoli($partenza, $destinazione, $data, $nPosti) {
-        $aeroporti = DBFacade::getIstance()->getAll("Aeroporto");
 		$registro = $this->model('volo/RegistroVoli');
+		$aeroporti = $registro->getAeroporti();
 		$voli = $registro->cercaVoli($partenza, $destinazione, $data, $nPosti);
 		$this->view('vendita/consulta', ["voli" => $voli, "partenza" => $partenza, "destinazione" => $destinazione,
                                                 "data" => $data, "viaggiatori" => $nPosti, "aeroporti" => $aeroporti]);

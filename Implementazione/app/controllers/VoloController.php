@@ -1,27 +1,22 @@
 <?php
 
 
-
 require_once __DIR__ . "/../core/Controller.php";
 require_once __DIR__ . "/../models/volo/RegistroVoli.php";
 require_once __DIR__ . "/../models/prenotazione/RegistroPrenotazioni.php";
 require_once __DIR__ . "/../models/volo/RegistroPromozioni.php";
-require_once __DIR__ . "/../models/servizi/Mailer.php";
-require_once __DIR__ . "/../models/servizi/DBFacade.php";
-require_once __DIR__ . "/../models/volo/Aeroporto.php";
+
 
 class VoloController extends Controller {
 
     private $registroVoli;
     private $registroPromozioni;
     private $registroPrenotazioni;
-    private $mailer;
 
     public function __construct(){
         $this->registroVoli = new RegistroVoli();
         $this->registroPromozioni = new RegistroPromozioni();
         $this->registroPrenotazioni = new RegistroPrenotazioni();
-        $this->mailer = new Mailer();
     }
 
 
@@ -34,10 +29,9 @@ class VoloController extends Controller {
     }
 
     public function voli($name = '') {
-        $aeroporti = DBFacade::getIstance()->getAll("Aeroporto");
-        $aerei = DBFacade::getIstance()->getAll("Aereo");
-        $voli = DBFacade::getIstance()->getAll("Volo");
-        //var_dump($voli);
+        $aeroporti = $this->registroVoli->getAeroporti();
+        $aerei = $this->registroVoli->getAerei();
+        $voli = $this->registroVoli->getVoli();
         $this->view('impiegato/voli',["aeroporti"=>$aeroporti,"aerei"=>$aerei,"voli"=>$voli]);
     }
 
@@ -46,14 +40,11 @@ class VoloController extends Controller {
         $this->view('impiegato/modifica', ["volo"=>$v]);
     }
 
-
     public function promozioni($name = '') {
-        $promozioni = DBFacade::getIstance()->getAll("Promozione");
-        $voli = DBFacade::getIstance()->getAll("Volo");
+        $promozioni = $this->registroPromozioni->getPromozioni();
+        $voli = $this->registroVoli->getVoli();
         $this->view('impiegato/promozioni', ["promozioni"=>$promozioni,"voli"=>$voli]);
     }
-
-
 
     public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest){
         //TODO richiamare modifica e basta??

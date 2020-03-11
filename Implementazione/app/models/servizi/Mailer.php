@@ -1,7 +1,7 @@
 <?php
 
 class Mailer{
-    //Da inserire nel diagramma
+    //TODO Da inserire nel diagramma
     private $email;
     private $password;
 

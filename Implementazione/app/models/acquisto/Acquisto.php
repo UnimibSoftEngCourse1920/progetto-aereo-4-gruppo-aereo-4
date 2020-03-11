@@ -2,6 +2,8 @@
 
 
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/acquisto/pagamento/PagamentoConCarta.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/acquisto/pagamento/PagamentoConPunti.php";
 
 
 abstract class MetodoPagamento
@@ -17,7 +19,7 @@ class Acquisto{
     private $puntiAccumulati;
     private $OID;
     private $pagamento;
-    private $dataora;
+    //private $dataora;
 	
 	public function __construct($metodoPagamento, $importo) {
 		$this->OID = OIDGenerator::getIstance()->getNewOID();
