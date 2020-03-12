@@ -52,6 +52,7 @@ class VenditaController extends Controller
             if ($esitoPagamento) {
                 //TODO: Testare queste istruzioni
                 $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
+                exit;
                 $registroPrenotazioni->aggiornaPrenotazione($prenotazione);
                 $registroClienti = $this->model('cliente/RegistroClienti');
                 $registroClienti->aggiornaCliente($cliente);
