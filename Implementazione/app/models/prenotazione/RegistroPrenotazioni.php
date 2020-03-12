@@ -131,8 +131,12 @@ class RegistroPrenotazioni{
 		return $prenotazione;
 	}
 	
-	public function aggiornaPrenotazione($prenotazione) {
-		DBFacade::getIstance()->aggiornaPrenotazione($prenotazione);
+	public function aggiornaAcquisti($prenotazione) {
+        foreach($prenotazione->getListaAcquisti() as $acquisto) {
+            DBFacade::getIstance()->put($acquisto->getPagamento());
+            DBFacade::getIstance()->put($acquisto);
+        }
+        DBFacade::getIstance()->update($prenotazione);
 	}
 
 	public function cancellaPrenotazioniScadute(){
