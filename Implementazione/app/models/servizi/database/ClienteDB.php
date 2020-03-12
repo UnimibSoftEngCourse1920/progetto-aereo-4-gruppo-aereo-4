@@ -8,7 +8,7 @@ class ClienteDB extends AbstractDB
     {
         $query = sprintf("INSERT INTO Cliente VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s');",
             $cliente->getOID(), $cliente->getNome(), $cliente->getCognome(), $cliente->getDataNascita(), $cliente->getIndirizzo(),
-                  $cliente->getCodiceFedelta(), $cliente->getStato(), $cliente->getPassword(), $cliente->getEmail());
+            $cliente->getCodiceFedelta(), $cliente->getStato(), $cliente->getPassword(), $cliente->getEmail());
         return $query;
     }
 
@@ -20,6 +20,7 @@ class ClienteDB extends AbstractDB
 
     public function login($email, $password){
         $query = "SELECT * from Cliente where email = '$email' and password='$password'  and codiceFedelta is not null";
+        // TODO migliorare qui
         $stmt = $this->connection->query($query);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $obj = (object)($row);
@@ -36,18 +37,8 @@ class ClienteDB extends AbstractDB
     public function getAllFedelta(){
         //TODO Fare un modo per filtrare la getAll
         $query = "Select * from Cliente where codiceFedelta is not null";
-        $stmt = $this->connection->query($query); //la eseguo
-        $lista = array();
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
-            $obj = (object)($row);
-            array_push($lista,$obj);
-        }
-        $listaDef = array();
-        foreach ($lista as $el){
-            array_push($listaDef,$this->objectToObject($el,Cliente::class)); //eseguo il cast dell'oggetto generico
-        }
-        return $listaDef;
-
+        $stmt = $this->connection->query($query);
+        return $this->materializeAll($stmt, Cliente::class);
     }
 
 

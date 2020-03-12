@@ -4,6 +4,7 @@
 //namespace model\servizi;
 
 //use PDO;
+//TODO perchè queste??
 require_once $_SERVER['DOCUMENT_ROOT'] . "/app/models/volo/Aeroporto.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aereo.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Volo.php";
@@ -25,18 +26,11 @@ abstract class AbstractDB
     }
 
     public function get($OID, $class){
-        //Ad ora non vale per cliente
-        /*$stmt = $this->connection->prepare($this->generateGetQuery($OID,$class)); //manca la query
-        //template method
-        $stmt->execute();
-        $stmt -> setFetchMode(PDO::FETCH_CLASS, $class);
-        return $obj = $stmt->fetchAll(); */
         $query = $this->generateGetQuery($OID,$class); //creo la query
         $stmt = $this->connection->query($query); //la eseguo
         $row = $stmt->fetch(PDO::FETCH_ASSOC);//per ogni riga creo un oggetto generico
         $obj = (object)($row);
         $ris = $this->objectToObject($obj,$class); //eseguo il cast dell'oggetto generico
-
         return $ris;
     }
 
@@ -58,18 +52,29 @@ abstract class AbstractDB
     public function getAll($class){
         $query = $this->generateGetAllQuery($class); //creo la query
         $stmt = $this->connection->query($query); //la eseguo
+        return $this->materializeAll($stmt, $class);
+    }
+
+    protected function materializeAll($stmt, $class){
         $lista = array();
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
             $obj = (object)($row);
             array_push($lista,$obj);
         }
-
         $listaDef = array();
         foreach ($lista as $el){
             array_push($listaDef,$this->objectToObject($el,$class)); //eseguo il cast dell'oggetto generico
         }
-
         return $listaDef;
+    }
+
+    protected function objectToObject($instance, $className) {
+        return unserialize(sprintf(
+            'O:%d:"%s"%s',
+            strlen($className),
+            $className,
+            strstr(strstr(serialize($instance), '"'), ':')
+        ));
     }
 
     protected function getClassName($object){
@@ -77,7 +82,6 @@ abstract class AbstractDB
     }
 
     //Metodi hook
-    //Sono comunque stati definiti qui perchè per molte operazioni il comportamento è comune per tutti (es. delete)
 
     protected function generateGetQuery($OID, $class){
         return "SELECT * FROM " . $class . " WHERE OID = '" . $OID . "'";
@@ -97,12 +101,4 @@ abstract class AbstractDB
         return "SELECT * from ".$class;
     }
 
-    protected function objectToObject($instance, $className) {
-        return unserialize(sprintf(
-            'O:%d:"%s"%s',
-            strlen($className),
-            $className,
-            strstr(strstr(serialize($instance), '"'), ':')
-        ));
-    }
 }
