@@ -24,13 +24,13 @@
             <div class="row mt-2">
                 <div class="col-md-2"></div>
                 <div class="col-md-4 text-center">
-                    <div class="d-flex mx-auto tariffa">
+                    <div class="d-flex mx-auto tariffa" id="tar_stand">
                         <em class="fas fa-paper-plane"></em>
                         <p class="mt-auto mx-auto">Tariffa Standard</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
-                    <div class="d-flex mx-auto tariffa selected">
+                    <div class="d-flex mx-auto tariffa selected" id="tar_plus">
                         <em class="fas fa-rocket"></em>
                         <p class="mt-auto mx-auto">Tariffa VoloPlus</p>
                     </div>
@@ -55,8 +55,9 @@
                                 <input type="email" class="form-control" placeholder="E-mail">
                             </div>
                         </div>
+                        <?php for($i=1;$i<=$data["pass"];$i++){?>
                         <div class="form-row px-2 py-3">
-                            Passeggero #1
+                            Passeggero <?= $i ?>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -68,32 +69,7 @@
                                 <input type="text" class="form-control" id="cognome" placeholder="Cognome">
                             </div>
                         </div>
-                        <div class="form-row px-2 py-3">
-                            Passeggero #2
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">Nome</label>
-                                <input type="text" class="form-control" id="nome" placeholder="Nome">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">Cognome</label>
-                                <input type="text" class="form-control" id="cognome" placeholder="Cognome">
-                            </div>
-                        </div>
-                        <div class="form-row px-2 py-3">
-                            Passeggero #3
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">Nome</label>
-                                <input type="text" class="form-control" id="nome" placeholder="Nome">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">Cognome</label>
-                                <input type="text" class="form-control" id="cognome" placeholder="Cognome">
-                            </div>
-                        </div>
+                        <?php }?>
                         <div class="form-row px-3 pt-4 pb-3">
                             <div class="error mx-auto">Non ci sono più posti per questo volo.</div>
                         </div>
