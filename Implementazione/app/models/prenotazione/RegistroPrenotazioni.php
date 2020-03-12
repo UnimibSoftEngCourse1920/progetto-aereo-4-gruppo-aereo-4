@@ -136,6 +136,7 @@ class RegistroPrenotazioni{
             DBFacade::getIstance()->put($acquisto->getPagamento());
             DBFacade::getIstance()->put($acquisto);
         }
+        var_dump($prenotazione);
         DBFacade::getIstance()->update($prenotazione);
 	}
 
