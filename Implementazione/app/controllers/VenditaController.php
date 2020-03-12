@@ -70,4 +70,8 @@ class VenditaController extends Controller
     public function confermaPrenotazione() {
         $this->view('vendita/conferma', ["success" => "La tua prenotazione è stata confermata!"]);
     }
+
+    public function confermaAcquisto() {
+        $this->view('vendita/conferma', ["success" => "Il tuo acquisto è stato confermato!"]);
+    }
 }
