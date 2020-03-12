@@ -91,11 +91,11 @@
                 <div class="col-6 text-right">
                     <h3 id="prezzo_base">
                         <?php
-                            if($data["volo"]->getPrezzoIntero()==$data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))){
-                                echo $data["volo"]->getPrezzoIntero()*$data["pass"]."€";
-                            } else {
-                                echo $data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"]."€ </h3><h3><strike style='font-size: 20px'>".$data["volo"]->getPrezzoIntero()*$data["pass"]."€</strike>";
-                            }?>
+                        if($data["volo"]->getPrezzoIntero()==$data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))){
+                            echo number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€";
+                        } else {
+                            echo number_format($data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"],2)."€ </h3><h3><strike style='font-size: 20px'>".number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€</strike>";
+                        }?>
                     </h3>
                 </div>
             </div>
@@ -137,7 +137,16 @@
             </div>
             <div class="row py-md-4">
                 <div class="col-8"><h3>Totale</h3></div>
-                <div class="col-4 text-right"><h3 id="prezzo_tot"><?= $data["volo"]->getPrezzoIntero()*$data["pass"]?>€</h3></div>
+                <div class="col-4 text-right">
+                    <h3 id="prezzo_tot">
+                        <?php
+                        if($data["volo"]->getPrezzoIntero()==$data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))){
+                            echo number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€";
+                        } else {
+                            echo number_format($data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"],2)."€ </h3><h3><strike id='old_tot' style='font-size: 20px'>".number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€</strike>";
+                        }?>
+                    </h3>
+                </div>
             </div>
         </div>
     </div>
