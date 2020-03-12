@@ -124,7 +124,9 @@
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4 pt-md-4">
-                    <button type="submit" class="btn btn-primary w-100">Paga più tardi</button>
+                    <a href="/public/vendita/confermaPrenotazione">
+                        <button type="submit" class="btn btn-primary w-100">Paga più tardi</button>
+                    </a>
                 </div>
             </div>
         </div>

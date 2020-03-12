@@ -66,4 +66,8 @@ class VenditaController extends Controller
 	public function acquista($idPrenotazione = "", $idCliente = "") {
         $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente]);
     }
+
+    public function confermaPrenotazione() {
+        $this->view('vendita/conferma', ["success" => "La tua prenotazione è stata confermata!"]);
+    }
 }
