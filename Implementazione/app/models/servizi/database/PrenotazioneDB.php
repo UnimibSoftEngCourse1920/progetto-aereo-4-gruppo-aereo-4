@@ -81,7 +81,9 @@ class PrenotazioneDB extends AbstractDB
             $query .= sprintf("UPDATE PrenotazionePosto SET posto = '%s' where OID = '%s';", $posto->getOID(), $obj->getOID());
 
         foreach($obj->getListaAcquisti() as $acquisto)
-            $query .= sprintf("UPDATE PrenotazioneAcquisto  SET acquisto = '%s' where OID = '%s';",$acquisto->getOID() ,$obj->getOID());
+            $query .= sprintf("INSERT IGNORE into PrenotazioneAcquisto  values('%s','%s');", $obj->getOID(), $acquisto->getOID());
+
+        return $query;
     }
 
     protected function generateDeleteQuery($OID, $class)
