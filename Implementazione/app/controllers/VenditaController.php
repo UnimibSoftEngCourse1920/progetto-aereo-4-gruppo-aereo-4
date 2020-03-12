@@ -33,7 +33,7 @@ class VenditaController extends Controller
 		if($esitoCambioData) {
 			//Aggiornare prenotazione (anche biglietti e acquisto), cliente, volo vecchio e volo nuovo per i posti
             $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
-			$registroPrenotazioni->aggiornaPrenotazione($prenotazione);
+			$registroPrenotazioni->aggiornaPrentoazione($prenotazione);
 			$registroClienti->aggiornaCliente($cliente);
 			$registroVoli->aggiornaVolo($volo);
 			$registroVoli->aggiornaVolo($nuovoVolo);
@@ -51,9 +51,9 @@ class VenditaController extends Controller
             $esitoPagamento = $registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
             if ($esitoPagamento) {
                 //TODO: Testare queste istruzioni
-                $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
+                //$registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
+                $registroPrenotazioni->aggiornaAcquisti($prenotazione);
                 exit;
-                $registroPrenotazioni->aggiornaPrenotazione($prenotazione);
                 $registroClienti = $this->model('cliente/RegistroClienti');
                 $registroClienti->aggiornaCliente($cliente);
                 //TODO: view con successo
