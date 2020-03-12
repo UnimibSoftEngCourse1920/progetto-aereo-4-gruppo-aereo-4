@@ -82,6 +82,9 @@ class Volo {
     }
 
     public function getPromozione(){
+        if(is_string($this->promozione)){
+            $this->promozione = DBFacade::getIstance()->get($this->promozione,Promozione::class);
+        }
         return $this->promozione;
     }
 
@@ -174,6 +177,7 @@ class Volo {
 
     public function getPrezzoScontato($isFedelta){
         $prezzo = $this->getPrezzoIntero();
+        $this->getPromozione();
         if((isset($this->promozione))) { //se esiste una promozione per questo volo
             //se è per fedeltà e cliente è fedeltà o non è per fedeltà
             if (($this->promozione->promozioneFedelta && $isFedelta) || !$this->promozione->promozioneFedelta) {
