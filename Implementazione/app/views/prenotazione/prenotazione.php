@@ -87,8 +87,17 @@
         </div>
         <div class="col-md-4 px-md-5 mt-md-4" id="riepilogo">
             <div class="row pb-md-4">
-                <div class="col-8"><h3>Biglietti</h3></div>
-                <div class="col-4 text-right"><h3 id="prezzo_base"><?= $data["volo"]->getPrezzoIntero()*$data["pass"]?>€</h3></div>
+                <div class="col-6"><h3>Biglietti</h3></div>
+                <div class="col-6 text-right">
+                    <h3 id="prezzo_base">
+                        <?php
+                            if($data["volo"]->getPrezzoIntero()==$data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))){
+                                echo $data["volo"]->getPrezzoIntero()*$data["pass"]."€";
+                            } else {
+                                echo $data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"]."€ </h3><h3><strike style='font-size: 20px'>".$data["volo"]->getPrezzoIntero()*$data["pass"]."€</strike>";
+                            }?>
+                    </h3>
+                </div>
             </div>
             <div class="row">
                 <div class="col">
@@ -113,10 +122,6 @@
                         <br><?= $data["pass"] ?>
                     </p>
                 </div>
-            </div>
-            <div class="row pb-md-4">
-                <div class="col-8"><h3>Promozioni</h3></div>
-                <div class="col-4 text-right"><?= var_dump($data["volo"]->getPromozione()); ?></div>
             </div>
             <div class="row py-md-4" id="supplemento_row" style="display: none;">
                 <div class="col-8"><h3>Supplementi</h3></div>
