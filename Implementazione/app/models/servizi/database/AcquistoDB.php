@@ -29,9 +29,9 @@ class AcquistoDB extends AbstractDB
         $pagamentoPunti = null;
         $p = $obj->getPagamento();
         if(get_class($p) == PagamentoConPunti::class){
-            $pagamentoPunti = $p;
+            $pagamentoPunti = $p->getOID();
         }else{
-            $pagamentoCarta = $p;
+            $pagamentoCarta = $p->getOID();
         }
 
         $query = "INSERT INTO Acquisto VALUES ('%s', %d, '%s', '%s')";
