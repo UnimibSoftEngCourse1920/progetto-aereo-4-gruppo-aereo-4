@@ -1,12 +1,11 @@
 <?php
 
 
-//namespace model\servizi;
 require_once "AbstractDB.php";
+
 
 class VoloDB extends AbstractDB
 {
-
     protected function generatePutQuery($obj){
         $query = "";
         $promozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
@@ -36,12 +35,13 @@ class VoloDB extends AbstractDB
 
     protected function generateGetQuery($OID, $class)
     {
-        return "SELECT v.*, va.aeroportoPartenza, va.aeroportoArrivo from Volo v join VoloAeroporto va on v.OID = va.volo WHERE v.OID = '$OID'";
+        return $this->generateGetAllQuery() ." WHERE v.OID = '$OID'";
+        //return "SELECT v.*, va.aeroportoPartenza, va.aeroportoArrivo from Volo v join VoloAeroporto va on v.OID = va.volo WHERE v.OID = '$OID'";
     }
 
     protected function generateGetAllQuery($class)
     {
-        return "SELECT * from Volo v join VoloAeroporto va on v.OID = va.volo";
+        return "SELECT va.aeroportoPartenza, va.aeroportoArrivo from Volo v join VoloAeroporto va on v.OID = va.volo";
     }
 
     public function get($OID, $class){
@@ -63,16 +63,7 @@ class VoloDB extends AbstractDB
                         AND v.stato <> '".Volo::$STATO_CANCELLATO."'
                         AND $nPosti < (SELECT count(*) from VoloPosto where volo = v.OID)";
         $stmt = $this->connection->query($query);
-        $lista = array();
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
-            $obj = (object)($row);
-            array_push($lista,$obj);
-        }
-        $listaVoli = array();
-        foreach ($lista as $el){
-            array_push($listaVoli,$this->objectToObject($el,"Volo")); //eseguo il cast dell'oggetto generico
-        }
-        return $listaVoli;
+        return $this->materializeAll($stmt, "Volo");
     }
 
     public function getPasseggeriVolo($OIDVolo){
@@ -80,16 +71,7 @@ class VoloDB extends AbstractDB
         $query = "select c.* from PrenotazioneVolo pv join Prenotazione p join PrenotazioneCliente pc join Cliente c 
                     on c.OID = pc.cliente and pv.prenotazione = p.OID and pc.prenotazione = p.OID where pv.volo = '$OIDVolo'";
         $stmt = $this->connection->query($query); //la eseguo
-        $lista = array();
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
-            $obj = (object)($row);
-            array_push($lista,$obj);
-        }
-        $listaDef = array();
-        foreach ($lista as $el){
-            array_push($listaDef,$this->objectToObject($el,'Cliente')); //eseguo il cast dell'oggetto generico
-        }
-        return $listaDef;
+        return $this->materializeAll($stmt, 'Cliente');
     }
 
     public function isAereoDisponibile($partenza, $arrivo, $OIDAereo){
