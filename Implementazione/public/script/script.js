@@ -89,6 +89,9 @@ $(function() {
             } else {
                 $(this).addClass("selected");
                 $("#tar_stand").removeClass("selected");
+                $("#supplemento_row").slideDown();
+                $("#tariffa_row").slideDown();
+                $("#prezzo_tot").text(parseFloat($("#prezzo_base")[0].innerHTML.replace("€",""))+20+"€");
             }
         });
         $("#tar_stand").click(function () {
@@ -97,6 +100,9 @@ $(function() {
             } else {
                 $(this).addClass("selected");
                 $("#tar_plus").removeClass("selected");
+                $("#supplemento_row").slideUp();
+                $("#tariffa_row").slideUp();
+                $("#prezzo_tot").text(parseFloat($("#prezzo_base")[0].innerHTML.replace("€",""))+"€");
             }
         });
     });

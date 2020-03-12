@@ -55,6 +55,7 @@ class Prenotazione{
             $b = new Biglietto($posto->numeroPosto,$tariffa,$listaPasseggeri[$i],$prezzo);
             DBFacade::getIstance()->put($b);
             array_push($lista,$b);
+            $i++;
         }
         return $lista;
     }

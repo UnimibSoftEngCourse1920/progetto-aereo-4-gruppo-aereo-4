@@ -68,7 +68,7 @@
         $dataOraPartenza = DateTime::createFromFormat('Y-m-d H:i:s', $volo->getDataOraPartenza());
         $dataOraArrivo = DateTime::createFromFormat('Y-m-d H:i:s', $volo->getDataOraArrivo());
         $prezzoScontato = number_format($volo->getPrezzoScontato(isset($_SESSION["id_cliente"])),2);
-        $prezzoIntero = $volo->getPrezzoIntero();?>
+        $prezzoIntero = number_format($volo->getPrezzoIntero(), 2);?>
         <div class="row volo p-md-5">
             <div class="col-md-2 text-center">
                 <div class="orario"><?=$dataOraPartenza->format('H:i');?> <?=$volo->getAeroportoPartenza()->getCodice()?></div>

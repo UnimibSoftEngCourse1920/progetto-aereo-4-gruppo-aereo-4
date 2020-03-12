@@ -82,6 +82,9 @@ class Volo {
     }
 
     public function getPromozione(){
+        if(is_string($this->promozione)){
+            $this->promozione = DBFacade::getIstance()->get($this->promozione,Promozione::class);
+        }
         return $this->promozione;
     }
 
@@ -96,7 +99,7 @@ class Volo {
     public function getPosti(){
         if(is_string($this->listaPosti[0])){
             for($i=0; $i< count($this->listaPosti); $i++){
-                $this->listaPosti[$i] = DBFacade::getIstance()->get($this->listaPosti[i], Posto::class);
+                $this->listaPosti[$i] = DBFacade::getIstance()->get($this->listaPosti[$i], Posto::class);
             }
         }
         return $this->listaPosti;
@@ -128,6 +131,7 @@ class Volo {
     }
 
     public function getDisponibilitaPosti($numPosti){
+        $this->getPosti();
         $contaLiberi=0;
         $posti = $this->listaPosti;
         foreach ($posti as $posto){
@@ -173,17 +177,18 @@ class Volo {
 
     public function getPrezzoScontato($isFedelta){
         $prezzo = $this->getPrezzoIntero();
+        $this->getPromozione();
         if((isset($this->promozione))) { //se esiste una promozione per questo volo
             //se è per fedeltà e cliente è fedeltà o non è per fedeltà
-            if (($this->promozione->promozioneFedelta && $isFedelta) || !$this->promozione->promozioneFedelta){
+            if (($this->promozione->promozioneFedelta && $isFedelta) || !$this->promozione->promozioneFedelta) {
                 $sconto = $this->promozione->percentualeSconto;
-                $prezzo = $prezzo - (($prezzo*$sconto)/100);
-            } else {
-                $registroPromozioni = new RegistroPromozioni();
-                $migliorPromozione = $registroPromozioni->getMigliorePromozioneAttiva();
-                if (($migliorPromozione->promozioneFedelta && $isFedelta) || !$migliorPromozione->promozioneFedelta) {
-                    $prezzo = $prezzo - (($prezzo * $migliorPromozione->percentualeSconto) / 100);
-                }
+                $prezzo = $prezzo - (($prezzo * $sconto) / 100);
+            }
+        } else {
+            $registroPromozioni = new RegistroPromozioni();
+            $migliorPromozione = $registroPromozioni->getMigliorePromozioneAttiva();
+            if (($migliorPromozione->promozioneFedelta && $isFedelta) || !$migliorPromozione->promozioneFedelta) {
+                $prezzo = $prezzo - (($prezzo * $migliorPromozione->percentualeSconto) / 100);
             }
         }
         return $prezzo;

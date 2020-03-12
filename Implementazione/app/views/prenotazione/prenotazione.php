@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gruppo Aereo 4 - Login</title>
+    <title>Gruppo Aereo 4 - Prenota</title>
     <?php include("../app/template/header.php") ?>
     <link type="text/css" rel="stylesheet" href="../css/style.css" />
 </head>
@@ -24,13 +24,13 @@
             <div class="row mt-2">
                 <div class="col-md-2"></div>
                 <div class="col-md-4 text-center">
-                    <div class="d-flex mx-auto tariffa" id="tar_stand">
+                    <div class="d-flex mx-auto tariffa selected" id="tar_stand">
                         <em class="fas fa-paper-plane"></em>
                         <p class="mt-auto mx-auto">Tariffa Standard</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
-                    <div class="d-flex mx-auto tariffa selected" id="tar_plus">
+                    <div class="d-flex mx-auto tariffa" id="tar_plus">
                         <em class="fas fa-rocket"></em>
                         <p class="mt-auto mx-auto">Tariffa VoloPlus</p>
                     </div>
@@ -62,22 +62,25 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Nome</label>
-                                <input type="text" class="form-control" id="nome" placeholder="Nome">
+                                <input type="text" class="form-control" id="nome<?= $i ?>" placeholder="Nome">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Cognome</label>
-                                <input type="text" class="form-control" id="cognome" placeholder="Cognome">
+                                <input type="text" class="form-control" id="cognome<?= $i ?>" placeholder="Cognome">
                             </div>
                         </div>
                         <?php }?>
+                        <?php if(!$data["volo"]->getDisponibilitaPosti($data["pass"])){ ?>
                         <div class="form-row px-3 pt-4 pb-3">
                             <div class="error mx-auto">Non ci sono più posti per questo volo.</div>
                         </div>
+                        <?php } else { ?>
                         <div class="form-row pt-4">
                             <div class="form-group col-md-4 mx-auto">
                                 <button type="submit" class="btn btn-primary w-100">Prenota</button>
                             </div>
                         </div>
+                        <?php } ?>
                     </form>
                 </div>
             </div>
@@ -85,21 +88,21 @@
         <div class="col-md-4 px-md-5 mt-md-4" id="riepilogo">
             <div class="row pb-md-4">
                 <div class="col-8"><h3>Biglietti</h3></div>
-                <div class="col-4 text-right"><h3>340€</h3></div>
+                <div class="col-4 text-right"><h3 id="prezzo_base"><?= $data["volo"]->getPrezzoIntero()*$data["pass"]?>€</h3></div>
             </div>
             <div class="row">
                 <div class="col">
                     <p>
-                        <strong>Milano Malpensa (MXP)</strong>
-                        <br>2020-04-04 04:30
+                        <strong><?= $data["volo"]->getAeroportoPartenza()->getCitta()." ".$data["volo"]->getAeroportoPartenza()->getNome()." (".$data["volo"]->getAeroportoPartenza()->getCodice().")" ?></strong>
+                        <br><?= $data["volo"]->getDataOraPartenza()?>
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <p>
-                        <strong>Londra Stansted (STN)</strong>
-                        <br>2020-04-04 19:00
+                        <strong><?= $data["volo"]->getAeroportoDestinazione()->getCitta()." ".$data["volo"]->getAeroportoDestinazione()->getNome()." (".$data["volo"]->getAeroportoDestinazione()->getCodice().")" ?></strong>
+                        <br><?= $data["volo"]->getDataOraArrivo()?>
                     </p>
                 </div>
             </div>
@@ -107,15 +110,19 @@
                 <div class="col">
                     <p>
                         <strong>Viaggiatori</strong>
-                        <br>3
+                        <br><?= $data["pass"] ?>
                     </p>
                 </div>
             </div>
-            <div class="row py-md-4">
-                <div class="col-8"><h3>Supplementi</h3></div>
-                <div class="col-4 text-right"><h3>10€</h3></div>
+            <div class="row pb-md-4">
+                <div class="col-8"><h3>Promozioni</h3></div>
+                <div class="col-4 text-right"><?= var_dump($data["volo"]->getPromozione()); ?></div>
             </div>
-            <div class="row">
+            <div class="row py-md-4" id="supplemento_row" style="display: none;">
+                <div class="col-8"><h3>Supplementi</h3></div>
+                <div class="col-4 text-right"><h3>20€</h3></div>
+            </div>
+            <div class="row" id="tariffa_row" style="display: none;">
                 <div class="col">
                     <p>
                         <strong>Tariffa</strong>
@@ -125,7 +132,7 @@
             </div>
             <div class="row py-md-4">
                 <div class="col-8"><h3>Totale</h3></div>
-                <div class="col-4 text-right"><h3>350€</h3></div>
+                <div class="col-4 text-right"><h3 id="prezzo_tot"><?= $data["volo"]->getPrezzoIntero()*$data["pass"]?>€</h3></div>
             </div>
         </div>
     </div>
