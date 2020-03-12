@@ -25,10 +25,9 @@ class Prenotazione{
         $this->volo = $volo;
         $this->listaPosti = $this->volo->prenota($numPosti);
         $prezzo = $this->volo->calcolaPrezzo($this->cliente->isFedelta());
-        $this->listaBiglietti = $this->generaBiglietti($prezzo,$tariffa);
+        $this->listaBiglietti = $this->generaBiglietti($prezzo,$tariffa,$listaPasseggeri);
         $this->listaAcquisti = array();
         $this->data = date("Y-m-d");
-        $this->listaPasseggeri = $listaPasseggeri;
     }
 
     public function generaEstrattoContoParziale(EstrattoConto $estrattoConto){
@@ -49,32 +48,13 @@ class Prenotazione{
         //non c'è nessuna return perchè lavora direttamente sull'obj
     }
 
-    public function registraPrenotazione(){
-        $this->OID = DBFacade::getIstance()->salvaPrenotazione($this);
-    }
-
     //getClienteCode() !!
 
-    public function __get($attributo) {
-        // TODO rimuovere ?
-        if (property_exists($this, $attributo)) {
-            return $this->$attributo;
-        }
-    }
-
-    public function __set($attributo, $valore) {
-        //TODO rimuovere ?
-        if (property_exists($this, $attributo)) {
-            $this->$attributo = $valore;
-        }
-        return $this;
-    }
-
-    public function generaBiglietti($prezzo,$tariffa){
+    private function generaBiglietti($prezzo,$tariffa,$listaPasseggeri){
         $lista = array();
         $i = 0;
         foreach ($this->listaPosti as $posto){
-            $b = new Biglietto($posto->numeroPosto,$tariffa,$this->listaPasseggeri[$i],$prezzo);
+            $b = new Biglietto($posto->numeroPosto,$tariffa,$listaPasseggeri[$i],$prezzo);
             DBFacade::getIstance()->put($b);
             array_push($lista,$b);
         }

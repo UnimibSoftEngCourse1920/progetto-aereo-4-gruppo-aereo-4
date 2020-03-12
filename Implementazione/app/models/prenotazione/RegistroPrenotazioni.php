@@ -80,11 +80,8 @@ class RegistroPrenotazioni{
 
             if($disp){
                 $v = $registroVoli->getVolo($codVolo);
-                $nuovaPrenotazione = new Prenotazione($cliente,$listaPasseggeri,$codVolo,$numPosti,$tariffa);
-                $nuovaPrenotazione->registraPrenotazione();
-                $volo = DBFacade::getIstance()->getVolo($codVolo);
-                $nuovaPrenotazione->listaPosti = $volo->prenota($numPosti);
-                $nuovaPrenotazione->generaBiglietti();
+                $nuovaPrenotazione = new Prenotazione($cliente,$listaPasseggeri,$v,$numPosti,$tariffa);
+                DBFacade::getIstance()->put($nuovaPrenotazione);
                 return $nuovaPrenotazione;
             }
             else{
