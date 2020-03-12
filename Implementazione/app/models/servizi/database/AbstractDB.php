@@ -4,6 +4,7 @@
 //namespace model\servizi;
 
 //use PDO;
+//TODO perchè queste??
 require_once $_SERVER['DOCUMENT_ROOT'] . "/app/models/volo/Aeroporto.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aereo.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Volo.php";
@@ -25,18 +26,11 @@ abstract class AbstractDB
     }
 
     public function get($OID, $class){
-        //Ad ora non vale per cliente
-        /*$stmt = $this->connection->prepare($this->generateGetQuery($OID,$class)); //manca la query
-        //template method
-        $stmt->execute();
-        $stmt -> setFetchMode(PDO::FETCH_CLASS, $class);
-        return $obj = $stmt->fetchAll(); */
         $query = $this->generateGetQuery($OID,$class); //creo la query
         $stmt = $this->connection->query($query); //la eseguo
         $row = $stmt->fetch(PDO::FETCH_ASSOC);//per ogni riga creo un oggetto generico
         $obj = (object)($row);
         $ris = $this->objectToObject($obj,$class); //eseguo il cast dell'oggetto generico
-
         return $ris;
     }
 
@@ -97,6 +91,7 @@ abstract class AbstractDB
         return "SELECT * from ".$class;
     }
 
+    //TODO private?
     protected function objectToObject($instance, $className) {
         return unserialize(sprintf(
             'O:%d:"%s"%s',

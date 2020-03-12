@@ -36,7 +36,7 @@ class VoloDB extends AbstractDB
 
     protected function generateGetQuery($OID, $class)
     {
-        return "SELECT * from Volo v join VoloAeroporto va on v.OID = va.volo WHERE v.OID = '$OID'";
+        return "SELECT v.*, va.aeroportoPartenza, va.aeroportoArrivo from Volo v join VoloAeroporto va on v.OID = va.volo WHERE v.OID = '$OID'";
     }
 
     protected function generateGetAllQuery($class)
@@ -46,24 +46,14 @@ class VoloDB extends AbstractDB
 
     public function get($OID, $class){
         $volo = parent::get($OID, $class);
-        //$this->setAereoporti($volo);
-        $this->setPosti($volo);
-        //setPromozione non serve perchè promo è attributo
+        $volo->setPosti($this->getAssociazioni("posto", $volo));
         return $volo;
     }
 
-    private function DEPRECATO_setAereoporti(Volo $volo){
-        $query = sprintf("Select aeroportoPartenza, aeroportoDestinazione from VoloAeroporto where volo='%s'", $volo->getOID());
-        $aereoporti = $this->connection->query($query)->fetch();
-        //TODO: controlli
-        $volo->setAeroportoPartenza($aereoporti[0]);
-        $volo->setAeroportoDestinazione($aereoporti[1]);
-    }
-
-    private function setPosti(Volo $volo){
-        $query = sprintf("Select posto from VoloPosto where volo='%s'", $volo->getOID());
-        $listaPosti = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
-        $volo->setPosti($listaPosti);
+    private function getAssociazioni($nomeClasseAssociata, $volo){
+        $name = ucfirst(strtolower($nomeClasseAssociata));
+        $query = sprintf("Select $name from Volo$name where volo = '%s'", $volo->getOID());
+        return $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
     }
 
     public function cercaVoli($partenza, $destinazione, $data, $nPosti){

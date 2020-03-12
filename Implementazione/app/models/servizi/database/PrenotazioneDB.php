@@ -10,11 +10,9 @@ class PrenotazioneDB extends AbstractDB
 {
     public function get($OID, $class){
         $prenotazione = parent::get($OID, $class); //TODO chiamata a this?
-        $this->setCliente($prenotazione);
-        $this->setVolo($prenotazione);
-        $this->setPosti($prenotazione);
-        $this->setBiglietti($prenotazione);
-        $this->setAcquisti($prenotazione);
+        $prenotazione->setPosti($this->getAssociazioni("posto", $prenotazione));
+        $prenotazione->setBiglietti($this->getAssociazioni("biglietto", $prenotazione));
+        $prenotazione->setAcquisti($this->getAssociazioni("acquisto", $prenotazione));
         return $prenotazione;
     }
 
@@ -22,34 +20,17 @@ class PrenotazioneDB extends AbstractDB
 
     //TODO faccio la join direttamente nella generateGetQuery così da no dover chiamare la setXX anche sui campi singoli ù(Cioè anche dove non serve)
 
-    private function setCliente(Prenotazione $prenotazione){
-        $query = sprintf("Select cliente from PrenotazioneCliente where prenotazione = '%s'", $prenotazione->getOID());
-        $cliente = $this->connection->query($query)->fetch()[0];
-        $prenotazione->setCliente($cliente);
+    private function getAssociazioni($nomeClasseAssociata, $prenotazione){
+        $name = ucfirst(strtolower($nomeClasseAssociata));
+        $query = sprintf("Select $name from Prenotazione$name where prenotazione = '%s'", $prenotazione->getOID());
+        return $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
     }
 
-    private function setVolo(Prenotazione $prenotazione){
-        $query = sprintf("Select volo from PrenotazioneVolo where prenotazione = '%s'", $prenotazione->getOID());
-        $volo = $this->connection->query($query)->fetch()[0];
-        $prenotazione->setVolo($volo);
-    }
-
-    private function setPosti(Prenotazione $prenotazione){
-        $query = sprintf("Select posto from PrenotazionePosto where prenotazione = '%s'", $prenotazione->getOID());
-        $posti = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
-        $prenotazione->setListaPosti($posti);
-    }
-
-    private function setBiglietti(Prenotazione $prenotazione){
-        $query = sprintf("Select biglietto from PrenotazioneBiglietto where prenotazione = '%s'", $prenotazione->getOID());
-        $biglietti = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
-        $prenotazione->setListaBiglietti($biglietti);
-    }
-
-    private function setAcquisti(Prenotazione $prenotazione){
-        $query = sprintf("Select acquisto from PrenotazioneAcquisto where prenotazione = '%s'", $prenotazione->getOID());
-        $acquisti = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
-        $prenotazione->setListaAcquisti($acquisti);
+    protected function generateGetQuery($OID, $class)
+    {
+        //Prendo anche cliente e Volo associati
+        return "select p.*,pv.volo,pc.cliente from Prenotazione p join PrenotazioneVolo pv join PrenotazioneCliente pc 
+                on p.OID = pv.prenotazione and p.OID=pc.prenotazione WHERE p.OID = '$OID'";
     }
 
     protected function generatePutQuery($obj){
@@ -86,6 +67,7 @@ class PrenotazioneDB extends AbstractDB
 
     protected function generateDeleteQuery($OID, $class)
     {
+        //TODO dovrei cancellare anche i biglietti
         $query = "DELETE FROM Prenotazione WHERE OID = $OID; 
                     DELETE FROM PrenotazioneCliente WHERE prenotazione = $OID; 
                     DELETE FROM PrenotazioneVolo WHERE prenotazione = $OID;
