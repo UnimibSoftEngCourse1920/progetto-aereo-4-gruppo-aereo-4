@@ -139,16 +139,15 @@ class RegistroPrenotazioni{
         DBFacade::getIstance()->update($prenotazione);
 	}
 
-	public function cancellaPrenotazioniScadute(){
+	public function controlloPrenotazioniScadute(){
         $listaPrenotazioni = DBFacade::getIstance() -> getPrenotazioniScaduteIn(72);
+        foreach ($listaPrenotazioni as $prenotazione){
+            DBFacade::getIstance()->delete($prenotazione->getOID(), Prenotazione::class);
+        }
+        $listaPrenotazioni = DBFacade::getIstance() -> getPrenotazioniScaduteIn(96);
         $listaClienti = array();
         foreach ($listaPrenotazioni as $prenotazione){
-            DBFacade::getIstance()->delete($prenotazione->getOID(), "Prenotazione");
-        }
-
-        $listaPrenotazioni = DBFacade::getIstance() -> getPrenotazioniScaduteIn(96);
-        foreach ($listaPrenotazioni as $prenotazione){
-            $listaClienti[] = $prenotazione->getCliente()->getEmail();
+            $listaClienti[] = $prenotazione->getCliente();
         }
         $this->mailer->avvisaPrenotazioneInScadenza($listaClienti);
     }

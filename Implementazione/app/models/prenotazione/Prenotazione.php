@@ -48,8 +48,6 @@ class Prenotazione{
         //non c'è nessuna return perchè lavora direttamente sull'obj
     }
 
-    //getClienteCode() !!
-
     private function generaBiglietti($prezzo,$tariffa,$listaPasseggeri){
         $lista = array();
         $i = 0;

@@ -63,8 +63,8 @@ class PrenotazioneDB extends AbstractDB
         foreach($obj->getListaPosti() as $posto)
             $query .= sprintf("INSERT INTO PrenotazionePosto VALUES ('%s', '%s');", $obj->getOID(), $posto->getOID());
 
-        foreach($obj->getListaAcquisti() as $acquisto)
-            $query .= sprintf("INSERT INTO PrenotazioneAcquisto VALUES ('%s', '%s');", $obj->getOID(), $acquisto->getOID());
+        //foreach($obj->getListaAcquisti() as $acquisto)
+        //   $query .= sprintf("INSERT INTO PrenotazioneAcquisto VALUES ('%s', '%s');", $obj->getOID(), $acquisto->getOID());
 
         return $query;
     }
@@ -95,8 +95,11 @@ class PrenotazioneDB extends AbstractDB
     }
 
     public function getScadute($ore){
-        $query = "select * from Prenotazione as p JOIN volo as v where p.OID NOT IN (select OID from PrenotazioneAcquisto) AND TIMESTAMPDIFF(HOUR, v.dataora, NOW()) >= '$ore'";
+        $query = "select p.OID, v.*, TIMESTAMPDIFF(HOUR, NOW(), v.dataOraPartenza) from Prenotazione as p JOIN Volo as v JOIN PrenotazioneVolo pv 
+                    on p.OID = pv.prenotazione and pv.volo = v.OID where TIMESTAMPDIFF(HOUR, NOW(), v.dataOraPartenza) <= '$ore' 
+                    AND p.OID NOT IN (select prenotazione from PrenotazioneAcquisto);";
         $stmt = $this->connection->query($query);
+        //TODO fare chiamata a materializeAll
         $listaPrenotazioni = $stmt->fetchAll(PDO::FETCH_CLASS, "Prenotazione");
         return $listaPrenotazioni;
     }
@@ -112,7 +115,8 @@ class PrenotazioneDB extends AbstractDB
     public function getFedeltaUltimaPrenotazione(){
         //Per ogni codice fedeltà, ritorna l'ultima prenotazione effettuata
         $result = array();
-        $query = "select c.OID,max(data) from Prenotazione p JOIN PrenotazioneCliente pc JOIN Cliente c on p.OID=pc.prenotazione and c.OID = pc.cliente where c.codiceFedelta is not null group by c.OID;";
+        $query = "select c.OID,max(data) from Prenotazione p JOIN PrenotazioneCliente pc JOIN Cliente c on p.OID=pc.prenotazione and c.OID = pc.cliente 
+                    where c.codiceFedelta is not null group by c.OID;";
         $stmt = $this->connection->query($query);
         $stmt->bindColumn(1, $OIDCliente);
         $stmt->bindColumn(2, $data);

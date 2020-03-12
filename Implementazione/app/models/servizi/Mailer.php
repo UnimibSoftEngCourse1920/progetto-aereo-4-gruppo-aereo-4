@@ -6,8 +6,13 @@ class Mailer{
     private $password;
 
     public function inviaCancellazioneFedelta($cliente){
-        $message = "Sei stato cancellato dal progarmma fedeltà";
-        mail($cliente->getEmail(), "Cancellazione programma fedeltà", $message);
+        $message = "Gentile cliente, \n
+                    Ti scriviamo per informarti che sei stato cancellato dal programma fedeltà. \n
+                    Speriamo di riaverti presto con noi. \n 
+                    Buona giornata \n \n
+                    GrupopAereo4
+                    " ;
+        mail($cliente->getEmail(), "Cancellazione programma fedelta'", $message);
     }
 
     public function inviaEmailModificaVolo($listaClienti, $volo){
@@ -85,16 +90,35 @@ class Mailer{
     }
 
     public function inviaComunicazioneInfedelta($cliente){
-        $message = 'INFEDELEEEE!!!!';
+        $message = "Gentile cliente, \n
+                    Ti contattiamo per comunicarti che, a causa di mancati acquisti da due anni a questa parte, il tuo nuovo stato è di cliente infedele. \n
+                    Per tornare ad essere un cliente fedeltà devi solamente effettuare un acquisto entro un anno, altrimenti verrai automaticamente cancellato dal programma. \n
+                    Grazie, \n
+                    Buona giornata \n\n
+                    GruppoAereo4";
         mail($cliente->getEmail(), 'Avviso infedeltà', $message);
     }
 
     public function avvisaClientiPromozioni($listaClienti, $listaPromozioni){
         //Genero testo dalla lista promozioni
-        mail($this->generateRecipients($listaClienti), 'Scopri le nuove promozioni', 'Lista promozioni');
+        $num = (count($listaPromozioni) >= 5) ? 5 : count($listaPromozioni);
+        $message = "Gentile cliente, \n
+                    Ti informiamo di alcune delle promozioni attualmente attive, esclusive per i cliente fedelta: \n";
+        for($i = 0; $i<$num; $i++){
+            $message .= sprintf("$i) %s", $listaPromozioni[$i]->getNome()." ".$listaPromozioni[$i]->getSconto())."% di sconto sul prezzo del biglietto \n";
+        }
+        $message .= "Grazie dell'attenzione, \n
+                    Buona giornata \n \n
+                    GruppoAereo4";
+        mail($this->generateRecipients($listaClienti), 'Scopri le nuove promozioni', $message);
     }
 
     public function avvisaPrenotazioneInScadenza($listaClienti){
+        $message = "Gentile cliente, \n
+                    Ti avvisiamo che la tua prenotazione è in scadenza. \n
+                    Se non verra acquistata entro 24 ore, verrà automaticamente eliminata. \n
+                    Buona giornata \n\n
+                    GruppoAereo4";
         mail($this->generateRecipients($listaClienti), "Prenotazione cancellata", "La tua prenotazione è stata cancellata");
     }
 
