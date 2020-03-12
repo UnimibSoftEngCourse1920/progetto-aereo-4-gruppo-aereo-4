@@ -60,6 +60,35 @@ class Mailer{
         mail($email, 'Conferma iscrizione programma fedeltà', $message);
     }
 
+    public function inviaEmailBiglietti($email, $pdf){
+        $email = "o.zaher@campus.unimib.it";
+        $content = file_get_contents($pdf);
+        $content = chunk_split(base64_encode($content));
+        $uid = md5(uniqid(time()));
+
+        $header = "From: Gruppo Aereo 4 <gruppoaereo4@gmail.com>\r\n";
+        $header .= "MIME-Version: 1.0\r\n";
+        $header .= "Content-Type: multipart/mixed; boundary=\"".$uid."\"\r\n\r\n";
+
+        $plainMessage = "Gentile cliente, \n".
+                    "In allegato trovi i biglietti da te acquistati.\n".
+                    "Buona giornata\n\n".
+                    "GruppoAereo4";
+
+        $message = "--".$uid."\r\n";
+        $message .= "Content-type:text/plain; charset=iso-8859-1\r\n";
+        $message .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
+        $message .= $plainMessage."\r\n\r\n";
+        $message .= "--".$uid."\r\n";
+        $message .= "Content-Type: application/octet-stream; name=\"".$pdf."\"\r\n";
+        $message .= "Content-Transfer-Encoding: base64\r\n";
+        $message .= "Content-Disposition: attachment; filename=\"".$pdf."\"\r\n\r\n";
+        $message .= $content."\r\n\r\n";
+        $message .= "--".$uid."--";
+
+        mail($email, 'Biglietti acquistati', $message, $header);
+    }
+
     public function inviaComunicazioneInfedelta($cliente){
         $message = "Gentile cliente, \n
                     Ti contattiamo per comunicarti che, a causa di mancati acquisti da due anni a questa parte, il tuo nuovo stato è di cliente infedele. \n

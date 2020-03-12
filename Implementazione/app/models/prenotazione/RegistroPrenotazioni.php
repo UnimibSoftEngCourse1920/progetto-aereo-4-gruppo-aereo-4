@@ -5,6 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/RegistroClienti.php"
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/EstrattoConto.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/Cliente.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/PDFGenerator.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/Mailer.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/RegistroVoli.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/prenotazione/Prenotazione.php";
@@ -80,11 +81,8 @@ class RegistroPrenotazioni{
 
             if($disp){
                 $v = $registroVoli->getVolo($codVolo);
-                $nuovaPrenotazione = new Prenotazione($cliente,$listaPasseggeri,$codVolo,$numPosti,$tariffa);
-                $nuovaPrenotazione->registraPrenotazione();
-                $volo = DBFacade::getIstance()->getVolo($codVolo);
-                $nuovaPrenotazione->listaPosti = $volo->prenota($numPosti);
-                $nuovaPrenotazione->generaBiglietti(); //NON VIENE GIA' FATTO NEL COSTRUTTORE??
+                $nuovaPrenotazione = new Prenotazione($cliente,$listaPasseggeri,$v,$numPosti,$tariffa);
+                DBFacade::getIstance()->put($nuovaPrenotazione);
                 return $nuovaPrenotazione;
             }
             else{
@@ -121,11 +119,11 @@ class RegistroPrenotazioni{
 	
 	public function generaBiglietti($prenotazione, $cliente) {
 		$biglietti = $prenotazione->getListaBiglietti();
-		foreach($biglietti as $biglietto) {
-			$biglietto->generaPDF();
-		}
+		$pdf = PDFGenerator::getInstance()->generaBiglietti($biglietti);
 		$email = $cliente->getEmail();
-		Mailer::getIstance()->inviaBiglietti($biglietti, $email);
+		$mailer = new Mailer();
+		$mailer->inviaEmailBiglietti($email, $pdf);
+        PDFGenerator::getInstance()->cancellaPDF($pdf);
 	}
 	
 	public function getPrenotazione($idPrenotazione) {

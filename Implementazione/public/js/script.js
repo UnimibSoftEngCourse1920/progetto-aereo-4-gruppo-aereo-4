@@ -32,3 +32,22 @@ if($("#containercircle").length) {
 
     bar.animate(0.7);
 }
+
+$(document).ready(function () {
+    $("#tar_plus").click(function () {
+        if($(this).hasClass("selected")){
+
+        } else {
+            $(this).addClass("selected");
+            $("#tar_stand").removeClass("selected");
+        }
+    });
+    $("#tar_stand").click(function () {
+        if($(this).hasClass("selected")){
+
+        } else {
+            $(this).addClass("selected");
+            $("#tar_plus").removeClass("selected");
+        }
+    });
+});
