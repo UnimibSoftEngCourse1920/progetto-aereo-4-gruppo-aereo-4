@@ -91,7 +91,11 @@ $(function() {
                 $("#tar_stand").removeClass("selected");
                 $("#supplemento_row").slideDown();
                 $("#tariffa_row").slideDown();
-                $("#prezzo_tot").text(parseFloat($("#prezzo_base")[0].innerHTML.replace("€",""))+20+"€");
+                $("#prezzo_tot").text((parseFloat($("#prezzo_base")[0].innerHTML.replace("€",""))+20).toFixed(2)+"€");
+                if($("#old_tot").length){
+                    var temp = $("#old_tot")[0].innerHTML.replace("€","");
+                    $("#old_tot").text(parseFloat(temp).toFixed(1)+20+"€");
+                }
             }
         });
         $("#tar_stand").click(function () {
@@ -102,7 +106,7 @@ $(function() {
                 $("#tar_plus").removeClass("selected");
                 $("#supplemento_row").slideUp();
                 $("#tariffa_row").slideUp();
-                $("#prezzo_tot").text(parseFloat($("#prezzo_base")[0].innerHTML.replace("€",""))+"€");
+                $("#prezzo_tot").text(parseFloat($("#prezzo_base")[0].innerHTML.replace("€","")).toFixed(2)+"€");
             }
         });
     });
