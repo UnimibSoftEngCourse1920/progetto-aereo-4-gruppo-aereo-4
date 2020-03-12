@@ -128,6 +128,14 @@ class DBFacade{
         return $this->gestori[Prenotazione::class] -> getPrenotazioniCliente($OIDCliente, $soloAcquistate);
     }
 
+    public function getPromozioniFedelta(){
+        return $this->gestori[Promozione::class] -> getPromozioniFedelta();
+    }
+
+    public function getAllFedelta(){
+        return $this->gestori['Cliente'] -> getAllFedelta();
+    }
+
 }
 
 

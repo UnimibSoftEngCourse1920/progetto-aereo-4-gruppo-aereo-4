@@ -9,6 +9,7 @@ class RegistroClienti
 {
     public static $AVVISACANCELLAZIONEFEDELTA = "CANCELLAZIONEFEDELTA";
     public static $AVVISACLIENTEINFEDELE = "CLIENTEINFEDELE";
+    public static $AVVISAPROMOZIONI = "PROMOZIONI";
 
     public $mailer;
 
@@ -75,6 +76,17 @@ class RegistroClienti
             default:
                 return false;
                 //TODO vedere questo return
+        }
+    }
+
+    public function avvisaClientiFedelta($object, $tipo){
+        if($tipo == self::$AVVISAPROMOZIONI) {
+            //TODO inserire questo controllo nei diagrammi?
+            if($object!=null && get_class($object[0]) == Promozione::class) {
+                $listaClienti = DBFacade::getIstance()->getAllFedelta();
+                //TODO controllo in avvisaClientiPromozioni
+                $this->mailer->avvisaClientiPromozioni($listaClienti, $object);
+            }
         }
     }
 

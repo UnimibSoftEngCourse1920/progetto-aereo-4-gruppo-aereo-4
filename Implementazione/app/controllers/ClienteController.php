@@ -1,6 +1,7 @@
 <?php
 
 require_once "../app/models/cliente/RegistroClienti.php";
+require_once "../app/models/volo/RegistroPromozioni.php";
 require_once "../app/models/prenotazione/RegistroPrenotazioni.php";
 require_once "../app/core/Controller.php";
 
@@ -8,10 +9,12 @@ class ClienteController extends Controller{
 
     private $registroClienti;
     private $registroPrenotazioni;
+    private $registroPromozioni;
 
     public function __construct(){
         $this->registroClienti = new RegistroClienti();
         $this->registroPrenotazioni = new RegistroPrenotazioni();
+        $this->registroPromozioni = new RegistroPromozioni();
     }
 
     public function annullaIscrizione($codiceFedelta){
@@ -50,11 +53,8 @@ class ClienteController extends Controller{
     }
 
     public function avvisaPromozioniFedelta() {
-        /* DA FARE
-        Rimuovere mailer!!
-        $listaClienti = DBFacade::getIstance()->getClientiFedelta();
-        $listaPromozioni = $this->registroPromozioni->getPromozioniFedelta();
-        $this->mailer->avvisaClientiPromozioni($listaClienti, $listaPromozioni);*/
+        $listaPromozioni = $this->registroPromozioni -> getPromozioniFedelta();
+        $this->registroClienti->avvisaClientiFedelta($listaPromozioni, RegistroClienti::$AVVISAPROMOZIONI);
     }
 
     public function registrato() {

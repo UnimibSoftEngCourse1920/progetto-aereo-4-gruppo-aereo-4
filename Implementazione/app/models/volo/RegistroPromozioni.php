@@ -35,10 +35,11 @@ class RegistroPromozioni
         DBFacade::getIstance()->delete($OID, "Promozione");
     }
 
+    //TODO da mettere insieme i due metodi sotto??
 
     public function getPromozioniFedelta(){
         //ritorna lista delle promozioni fedelta attive
-        return array();
+        return DBFacade::getIstance() ->getPromozioniFedelta();
     }
 
     public function getPromozioni(){

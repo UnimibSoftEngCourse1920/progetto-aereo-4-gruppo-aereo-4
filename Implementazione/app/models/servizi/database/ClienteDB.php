@@ -40,5 +40,24 @@ class ClienteDB extends AbstractDB
         return $result[0];
     }
 
+    public function getAllFedelta(){
+        //TODO Fare un modo per filtrare la getAll
+        $query = "Select * from Cliente where codiceFedelta is not null";
+        $stmt = $this->connection->query($query); //la eseguo
+        $lista = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
+            $obj = (object)($row);
+            array_push($lista,$obj);
+        }
+
+        $listaDef = array();
+        foreach ($lista as $el){
+            array_push($listaDef,$this->objectToObject($el,Cliente::class)); //eseguo il cast dell'oggetto generico
+        }
+
+        return $listaDef;
+
+    }
+
 
 }
