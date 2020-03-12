@@ -7,8 +7,13 @@ class PrenotazioneController extends Controller
 {
     private $registroPrenotazioni;
 
-    public function cancellaPrenotazioniScadute(){
-        $this->registroPrenotazioni->cancellaPrenotazioniScadute();
+    public function __construct()
+    {
+        $this->registroPrenotazioni = new RegistroPrenotazioni();
+    }
+
+    public function controlloPrenotazioniScadute(){
+        $this->registroPrenotazioni->controlloPrenotazioniScadute();
     }
 
     //TODO Metodo temporaneo

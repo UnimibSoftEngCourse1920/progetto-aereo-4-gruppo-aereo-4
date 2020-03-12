@@ -53,8 +53,6 @@ class Prenotazione{
         $this->OID = DBFacade::getIstance()->salvaPrenotazione($this);
     }
 
-    //getClienteCode() !!
-
     public function __get($attributo) {
         // TODO rimuovere ?
         if (property_exists($this, $attributo)) {

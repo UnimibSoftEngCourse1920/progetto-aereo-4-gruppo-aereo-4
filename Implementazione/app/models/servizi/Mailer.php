@@ -85,6 +85,11 @@ class Mailer{
     }
 
     public function avvisaPrenotazioneInScadenza($listaClienti){
+        $message = "Gentile cliente, \n
+                    Ti avvisiamo che la tua prenotazione è in scadenza. \n
+                    Se non verra acquistata entro 24 ore, verrà automaticamente eliminata. \n
+                    Buona giornata \n\n
+                    GruppoAereo4";
         mail($this->generateRecipients($listaClienti), "Prenotazione cancellata", "La tua prenotazione è stata cancellata");
     }
 
