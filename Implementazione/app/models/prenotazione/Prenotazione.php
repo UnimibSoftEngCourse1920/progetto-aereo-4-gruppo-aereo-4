@@ -141,7 +141,7 @@ class Prenotazione{
 
     public function getVolo() {
         if(is_string($this->volo)){
-            $this->cliente = DBFacade::getIstance() ->get($this->volo, Volo::class);
+            $this->volo = DBFacade::getIstance() ->get($this->volo, Volo::class);
         }
         return $this->volo;
     }
