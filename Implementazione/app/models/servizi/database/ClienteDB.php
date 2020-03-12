@@ -33,13 +33,6 @@ class ClienteDB extends AbstractDB
         return $lista;
     }
 
-    public function getUltimoCodiceFedelta(){
-        //TODO: metodo di Omar??
-        $query = "select IFNULL(max(codiceFedelta), 'F0') from Cliente;";
-        $result = $this->connection->query($query)->fetch();
-        return $result[0];
-    }
-
     public function getAllFedelta(){
         //TODO Fare un modo per filtrare la getAll
         $query = "Select * from Cliente where codiceFedelta is not null";
@@ -49,12 +42,10 @@ class ClienteDB extends AbstractDB
             $obj = (object)($row);
             array_push($lista,$obj);
         }
-
         $listaDef = array();
         foreach ($lista as $el){
             array_push($listaDef,$this->objectToObject($el,Cliente::class)); //eseguo il cast dell'oggetto generico
         }
-
         return $listaDef;
 
     }

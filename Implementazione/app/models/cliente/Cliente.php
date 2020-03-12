@@ -20,15 +20,15 @@ class Cliente{
     private $stato;
     private $punti;
 
-    public function __construct($nome, $cognome, $email, $dataNascita, $codiceFedelta=null, $indirizzo=null, $password = null){
+    public function __construct($nome, $cognome, $email, $dataNascita, $indirizzo=null, $password = null, $fedelta = false){
         $this->OID = OIDGenerator::getIstance()->getNewOID();
         $this->nome = $nome;
         $this->cognome = $cognome;
         $this->email = $email;
         $this->dataNascita = $dataNascita;
 
-        if($codiceFedelta!=null){
-            $this->codiceFedelta = $codiceFedelta;
+        if($fedelta){
+            $this->codiceFedelta = base_convert($this->OID, 10, 32);
             $this->indirizzo = $indirizzo;
             $this->password = $password;
             $this->stato = self::$STATO_FEDELE;
@@ -38,6 +38,7 @@ class Cliente{
             $this->codiceFedelta = null;
             $this->indirizzo = null;
             $this->password = null;
+            $this->punti = null;
             $this->stato = self::$STATO_OSPITE;
         }
     }

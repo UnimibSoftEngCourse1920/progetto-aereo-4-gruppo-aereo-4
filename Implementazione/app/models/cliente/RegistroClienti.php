@@ -23,31 +23,17 @@ class RegistroClienti
         return DBFacade::getIstance() -> emailFedeltaExists($email);
     }
 
-    private function generaCodiceFedelta(){
-        //La generazione del codice è ancora da vedere
-        //Chiede al DB oppure lui sa qual'è l'ultimo (Attenzione! Se sono più di uno è un macello)
-
-        $ultimoCodice = DBFacade::getIstance()->getUltimoCodiceFedelta();
-        return "F" . sprintf('%07d', substr($ultimoCodice, 1) + 1);
-    }
-
     public function nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $password){
         $mailExists = DBFacade::getIstance()->emailFedeltaExists($email);
         if(!$mailExists){
-            $codice = $this->generaCodiceFedelta();
-            $cliente = new Cliente($nome, $cognome, $email, $dataNascita, $codice, $indirizzo, md5($password));
+            $cliente = new Cliente($nome, $cognome, $email, $dataNascita, $indirizzo, md5($password), true);
             $esito = DBFacade::getIstance()->put($cliente);
             if ($esito) {
-                $this->mailer->inviaEmailCodiceFedelta($email, $codice);
+                $this->mailer->inviaEmailCodiceFedelta($email, $cliente->getCodiceFedelta());
             }
         }
         return $esito;
     }
-
-    /*public function getCliente($codiceFedelta){
-        //per ora è deprecated
-        return DBFacade::getIstance() -> get($codiceFedelta);
-    }*/
 
     public function annullaIscrizione($OIDCliente){
         $db = DBFacade::getIstance();

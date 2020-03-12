@@ -111,11 +111,6 @@ class DBFacade{
         return $this->gestori['Prenotazione'] -> getFedeltaUltimaPrenotazione();
     }
 
-    public function getUltimoCodiceFedelta(){
-        //TODO cancellare a causa di generazione con conversione base64
-        return $this->gestori['Cliente'] -> getUltimoCodiceFedelta();
-    }
-
     public function getPasseggeriVolo($OIDVolo){
         return $this->gestori['Volo'] -> getPasseggeriVolo($OIDVolo);
     }
