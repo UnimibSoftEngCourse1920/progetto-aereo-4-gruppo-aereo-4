@@ -72,13 +72,13 @@ class PrenotazioneDB extends AbstractDB
     protected function generateUpdateQuery($obj){
         //Potrebbe non servire controllare la materializzazione qui
 
-        $query = sprintf("UPDATE PrenotazioneVolo  SET volo = '%s' where OID = '%s';", $obj->getVolo()->getOID() ,$obj->getOID());
+        $query = sprintf("UPDATE PrenotazioneVolo  SET volo = '%s' where prenotazione = '%s';", $obj->getVolo()->getOID() ,$obj->getOID());
 
         foreach($obj->getListaBiglietti() as $biglietto)
-            $query .= sprintf("UPDATE PrenotazioneBiglietto SET biglietto = '%s' where OID = '%s';", $biglietto->getOID(), $obj->getOID());
+            $query .= sprintf("UPDATE PrenotazioneBiglietto SET biglietto = '%s' where prenotazione = '%s';", $biglietto->getOID(), $obj->getOID());
 
         foreach($obj->getListaPosti() as $posto)
-            $query .= sprintf("UPDATE PrenotazionePosto SET posto = '%s' where OID = '%s';", $posto->getOID(), $obj->getOID());
+            $query .= sprintf("UPDATE PrenotazionePosto SET posto = '%s' where prenotazione = '%s';", $posto->getOID(), $obj->getOID());
 
         foreach($obj->getListaAcquisti() as $acquisto)
             $query .= sprintf("INSERT IGNORE into PrenotazioneAcquisto  values('%s','%s');", $obj->getOID(), $acquisto->getOID());
