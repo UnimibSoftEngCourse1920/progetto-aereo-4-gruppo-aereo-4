@@ -11,13 +11,7 @@ class Biglietto{
     private $OID;
     private $prezzo;
 
-    /**
-     * Biglietto constructor.
-     * @param $tariffa
-     * @param $nominativo
-     * @param $OID
-     */
-    public function __construct($numPosto, $tariffa, $nominativo,$prezzo)
+    public function __construct($numPosto, $tariffa, $nominativo, $prezzo)
     {
         $this->numPosto=$numPosto;
         $this->tariffa = $tariffa;

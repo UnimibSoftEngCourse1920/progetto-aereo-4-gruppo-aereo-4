@@ -9,7 +9,7 @@ require_once("AbstractDB.php");
 class PrenotazioneDB extends AbstractDB
 {
     public function get($OID, $class){
-        $prenotazione = parent::get($OID, $class);
+        $prenotazione = parent::get($OID, $class); //TODO chiamata a this?
         $this->setCliente($prenotazione);
         $this->setVolo($prenotazione);
         $this->setPosti($prenotazione);
@@ -53,7 +53,7 @@ class PrenotazioneDB extends AbstractDB
     }
 
     protected function generatePutQuery($obj){
-        $query = sprintf("INSERT INTO Prenotazione VALUES ('%s', '%s', '%s');",$obj->getOID(), $obj->getData(), $obj->getTariffa());
+        $query = sprintf("INSERT INTO Prenotazione VALUES ('%s', '%s', '%s');",$obj->getOID(), $obj->getData());
         $query .= sprintf("INSERT INTO PrenotazioneCliente VALUES ('%s', '%s');", $obj->getOID(), $obj->getCliente()->getOID());
         $query .= sprintf("INSERT INTO PrenotazioneVolo VALUES ('%s', '%s');", $obj->getOID(), $obj->getVolo()->getOID());
 

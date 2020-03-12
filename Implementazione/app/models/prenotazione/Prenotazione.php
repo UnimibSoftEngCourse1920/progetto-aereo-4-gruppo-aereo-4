@@ -56,12 +56,14 @@ class Prenotazione{
     //getClienteCode() !!
 
     public function __get($attributo) {
+        // TODO rimuovere ?
         if (property_exists($this, $attributo)) {
             return $this->$attributo;
         }
     }
 
     public function __set($attributo, $valore) {
+        //TODO rimuovere ?
         if (property_exists($this, $attributo)) {
             $this->$attributo = $valore;
         }
@@ -157,11 +159,6 @@ class Prenotazione{
     public function getData()
     {
         return $this->data;
-    }
-
-    public function getTariffa()
-    {
-        return $this->tariffa;
     }
 
     public function getVolo() {
