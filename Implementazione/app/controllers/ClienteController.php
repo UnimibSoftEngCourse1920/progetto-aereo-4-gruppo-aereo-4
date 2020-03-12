@@ -123,9 +123,9 @@ class ClienteController extends Controller{
         //TODO implementare errori
         $estrattoConto = $this->registroPrenotazioni->generaEstrattoConto($OIDCliente);
         if($estrattoConto != null){
-            echo ('ESTRATTO OK');
+            echo "ESTRATTO OK";
         }
-        echo ('ERRORE');
+        echo "ERRORE";
     }
 
 }

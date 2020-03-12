@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/Pagamento.php";
+require_once "../app/models/acquisto/pagamento/IstitutoDiCredito.php";
 
 class PagamentoConCarta extends Pagamento{
 
@@ -12,7 +13,7 @@ class PagamentoConCarta extends Pagamento{
     
 	public function effettua($carta) {
 		$this->istituto = new IstitutoDiCredito("Banca Bicocca");
-		$esitoPagamento = $this->istituto->autorizzaPagamento($this->carta);
+		$esitoPagamento = $this->istituto->autorizzaPagamento($carta);
 		return $esitoPagamento;
 	}
 

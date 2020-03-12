@@ -25,13 +25,13 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-4 text-center">
                     <div class="d-flex mx-auto tariffa">
-                        <i class="fas fa-paper-plane"></i>
+                        <em class="fas fa-paper-plane"></em>
                         <p class="mt-auto mx-auto">Tariffa Standard</p>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="d-flex mx-auto tariffa selected">
-                        <i class="fas fa-rocket"></i>
+                        <em class="fas fa-rocket"></em>
                         <p class="mt-auto mx-auto">Tariffa VoloPlus</p>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
             <div class="row">
                 <div class="col">
                     <p>
-                        <b>Milano Malpensa (MXP)</b>
+                        <strong>Milano Malpensa (MXP)</strong>
                         <br>2020-04-04 04:30
                     </p>
                 </div>
@@ -122,7 +122,7 @@
             <div class="row">
                 <div class="col">
                     <p>
-                        <b>Londra Stansted (STN)</b>
+                        <strong>Londra Stansted (STN)</strong>
                         <br>2020-04-04 19:00
                     </p>
                 </div>
@@ -130,7 +130,7 @@
             <div class="row">
                 <div class="col">
                     <p>
-                        <b>Viaggiatori</b>
+                        <strong>Viaggiatori</strong>
                         <br>3
                     </p>
                 </div>
@@ -142,7 +142,7 @@
             <div class="row">
                 <div class="col">
                     <p>
-                        <b>Tariffa</b>
+                        <strong>Tariffa</strong>
                         <br>VoloPlus
                     </p>
                 </div>

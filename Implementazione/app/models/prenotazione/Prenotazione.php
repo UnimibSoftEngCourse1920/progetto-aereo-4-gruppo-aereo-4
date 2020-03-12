@@ -1,7 +1,8 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT']."/app/models/volo/Biglietto.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/app/models/acquisto/Acquisto.php");
+
+require_once("../app/models/volo/Biglietto.php");
+require_once("../app/models/acquisto/Acquisto.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/app/models/cliente/EstrattoConto.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/app/models/acquisto/pagamento/PagamentoConPunti.php");
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
@@ -80,13 +81,12 @@ class Prenotazione{
 
     public function getImporto(){
         $importo = 0;
-        foreach ($this->listaBiglietti as $biglietto){
+        foreach ($this->getListaBiglietti() as $biglietto){
             if($biglietto->getTariffa()=="Plus") {
                 $importo += ($biglietto->getPrezzo() + 20);
             } else {
                 $importo += $biglietto->getPrezzo();
             }
-
         }
         return $importo;
     }
@@ -113,9 +113,10 @@ class Prenotazione{
 	}
 	
 	public function acquista($metodoPagamento, $cliente, $importo, $carta) {
-		$acquisto = new Acquisto($metodoPagamento, $importo);		
-		$esitoPagamento = $acquisto->effettuaPagamento($cliente, $carta);
-		array_push($this->acquisti, $acquisto);
+		$acquisto = new Acquisto();
+		$esitoPagamento = $acquisto->effettuaPagamento($metodoPagamento, $cliente, $importo, $carta);
+        $this->getListaAcquisti();
+		array_push($this->listaAcquisti, $acquisto);
 		return $esitoPagamento;
 	}
 	

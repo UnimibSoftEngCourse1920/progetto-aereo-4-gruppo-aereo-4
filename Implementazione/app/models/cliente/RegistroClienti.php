@@ -14,29 +14,23 @@ class RegistroClienti
 
     //lista clienti
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->mailer = new Mailer();
     }
 
-    public function checkEmailClienteFedelta($email)
-    {
-        $mailExists = DBFacade::getIstance() -> emailFedeltaExists($email);
-        return $mailExists;
+    public function checkEmailClienteFedelta($email){
+        return DBFacade::getIstance() -> emailFedeltaExists($email);
     }
 
-    private function generaCodiceFedelta()
-    {
+    private function generaCodiceFedelta(){
         //La generazione del codice è ancora da vedere
         //Chiede al DB oppure lui sa qual'è l'ultimo (Attenzione! Se sono più di uno è un macello)
 
-        //return md5(uniqid(rand(), true));
         $ultimoCodice = DBFacade::getIstance()->getUltimoCodiceFedelta();
         return "F" . sprintf('%07d', substr($ultimoCodice, 1) + 1);
     }
 
-    public function nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $password)
-    {
+    public function nuovoClienteFedelta($nome, $cognome, $email, $dataNascita, $indirizzo, $password){
         $mailExists = DBFacade::getIstance()->emailFedeltaExists($email);
         if(!$mailExists){
             $codice = $this->generaCodiceFedelta();
@@ -98,8 +92,7 @@ class RegistroClienti
     }
 
 	public function getCliente($idCliente) {
-		$cliente = DBFacade::getIstance()->get($idCliente, 'Cliente');
-		return $cliente;
+        return DBFacade::getIstance()->get($idCliente, 'Cliente');
 	}
 		
 	public function aggiornaCliente($cliente) {
@@ -108,8 +101,7 @@ class RegistroClienti
 	}
 
 	public function login($email, $password) {
-        $cliente = DBFacade::getIstance()->userLogin($email, md5($password));
-        return $cliente;
+        return DBFacade::getIstance()->userLogin($email, md5($password));
     }
 
 }
