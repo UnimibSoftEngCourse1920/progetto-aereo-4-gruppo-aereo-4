@@ -25,7 +25,16 @@ class AcquistoDB extends AbstractDB
 
     protected function generatePutQuery($obj)
     {
-        $query = "INSERT INTO Acquisto VALUES ('%s', %d, '%s')";
-        return sprintf($query,$obj->getOID(), $obj->getPuntiAccumulati(), $obj->getPagamento()->getOID());
+        $pagamentoCarta = null;
+        $pagamentoPunti = null;
+        $p = $obj->getPagamento();
+        if(get_class($p) == PagamentoConPunti::class){
+            $pagamentoPunti = $p->getOID();
+        }else{
+            $pagamentoCarta = $p->getOID();
+        }
+
+        $query = "INSERT INTO Acquisto VALUES ('%s', %d, '%s', '%s')";
+        return sprintf($query,$obj->getOID(), $obj->getPuntiAccumulati(), $pagamentoCarta, $pagamentoPunti);
     }
 }

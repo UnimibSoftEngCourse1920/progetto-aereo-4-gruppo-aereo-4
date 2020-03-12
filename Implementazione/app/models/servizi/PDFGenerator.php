@@ -7,7 +7,7 @@
 
         public static function getInstance() {
             if (self::$instance == null) {
-                self::$instance = new Singleton();
+                self::$instance = new PDFGenerator();
             }
 
             return self::$instance;
@@ -15,13 +15,17 @@
 
         public function generaBiglietti($biglietti) {
             $html = "<html><head></head><body>";
-            foreach($biglietti as $biglietto) {
-                $html .= $biglietto->getNominativo();
+
+            $numBiglietti = count($biglietti);
+            for($i = 0; $i < $numBiglietti; $i++) {
+                $html .= $biglietti[$i]->getNominativo();
                 $html .= "<br>";
-                $html .= $biglietto->getTariffa();
+                $html .= $biglietti[$i]->getTariffa();
                 $html .= "<br>";
-                $html .= $biglietto->getNumPosto();
-                $html .= "<div class=\"phpToPDF-page-break\"></div>";
+                $html .= $biglietti[$i]->getNumPosto();
+                if($i != $numBiglietti - 1) {
+                    $html .= "<div class=\"phpToPDF-page-break\"></div>";
+                }
             }
             $html .= "</body></html>";
             return $this->creaPDF($html);
@@ -36,5 +40,11 @@
                 "file_name" => $nome);
             phptopdf($pdf_options);
             return $nome;
+        }
+
+        public function cancellaPDF($pdf) {
+            if(strpos($pdf, ".pdf") == strlen($pdf) - 4) {
+                unlink($pdf);
+            }
         }
     }
