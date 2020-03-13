@@ -34,18 +34,31 @@ class VoloController extends Controller {
         $aeroporti = $this->registroVoli->getAeroporti();
         $aerei = $this->registroVoli->getAerei();
         $voli = $this->registroVoli->getVoli();
-        $this->view('impiegato/voli',["aeroporti"=>$aeroporti,"aerei"=>$aerei,"voli"=>$voli]);
+        if(isset($_SESSION["admin"])){
+            $this->view('impiegato/voli',["aeroporti"=>$aeroporti,"aerei"=>$aerei,"voli"=>$voli]);
+        } else {
+            header("Location: /public/volo/login");
+        }
     }
 
     public function modifica($OIDVolo){
         $v = $this->registroVoli->getVolo($OIDVolo);
-        $this->view('impiegato/modifica', ["volo"=>$v]);
+        if(isset($_SESSION["admin"])){
+            $this->view('impiegato/modifica', ["volo"=>$v]);
+        } else {
+            header("Location: /public/volo/login");
+        }
     }
 
     public function promozioni($name = '') {
         $promozioni = $this->registroPromozioni->getPromozioni();
         $voli = $this->registroVoli->getVoli();
-        $this->view('impiegato/promozioni', ["promozioni"=>$promozioni,"voli"=>$voli]);
+        if(isset($_SESSION["admin"])){
+            $this->view('impiegato/promozioni', ["promozioni"=>$promozioni,"voli"=>$voli]);
+        } else {
+            header("Location: /public/volo/login");
+        }
+
     }
 
     public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest){
@@ -54,6 +67,15 @@ class VoloController extends Controller {
             $this->registroVoli->avvisaPasseggeri($OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
         }
         header(LOCATIONVOLI);
+    }
+
+    public function autenticazioneImpiegato($username,$password){
+        if($username=="admin" && $password=="admin"){
+            $_SESSION["admin"] = "logged";
+            header("Location: /public/volo/admin");
+        } else {
+            header("Location: /public/volo/login");
+        }
     }
 
     public function inserisciVolo($dataoraPart, $dataoraArr, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo){

@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="login-form col-md-6">
-                <form action="" method="post">
+                <form action="autenticazioneImpiegato" method="post">
                     <div class="container">
                         <div class="row text-center mb-3">
                             <h2>Accedi al pannello di amministrazione</h2>
