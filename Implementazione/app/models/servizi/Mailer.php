@@ -2,9 +2,6 @@
 
 class Mailer{
 
-    private $email;
-    private $password;
-
     public function inviaCancellazioneFedelta($cliente){
         $message = "Gentile cliente, \n
                     Ti scriviamo per informarti che sei stato cancellato dal programma fedeltà. \n

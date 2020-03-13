@@ -138,8 +138,9 @@ class Volo {
         $contaLiberi=0;
         $posti = $this->listaPosti;
         foreach ($posti as $posto){
-            if($posto->isOccupato()==0)
+            if($posto->isOccupato()==0) {
                 $contaLiberi++;
+            }
         }
 
         return ($numPosti <= $contaLiberi);

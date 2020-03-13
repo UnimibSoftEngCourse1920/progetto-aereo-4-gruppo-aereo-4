@@ -93,8 +93,7 @@ class RegistroPrenotazioni{
 	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta) {
 		$tariffa = $prenotazione->getTariffa();
 		$tassa = $this->calcolaTassa($tariffa, $nuovaTariffa);
-		$esitoCambioData = $prenotazione->cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta);
-		return $esitoCambioData;
+		return $prenotazione->cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta);
 	}
 	
 	private function calcolaTassa($tariffa, $nuovaTariffa) {

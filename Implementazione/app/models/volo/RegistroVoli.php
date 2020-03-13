@@ -38,7 +38,6 @@ class RegistroVoli{
     }
 
     private function salvaPosti($listaPosti){
-        //TODO Mettere esito anche qui?
         $db = DBFacade::getIstance();
         foreach ($listaPosti as $posto){
             $db->put($posto);
