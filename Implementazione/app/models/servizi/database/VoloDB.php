@@ -33,7 +33,7 @@ class VoloDB extends AbstractDB
 
     protected function generateGetAllQuery($class)
     {
-        return "SELECT va.aeroportoPartenza, va.aeroportoDestinazione from Volo v join VoloAeroporto va on v.OID = va.volo";
+        return "SELECT v.*, va.aeroportoPartenza, va.aeroportoDestinazione from Volo v join VoloAeroporto va on v.OID = va.volo";
     }
 
     public function get($OID, $class){
