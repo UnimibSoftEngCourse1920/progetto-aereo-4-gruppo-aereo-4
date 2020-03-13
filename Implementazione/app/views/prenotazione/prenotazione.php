@@ -58,12 +58,20 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col">
+                            <div class="form-group col-6">
                                 <label for="inputState">E-mail</label>
                                 <?php if(isset($_SESSION["email_cliente"])){ ?>
                                     <input type="email" class="form-control" name="email" placeholder="E-mail" value="<?= $_SESSION["email_cliente"]?>">
                                 <?php } else { ?>
                                     <input type="email" class="form-control" name="email" placeholder="E-mail">
+                                <?php } ?>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="inputState">Data di nascita</label>
+                                <?php if(isset($_SESSION["email_cliente"])){ ?>
+                                    <input type="date" class="form-control" name="datanascita" placeholder="" value="<?= $_SESSION["data_n"]?>">
+                                <?php } else { ?>
+                                    <input type="date" class="form-control" name="datanascita" placeholder="">
                                 <?php } ?>
                             </div>
                         </div>
