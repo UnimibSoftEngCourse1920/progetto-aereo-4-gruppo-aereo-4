@@ -68,6 +68,12 @@ $(function() {
         return true;
     });
 
+    $('#form-data').submit(function() {
+        $("#form-data #id_nuovo_volo").val($(".data-disponibile.selected").eq(0).attr('data-volo'));
+        $("#form-data #nuova_tariffa").val($(".tariffa.selected").eq(0).attr('data-tariffa'));
+        return true;
+    });
+
     $('#button-punti').click(function() {
         $('#button-punti').addClass("selected");
         $('#button-carta').removeClass("selected");
@@ -80,6 +86,16 @@ $(function() {
         $('#button-carta').addClass("selected");
         $('#pagamento-carta').show();
         $('#pagamento-punti').hide();
+    });
+
+    $('.data-disponibile').click(function() {
+        $('.data-disponibile').removeClass("selected");
+        $(this).addClass("selected");
+    });
+
+    $('.tariffa').click(function() {
+        $('.tariffa').removeClass("selected");
+        $(this).addClass("selected");
     });
 
     $(document).ready(function () {
