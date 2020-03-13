@@ -1,6 +1,7 @@
 <?php
 
 require_once "../app/core/Controller.php";
+require_once "../app/models/volo/RegistroVoli.php";
 
 
 class HomeController extends Controller {
