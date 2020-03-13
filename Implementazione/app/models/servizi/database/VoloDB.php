@@ -28,7 +28,7 @@ class VoloDB extends AbstractDB
 
     protected function generateGetQuery($OID, $class)
     {
-        return $this->generateGetAllQuery() ." WHERE v.OID = '$OID'";
+        return $this->generateGetAllQuery('') ." WHERE v.OID = '$OID'";
     }
 
     protected function generateGetAllQuery($class)
