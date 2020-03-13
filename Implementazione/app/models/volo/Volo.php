@@ -24,7 +24,7 @@ class Volo {
 
     private $codiceVolo;
 
-    public function __construct($dataOraPartenza, $dataOraArrivo, $aeroportoPartenza, $aeroportoDestinazione, $aereo){
+    public function __construct($dataOraPartenza, $dataOraArrivo, $aeroportoPartenza, $aeroportoDestinazione, $aereo, $codiceVolo){
         $this->OID = OIDGenerator::getIstance()->getNewOID();
         $this->dataOraPartenza = $dataOraPartenza;
         $this->dataOraArrivo = $dataOraArrivo;
@@ -35,16 +35,11 @@ class Volo {
         $this->aereo = $aereo;
         $this->promozione = null;
         $this->listaPosti = array();
-        $this->codiceVolo = $this->generaCodiceVolo();
+        $this->codiceVolo = $codiceVolo;
         for($i=0; $i<$this->aereo->getNumeroPosti(); $i++){
             $p = new Posto($i+1);
             $this->listaPosti[] = $p;
         }
-    }
-
-    private function generaCodiceVolo(){
-        //Genero random
-        return sprintf("%04d",rand(1,1000));
     }
 
     public function getCodiceVolo(){
@@ -143,8 +138,9 @@ class Volo {
         $contaLiberi=0;
         $posti = $this->listaPosti;
         foreach ($posti as $posto){
-            if($posto->isOccupato()==0)
+            if($posto->isOccupato()==0) {
                 $contaLiberi++;
+            }
         }
 
         return ($numPosti <= $contaLiberi);

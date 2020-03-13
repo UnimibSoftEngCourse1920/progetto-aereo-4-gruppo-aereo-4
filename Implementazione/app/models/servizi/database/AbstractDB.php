@@ -36,17 +36,17 @@ abstract class AbstractDB
 
     public function delete($OID, $class){
         $res = $this->connection->exec($this->generateDeleteQuery($OID, $class));
-        return ($res==0) ? false : true;
+        return !($res==0);
     }
 
     public function update($object){
         $res = $this->connection->exec($this->generateUpdateQuery($object));
-        return ($res==0) ? false : true;
+        return !($res==0);
     }
 
     public function put($object){
         $res = $this->connection->exec($this->generatePutQuery($object));
-        return ($res==0) ? false : true;
+        return !($res==0);
     }
 
     public function getAll($class){

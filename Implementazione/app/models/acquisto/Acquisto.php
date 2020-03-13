@@ -39,7 +39,7 @@ class Acquisto{
 	}
 
 	private function calcolaPuntiAccumulati($importo){
-        return $importo/10;
+        return floor($importo/10);
     }
 
     public function getPuntiAccumulati()

@@ -89,15 +89,13 @@ class RegistroPrenotazioni{
             return false;
         }
     }
-	
-	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta) {
-		$tariffa = $prenotazione->getTariffa();
-		$tassa = $this->calcolaTassa($tariffa, $nuovaTariffa);
-		$esitoCambioData = $prenotazione->cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta);
+
+	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta, $tassaCambio) {
+		$esitoCambioData = $prenotazione->cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassaCambio, $carta);
 		return $esitoCambioData;
 	}
 	
-	private function calcolaTassa($tariffa, $nuovaTariffa) {
+	public function calcolaTassa($tariffa, $nuovaTariffa) {
 		$tassa = 0;
 		if($tariffa != Tariffa::PLUS) {
 			$tassa += 10;		

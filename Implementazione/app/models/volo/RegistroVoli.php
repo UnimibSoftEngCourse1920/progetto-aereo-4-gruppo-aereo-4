@@ -24,12 +24,12 @@ class RegistroVoli{
     {
         $database = DBFacade::getIstance();
         if($this->validaDate($dataOraPart, $dataOraArr) && $database->isAereoDisponibile($dataOraPart, $dataOraArr, $OIDAereo)){
-            //TODO genero codice del volo
+            $codiceVolo = $this->generaCodiceVolo();
             $aeroportoPart = $database->get($OIDAeroportoPart,Aeroporto::class);
             $aeroportoDest = $database->get($OIDAeroportoDest, Aeroporto::class);
             $aereo = $database->get($OIDAereo,Aereo::class);
             if($aereo!=null && $aeroportoDest!=null && $aeroportoPart!=null) {
-                $nuovoVolo = new Volo($dataOraPart, $dataOraArr, $aeroportoPart, $aeroportoDest, $aereo);
+                $nuovoVolo = new Volo($dataOraPart, $dataOraArr, $aeroportoPart, $aeroportoDest, $aereo, $codiceVolo);
                 $this->salvaPosti($nuovoVolo->getPosti()); //salvo sul DB i posti che sono stati creati col costruttore
                 return $database->put($nuovoVolo);
             }
@@ -38,7 +38,6 @@ class RegistroVoli{
     }
 
     private function salvaPosti($listaPosti){
-        //TODO Mettere esito anche qui?
         $db = DBFacade::getIstance();
         foreach ($listaPosti as $posto){
             $db->put($posto);
@@ -90,9 +89,8 @@ class RegistroVoli{
         return $formato && $date;
     }
 
-    private function generaCodiceVolo($datiVolo){
-        return '';
-        //E' un campo autoincrement dal DB o lo genero secondo una logica?
+    private function generaCodiceVolo(){
+        return sprintf("%04d",rand(1,1000));
     }
 
     public function checkDisponibilitaPosti($numPosti, $codVolo){
