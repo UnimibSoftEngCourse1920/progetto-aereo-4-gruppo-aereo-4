@@ -92,7 +92,7 @@ abstract class AbstractDB
         return '';
     }
 
-    protected function generateUpdateQuery($object){ return '';}
+    protected function generateUpdateQuery($cliente){ return '';}
 
     protected function generateDeleteQuery($OID, $class){
         return "DELETE FROM ".$class." WHERE OID ='".$OID."'";

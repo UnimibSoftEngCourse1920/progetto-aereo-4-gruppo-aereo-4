@@ -11,6 +11,11 @@ class ClienteDB extends AbstractDB
             $cliente->getCodiceFedelta(), $cliente->getStato(), $cliente->getPassword(), $cliente->getEmail(), $cliente->getSaldoPunti());
     }
 
+    public function generateUpdateQuery($cliente)
+    {
+        return sprintf("update Cliente set saldoPunti = %d where OID = '%s'", $cliente->getSaldoPunti(), $cliente->getOID());
+    }
+
     public function emailFedeltaExists($email){
         $query = "SELECT * from Cliente WHERE email = '$email' and codiceFedelta is not null";
         $stmt = $this->connection->query($query);

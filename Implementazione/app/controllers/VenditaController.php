@@ -76,7 +76,6 @@ class VenditaController extends Controller {
                     //TODO: Testare queste istruzioni
                     //$this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
                     $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
-                    exit;
                     $this->registroClienti->aggiornaCliente($cliente);
                     //TODO: view con successo
                 } else {

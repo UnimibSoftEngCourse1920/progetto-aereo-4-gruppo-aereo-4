@@ -9,7 +9,7 @@ class PagamentoConCarta extends Pagamento{
     
 	public function effettua($carta) {
 		$istituto = new IstitutoDiCredito();
-		$esito = $this->istituto->autorizzaPagamento($carta);
+		$esito = $istituto->autorizzaPagamento($carta);
 		$this->istituto = $istituto->getNome();
 		return $esito;
 	}
