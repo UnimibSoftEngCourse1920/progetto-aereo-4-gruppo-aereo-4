@@ -12,7 +12,6 @@ require_once $_SERVER['DOCUMENT_ROOT']."/app/models/prenotazione/Prenotazione.ph
 
 abstract class Tariffa
 {
-    //TODO: sistemare tutti in base a questo formato??
     const STANDARD = "standard";
     const PLUS = "plus";
 }

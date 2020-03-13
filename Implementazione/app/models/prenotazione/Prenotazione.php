@@ -72,7 +72,7 @@ class Prenotazione{
     }
 
 	public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta) {
-		$nPosti = $this->getNumeroPosti();
+		$nPosti = count($this->listaPosti);
 		if($nPosti <= $nuovoVolo->getNumeroPostiDisponibili()) {
 			$esitoPagamentoTassa = $this->acquista($metodoPagamento, $cliente, $tassa, $carta);
 			if($esitoPagamentoTassa) {
@@ -126,10 +126,6 @@ class Prenotazione{
 
 	public function getOID() {
 		return $this->OID;
-	}
-	
-	public function getNumeroPosti() {
-		//TODO a cosa serve
 	}
 
     public function getData()

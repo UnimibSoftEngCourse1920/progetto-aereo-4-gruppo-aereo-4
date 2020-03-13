@@ -66,7 +66,6 @@ class RegistroClienti
 
     public function avvisaClientiFedelta($object, $tipo){
         if($tipo == self::$AVVISAPROMOZIONI && $object!=null && get_class($object[0]) == Promozione::class) {
-            //TODO inserire questo controllo nei diagrammi?
                 $listaClienti = DBFacade::getIstance()->getAllFedelta();
                 $this->mailer->avvisaClientiPromozioni($listaClienti, $object);
         }
@@ -90,8 +89,7 @@ class RegistroClienti
 	}
 		
 	public function aggiornaCliente($cliente) {
-        //TODO a cosa serve?
-		DBFacade::getIstance()->aggiornaCliente($cliente);
+		DBFacade::getIstance()->update($cliente);
 	}
 
 	public function login($email, $password) {
