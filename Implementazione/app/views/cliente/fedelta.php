@@ -50,14 +50,23 @@
                             <td><?= $prenotazione->getData() ?></td>
                             <td>
                                 <?php
-                                    if($prenotazione->getListaAcquisti()!=null) {
+                                    $listaAcquisti = $prenotazione->getListaAcquisti();
+                                    if($listaAcquisti!=null) {
                                         echo "Pagato";
                                     } else {
                                         echo "Non Pagato";
                                     }
                                     ?>
                             </td>
-                            <td>100</td>
+                            <td>
+                                <?php
+                                    $sommaPunti = 0;
+                                    foreach ($listaAcquisti as $acquisto){
+                                        $sommaPunti+=$acquisto->getPuntiAccumulati();
+                                    }
+                                    echo $sommaPunti;
+                                ?>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -65,7 +74,9 @@
             </div>
         </div>
         <div class="row text-center">
-            <button> Elimina account </button>
+            <div class="col-md-12">
+                <button> Elimina account </button>
+            </div>
         </div>
     </div>
 </div>

@@ -94,8 +94,6 @@ class ClienteController extends Controller{
     public function prenotazioni() {
         $cliente = $this->registroClienti->getCliente($_SESSION["id_cliente"]);
         $prenotazioni = $this->registroPrenotazioni->getPrenotazioniCliente($_SESSION["id_cliente"]);
-
-        //TODO
         $this->view('cliente/fedelta', ["prenotazioni" => $prenotazioni, "cliente" => $cliente]);
     }
 
