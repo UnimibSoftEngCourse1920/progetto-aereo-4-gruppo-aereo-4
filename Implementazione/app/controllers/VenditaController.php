@@ -22,28 +22,34 @@ class VenditaController extends Controller
 	
 	//TODO: DB
 	public function cambiaData($idPrenotazione, $idCliente, $idNuovoVolo, $nuovaTariffa, $metodoPagamento, $carta = "") {
-		$registroPrenotazioni = $this->model('RegistroPrenotazioni');
-		$registroClienti = $this->model('RegistroClienti');
-		$registroVoli = $this->model('RegistroVoli');
-		$cliente = $registroClienti->getCliente($idCliente);
-		$prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
-		$volo = $prenotazione->getVolo();
-		$nuovoVolo = $registroVoli->getVolo($idNuovoVolo);
-		$esitoCambioData = $registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta);
-		if($esitoCambioData) {
-			//Aggiornare prenotazione (anche biglietti e acquisto), cliente, volo vecchio e volo nuovo per i posti
-            $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
-			$registroPrenotazioni->aggiornaPrentoazione($prenotazione);
-			$registroClienti->aggiornaCliente($cliente);
-			$registroVoli->aggiornaVolo($volo);
-			$registroVoli->aggiornaVolo($nuovoVolo);
-			//TODO: view con successo
-		} else {
-			//TODO: view con errore
-		}
+        $registroPrenotazioni = $this->model('prenotazione/RegistroPrenotazioni');
+        $registroVoli = $this->model('volo/RegistroVoli');
+        $registroClienti = $this->model('cliente/RegistroClienti');
+        $prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
+        $cliente = $prenotazione->getCliente();
+        if ($idCliente == $cliente->getOID()) {
+            $volo = $prenotazione->getVolo();
+            var_dump($prenotazione);
+            var_dump($volo);
+            exit;
+            $registroVoli = $this->model('volo/RegistroVoli');
+            $nuovoVolo = $registroVoli->getVolo($idNuovoVolo);
+            $esitoCambioData = $registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta);
+            if ($esitoCambioData) {
+                //Aggiornare prenotazione (anche biglietti e acquisto), cliente, volo vecchio e volo nuovo per i posti
+                $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
+                $registroPrenotazioni->aggiornaPrentoazione($prenotazione);
+                $registroClienti->aggiornaCliente($cliente);
+                $registroVoli->aggiornaVolo($volo);
+                $registroVoli->aggiornaVolo($nuovoVolo);
+                //TODO: view con successo
+            } else {
+                //TODO: view con errore
+            }
+        }
 	}
 
-	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento, $carta = "") {
+	public function acquistoPrenotazione($idPrenotazione, $idCliente, $metodoPagamento, $carta = "") {
         $registroPrenotazioni = $this->model('prenotazione/RegistroPrenotazioni');
         $prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
         $cliente = $prenotazione->getCliente();

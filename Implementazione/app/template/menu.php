@@ -24,7 +24,8 @@
                         <?=$_SESSION["nome_cliente"];?>
                     </p>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/public/cliente/prenotazioni">Le tue prenotazioni</a>
+                        <a class="dropdown-item" href="/public/cliente/prenotazioni">Il mio account</a>
+                        <a class="dropdown-item" href="#">Estratto conto</a>
                         <a class="dropdown-item" href="/public/cliente/esci">Esci</a>
                     </div>
                 </div>
