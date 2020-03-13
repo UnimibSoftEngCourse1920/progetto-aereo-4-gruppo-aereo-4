@@ -75,7 +75,6 @@
         </div>
         <div class="row text-center">
             <div class="col-md-12">
-                <a href="richiediEstrattoConto/<?=$_SESSION["id_cliente"]?>" style="text-decoration: none;"><button> Richiedi estratto conto </button>
                 <a href="annullaIscrizione/<?=$_SESSION["id_cliente"]?>"  style="text-decoration: none;"><button> Elimina account </button></a>
             </div>
         </div>

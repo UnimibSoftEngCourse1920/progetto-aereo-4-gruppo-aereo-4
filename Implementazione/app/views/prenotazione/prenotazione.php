@@ -42,33 +42,47 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Nome</label>
-                                <input type="text" class="form-control" id="nome" placeholder="Nome">
+                                <?php if(isset($_SESSION["id_cliente"])){ ?>
+                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" value="<?= explode(" ",$_SESSION["nome_cliente"])[0]; ?>" disabled>
+                                <?php } else { ?>
+                                    <input type="text" class="form-control" name="name" id="nome" placeholder="Nome">
+                                <?php } ?>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Cognome</label>
-                                <input type="text" class="form-control" id="cognome" placeholder="Cognome">
+                                <?php if(isset($_SESSION["id_cliente"])){ ?>
+                                    <input type="text" class="form-control" name="cognome" id="cognome" placeholder="Cognome" value="<?= explode(" ",$_SESSION["nome_cliente"])[1]; ?>" disabled>
+                                <?php } else { ?>
+                                    <input type="text" class="form-control" name="cognome" id="cognome" placeholder="Cognome" disabled>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col">
                                 <label for="inputState">E-mail</label>
-                                <input type="email" class="form-control" placeholder="E-mail">
+                                <?php if(isset($_SESSION["email_cliente"])){ ?>
+                                    <input type="email" class="form-control" name="email" placeholder="E-mail" value="<?= $_SESSION["email_cliente"]?>" disabled>
+                                <?php } else { ?>
+                                    <input type="email" class="form-control" name="email" placeholder="E-mail">
+                                <?php } ?>
                             </div>
                         </div>
+                        <input type="hidden" id="lista-passeggeri" name="lista">
                         <?php for($i=1;$i<=$data["pass"];$i++){?>
                         <div class="form-row px-2 py-3">
                             Passeggero <?= $i ?>
                         </div>
-                        <div class="form-row">
+                        <div class="form-row nome-cognome-pass">
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Nome</label>
-                                <input type="text" class="form-control" id="nome<?= $i ?>" placeholder="Nome">
+                                <input type="text" class="form-control nome" id="nome<?= $i ?>" placeholder="Nome">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Cognome</label>
-                                <input type="text" class="form-control" id="cognome<?= $i ?>" placeholder="Cognome">
+                                <input type="text" class="form-control cognome" id="cognome<?= $i ?>" placeholder="Cognome">
                             </div>
                         </div>
+
                         <?php }?>
                         <?php if(!$data["volo"]->getDisponibilitaPosti($data["pass"])){ ?>
                         <div class="form-row px-3 pt-4 pb-3">
@@ -77,7 +91,7 @@
                         <?php } else { ?>
                         <div class="form-row pt-4">
                             <div class="form-group col-md-4 mx-auto">
-                                <button type="submit" class="btn btn-primary w-100">Prenota</button>
+                                <button type="submit" id="prenota-btn" class="btn btn-primary w-100">Prenota</button>
                             </div>
                         </div>
                         <?php } ?>
@@ -136,14 +150,14 @@
                 </div>
             </div>
             <div class="row py-md-4">
-                <div class="col-8"><h3>Totale</h3></div>
-                <div class="col-4 text-right">
+                <div class="col-6"><h3>Totale</h3></div>
+                <div class="col-6 text-right">
                     <h3 id="prezzo_tot">
                         <?php
                         if($data["volo"]->getPrezzoIntero()==$data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))){
                             echo number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€";
                         } else {
-                            echo number_format($data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"],2)."€ </h3><h3><strike id='old_tot' style='font-size: 20px'>".number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€</strike>";
+                            echo number_format($data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"],2)."€";
                         }?>
                     </h3>
                 </div>
