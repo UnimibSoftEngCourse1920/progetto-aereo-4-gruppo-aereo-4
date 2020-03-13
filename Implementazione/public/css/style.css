@@ -273,6 +273,19 @@ h2{
     border-radius: 3px !important;
 }
 
+.fidelity-profile-image{
+    background: #7876AE;
+    color: white;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    line-height: 95px;
+    border-radius: 100%;
+    text-align: center;
+    margin-right: 5px;
+    font-size: 60px;
+}
+
 /*
 Colori della palette:
 F5F4F6

@@ -15,14 +15,16 @@
 <?php include("../app/template/menu.php") ?>
 <div class="body-cont px-4">
     <div class="container">
-        <div class="row">
-            <div class="col-md-3">
+        <div class="row px-5 py-3 pb-5">
+            <div class="col-md-2">
                 <div class="fidelity-profile-image">
                     <?=substr($_SESSION["nome_cliente"], 0, 1);?>
                 </div>
             </div>
-            <div class="col-md-9">
-
+            <div class="col-md-10">
+                <h2 style="display: inline-block; margin-right: 20px;"><?= $_SESSION["nome_cliente"] ?></h2>
+                <span><em class="fas fa-coins"></em>  <?= $data["cliente"]->getSaldoPunti(); ?> </span><br>
+                <span> <?= $data["cliente"]->getIndirizzo(); ?> </span>
             </div>
         </div>
         <div class="row">
@@ -40,33 +42,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Milano </td>
-                        <td>Barcellona</td>
-                        <td>2/3/2020</td>
-                        <td>Pagato</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Milano </td>
-                        <td>Barcellona</td>
-                        <td>2/3/2020</td>
-                        <td>Annullato</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Milano </td>
-                        <td>Barcellona</td>
-                        <td>2/3/2020</td>
-                        <td>In sospeso</td>
-                        <td>100</td>
-                    </tr>
+                    <?php foreach ($data["prenotazioni"] as $prenotazione){ ?>
+                        <tr>
+                            <th scope="row"><?= $prenotazione->getOID() ?></th>
+                            <td><?= $prenotazione->getVolo()->getAeroportoPartenza()->getCitta() ?> </td>
+                            <td><?= $prenotazione->getVolo()->getAeroportoDestinazione()->getCitta() ?> </td>
+                            <td><?= $prenotazione->getData() ?></td>
+                            <td>
+                                <?php
+                                    if($prenotazione->getListaAcquisti()!=null) {
+                                        echo "Pagato";
+                                    } else {
+                                        echo "Non Pagato";
+                                    }
+                                    ?>
+                            </td>
+                            <td>100</td>
+                        </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="row text-center">
+            <button> Elimina account </button>
         </div>
     </div>
 </div>
