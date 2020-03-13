@@ -25,6 +25,10 @@ abstract class AbstractDB
     public function get($OID, $class){
         $query = $this->generateGetQuery($OID,$class); //creo la query
         $stmt = $this->connection->query($query); //la eseguo
+        return $this->fetchSingleByClass($stmt, $class);
+    }
+
+    protected function fetchSingleByClass($stmt, $class){
         $row = $stmt->fetch(PDO::FETCH_ASSOC);//per ogni riga creo un oggetto generico
         $obj = (object)($row);
         return $this->objectToObject($obj,$class); //eseguo il cast dell'oggetto generico

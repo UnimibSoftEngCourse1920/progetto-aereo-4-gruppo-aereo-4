@@ -95,7 +95,7 @@ class Prenotazione{
 	public function acquista($metodoPagamento, $cliente, $importo, $carta) {
 		$acquisto = new Acquisto();
 		$esitoPagamento = $acquisto->effettuaPagamento($metodoPagamento, $cliente, $importo, $carta);
-        $this->getListaAcquisti();
+        $this->listaAcquisti = $this->getListaAcquisti(); //Per fare la materializzazione degli obj
 		array_push($this->listaAcquisti, $acquisto);
 		return $esitoPagamento;
 	}
