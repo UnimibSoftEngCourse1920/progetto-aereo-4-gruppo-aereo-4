@@ -90,28 +90,7 @@ class ClienteController extends Controller{
         session_destroy();
         header('Location: /');
     }
-/*
-    public function registrati($nome = "", $cognome = "", $email = "", $dataNascita = "", $indirizzo = "", $citta = "",
-                                $cap = "", $password = "", $confermaPassword = "") {
-        $error = "";
-        if($nome != "" && $cognome != "" && $indirizzo != "" && $citta != "" && $cap != "" && $dataNascita != "" &&
-            $email != "" && $password != "") {
-            if($password == $confermaPassword) {
-                //Converto il formato della data
-                $esitoRegistrazione = $this->iscrizioneFedelta($nome, $cognome, $indirizzo." ".$citta." ".$cap,
-                                                                $dataNascita, $email, $password, $confermaPassword);
-                if ($esitoRegistrazione) {
-                    header("Location: /public/cliente/registrato");
-                } else {
-                    $error = "L'indirizzo e-mail è già registrato.";
-                }
-            } else {
-                $error = "Le due password non coincidono.";
-            }
-        }
-        $this->view('cliente/registrazione', ["error" => $error]);
-    }
-*/
+
     public function prenotazioni() {
         $prenotazioni = array();
         $cliente = 0;

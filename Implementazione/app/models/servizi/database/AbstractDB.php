@@ -1,9 +1,6 @@
 <?php
 
 
-//namespace model\servizi;
-
-//use PDO;
 //TODO perchè queste??
 require_once $_SERVER['DOCUMENT_ROOT'] . "/app/models/volo/Aeroporto.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aereo.php";
@@ -30,23 +27,19 @@ abstract class AbstractDB
         $stmt = $this->connection->query($query); //la eseguo
         $row = $stmt->fetch(PDO::FETCH_ASSOC);//per ogni riga creo un oggetto generico
         $obj = (object)($row);
-        $ris = $this->objectToObject($obj,$class); //eseguo il cast dell'oggetto generico
-        return $ris;
+        return $this->objectToObject($obj,$class); //eseguo il cast dell'oggetto generico
     }
 
     public function delete($OID, $class){
-        $result = $this->connection->exec($this->generateDeleteQuery($OID, $class));
-        return $result;
+        return $this->connection->exec($this->generateDeleteQuery($OID, $class));
     }
 
     public function update($object){
-        $result = $this->connection->exec($this->generateUpdateQuery($object));
-        return $result;
+        return $this->connection->exec($this->generateUpdateQuery($object));
     }
 
     public function put($object){
-        $result = $this->connection->exec($this->generatePutQuery($object));
-        return $result;
+        return $this->connection->exec($this->generatePutQuery($object));
     }
 
     public function getAll($class){
@@ -87,6 +80,7 @@ abstract class AbstractDB
         return "SELECT * FROM " . $class . " WHERE OID = '" . $OID . "'";
     }
 
+    //TODO da rivedere
     protected function generatePutQuery($object){
         return '';
     }

@@ -29,8 +29,7 @@ class RegistroPrenotazioni{
     }
 
     public function getListaClientiVolo($OIDVolo){
-        $listaClienti = DBFacade::getIstance() -> getPasseggeriVolo($OIDVolo);
-        return $listaClienti;
+        return DBFacade::getIstance() -> getPasseggeriVolo($OIDVolo);
     }
 
     public function generaEstrattoConto($OIDCliente){
@@ -113,22 +112,19 @@ class RegistroPrenotazioni{
 	
 	public function acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta) {
 		$importo = $prenotazione->getImporto();
-		$esitoPagamento = $prenotazione->acquista($metodoPagamento, $cliente, $importo, $carta);
-		return $esitoPagamento;
+		return $prenotazione->acquista($metodoPagamento, $cliente, $importo, $carta);
 	}
 	
 	public function generaBiglietti($prenotazione, $cliente) {
 		$biglietti = $prenotazione->getListaBiglietti();
 		$pdf = PDFGenerator::getInstance()->generaBiglietti($biglietti);
 		$email = $cliente->getEmail();
-		$mailer = new Mailer();
-		$mailer->inviaEmailBiglietti($email, $pdf);
+		$this->mailer->inviaEmailBiglietti($email, $pdf);
         PDFGenerator::getInstance()->cancellaPDF($pdf);
 	}
 	
 	public function getPrenotazione($idPrenotazione) {
-		$prenotazione = DBFacade::getIstance()->get($idPrenotazione, 'Prenotazione');
-		return $prenotazione;
+		return DBFacade::getIstance()->get($idPrenotazione, 'Prenotazione');
 	}
 	
 	public function aggiornaAcquisti($prenotazione) {

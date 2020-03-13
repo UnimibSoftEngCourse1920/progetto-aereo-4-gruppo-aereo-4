@@ -1,7 +1,6 @@
 <?php
 
 
-//namespace model\servizi;
 require_once("AbstractDB.php");
 
 

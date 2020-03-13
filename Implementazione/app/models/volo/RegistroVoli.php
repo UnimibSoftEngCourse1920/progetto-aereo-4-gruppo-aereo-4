@@ -23,18 +23,15 @@ class RegistroVoli{
     public function inserisciVolo($dataOraPart, $dataOraArr, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo)
     {
         $database = DBFacade::getIstance();
-        if($this->validaDate($dataOraPart, $dataOraArr)){
-            if($database->isAereoDisponibile($dataOraPart, $dataOraArr, $OIDAereo)){
-                //genero codice del volo
-                $aeroportoPart = $database->get($OIDAeroportoPart,Aeroporto::class);
-                $aeroportoDest = $database->get($OIDAeroportoDest, Aeroporto::class);
-                $aereo = $database->get($OIDAereo,Aereo::class);
-                if($aereo!=null and $aeroportoDest!=null and $aeroportoPart!=null) {
-                    $nuovoVolo = new Volo($dataOraPart, $dataOraArr, $aeroportoPart, $aeroportoDest, $aereo);
-                    $this->salvaPosti($nuovoVolo->getPosti()); //salvo sul DB i posti che sono stati creati col costruttore
-                    $esito = $database->put($nuovoVolo);
-                    return $esito;
-                }
+        if($this->validaDate($dataOraPart, $dataOraArr) && $database->isAereoDisponibile($dataOraPart, $dataOraArr, $OIDAereo)){
+            //TODO genero codice del volo
+            $aeroportoPart = $database->get($OIDAeroportoPart,Aeroporto::class);
+            $aeroportoDest = $database->get($OIDAeroportoDest, Aeroporto::class);
+            $aereo = $database->get($OIDAereo,Aereo::class);
+            if($aereo!=null && $aeroportoDest!=null && $aeroportoPart!=null) {
+                $nuovoVolo = new Volo($dataOraPart, $dataOraArr, $aeroportoPart, $aeroportoDest, $aereo);
+                $this->salvaPosti($nuovoVolo->getPosti()); //salvo sul DB i posti che sono stati creati col costruttore
+                return $database->put($nuovoVolo);
             }
         }
         return false;
@@ -56,8 +53,7 @@ class RegistroVoli{
                 $voloMod = DBFacade::getIstance()->get($OIDVolo, Volo::class);
                 $voloMod->setDataOraPartenza($nuovaDataoraPart);
                 $voloMod->setDataOraArrivo($nuovaDataoraArr);
-                $esito = DBFacade::getIstance()->update($voloMod);
-                return $esito;
+                return DBFacade::getIstance()->update($voloMod);
             }
         }
         return false;
@@ -68,8 +64,7 @@ class RegistroVoli{
         $volo = $database ->get($OIDVolo, Volo::class);
         if($volo != null) {
             $volo->setStato(Volo::$STATO_CANCELLATO);
-            $esito = $database->update($volo);
-            return $esito;
+            return $database->update($volo);
         }
         return false;
     }
@@ -108,18 +103,15 @@ class RegistroVoli{
     }
 	
 	public function cercaVoli($partenza, $destinazione, $data, $nPosti) {
-		$voli = DBFacade::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
-		return $voli;
+		return DBFacade::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
 	}
 	
 	public function cercaDateDisponibili($idVolo, $nPosti) {
-		$voli = DBFacade::getIstance()->cercaDateDisponibili($idVolo, $nPosti);
-		return $voli;
+		return DBFacade::getIstance()->cercaDateDisponibili($idVolo, $nPosti);
 	}
 	
 	public function getVolo($idVolo) {
-		$volo = DBFacade::getIstance()->get($idVolo,"Volo");
-		return $volo;
+		return DBFacade::getIstance()->get($idVolo,"Volo");
 	}
 	
 	public function aggiornaVolo($idVolo) {
@@ -138,6 +130,5 @@ class RegistroVoli{
         return DBFacade::getIstance()->getAll(Aereo::class);
     }
 
-    //public function avvisaPasseggeri($OIDVolo, )
 
 }

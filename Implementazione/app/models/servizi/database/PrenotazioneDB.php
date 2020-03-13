@@ -1,8 +1,6 @@
 <?php
 
 
-//use PDO;
-
 require_once("AbstractDB.php");
 
 
@@ -10,9 +8,9 @@ class PrenotazioneDB extends AbstractDB
 {
     public function get($OID, $class){
         $prenotazione = parent::get($OID, $class); //TODO chiamata a this?
-        $prenotazione->setPosti($this->getAssociazioni("posto", $prenotazione));
-        $prenotazione->setBiglietti($this->getAssociazioni("biglietto", $prenotazione));
-        $prenotazione->setAcquisti($this->getAssociazioni("acquisto", $prenotazione));
+        $prenotazione->setListaPosti($this->getAssociazioni("posto", $prenotazione));
+        $prenotazione->setListaBiglietti($this->getAssociazioni("biglietto", $prenotazione));
+        $prenotazione->setListaAcquisti($this->getAssociazioni("acquisto", $prenotazione));
         return $prenotazione;
     }
 
@@ -29,20 +27,21 @@ class PrenotazioneDB extends AbstractDB
                 on p.OID = pv.prenotazione and p.OID=pc.prenotazione WHERE p.OID = '$OID'";
     }
 
-    protected function generatePutQuery($obj){
-        $query = sprintf("INSERT INTO Prenotazione VALUES ('%s', '%s', '%s');",$obj->getOID(), $obj->getData());
+    protected function generatePutQuery($obj)
+    {
+        $query = sprintf("INSERT INTO Prenotazione VALUES ('%s', '%s', '%s');", $obj->getOID(), $obj->getData());
         $query .= sprintf("INSERT INTO PrenotazioneCliente VALUES ('%s', '%s');", $obj->getOID(), $obj->getCliente()->getOID());
         $query .= sprintf("INSERT INTO PrenotazioneVolo VALUES ('%s', '%s');", $obj->getOID(), $obj->getVolo()->getOID());
 
-        foreach($obj->getListaBiglietti() as $biglietto)
+        foreach ($obj->getListaBiglietti() as $biglietto) {
             $query .= sprintf("INSERT INTO PrenotazioneBiglietto VALUES ('%s', '%s');", $obj->getOID(), $biglietto->getOID());
-
-        foreach($obj->getListaPosti() as $posto)
+        }
+        foreach ($obj->getListaPosti() as $posto) {
             $query .= sprintf("INSERT INTO PrenotazionePosto VALUES ('%s', '%s');", $obj->getOID(), $posto->getOID());
-
-        //foreach($obj->getListaAcquisti() as $acquisto)
-        //   $query .= sprintf("INSERT INTO PrenotazioneAcquisto VALUES ('%s', '%s');", $obj->getOID(), $acquisto->getOID());
-
+        }
+        foreach($obj->getListaAcquisti() as $acquisto) {
+            $query .= sprintf("INSERT INTO PrenotazioneAcquisto VALUES ('%s', '%s');", $obj->getOID(), $acquisto->getOID());
+        }
         return $query;
     }
 
@@ -51,15 +50,15 @@ class PrenotazioneDB extends AbstractDB
 
         $query = sprintf("UPDATE PrenotazioneVolo  SET volo = '%s' where prenotazione = '%s';", $obj->getVolo()->getOID() ,$obj->getOID());
 
-        foreach($obj->getListaBiglietti() as $biglietto)
+        foreach($obj->getListaBiglietti() as $biglietto) {
             $query .= sprintf("UPDATE PrenotazioneBiglietto SET biglietto = '%s' where prenotazione = '%s';", $biglietto->getOID(), $obj->getOID());
-
-        foreach($obj->getListaPosti() as $posto)
+        }
+        foreach($obj->getListaPosti() as $posto) {
             $query .= sprintf("UPDATE PrenotazionePosto SET posto = '%s' where prenotazione = '%s';", $posto->getOID(), $obj->getOID());
-
-        foreach($obj->getListaAcquisti() as $acquisto)
+        }
+        foreach($obj->getListaAcquisti() as $acquisto) {
             $query .= sprintf("INSERT IGNORE into PrenotazioneAcquisto  values('%s','%s');", $obj->getOID(), $acquisto->getOID());
-
+        }
         return $query;
     }
 

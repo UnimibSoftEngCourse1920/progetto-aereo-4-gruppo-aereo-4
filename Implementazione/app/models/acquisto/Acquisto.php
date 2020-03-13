@@ -41,11 +41,6 @@ class Acquisto{
 	private function calcolaPuntiAccumulati($importo){
         return $importo/10;
     }
-	
-	private function costoToPunti($importo) {
-		//TODO: Stabilire come effettuare la conversione
-		return $importo * 100;
-	}
 
     public function getPuntiAccumulati()
     {

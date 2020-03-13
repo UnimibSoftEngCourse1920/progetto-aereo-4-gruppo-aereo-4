@@ -119,7 +119,7 @@ class Mailer{
                     Se non verra acquistata entro 24 ore, verrà automaticamente eliminata. \n
                     Buona giornata \n\n
                     GruppoAereo4";
-        mail($this->generateRecipients($listaClienti), "Prenotazione cancellata", "La tua prenotazione è stata cancellata");
+        mail($this->generateRecipients($listaClienti), "Prenotazione cancellata", $message);
     }
 
     private function generateRecipients($listaClienti){

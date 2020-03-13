@@ -1,8 +1,6 @@
 <?php
 
 
-//namespace model\servizi;
-
 require_once("database/AcquistoDB.php");
 require_once("database/AereoDB.php");
 require_once("database/AeroportoDB.php");
@@ -16,7 +14,6 @@ require_once("database/PostoDB.php");
 require_once("database/PrenotazioneDB.php");
 require_once("database/PromozioneDB.php");
 require_once("database/VoloDB.php");
-//require_once("database/OIDDB.php");
 
 
 class DBFacade{
@@ -49,19 +46,17 @@ class DBFacade{
     }
 
     //Operazioni CRUD
-
+    //TODO esiti mancanti
     public function update($object){
-        $esito = $this -> gestori[$this->getClassName($object)] -> update($object);
+        return $this -> gestori[$this->getClassName($object)] -> update($object);
     }
 
     public function put($object){
-        $esito = $this -> gestori[$this->getClassName($object)] -> put($object);
-        return $esito;
+        return $this -> gestori[$this->getClassName($object)] -> put($object);
     }
 
     public function get($OID, $class){
-        $returnObject = $this -> gestori[$class]->get($OID,$class);
-        return $returnObject;
+        return $this -> gestori[$class]->get($OID,$class);
     }
 
     public function delete($OID, $class){
@@ -69,6 +64,8 @@ class DBFacade{
     }
 
     private function getClassName($class){
+        //TODO chi usa questo metodo??
+        //Rimuovo per evitare code smell dei troppi metodi!!
         return get_class($class);
         //return substr(strrchr(get_class($class), "\\"), 1);
     }

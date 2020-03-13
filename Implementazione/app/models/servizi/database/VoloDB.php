@@ -9,12 +9,6 @@ class VoloDB extends AbstractDB
     protected function generatePutQuery($obj){
         $query = "";
         $promozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
-       /*
-        //E' stato fatto direttamente in inserimentoVolo
-        foreach ($obj->getPosti() as $posto){
-            $query .= sprintf("INSERT INTO Posto VALUES ('%s',%b ,%d )", $posto->getOID(), $posto->isStato(), $posto->getNumeroPosto());
-        }
-        */
         $query .= sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s', '%s'); ",
                         $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo()->getOID(), $promozione);
         //VoloAeroporto
@@ -28,15 +22,13 @@ class VoloDB extends AbstractDB
 
     protected function generateUpdateQuery($obj){
         $OIDpromozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
-        $var =  sprintf("UPDATE ".get_class($obj)." SET stato = '%s', dataOraPartenza='%s', dataOraArrivo='%s' , promozione = '%s' WHERE OID = '%s'",
-                    $obj->getStato(), $obj->getDataOraPartenza(), $obj->getDataOraArrivo(), $OIDpromozione, $obj->getOID() );
-        return $var;
+        return sprintf("UPDATE ".get_class($obj)." SET stato = '%s', dataOraPartenza='%s', dataOraArrivo='%s' , promozione = '%s' WHERE OID = '%s'",
+                                $obj->getStato(), $obj->getDataOraPartenza(), $obj->getDataOraArrivo(), $OIDpromozione, $obj->getOID() );
     }
 
     protected function generateGetQuery($OID, $class)
     {
         return $this->generateGetAllQuery() ." WHERE v.OID = '$OID'";
-        //return "SELECT v.*, va.aeroportoPartenza, va.aeroportoArrivo from Volo v join VoloAeroporto va on v.OID = va.volo WHERE v.OID = '$OID'";
     }
 
     protected function generateGetAllQuery($class)

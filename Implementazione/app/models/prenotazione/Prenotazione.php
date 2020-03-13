@@ -14,8 +14,6 @@ class Prenotazione{
     private $OID;
     private $cliente;
     private $volo;
-
-    private $listaPasseggeri;
     private $listaPosti;
     private $listaBiglietti;
     private $listaAcquisti;

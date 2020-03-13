@@ -6,10 +6,9 @@ class ClienteDB extends AbstractDB
 {
     public function generatePutQuery($cliente)
     {
-        $query = sprintf("INSERT INTO Cliente VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s');",
+        return sprintf("INSERT INTO Cliente VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s');",
             $cliente->getOID(), $cliente->getNome(), $cliente->getCognome(), $cliente->getDataNascita(), $cliente->getIndirizzo(),
             $cliente->getCodiceFedelta(), $cliente->getStato(), $cliente->getPassword(), $cliente->getEmail());
-        return $query;
     }
 
     public function emailFedeltaExists($email){
@@ -30,8 +29,7 @@ class ClienteDB extends AbstractDB
     public function getClientiFedelta(){
         $query = "SELECT * FROM CLIENTE WHERE codiceFedelta is null";
         $stmt = $this->connection->query($query);
-        $lista = $stmt->fetchAll(PDO::FETCH_CLASS, "Cliente");
-        return $lista;
+        return $this->materializeAll($stmt, Cliente::class);
     }
 
     public function getAllFedelta(){
