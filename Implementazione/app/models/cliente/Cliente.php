@@ -3,7 +3,6 @@
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 class Cliente{
-    //TODO:: Spostare in un'altra classe
     public static $STATO_OSPITE= 'OSPITE';
     public static $STATO_FEDELE = 'FEDELE';
     public static $STATO_INFEDELE = 'INFEDELE';
@@ -97,7 +96,6 @@ class Cliente{
         $this->codiceFedelta = null;
         $this->username = null;
         $this->password = null;
-        //TODO:: se si cancella imposto solamente lo stato 'Cancellato' ?
         $this->stato = self::$STATO_CANCELLATO;
     }
 

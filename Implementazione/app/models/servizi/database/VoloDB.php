@@ -9,8 +9,8 @@ class VoloDB extends AbstractDB
     protected function generatePutQuery($obj){
         $query = "";
         $promozione = $obj->getPromozione()!=null ? $obj->getPromozione()->getOID() : null;
-        $query .= sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s', '%s'); ",
-                        $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo()->getOID(), $promozione);
+        $query .= sprintf("INSERT INTO Volo VALUES ('%s','%s','%s','%s','%s','%s', '%s', '%s'); ",
+                        $obj->getOID(),$obj->getDataOraPartenza(),$obj->getDataOraArrivo(),$obj->getStato(), $obj->getMiglia(), $obj->getAereo()->getOID(), $promozione, $obj->getCodiceVolo());
         //VoloAeroporto
         $query .= sprintf("Insert into VoloAeroporto values ('%s', '%s', '%s' ); ", $obj->getOID(), $obj->getAeroportoPartenza()->getOID(), $obj->getAeroportoDestinazione()->getOID());
         //VoloPosto

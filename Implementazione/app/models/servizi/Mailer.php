@@ -122,12 +122,17 @@ class Mailer{
         mail($this->generateRecipients($listaClienti), "Prenotazione cancellata", $message);
     }
 
-    private function generateRecipients($listaClienti){
+    private function generateRecipients($listaClienti)
+    {
+        //TODO provare con recipients null cosa succede
         $recipients = array();
-        foreach ($listaClienti as $cliente){
-            array_push($recipients, $cliente->getEmail());
+        if ($listaClienti) {
+            foreach ($listaClienti as $cliente) {
+                array_push($recipients, $cliente->getEmail());
+            }
+            return implode(',', $recipients);
         }
-        return implode(',',$recipients);
+        return '';
     }
 }
 

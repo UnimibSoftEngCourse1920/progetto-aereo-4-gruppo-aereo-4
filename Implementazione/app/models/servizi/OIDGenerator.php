@@ -37,7 +37,7 @@ class OIDGenerator
             $this->seqnumber =  0;
         }
         $this->seqnumber += 1;
-        $oid = strval($this->date) . sprintf('%05d', $this->seqnumber);
+        $oid = strval($this->date) . sprintf('%07d', $this->seqnumber);
 
         file_put_contents(self::$fname, $oid);
 
