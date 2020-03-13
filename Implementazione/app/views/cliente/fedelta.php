@@ -21,7 +21,7 @@
                     <?=substr($_SESSION["nome_cliente"], 0, 1);?>
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-10 mt-2">
                 <h2 style="display: inline-block; margin-right: 20px;"><?= $_SESSION["nome_cliente"] ?></h2>
                 <span><em class="fas fa-coins"></em>  <?= $data["cliente"]->getSaldoPunti(); ?> </span><br>
                 <span> <?= $data["cliente"]->getIndirizzo(); ?> </span>
@@ -75,8 +75,8 @@
         </div>
         <div class="row text-center">
             <div class="col-md-12">
-                <a href="annullaIscrizione/<?=$_SESSION["id_cliente"]?>"><button> Richiedi estratto conto </button>
-                <a href="richiediEstrattoConto/<?=$_SESSION["id_cliente"]?>"><button> Elimina account </button></a>
+                <a href="richiediEstrattoConto/<?=$_SESSION["id_cliente"]?>" style="text-decoration: none;"><button> Richiedi estratto conto </button>
+                <a href="annullaIscrizione/<?=$_SESSION["id_cliente"]?>"  style="text-decoration: none;"><button> Elimina account </button></a>
             </div>
         </div>
     </div>
