@@ -23,11 +23,9 @@ class PrenotazioneController extends Controller
     }
 
     public function effettuaPrenotazione($nome = "", $cognome = "", $email = "",$listaPasseggeri,$idVolo,$nPosti = "",$tariffa) {
-        if(isset($idVolo) && isset($viaggiatori) && isset($nome) && isset($cognome) && isset($email) && isset($nPosti)) {
-            //header('Location: /public/vendita/acquista');
-        }
-        $registro = $this->model('volo/RegistroVoli');
-        $volo = $registro->getVolo($idVolo);
-        $this->view('prenotazione/prenotazione', ["volo"=> $volo,"pass"=>$viaggiatori]);
+        $cliente = new Cliente($nome,$cognome,$email,null);
+        $p = $this->registroPrenotazioni->effettuaPrenotazione($cliente,json_decode($listaPasseggeri,true),$idVolo,$nPosti,$tariffa);
+        var_dump($p);
+        //$this->view('prenotazione/prenotazione', ["volo"=> $volo,"pass"=>$viaggiatori]);
     }
 }
