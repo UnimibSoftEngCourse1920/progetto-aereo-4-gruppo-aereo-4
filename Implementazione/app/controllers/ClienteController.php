@@ -20,7 +20,8 @@ class ClienteController extends Controller{
     public function annullaIscrizione($codiceFedelta){
         $esito = $this->registroClienti -> annullaIscrizione($codiceFedelta);
         if($esito) {
-            //TODO esito positivo
+            session_destroy();
+            header("Location: https://gruppoaereo4.000webhostapp.com/public/");
         }
         else {
             //TODO esito negativo
