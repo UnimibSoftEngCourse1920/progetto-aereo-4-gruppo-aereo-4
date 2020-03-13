@@ -1,27 +1,46 @@
 <?php
 
 require_once "../app/core/Controller.php";
+require_once "../app/models/volo/RegistroVoli.php";
+require_once "../app/models/prenotazione/RegistroPrenotazioni.php";
+require_once "../app/models/cliente/RegistroClienti.php";
 
-class VenditaController extends Controller
-{
-	//TODO: DB e controllo
+class VenditaController extends Controller {
+
+    private $registroPrenotazioni;
+    private $registroVoli;
+    private $registroClienti;
+
+    public function __construct() {
+        $this->registroPrenotazioni = new RegistroPrenotazioni();
+        $this->registroVoli = new RegistroVoli();
+        $this->registroClienti = new RegistroClienti();
+    }
+
 	public function consultaVoli($partenza, $destinazione, $data, $nPosti) {
-		$registro = $this->model('volo/RegistroVoli');
-		$aeroporti = $registro->getAeroporti();
-		$voli = $registro->cercaVoli($partenza, $destinazione, $data, $nPosti);
+		$aeroporti = $this->registroVoli->getAeroporti();
+		$voli = $this->registroVoli->cercaVoli($partenza, $destinazione, $data, $nPosti);
 		$this->view('vendita/consulta', ["voli" => $voli, "partenza" => $partenza, "destinazione" => $destinazione,
                                                 "data" => $data, "viaggiatori" => $nPosti, "aeroporti" => $aeroporti]);
 	}
-	
-	//TODO: DB e restituire voli anziché date
-	public function cercaDateDisponibili($idVolo, $nPosti) {
-		$registro = $this->model('RegistroVoli');
-		$voli = $registro->cercaDateDisponibili($idVolo, $nPosti);
-		$this->view('vendita/cambiaprenotazione', $voli);
+
+	public function cercaDateDisponibili($idPrenotazione, $nuovaData = "") {
+		$prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+        $volo = $prenotazione->getVolo();
+        if($nuovaData != "") {
+            $voli = $this->registroVoli->cercaVoli($volo->getAeroportoPartenza()->getOID(),
+                $volo->getAeroportoDestinazione()->getOID(), $nuovaData,
+                count($prenotazione->getListaPosti()));
+        } else {
+            $voli = null;
+        }
+        $tariffa = $prenotazione->getListaBiglietti()[0]->getTariffa();
+		$this->view('vendita/cercadate', ["id_prenotazione" => $idPrenotazione, "volo" => $volo, "voli" => $voli,
+                                                "tariffa" => $tariffa]);
 	}
 	
 	//TODO: DB
-	public function cambiaData($idPrenotazione, $idCliente, $idNuovoVolo, $nuovaTariffa, $metodoPagamento, $carta = "") {
+	public function cambiaData($idPrenotazione, $idCliente, $idNuovoVolo, $nuovaTariffa, $metodoPagamento = "", $carta = "") {
         $registroPrenotazioni = $this->model('prenotazione/RegistroPrenotazioni');
         $registroVoli = $this->model('volo/RegistroVoli');
         $registroClienti = $this->model('cliente/RegistroClienti');
@@ -50,18 +69,16 @@ class VenditaController extends Controller
 	}
 
 	public function acquistoPrenotazione($idPrenotazione, $idCliente, $metodoPagamento, $carta = "") {
-        $registroPrenotazioni = $this->model('prenotazione/RegistroPrenotazioni');
-        $prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
+        $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
         $cliente = $prenotazione->getCliente();
         if ($idCliente == $cliente->getOID()) {
-            $esitoPagamento = $registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
+            $esitoPagamento = $this->registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
             if ($esitoPagamento) {
                 //TODO: Testare queste istruzioni
-                //$registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
-                $registroPrenotazioni->aggiornaAcquisti($prenotazione);
+                //$this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
+                $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
                 exit;
-                $registroClienti = $this->model('cliente/RegistroClienti');
-                $registroClienti->aggiornaCliente($cliente);
+                $this->registroClienti->aggiornaCliente($cliente);
                 //TODO: view con successo
             } else {
                 //TODO: view con errore

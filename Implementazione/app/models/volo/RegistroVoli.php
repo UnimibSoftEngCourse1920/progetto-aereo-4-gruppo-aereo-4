@@ -101,12 +101,8 @@ class RegistroVoli{
     }
 	
 	public function cercaVoli($partenza, $destinazione, $data, $nPosti) {
-		return DBFacade::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
-	}
-	
-	public function cercaDateDisponibili($idVolo, $nPosti) {
-		return DBFacade::getIstance()->cercaDateDisponibili($idVolo, $nPosti);
-	}
+        return DBFacade::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
+    }
 	
 	public function getVolo($idVolo) {
 		return DBFacade::getIstance()->get($idVolo,"Volo");
