@@ -41,54 +41,51 @@ class VenditaController extends Controller {
 	
 	//TODO: DB
 	public function cambiaData($idPrenotazione, $idCliente, $idNuovoVolo, $nuovaTariffa, $metodoPagamento = "", $carta = "") {
-        $registroPrenotazioni = $this->model('prenotazione/RegistroPrenotazioni');
-        $registroVoli = $this->model('volo/RegistroVoli');
-        $registroClienti = $this->model('cliente/RegistroClienti');
-        $prenotazione = $registroPrenotazioni->getPrenotazione($idPrenotazione);
-        $cliente = $prenotazione->getCliente();
-        if ($idCliente == $cliente->getOID()) {
-            $volo = $prenotazione->getVolo();
-            var_dump($prenotazione);
-            var_dump($volo);
-            exit;
-            $registroVoli = $this->model('volo/RegistroVoli');
-            $nuovoVolo = $registroVoli->getVolo($idNuovoVolo);
-            $esitoCambioData = $registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta);
-            if ($esitoCambioData) {
-                //Aggiornare prenotazione (anche biglietti e acquisto), cliente, volo vecchio e volo nuovo per i posti
-                $registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
-                $registroPrenotazioni->aggiornaPrentoazione($prenotazione);
-                $registroClienti->aggiornaCliente($cliente);
-                $registroVoli->aggiornaVolo($volo);
-                $registroVoli->aggiornaVolo($nuovoVolo);
-                //TODO: view con successo
-            } else {
-                //TODO: view con errore
-            }
-        }
-	}
-
-	public function acquistoPrenotazione($idPrenotazione, $idCliente, $metodoPagamento, $carta = "") {
-        $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
-        $cliente = $prenotazione->getCliente();
-        if ($idCliente == $cliente->getOID()) {
-            $esitoPagamento = $this->registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
-            if ($esitoPagamento) {
-                //TODO: Testare queste istruzioni
-                //$this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
-                $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
+        if($metodoPagamento != "") {
+            $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+            $cliente = $prenotazione->getCliente();
+            if ($idCliente == $cliente->getOID()) {
+                $volo = $prenotazione->getVolo();
+                $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
+                var_dump($nuovoVolo);
                 exit;
-                $this->registroClienti->aggiornaCliente($cliente);
-                //TODO: view con successo
-            } else {
-                //TODO: view con errore
+                $esitoCambioData = $this->registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta);
+                if ($esitoCambioData) {
+                    //Aggiornare prenotazione (anche biglietti e acquisto), cliente, volo vecchio e volo nuovo per i posti
+                    $this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
+                    $this->registroPrenotazioni->aggiornaPrentoazione($prenotazione);
+                    $this->registroClienti->aggiornaCliente($cliente);
+                    $this->registroVoli->aggiornaVolo($volo);
+                    $this->registroVoli->aggiornaVolo($nuovoVolo);
+                    //TODO: view con successo
+                } else {
+                    //TODO: view con errore
+                }
             }
         }
+        $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente]);
 	}
 
-	public function acquista($idPrenotazione = "", $idCliente = "") {
+	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento = "", $carta = "") {
+        if($metodoPagamento != "") {
+            $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+            $cliente = $prenotazione->getCliente();
+            if ($idCliente == $cliente->getOID()) {
+                $esitoPagamento = $this->registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
+                if ($esitoPagamento) {
+                    //TODO: Testare queste istruzioni
+                    //$this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
+                    $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
+                    exit;
+                    $this->registroClienti->aggiornaCliente($cliente);
+                    //TODO: view con successo
+                } else {
+                    //TODO: view con errore
+                }
+            }
+        }
         $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente]);
-    }
+	}
 
     public function confermaPrenotazione() {
         $this->view('vendita/conferma', ["success" => "La tua prenotazione è stata confermata!"]);

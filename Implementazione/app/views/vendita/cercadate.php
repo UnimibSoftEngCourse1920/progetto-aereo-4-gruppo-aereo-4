@@ -138,10 +138,10 @@
         <div class="col-md-3"></div>
         <div class="col-md-6 mt-auto">
             <form class="py-md-4 px-md-5" id="form-data" action="/public/vendita/cambiaData" method="post">
-                <input type="text" id="id_prenotazione" name="id_prenotazione" value="<?=$data["id_prenotazione"]?>">
-                <input type="text" id="id_cliente" name="id_cliente" value="<?=$_SESSION["id_cliente"]?>">
-                <input type="text" id="id_nuovo_volo" name="id_nuovo_volo">
-                <input type="text" id="nuova_tariffa" name="nuova_tariffa">
+                <input type="hidden" id="id_prenotazione" name="id_prenotazione" value="<?=$data["id_prenotazione"]?>">
+                <input type="hidden" id="id_cliente" name="id_cliente" value="<?=$_SESSION["id_cliente"]?>">
+                <input type="hidden" id="id_nuovo_volo" name="id_nuovo_volo">
+                <input type="hidden" id="nuova_tariffa" name="nuova_tariffa">
                 <div class="form-row pt-4">
                     <div class="form-group col-md-4 mx-auto">
                         <button type="submit" class="btn btn-primary w-100">Cambia data</button>
