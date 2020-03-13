@@ -49,6 +49,7 @@
                             </thead>
                             <tbody>
                             <?php
+
                                 foreach ($data["voli"] as $volo){
                                     echo "<tr>
                                             <th scope='row'>".$volo->getOID()."</th>
