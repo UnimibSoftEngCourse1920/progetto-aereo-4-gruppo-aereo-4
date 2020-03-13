@@ -130,24 +130,34 @@
                 </div>
             </div>
         </div>
+        <?php if(isset($data["volo"])) { ?>
         <div class="col-md-4 px-md-5 mt-md-4" id="riepilogo">
             <div class="row pb-md-4">
-                <div class="col-8"><h3>Biglietti</h3></div>
-                <div class="col-4 text-right"><h3>340€</h3></div>
+                <div class="col-6"><h3>Biglietti</h3></div>
+                <div class="col-6 text-right">
+                    <h3 id="prezzo_base">
+                        <?php
+                        if($data["volo"]->getPrezzoIntero()==$data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))){
+                            echo number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€";
+                        } else {
+                            echo number_format($data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"],2)."€ </h3><h3><strike style='font-size: 20px'>".number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€</strike>";
+                        }?>
+                    </h3>
+                </div>
             </div>
             <div class="row">
                 <div class="col">
                     <p>
-                        <strong>Milano Malpensa (MXP)</strong>
-                        <br>2020-04-04 04:30
+                        <strong><?= $data["volo"]->getAeroportoPartenza()->getCitta()." ".$data["volo"]->getAeroportoPartenza()->getNome()." (".$data["volo"]->getAeroportoPartenza()->getCodice().")" ?></strong>
+                        <br><?= $data["volo"]->getDataOraPartenza()?>
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <p>
-                        <strong>Londra Stansted (STN)</strong>
-                        <br>2020-04-04 19:00
+                        <strong><?= $data["volo"]->getAeroportoDestinazione()->getCitta()." ".$data["volo"]->getAeroportoDestinazione()->getNome()." (".$data["volo"]->getAeroportoDestinazione()->getCodice().")" ?></strong>
+                        <br><?= $data["volo"]->getDataOraArrivo()?>
                     </p>
                 </div>
             </div>
@@ -155,15 +165,16 @@
                 <div class="col">
                     <p>
                         <strong>Viaggiatori</strong>
-                        <br>3
+                        <br><?= $data["pass"] ?>
                     </p>
                 </div>
             </div>
-            <div class="row py-md-4">
+            <?php if($data["tariffa"] == "plus") { ?>
+            <div class="row py-md-4" id="supplemento_row">
                 <div class="col-8"><h3>Supplementi</h3></div>
-                <div class="col-4 text-right"><h3>10€</h3></div>
+                <div class="col-4 text-right"><h3>20€</h3></div>
             </div>
-            <div class="row">
+            <div class="row" id="tariffa_row">
                 <div class="col">
                     <p>
                         <strong>Tariffa</strong>
@@ -171,11 +182,22 @@
                     </p>
                 </div>
             </div>
+            <?php } ?>
             <div class="row py-md-4">
-                <div class="col-8"><h3>Totale</h3></div>
-                <div class="col-4 text-right"><h3>350€</h3></div>
+                <div class="col-6"><h3>Totale</h3></div>
+                <div class="col-6 text-right">
+                    <h3 id="prezzo_tot">
+                        <?php
+                        if($data["volo"]->getPrezzoIntero()==$data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))){
+                            echo number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€";
+                        } else {
+                            echo number_format($data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"],2)."€ </h3><h3><strike id='old_tot' style='font-size: 20px'>".number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€</strike>";
+                        }?>
+                    </h3>
+                </div>
             </div>
         </div>
+        <?php } ?>
     </div>
 </div>
 <?php include("../app/template/footer.php") ?>

@@ -93,7 +93,7 @@ $(function() {
         $(this).addClass("selected");
     });
 
-    $('.tariffa').click(function() {
+    $('.tariffa:not(#tar_stand):not(#tar_plus)').click(function() {
         $('.tariffa').removeClass("selected");
         $(this).addClass("selected");
     });

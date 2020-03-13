@@ -114,8 +114,6 @@ class RegistroVoli{
 		DBFacade::getIstance()->aggiornaVolo($idVolo);
 	}
 
-	//TODO funzione getAll per tutti?
-
 	public function getAeroporti(){
         return DBFacade::getIstance()->getAll(Aeroporto::class);
     }

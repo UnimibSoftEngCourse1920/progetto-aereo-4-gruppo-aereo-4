@@ -25,21 +25,28 @@ abstract class AbstractDB
     public function get($OID, $class){
         $query = $this->generateGetQuery($OID,$class); //creo la query
         $stmt = $this->connection->query($query); //la eseguo
+        return $this->fetchSingleByClass($stmt, $class);
+    }
+
+    protected function fetchSingleByClass($stmt, $class){
         $row = $stmt->fetch(PDO::FETCH_ASSOC);//per ogni riga creo un oggetto generico
         $obj = (object)($row);
         return $this->objectToObject($obj,$class); //eseguo il cast dell'oggetto generico
     }
 
     public function delete($OID, $class){
-        return $this->connection->exec($this->generateDeleteQuery($OID, $class));
+        $res = $this->connection->exec($this->generateDeleteQuery($OID, $class));
+        return ($res==0) ? false : true;
     }
 
     public function update($object){
-        return $this->connection->exec($this->generateUpdateQuery($object));
+        $res = $this->connection->exec($this->generateUpdateQuery($object));
+        return ($res==0) ? false : true;
     }
 
     public function put($object){
-        return $this->connection->exec($this->generatePutQuery($object));
+        $res = $this->connection->exec($this->generatePutQuery($object));
+        return ($res==0) ? false : true;
     }
 
     public function getAll($class){

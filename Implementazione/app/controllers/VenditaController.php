@@ -67,8 +67,8 @@ class VenditaController extends Controller {
 	}
 
 	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento = "", $carta = "") {
+        $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
         if($metodoPagamento != "") {
-            $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
             $cliente = $prenotazione->getCliente();
             if ($idCliente == $cliente->getOID()) {
                 $esitoPagamento = $this->registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
@@ -84,7 +84,12 @@ class VenditaController extends Controller {
                 }
             }
         }
-        $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente]);
+        $nPosti = count($prenotazione->getListaPosti());
+        $tariffa = $prenotazione->getListaBiglietti()[0]->getTariffa();
+        $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente,
+                                                "volo" => $prenotazione->getVolo(),
+                                                "pass" => $nPosti,
+                                                "tariffa" => $tariffa]);
 	}
 
     public function confermaPrenotazione() {

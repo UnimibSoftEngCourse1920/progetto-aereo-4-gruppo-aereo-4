@@ -9,32 +9,26 @@ class AcquistoDB extends AbstractDB
 {
     public function get($OID, $class)
     {
-        //TODO dovrebbe funzionare ma non mi piace
-        $acquisto = parent::get($OID, $class);
-        $acquisto->setPagamento($this->getPagamento($acquisto->getPagamento()));
+        //TODO riutilizzo la get ??
+        $acquisto = parent::get($OID, $class); //Fa la get di acquisto
+        $tipo = $this->getTipoPagamento($acquisto->getPagamento());
+
+        $query = "Select * from Pagamento WHERE OID = '".$acquisto->getPagamento()."'";
+        $stmt = $this->connection->query($query); //la eseguo
+        $classePagamento = "PagamentoCon".$tipo;
+        $pagamento = $this->fetchSingleByClass($stmt, $classePagamento);
+        $acquisto->setPagamento($pagamento);
         return $acquisto;
     }
 
-    private function getPagamento($OIDPagamento){
-        $query = "(SELECT OID, 'Punti' as tipo from PagamentoConPunti WHERE OID = '$OIDPagamento') 
-                   UNION ALL 
-                  (SELECT OID, 'Carta' as tipo from PagamentoConCarta WHERE OID = $OIDPagamento)";
-        $pagamento = $this->connection->query($query)->fetch();
-        return $this->get($pagamento[0], "PagamentoCon".$pagamento[1]);
+    private function getTipoPagamento($OID){
+        $query = "Select tipo from Pagamento WHERE OID = '$OID'";
+        return $this->connection->query($query)->fetch()[0];
     }
 
     protected function generatePutQuery($obj)
     {
-        $pagamentoCarta = null;
-        $pagamentoPunti = null;
-        $p = $obj->getPagamento();
-        if(get_class($p) == PagamentoConPunti::class){
-            $pagamentoPunti = $p->getOID();
-        }else{
-            $pagamentoCarta = $p->getOID();
-        }
-
-        $query = "INSERT INTO Acquisto VALUES ('%s', %d, '%s', '%s')";
-        return sprintf($query,$obj->getOID(), $obj->getPuntiAccumulati(), $pagamentoCarta, $pagamentoPunti);
+        $query = "INSERT INTO Acquisto VALUES ('%s', %d, '%s')";
+        return sprintf($query,$obj->getOID(), $obj->getPuntiAccumulati(), $obj->getPagamento()->getOID());
     }
 }

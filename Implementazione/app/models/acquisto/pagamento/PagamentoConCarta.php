@@ -8,16 +8,13 @@ class PagamentoConCarta extends Pagamento{
     private $istituto;
     
 	public function effettua($carta) {
-		$this->istituto = new IstitutoDiCredito("Banca Bicocca");
-		return $this->istituto->autorizzaPagamento($carta);
+		$istituto = new IstitutoDiCredito();
+		$esito = $this->istituto->autorizzaPagamento($carta);
+		$this->istituto = $istituto->getNome();
+		return $esito;
 	}
 
 	public function getIstituto(){
-	    if(is_string($this->istituto)){
-            return DBFacade::getIstance() ->get($this->istituto, IstitutoDiCredito::class);
-        }
-	    else {
-            return $this->istituto;
-        }
+	    return $this->istituto;
     }
 }
