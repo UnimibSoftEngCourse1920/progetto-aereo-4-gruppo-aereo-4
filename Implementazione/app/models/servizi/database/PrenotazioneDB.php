@@ -108,9 +108,8 @@ class PrenotazioneDB extends AbstractDB
     }
 
     public function getPrenotazioniCliente($OID, $soloAcquistate){
-        //TODO guardo se funziona
         $prenotazioni = array();
-        if($soloAcquistate) {
+        if(!$soloAcquistate) {
             $query = "select prenotazione from PrenotazioneCliente where cliente = '$OID'";
         } else{
             $query = "select p.OID from PrenotazioneCliente pc join Prenotazione p join PrenotazioneAcquisto a on p.OID = pc.cliente and p.OID = a.prenotazione WHERE pc.cliente='$OID';";

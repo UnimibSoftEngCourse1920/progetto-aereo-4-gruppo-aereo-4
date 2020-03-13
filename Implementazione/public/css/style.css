@@ -204,7 +204,7 @@ h2{
     color: white;
 }
 
-.tariffa {
+.tariffa, .data-disponibile {
     height: 200px;
     width: 200px;
     border-radius: 8px;
@@ -215,7 +215,7 @@ h2{
     cursor:pointer;
 }
 
-.tariffa .fas {
+.tariffa .fas, .data-disponibile .fas {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -224,17 +224,18 @@ h2{
     color: #ddd;
 }
 
-.tariffa.selected, .tariffa.selected .fas {
+.tariffa.selected, .tariffa.selected .fas, .data-disponibile.selected, .data-disponibile.selected .fas {
     color: #7876AE;
     border-color: #7876AE;
 }
 
-.tariffa:not(.selected):hover, .tariffa:not(.selected):hover .fas {
+.tariffa:not(.selected):hover, .tariffa:not(.selected):hover .fas, .data-disponibile:not(.selected):hover,
+.data-disponibile:not(.selected):hover .fas {
     color: #7091BE;
     border-color: #7091BE;
 }
 
-.tariffa.selected:before {
+.tariffa.selected:before, .data-disponibile.selected:before {
     content: '\f00c';
     position: absolute;
     top: 8px;
@@ -270,6 +271,19 @@ h2{
     border: 1px solid #aaa !important;
     padding: 8px 15px !important;
     border-radius: 3px !important;
+}
+
+.fidelity-profile-image{
+    background: #7876AE;
+    color: white;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    line-height: 95px;
+    border-radius: 100%;
+    text-align: center;
+    margin-right: 5px;
+    font-size: 60px;
 }
 
 /*

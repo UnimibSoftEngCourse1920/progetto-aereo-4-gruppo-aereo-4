@@ -146,6 +146,10 @@ class RegistroPrenotazioni{
         }
         $this->mailer->avvisaPrenotazioneInScadenza($listaClienti);
     }
+
+    public function getPrenotazioniCliente($OIDCliente){
+        return DBFacade::getIstance()->getPrenotazioniCliente($OIDCliente, false);
+    }
 	
 }
 ?>

@@ -20,7 +20,8 @@ class ClienteController extends Controller{
     public function annullaIscrizione($codiceFedelta){
         $esito = $this->registroClienti -> annullaIscrizione($codiceFedelta);
         if($esito) {
-            //TODO esito positivo
+            session_destroy();
+            header("Location: https://gruppoaereo4.000webhostapp.com/public/");
         }
         else {
             //TODO esito negativo
@@ -92,9 +93,8 @@ class ClienteController extends Controller{
     }
 
     public function prenotazioni() {
-        $prenotazioni = array();
-        $cliente = 0;
-        //TODO
+        $cliente = $this->registroClienti->getCliente($_SESSION["id_cliente"]);
+        $prenotazioni = $this->registroPrenotazioni->getPrenotazioniCliente($_SESSION["id_cliente"]);
         $this->view('cliente/fedelta', ["prenotazioni" => $prenotazioni, "cliente" => $cliente]);
     }
 
