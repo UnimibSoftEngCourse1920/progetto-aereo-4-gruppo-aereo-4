@@ -73,6 +73,8 @@ class Prenotazione{
 
 	public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta) {
 		$nPosti = count($this->listaPosti);
+		var_dump($nPosti);
+		exit;
 		if($nPosti <= $nuovoVolo->getNumeroPostiDisponibili()) {
 			$esitoPagamentoTassa = $this->acquista($metodoPagamento, $cliente, $tassa, $carta);
 			if($esitoPagamentoTassa) {

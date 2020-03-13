@@ -41,15 +41,19 @@ class VenditaController extends Controller {
 	
 	//TODO: DB
 	public function cambiaData($idPrenotazione, $idCliente, $idNuovoVolo, $nuovaTariffa, $metodoPagamento = "", $carta = "") {
-        if($metodoPagamento != "") {
-            $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+        $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
+        $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+        $tariffa = $prenotazione->getListaBiglietti()[0]->getTariffa();
+        $tassaCambio = $this->registroPrenotazioni->calcolaTassa($tariffa, $nuovaTariffa);
+        if($metodoPagamento != "" || $tassaCambio == 0) {
             $cliente = $prenotazione->getCliente();
             if ($idCliente == $cliente->getOID()) {
                 $volo = $prenotazione->getVolo();
                 $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
-                var_dump($nuovoVolo);
+                $esitoCambioData = $this->registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa,
+                                                                            $metodoPagamento, $carta, $tassaCambio);
+                var_dump($esitoCambioData);
                 exit;
-                $esitoCambioData = $this->registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta);
                 if ($esitoCambioData) {
                     //Aggiornare prenotazione (anche biglietti e acquisto), cliente, volo vecchio e volo nuovo per i posti
                     $this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
@@ -63,7 +67,10 @@ class VenditaController extends Controller {
                 }
             }
         }
-        $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente]);
+        $nPosti = count($prenotazione->getListaPosti());
+        $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente,
+                                                "volo" => $nuovoVolo, "pass" => $nPosti, "tariffa" => $nuovaTariffa,
+                                                "tassa_cambio" => $tassaCambio]);
 	}
 
 	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento = "", $carta = "") {
@@ -76,7 +83,6 @@ class VenditaController extends Controller {
                     //TODO: Testare queste istruzioni
                     //$this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
                     $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
-                    exit;
                     $this->registroClienti->aggiornaCliente($cliente);
                     //TODO: view con successo
                 } else {
