@@ -7,7 +7,6 @@ require_once("database/AeroportoDB.php");
 require_once("database/BigliettoDB.php");
 require_once("database/ClienteDB.php");
 require_once("database/ImpiegatoDB.php");
-require_once("database/IstitutoDB.php");
 require_once("database/PagamentoConCartaDB.php");
 require_once("database/PagamentoConPuntiDB.php");
 require_once("database/PostoDB.php");
@@ -22,14 +21,12 @@ class DBFacade{
     private $gestori = array();
 
     private function __construct(){
-        // TODO: Factory mapper?
         $this->gestori['Cliente'] = new ClienteDB();
         $this->gestori['Acquisto'] = new AcquistoDB();
-        $this->gestori[Aereo::class] = new AereoDB();
+        $this->gestori['Aereo'] = new AereoDB();
         $this->gestori['Aeroporto'] = new AeroportoDB();
         $this->gestori['Biglietto'] = new BigliettoDB();
         $this->gestori['Impiegato'] = new ImpiegatoDB();
-        $this->gestori['Istituto'] = new IstitutoDB();
         $this->gestori['PagamentoConPunti'] = new PagamentoConPuntiDB();
         $this->gestori['PagamentoConCarta'] = new PagamentoConCartaDB();
         $this->gestori['Posto'] = new PostoDB();
@@ -46,7 +43,6 @@ class DBFacade{
     }
 
     //Operazioni CRUD
-    //TODO esiti mancanti
     public function update($object){
         return $this -> gestori[$this->getClassName($object)] -> update($object);
     }

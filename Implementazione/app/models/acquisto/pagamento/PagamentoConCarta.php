@@ -13,11 +13,6 @@ class PagamentoConCarta extends Pagamento{
 	}
 
 	public function getIstituto(){
-	    if(is_string($this->istituto)){
-            return DBFacade::getIstance() ->get($this->istituto, IstitutoDiCredito::class);
-        }
-	    else {
-            return $this->istituto;
-        }
+	    return $this->istituto;
     }
 }
