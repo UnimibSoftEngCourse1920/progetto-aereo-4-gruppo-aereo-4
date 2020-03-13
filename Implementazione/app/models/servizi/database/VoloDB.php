@@ -28,7 +28,7 @@ class VoloDB extends AbstractDB
 
     protected function generateGetQuery($OID, $class)
     {
-        return $this->generateGetAllQuery('') ." WHERE v.OID = '$OID'";
+        return $this->generateGetAllQuery(Volo::class) ." WHERE v.OID = '$OID'";
     }
 
     protected function generateGetAllQuery($class)
@@ -55,14 +55,14 @@ class VoloDB extends AbstractDB
                         AND v.stato <> '".Volo::$STATO_CANCELLATO."'
                         AND $nPosti < (SELECT count(*) from VoloPosto where volo = v.OID)";
         $stmt = $this->connection->query($query);
-        return $this->materializeAll($stmt, "Volo");
+        return $this->fetchResultsByClass($stmt, Volo::class);
     }
 
     public function getPasseggeriVolo($OIDVolo){
         $query = "select c.* from PrenotazioneVolo pv join Prenotazione p join PrenotazioneCliente pc join Cliente c 
                     on c.OID = pc.cliente and pv.prenotazione = p.OID and pc.prenotazione = p.OID where pv.volo = '$OIDVolo'";
         $stmt = $this->connection->query($query); //la eseguo
-        return $this->materializeAll($stmt, 'Cliente');
+        return $this->fetchResultsByClass($stmt, Cliente::class);
     }
 
     public function isAereoDisponibile($partenza, $arrivo, $OIDAereo){

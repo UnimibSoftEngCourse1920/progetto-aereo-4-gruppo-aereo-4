@@ -45,10 +45,10 @@ abstract class AbstractDB
     public function getAll($class){
         $query = $this->generateGetAllQuery($class); //creo la query
         $stmt = $this->connection->query($query); //la eseguo
-        return $this->materializeAll($stmt, $class);
+        return $this->fetchResultsByClass($stmt, $class);
     }
 
-    protected function materializeAll($stmt, $class){
+    protected function fetchResultsByClass($stmt, $class){
         $lista = array();
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){ //per ogni riga creo un oggetto generico
             $obj = (object)($row);

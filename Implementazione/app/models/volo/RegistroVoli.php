@@ -38,7 +38,7 @@ class RegistroVoli{
     }
 
     private function salvaPosti($listaPosti){
-        //Mettere esito anche qui?
+        //TODO Mettere esito anche qui?
         $db = DBFacade::getIstance();
         foreach ($listaPosti as $posto){
             $db->put($posto);
@@ -71,7 +71,6 @@ class RegistroVoli{
 
     public function avvisaPasseggeri($OIDVolo, $tipologiaAvviso){
         $volo = DBFacade::getIstance() ->get($OIDVolo, Volo::class);
-        //TODO perchè passo dal registro Voli ?? Devo fare come prima e passare dal controller?
         $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
         switch ($tipologiaAvviso){
             case self::$AVVISAMODIFICAVOLO:
@@ -86,7 +85,6 @@ class RegistroVoli{
     }
 
     private function validaDate($data1, $data2){
-        //TODO deve esserci un minimo di tot minuti tra le due date?
         $formato = strtotime($data1) && strtotime($data2);
         $date = $data1 < $data2;
         return $formato && $date;
@@ -115,6 +113,8 @@ class RegistroVoli{
 	}
 	
 	public function aggiornaVolo($idVolo) {
+        //TODO vedere se serve o meno
+        //TODO chiamare la update
 		DBFacade::getIstance()->aggiornaVolo($idVolo);
 	}
 

@@ -18,7 +18,7 @@ class Cliente{
     private $codiceFedelta;
     private $password;
     private $stato;
-    private $punti;
+    private $saldoPunti;
 
     public function __construct($nome, $cognome, $email, $dataNascita, $indirizzo=null, $password = null, $fedelta = false){
         $this->OID = OIDGenerator::getIstance()->getNewOID();
@@ -32,13 +32,13 @@ class Cliente{
             $this->indirizzo = $indirizzo;
             $this->password = $password;
             $this->stato = self::$STATO_FEDELE;
-            $this->punti = 0;
+            $this->saldoPunti = 0;
         }
         else{
             $this->codiceFedelta = null;
             $this->indirizzo = null;
             $this->password = null;
-            $this->punti = null;
+            $this->saldoPunti = null;
             $this->stato = self::$STATO_OSPITE;
         }
     }
@@ -88,8 +88,8 @@ class Cliente{
         return $this->stato;
     }
 
-    public function getPunti() {
-        return $this->punti;
+    public function getSaldoPunti() {
+        return $this->saldoPunti;
     }
 
     public function annullaIscrizioneFedelta(){
@@ -112,15 +112,15 @@ class Cliente{
 
     public function sottraiPunti($punti)
     {
-        if ($this->punti >= $punti) {
-            $this->punti = $this->punti - $punti;
+        if ($this->saldoPunti >= $punti) {
+            $this->saldoPunti = $this->saldoPunti - $punti;
             return true;
         }
         return false;
     }
 
     public function aggiungiPunti($punti) {
-        $this->punti = $this->punti + $punti;
+        $this->saldoPunti = $this->saldoPunti + $punti;
         return true;
     }
 

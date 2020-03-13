@@ -46,16 +46,19 @@ class PrenotazioneDB extends AbstractDB
     }
 
     protected function generateUpdateQuery($obj){
-        //Potrebbe non servire controllare la materializzazione qui
 
         $query = sprintf("UPDATE PrenotazioneVolo  SET volo = '%s' where prenotazione = '%s';", $obj->getVolo()->getOID() ,$obj->getOID());
 
+        $query .= sprintf("DELETE FROM PrenotazioneBiglietto WHERE prenotazione = '%s'; ", $obj->getOID());
         foreach($obj->getListaBiglietti() as $biglietto) {
-            $query .= sprintf("UPDATE PrenotazioneBiglietto SET biglietto = '%s' where prenotazione = '%s';", $biglietto->getOID(), $obj->getOID());
+            $query .= sprintf("INSERT INTO PrenotazioneBiglietto VALUES ('%s','%s');", $obj->getOID(), $biglietto->getOID());
         }
+
+        $query .= sprintf("DELETE FROM PrenotazionePosto WHERE prenotazione = '%s'; ", $obj->getOID());
         foreach($obj->getListaPosti() as $posto) {
-            $query .= sprintf("UPDATE PrenotazionePosto SET posto = '%s' where prenotazione = '%s';", $posto->getOID(), $obj->getOID());
+            $query .= sprintf("INSERT INTO PrenotazionePosto VALUES ('%s', '%s');", $obj->getOID(), $posto->getOID());
         }
+
         foreach($obj->getListaAcquisti() as $acquisto) {
             $query .= sprintf("INSERT IGNORE into PrenotazioneAcquisto  values('%s','%s');", $obj->getOID(), $acquisto->getOID());
         }
@@ -78,7 +81,7 @@ class PrenotazioneDB extends AbstractDB
                     on p.OID = pv.prenotazione and pv.volo = v.OID where TIMESTAMPDIFF(HOUR, NOW(), v.dataOraPartenza) <= '$ore' 
                     AND p.OID NOT IN (select prenotazione from PrenotazioneAcquisto);";
         $stmt = $this->connection->query($query);
-        return $this->materializeAll($stmt, Prenotazione::class);
+        return $this->fetchResultsByClass($stmt, Prenotazione::class);
     }
 
     public function checkUnivoca($email, $OIDVolo)

@@ -40,6 +40,11 @@ class Volo {
         }
     }
 
+    private function getCodiceVolo(){
+        //Genero random
+        return rand(1,10000);
+    }
+
 
     public function setAeroportoDestinazione($aeroportoDestinazione)
     {

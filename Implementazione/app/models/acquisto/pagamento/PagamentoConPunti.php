@@ -16,7 +16,7 @@ class PagamentoConPunti extends Pagamento{
     }
 	
 	public function effettua($cliente) {
-		if($this->puntiUtilizzati <= $cliente->getPunti()) {
+		if($this->puntiUtilizzati <= $cliente->getSaldoPunti()) {
 			$esitoPagamento = $cliente->sottraiPunti($this->puntiUtilizzati);
 		} else {
 			$esitoPagamento = false;

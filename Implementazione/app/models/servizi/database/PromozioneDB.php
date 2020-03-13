@@ -15,6 +15,6 @@ class PromozioneDB extends AbstractDB{
     public function getPromozioniFedelta(){
         $query = "select * from Promozione where promozioneFedelta = 'TRUE'";
         $stmt = $this->connection->query($query);
-        return $this->materializeAll($stmt, Promozione::class);
+        return $this->fetchResultsByClass($stmt, Promozione::class);
     }
 }
