@@ -81,6 +81,7 @@ class ClienteController extends Controller{
         if ($cliente->getOID()) {
             $_SESSION['id_cliente'] = $cliente->getOID();
             $_SESSION['nome_cliente'] = $cliente->getNome() . " " . $cliente->getCognome();
+            $_SESSION['email_cliente'] = $cliente->getEmail();
             return true;
         } else {
             return false;
