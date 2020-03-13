@@ -10,7 +10,7 @@ class AcquistoDB extends AbstractDB
     public function get($OID, $class)
     {
         //TODO dovrebbe funzionare ma non mi piace
-        $acquisto = $this->get($OID, $class);
+        $acquisto = self::get($OID, $class);
         $acquisto->setPagamento($this->getPagamento($acquisto->getPagamento()));
         return $acquisto;
     }
