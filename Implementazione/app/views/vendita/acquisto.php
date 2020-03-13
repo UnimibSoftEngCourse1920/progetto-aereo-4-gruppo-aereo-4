@@ -33,7 +33,7 @@
             <?php }?>
             <div class="row mt-md-4" id="pagamento-carta">
                 <div class="col">
-                    <form class="px-md-5" action="/public/vendita/acquistaPrenotazione" method="post">
+                    <form class="px-md-5" action="/public/vendita/acquistoPrenotazione" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Nome</label>

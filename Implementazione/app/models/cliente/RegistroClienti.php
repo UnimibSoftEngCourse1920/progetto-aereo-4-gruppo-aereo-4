@@ -90,8 +90,7 @@ class RegistroClienti
 	}
 		
 	public function aggiornaCliente($cliente) {
-        //TODO a cosa serve?
-		DBFacade::getIstance()->aggiornaCliente($cliente);
+		DBFacade::getIstance()->update($cliente);
 	}
 
 	public function login($email, $password) {
