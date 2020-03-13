@@ -14,7 +14,7 @@ abstract class Pagamento{
     {
         $this->importo = $importo;
         $this->OID = OIDGenerator::getIstance()->getNewOID();
-        $this->data = date("yy-m-d"); //TODO fare dataora
+        $this->data = date("yy-m-d");
     }
 
     public function getOID()

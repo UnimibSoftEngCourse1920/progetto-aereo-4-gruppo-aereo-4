@@ -59,7 +59,6 @@ class VoloDB extends AbstractDB
     }
 
     public function getPasseggeriVolo($OIDVolo){
-        //TODO ritorno solamente la mail?
         $query = "select c.* from PrenotazioneVolo pv join Prenotazione p join PrenotazioneCliente pc join Cliente c 
                     on c.OID = pc.cliente and pv.prenotazione = p.OID and pc.prenotazione = p.OID where pv.volo = '$OIDVolo'";
         $stmt = $this->connection->query($query); //la eseguo

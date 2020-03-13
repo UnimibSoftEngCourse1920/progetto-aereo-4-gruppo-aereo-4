@@ -99,8 +99,6 @@ class Prenotazione{
 		array_push($this->listaAcquisti, $acquisto);
 		return $esitoPagamento;
 	}
-	
-	//TODO: Prevedere logica di recupero per i get su volo, acquisto e posti?
 
 	public function setVolo($volo) {
 		$this->volo = $volo;
@@ -148,14 +146,11 @@ class Prenotazione{
 
     public function getCliente()
     {
-        //TODO:: se divido il cliente va aggiornata anche questa get!!
         if(is_string($this->cliente)){
             $this->cliente = DBFacade::getIstance() ->get($this->cliente, Cliente::class);
         }
         return $this->cliente;
     }
-
-    //TODO rivedere il metodo materializaAll
 
     public function getListaPosti()
     {

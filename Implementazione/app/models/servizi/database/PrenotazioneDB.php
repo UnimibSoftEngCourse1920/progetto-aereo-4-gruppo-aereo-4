@@ -7,7 +7,7 @@ require_once("AbstractDB.php");
 class PrenotazioneDB extends AbstractDB
 {
     public function get($OID, $class){
-        $prenotazione = parent::get($OID, $class); //TODO chiamata a this?
+        $prenotazione = parent::get($OID, $class);
         $prenotazione->setListaPosti($this->getAssociazioni("posto", $prenotazione));
         $prenotazione->setListaBiglietti($this->getAssociazioni("biglietto", $prenotazione));
         $prenotazione->setListaAcquisti($this->getAssociazioni("acquisto", $prenotazione));
@@ -78,9 +78,7 @@ class PrenotazioneDB extends AbstractDB
                     on p.OID = pv.prenotazione and pv.volo = v.OID where TIMESTAMPDIFF(HOUR, NOW(), v.dataOraPartenza) <= '$ore' 
                     AND p.OID NOT IN (select prenotazione from PrenotazioneAcquisto);";
         $stmt = $this->connection->query($query);
-        //TODO fare chiamata a materializeAll
-        $listaPrenotazioni = $stmt->fetchAll(PDO::FETCH_CLASS, "Prenotazione");
-        return $listaPrenotazioni;
+        return $this->materializeAll($stmt, Prenotazione::class);
     }
 
     public function checkUnivoca($email, $OIDVolo)

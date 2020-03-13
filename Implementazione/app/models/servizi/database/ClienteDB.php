@@ -33,7 +33,6 @@ class ClienteDB extends AbstractDB
     }
 
     public function getAllFedelta(){
-        //TODO Fare un modo per filtrare la getAll
         $query = "Select * from Cliente where codiceFedelta is not null";
         $stmt = $this->connection->query($query);
         return $this->materializeAll($stmt, Cliente::class);

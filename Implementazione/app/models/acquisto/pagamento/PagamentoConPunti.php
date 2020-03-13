@@ -4,7 +4,6 @@ require_once __DIR__ . "/Pagamento.php";
 
 class PagamentoConPunti extends Pagamento{
 
-    //TODO rinominare variabile
     private $puntiUtilizzati;
 	
 	public function __construct($importo) {

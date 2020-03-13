@@ -65,7 +65,6 @@ class RegistroPrenotazioni{
     }
 
     private function anniPassati($data){
-        //TODO forse non serve più
         $data = new DateTime($data);
         $oggi = new DateTime(date('Y-m-d'));
         return ($oggi->diff($data)) -> y;

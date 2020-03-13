@@ -49,7 +49,6 @@ class VoloController extends Controller {
     }
 
     public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest){
-        //TODO richiamare modifica e basta??
         $esito = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest);
         if($esito){
             $this->registroVoli->avvisaPasseggeri($OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
