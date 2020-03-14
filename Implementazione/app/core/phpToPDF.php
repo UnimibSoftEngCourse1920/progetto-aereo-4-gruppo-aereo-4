@@ -133,8 +133,7 @@ function phptopdf_curl_post($url, $data)
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $response = curl_exec($ch);
-    return $response;
+    return curl_exec($ch);
 }
 
 

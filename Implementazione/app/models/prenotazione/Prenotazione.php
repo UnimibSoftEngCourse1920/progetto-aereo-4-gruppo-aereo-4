@@ -3,7 +3,6 @@
 
 require_once("../app/models/volo/Biglietto.php");
 require_once("../app/models/acquisto/Acquisto.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/app/models/cliente/EstrattoConto.php");
 require_once($_SERVER['DOCUMENT_ROOT']."/app/models/acquisto/pagamento/PagamentoConPunti.php");
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
@@ -29,18 +28,17 @@ class Prenotazione{
         $this->data = date("Y-m-d");
     }
 
-    public function generaEstrattoContoParziale(EstrattoConto $estrattoConto){
-        //TODO  faccio addRigaAcquisto e Pagamento cosi da togliere la require??
+    public function generaEstrattoContoParziale($estrattoConto){
         foreach ($this->listaAcquisti as $acquisto){
             $punti = $acquisto->getPuntiAccumulati();
             if($punti>0){
-                $estrattoConto->addRiga($this->volo, EstrattoConto::$ACQUISTO, $punti);
+                $estrattoConto->addRiga($this->volo, $estrattoConto::$ACQUISTO, $punti);
             }
             $pag = $acquisto->getPagamento();
             if(get_class($pag) == PagamentoConPunti::class){
                 $punti = $pag->getPuntiUtilizzati();
                 if($punti>0){
-                    $estrattoConto->addRiga($this->volo, EstrattoConto::$PAGAMENTO, -$punti); //gli passo -punti
+                    $estrattoConto->addRiga($this->volo, $estrattoConto::$PAGAMENTO, -$punti); //gli passo -punti
                 }
             }
         }

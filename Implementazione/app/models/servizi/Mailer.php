@@ -121,7 +121,6 @@ class Mailer{
 
     private function generateRecipients($listaClienti)
     {
-        //TODO provare con recipients null cosa succede
         $recipients = array();
         if ($listaClienti) {
             foreach ($listaClienti as $cliente) {

@@ -3,8 +3,8 @@
 
 class EstrattoConto
 {
-    public static $PAGAMENTO = 'Acquisto';
-    public static $ACQUISTO = 'Pagamento';
+    public static $PAGAMENTO = 'Pagamento';
+    public static $ACQUISTO = 'Acquisto';
 
     private $righe;
     private $saldo;

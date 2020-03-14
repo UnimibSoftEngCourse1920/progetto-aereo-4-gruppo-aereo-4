@@ -5,16 +5,16 @@ require_once "../app/models/acquisto/pagamento/IstitutoDiCredito.php";
 
 class PagamentoConCarta extends Pagamento{
 
-    private $istituto;
+    private $nomeIstituto;
     
 	public function effettua($carta) {
 		$istituto = new IstitutoDiCredito();
 		$esito = $istituto->autorizzaPagamento($carta);
-		$this->istituto = $istituto->getNome();
+		$this->nomeIstituto = $istituto->getNome();
 		return $esito;
 	}
 
-	public function getIstituto(){
-	    return $this->istituto;
+	public function getNomeIstituto(){
+	    return $this->nomeIstituto;
     }
 }

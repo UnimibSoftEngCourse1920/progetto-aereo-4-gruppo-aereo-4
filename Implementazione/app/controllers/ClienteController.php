@@ -24,7 +24,7 @@ class ClienteController extends Controller{
             header("Location: https://gruppoaereo4.000webhostapp.com/public/");
         }
         else {
-            //TODO esito negativo
+            //TODO esito negativo: non fa nulla semplicemente?
         }
     }
 

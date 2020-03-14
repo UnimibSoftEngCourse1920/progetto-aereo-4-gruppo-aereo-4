@@ -1,7 +1,6 @@
 <?php
 
 
- \database;
 require_once("AbstractDB.php");
 
 

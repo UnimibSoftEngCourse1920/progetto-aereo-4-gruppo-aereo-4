@@ -99,7 +99,7 @@ class VoloController extends Controller {
     }
 
     public function cancellaPromozione($OIDPromozione){
-        $this->registroPromozioni->cancellaPrenotazione($OIDPromozione);
+        $this->registroPromozioni->cancellaPromozione($OIDPromozione);
         header(LOCATIONPROMOZIONI);
     }
 

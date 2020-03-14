@@ -166,13 +166,11 @@ class Volo {
         $this->getPosti(); //per materializzazione
         $listaPostiPrenotati = array();
         foreach ($this->listaPosti as $posto){ //per ogni posto del volo
-            if($postiRimanenti>0) { //controllo che ci siano ancora posti da prenotare
-                if ($posto->isOccupato() == 0) { //se non è occupato
-                    $posto->cambiaStato(1); //lo occupo
-                    array_push($listaPostiPrenotati,$posto); //lo aggiungo alla lista dei posti prenotati
-                    DBFacade::getIstance()->update($posto); //aggiorno anche sul DB
-                    $postiRimanenti--; // diminuisco i posti da prenotare
-                }
+            if($postiRimanenti>0 && $posto->isOccupato() == 0) { //controllo che ci siano ancora posti da prenotare e che non sia occupato
+                $posto->cambiaStato(1); //lo occupo
+                array_push($listaPostiPrenotati,$posto); //lo aggiungo alla lista dei posti prenotati
+                DBFacade::getIstance()->update($posto); //aggiorno anche sul DB
+                $postiRimanenti--; // diminuisco i posti da prenotare
             }
 
         }
@@ -189,7 +187,7 @@ class Volo {
     public function getPrezzoScontato($isFedelta){
         $prezzo = $this->getPrezzoIntero();
         $this->getPromozione();
-        if((isset($this->promozione))) { //se esiste una promozione per questo volo
+        if (isset($this->promozione)) { //se esiste una promozione per questo volo
             //se è per fedeltà e cliente è fedeltà o non è per fedeltà
             if (($this->promozione->promozioneFedelta && $isFedelta) || !$this->promozione->promozioneFedelta) {
                 $sconto = $this->promozione->percentualeSconto;

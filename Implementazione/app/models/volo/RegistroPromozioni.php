@@ -8,10 +8,6 @@ require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
 
 class RegistroPromozioni
 {
-    public function __construct()
-    {
-
-    }
 
     public function creaPromozione($sconto, $dataInizio,$dataFine, $nome, $codVolo, $promozioneFedelta){
         if($dataInizio==""){
@@ -31,11 +27,9 @@ class RegistroPromozioni
         }
     }
 
-    public function cancellaPrenotazione($OID){
-        DBFacade::getIstance()->delete($OID, "Promozione");
+    public function cancellaPromozione($OID){
+        DBFacade::getIstance()->delete($OID, Promozione::class);
     }
-
-    //TODO da mettere insieme i due metodi sotto??
 
     public function getPromozioniFedelta(){
         //ritorna lista delle promozioni fedelta attive
@@ -43,7 +37,8 @@ class RegistroPromozioni
     }
 
     public function getPromozioni(){
-        return DBFacade::getIstance()->getAll("Promozione");
+        //Ritorna la lista di tutte le promozioni
+        return DBFacade::getIstance()->getAll(Promozione::class);
     }
 
     public function getMigliorPromozioneAttiva(){
@@ -54,7 +49,6 @@ class RegistroPromozioni
                 $migliorProm = $promozione;
             }
         }
-
         return $migliorProm;
     }
 
