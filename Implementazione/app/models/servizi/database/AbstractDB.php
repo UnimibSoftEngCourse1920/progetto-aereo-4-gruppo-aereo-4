@@ -2,9 +2,9 @@
 
 
 //TODO perchè queste??
-require_once $_SERVER['DOCUMENT_ROOT'] . "/app/models/volo/Aeroporto.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Aereo.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/Volo.php";
+require_once "../app/models/volo/Aeroporto.php";
+require_once "../app/models/volo/Aereo.php";
+require_once "../app/models/volo/Volo.php";
 
 
 abstract class AbstractDB
