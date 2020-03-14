@@ -52,15 +52,14 @@ class VenditaController extends Controller {
                 $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
                 $esitoCambioData = $this->registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa,
                                                                             $metodoPagamento, $carta, $tassaCambio);
-                var_dump($esitoCambioData);
-                exit;
                 if ($esitoCambioData) {
                     //Aggiornare prenotazione (anche biglietti e acquisto), cliente, volo vecchio e volo nuovo per i posti
                     $this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
-                    $this->registroPrenotazioni->aggiornaPrentoazione($prenotazione);
-                    $this->registroClienti->aggiornaCliente($cliente);
-                    $this->registroVoli->aggiornaVolo($volo);
-                    $this->registroVoli->aggiornaVolo($nuovoVolo);
+                    $this->registroPrenotazioni->aggiornaBiglietti($prenotazione);
+                    if($tassaCambio != 0) {
+                        $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
+                        $this->registroClienti->aggiornaCliente($cliente);
+                    }
                     //TODO: view con successo
                 } else {
                     //TODO: view con errore

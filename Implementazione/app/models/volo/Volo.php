@@ -179,6 +179,13 @@ class Volo {
         return $listaPostiPrenotati;
     }
 
+    public function libera($posti){
+        foreach($posti as $posto) {
+            $posto->cambiaStato(0);
+            DBFacade::getIstance()->update($posto);
+        }
+    }
+
     public function getPrezzoScontato($isFedelta){
         $prezzo = $this->getPrezzoIntero();
         $this->getPromozione();

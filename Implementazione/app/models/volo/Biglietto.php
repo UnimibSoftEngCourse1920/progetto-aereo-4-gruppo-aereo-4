@@ -20,6 +20,10 @@ class Biglietto{
         $this->prezzo=$prezzo;
     }
 
+    public function setPosto($numPosto) {
+        $this->numPosto = $numPosto;
+    }
+
     /**
      * @return mixed
      */
