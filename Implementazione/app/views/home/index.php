@@ -73,47 +73,27 @@
         <div class="row pt-md-5 mt-md-5 pb-md-5 px-md-5">
             <h2>In promozione</h2>
         </div>
-        <?= var_dump($voli)?>
-        <?php foreach ($voli as $volo){ ?>
-
         <div class="row pb-md-5 mb-md-5">
+        <?php
+            $i = 0;
+            foreach ($voli as $volo){
+                if($i<3){?>
             <div class="col-md-4">
                 <div class="promozione" style="background: url('https://source.unsplash.com/featured/?<?= $volo->getAeroportoDestinazione()->getCitta() ?>')">
                     <div class="volo p-md-3">
                         <div class="tratta"><?= $volo->getAeroportoPartenza()->getCitta()?> - <?= $volo->getAeroportoDestinazione()->getCitta()?></div>
-                        <div class="data"><?= $volo->getDataOraPartenza()?></div>
+                        <div class="data"><?= explode(" ",$volo->getDataOraPartenza())[0]?></div>
                         <div class="prezzo">
-                            <?= $volo->getPrezzoScontato(false)?>
-                            <strike><?= $volo->getPrezzoIntero()?></strike>
+                            <?= $volo->getPrezzoScontato(false)?>€
+                            <strike><?= $volo->getPrezzoIntero()?>€</strike>
                         </div>
                     </div>
                 </div>
             </div>
-            <?php } ?>
-            <div class="col-md-4">
-                <div class="promozione" style="background: url('img/parigi.jpg')">
-                    <div class="volo p-md-3">
-                        <div class="tratta">Firenze - Parigi</div>
-                        <div class="data">10/03/2020</div>
-                        <div class="prezzo">
-                            72€
-                            <strike>80€</strike>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="promozione" style="background: url('img/londra.jpg')">
-                    <div class="volo p-md-3">
-                        <div class="tratta">Roma - Londra</div>
-                        <div class="data">15/03/2020</div>
-                        <div class="prezzo">
-                            85€
-                            <strike>93€</strike>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                $i++;
+                }
+            } ?>
         </div>
     </div>
 	<?php include("../app/template/footer.php") ?>

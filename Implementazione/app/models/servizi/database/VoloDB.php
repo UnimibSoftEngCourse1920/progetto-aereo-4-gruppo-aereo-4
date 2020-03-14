@@ -33,7 +33,6 @@ class VoloDB extends AbstractDB
 
     protected function generateGetAllQuery($class)
     {
-        //TODO cercare di usare il parametro della classe Volo
         return "SELECT v.*, va.aeroportoPartenza, va.aeroportoDestinazione from Volo v join VoloAeroporto va on v.OID = va.volo WHERE v.stato != '".Volo::$STATO_CANCELLATO."'";
     }
 
@@ -75,7 +74,7 @@ class VoloDB extends AbstractDB
 
     public function getVoliConPromozione(){
         $data = date("Y-m-d");
-        $query = "select * from Volo where promozione != '' and stato = 'ATTIVO' and dataOraPartenza > '$data'";
+        $query = "select * from Volo v join VoloAeroporto va on v.OID = va.volo where promozione != '' and stato = 'ATTIVO' and dataOraPartenza > '$data'";
         $stmt = $this->connection->query($query);
         return $this->fetchResultsByClass($stmt, Volo::class);
     }
