@@ -35,7 +35,7 @@ class PrenotazioneController extends Controller
         if($p!=false){
             $this->view('prenotazione/prenotazione', ["idCliente"=> $cliente->getOID(),"prenotazione"=>$p->getOID()]);
         } else {
-            $this->view('prenotazione/error',["error","Errore durante la prenotazione"]);
+            $this->view('prenotazione/prenotazione',["error","Errore durante la prenotazione"]);
         }
 
     }

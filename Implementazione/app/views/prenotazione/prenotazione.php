@@ -107,17 +107,16 @@
                         </div>
 
                         <?php }?>
-                        <?php //if(!$data["volo"]->getDisponibilitaPosti($data["pass"])){ ?>
+                        <?php if(isset($data["error"])){ ?>
                         <div class="form-row px-3 pt-4 pb-3">
-                            <div class="error mx-auto">Non ci sono più posti per questo volo.</div>
+                            <div class="error mx-auto">Errore nella prenotazione.</div>
                         </div>
-                        <?php //} else { ?>
+                        <?php } ?>
                         <div class="form-row pt-4">
                             <div class="form-group col-md-4 mx-auto">
                                 <button type="submit" id="prenota-btn" class="btn btn-primary w-100">Prenota</button>
                             </div>
                         </div>
-                        <?php// } ?>
                     </form>
                 </div>
             </div>
