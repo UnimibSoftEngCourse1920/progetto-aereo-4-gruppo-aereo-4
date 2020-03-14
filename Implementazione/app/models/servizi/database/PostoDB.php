@@ -14,7 +14,7 @@ class PostoDB extends AbstractDB
 
     protected function generateUpdateQuery($cliente){
         $query = "UPDATE %s SET stato = %b WHERE OID = '%s'";
-        return sprintf($query, $this->getClassName($cliente), $cliente->isStato(), $cliente->getOID());
+        return sprintf($query, $this->getClassName($cliente), $cliente->isOccupato(), $cliente->getOID());
     }
 
 }

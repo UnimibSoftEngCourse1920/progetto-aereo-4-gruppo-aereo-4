@@ -60,7 +60,7 @@ class VenditaController extends Controller {
                         $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
                         $this->registroClienti->aggiornaCliente($cliente);
                     }
-                    //TODO: view con successo
+                    header("Location: /public/vendita/confermaCambioData");
                 } else {
                     //TODO: view con errore
                 }
@@ -79,11 +79,10 @@ class VenditaController extends Controller {
             if ($idCliente == $cliente->getOID()) {
                 $esitoPagamento = $this->registroPrenotazioni->acquistaPrenotazione($prenotazione, $cliente, $metodoPagamento, $carta);
                 if ($esitoPagamento) {
-                    //TODO: Testare queste istruzioni
-                    //$this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
+                    $this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
                     $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
                     $this->registroClienti->aggiornaCliente($cliente);
-                    //TODO: view con successo
+                    header("Location: /public/vendita/confermaAcquisto");
                 } else {
                     //TODO: view con errore
                 }
@@ -103,5 +102,9 @@ class VenditaController extends Controller {
 
     public function confermaAcquisto() {
         $this->view('vendita/conferma', ["success" => "Il tuo acquisto è stato confermato!"]);
+    }
+
+    public function confermaCambioData() {
+        $this->view('vendita/conferma', ["success" => "Il cambio data è stato confermato!"]);
     }
 }
