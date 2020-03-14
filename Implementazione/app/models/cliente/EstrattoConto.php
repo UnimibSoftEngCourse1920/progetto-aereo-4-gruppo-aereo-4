@@ -40,7 +40,7 @@ class EstrattoContoRow{
         $this->datiVolo = $volo->getAeroportoPartenza()->getCitta() . " - " .$volo->getAeroportoDestinazione()->getCitta();
         $this->dataoraPartenza = $volo->getDataoraPartenza(); //non so se funziona
         $this->tipologia = $tipologia;
-        $this->saldo = $punti;
+        $this->punti = $punti;
     }
 
     /**

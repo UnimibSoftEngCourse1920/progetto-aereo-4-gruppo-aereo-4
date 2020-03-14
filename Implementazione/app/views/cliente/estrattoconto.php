@@ -49,6 +49,11 @@
                     <?php } ?>
                     </tbody>
                 </table>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <strong>Saldo: </strong><span class="py-2"><?= $data["estrattoconto"]->getSaldo() ?></span>
+                    </div>
+                </div>
                 <?php } else { ?>
                     <div class="row">
                         <div class="col-md-12">
