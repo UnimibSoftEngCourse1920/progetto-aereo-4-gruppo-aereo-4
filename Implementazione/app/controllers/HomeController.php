@@ -2,6 +2,7 @@
 
 require_once "../app/core/Controller.php";
 require_once "../app/models/volo/RegistroVoli.php";
+require_once "../app/models/volo/RegistroPromozioni.php";
 
 
 class HomeController extends Controller {
@@ -11,11 +12,14 @@ class HomeController extends Controller {
     public function __construct()
     {
         $this->registroVoli = new RegistroVoli();
+        $this->registroPromozioni = new RegistroPromozioni();
     }
 
     public function index() {
 	    $aeroporti = $this->registroVoli->getAeroporti();
-		$this->view('home/index', ["aeroporti" => $aeroporti]);
+	    $promozione = $this->registroPromozioni->getMigliorPromozioneAttiva();
+
+		$this->view('home/index', ["aeroporti" => $aeroporti,"promozioneBanner" => $promozione]);
 	}
 	
 }

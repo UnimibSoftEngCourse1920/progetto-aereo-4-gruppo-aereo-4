@@ -6,10 +6,11 @@
 </head>
 <body>
     <?php include("../app/template/menu.php") ?>
+    <?php $promozioneBanner = $data["promozioneBanner"] ?>
     <div class="container-fluid">
         <div class="row" id="promozione">
             <div class="col p-2 text-center">
-                <a href="#">Sconto del 20% fino al 20/03/2020 su una selezione di voli.</a>
+                <span style="color: white"> <i><?= $promozioneBanner->getNome() ?></i> risparmia il <?= $promozioneBanner->getSconto() ?>% fino al <?= $promozioneBanner->getDataFine() ?> su una selezione di voli.</span>
             </div>
         </div>
         <script>
