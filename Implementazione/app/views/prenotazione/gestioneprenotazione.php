@@ -21,20 +21,33 @@
                     <div class="col-md-12">
                         <h2>Gestione della prenotazione #<?= $data["idPrenotazione"] ?></h2>
                     </div>
-                    <?php ?>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6">
-                        <a href="voli">
-                            <button class="btn btn-primary btn-lg mb-3">
-                                <h4> <em class="fas fa-plane-departure"></em> Gestione dei voli</h4>
-                            </button>
-                        </a><br>
-                        <a href="promozioni">
-                            <button  class="btn btn-primary btn-lg mt-3">
-                                <h4> <em class="fas fa-percentage"></em> Gestione delle promozioni</h4>
-                            </button>
-                        </a>
-                    </div>
+                    <?php if($data["acquistato"]){ ?>
+                        <div class="row mt-5 w-100">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4 text-center">
+                                <div class="d-flex mx-auto tariffa selected">
+                                    <em class="fas fa-wallet"></em>
+                                    <p class="mt-auto mx-auto">Completa il tuo acquisto</p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } else { ?>
+                        <div class="row mt-5 w-100">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4 text-center">
+                                <div class="d-flex mx-auto tariffa selected">
+                                    <em class="fas fa-file-download"></em>
+                                    <p class="mt-auto mx-auto">Scarica Biglietti</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="d-flex mx-auto tariffa selected">
+                                    <em class="fas fa-calendar-alt"></em>
+                                    <p class="mt-auto mx-auto">Modifica Data</p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
