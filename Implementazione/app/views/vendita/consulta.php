@@ -15,8 +15,13 @@
         <script>
             var aeroporti = [];
             var codiciAeroporti = [];
+
             <?php
+            $partenza = $data["partenza"];
+            $destinazione = $data["destinazione"];
+            $viaggiatori = $data["viaggiatori"];
             $index = 0;
+
             foreach($data["aeroporti"] as $aeroporto) {
                 $oid = $aeroporto->getOID();
                 $nome = $aeroporto->getCitta()." ".$aeroporto->getNome()." (".$aeroporto->getCodice().")";
@@ -24,11 +29,11 @@
                 aeroporti["<?=$index?>"] = "<?=$nome?>";
                 codiciAeroporti["<?=$nome?>"] = "<?=$oid?>";
             <?php
-                if($oid == $data["partenza"]) {
-                    $data["partenza"] = $nome;
+                if($oid == $partenza) {
+                    $partenza = $nome;
                 }
-                if($oid == $data["destinazione"]) {
-                    $data["destinazione"] = $nome;
+                if($oid == $destinazione) {
+                    $destinazione = $nome;
                 }
                 $index++;
             }
@@ -41,11 +46,11 @@
                         <div class="form-group col-md-2"></div>
                         <div class="form-group col-md-2">
                             <label for="da">Da</label>
-                            <input type="text" class="form-control aeroporto" id="da" value="<?=$data["partenza"]?>" placeholder="Città o aeroporto" required>
+                            <input type="text" class="form-control aeroporto" id="da" value="<?=$partenza?>" placeholder="Città o aeroporto" required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="a">A</label>
-                            <input type="text" class="form-control aeroporto" id="a" value="<?=$data["destinazione"]?>" name="a" placeholder="Città o aeroporto" required>
+                            <input type="text" class="form-control aeroporto" id="a" value="<?=$destinazione?>" name="a" placeholder="Città o aeroporto" required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="data_partenza">Data</label>
@@ -53,7 +58,7 @@
                         </div>
                         <div class="form-group col-md-1">
                             <label for="viaggiatori">Viaggiatori</label>
-                            <input type="number" id="viaggiatori" value="<?=$data["viaggiatori"]?>" name=viaggiatori" value="1" min="1" required>
+                            <input type="number" id="viaggiatori" value="<?=$viaggiatori?>" name=viaggiatori" value="1" min="1" required>
                         </div>
                         <div class="form-group col-md-1 mt-auto">
                             <button type="submit" class="btn btn-primary w-100">Cerca voli</button>
@@ -97,15 +102,15 @@
                 </div>
 
                 <div class="totale">
-                    <?php if ($data["viaggiatori"] > 1) {
-                        echo number_format($prezzoScontato*$data["viaggiatori"],2)."€";
+                    <?php if ($viaggiatori> 1) {
+                        echo number_format($prezzoScontato*$viaggiatori,2)."€";
                     }?>
                     totale
                 </div>
 
             </div>
             <div class="col-md-3 text-center">
-                <a href="/public/prenotazione/prenota/<?=$volo->getOID()?>/<?=$data["viaggiatori"]?>">
+                <a href="/public/prenotazione/prenota/<?=$volo->getOID()?>/<?=$viaggiatori?>">
                     <button class="mx-auto">Prenota questo volo</button>
                 </a>
             </div>
