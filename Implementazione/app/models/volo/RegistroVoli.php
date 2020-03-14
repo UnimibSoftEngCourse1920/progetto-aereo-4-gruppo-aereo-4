@@ -102,12 +102,6 @@ class RegistroVoli{
 		return DBFacade::getIstance()->get($idVolo,"Volo");
 	}
 
-	public function aggiornaVolo($idVolo) {
-        //TODO vedere se serve o meno
-        //TODO chiamare la update
-		DBFacade::getIstance()->aggiornaVolo($idVolo);
-	}
-
 	public function getAeroporti(){
         return DBFacade::getIstance()->getAll(Aeroporto::class);
     }

@@ -38,7 +38,7 @@ class VenditaController extends Controller {
 		$this->view('vendita/cercadate', ["id_prenotazione" => $idPrenotazione, "volo" => $volo, "voli" => $voli,
                                                 "tariffa" => $tariffa]);
 	}
-	
+
 	public function cambiaData($idPrenotazione, $idCliente, $idNuovoVolo, $nuovaTariffa, $metodoPagamento = "", $carta = "") {
         $error = "";
         $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
