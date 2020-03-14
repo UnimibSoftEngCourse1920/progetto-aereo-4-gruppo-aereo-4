@@ -61,15 +61,6 @@ class VoloController extends Controller {
 
     }
 
-    public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest){
-        $esito = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest);
-        if($esito){
-            $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
-            $this->registroVoli->avvisaPasseggeri($listaClienti, $OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
-        }
-        header(LOCATIONVOLI);
-    }
-
     public function autenticazioneImpiegato($username,$password){
         if($username=="admin" && $password=="admin"){
             $_SESSION["admin"] = "logged";
@@ -85,6 +76,16 @@ class VoloController extends Controller {
             header(LOCATIONVOLI);
         }
     }
+
+    public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest){
+        $esito = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest);
+        if($esito){
+            $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
+            $this->registroVoli->avvisaPasseggeri($listaClienti, $OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
+        }
+        header(LOCATIONVOLI);
+    }
+
 
     public function cancellaVolo($OIDVolo){
     $esito = $this->registroVoli->rimuoviVolo($OIDVolo);

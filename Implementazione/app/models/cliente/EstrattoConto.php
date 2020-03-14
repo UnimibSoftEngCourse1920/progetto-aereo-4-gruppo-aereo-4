@@ -38,7 +38,7 @@ class EstrattoContoRow{
     public function __construct(Volo $volo, $tipologia, $punti)
     {
         $this->datiVolo = $volo->getAeroportoPartenza()->getCodice() . " - " .$volo->getAeroportoDestinazione()->getCodice();
-        $this->dataoraPartenza = $volo->getDataoraPartenza()->format("d-m-yy"); //non so se funziona
+        $this->dataoraPartenza = $volo->getDataoraPartenza(); //non so se funziona
         $this->tipologia = $tipologia;
         $this->saldo = $punti;
     }

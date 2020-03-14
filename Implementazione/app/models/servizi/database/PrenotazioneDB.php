@@ -111,8 +111,8 @@ class PrenotazioneDB extends AbstractDB
         $prenotazioni = array();
         if(!$soloAcquistate) {
             $query = "select prenotazione from PrenotazioneCliente where cliente = '$OID'";
-        } else{
-            $query = "select p.OID from PrenotazioneCliente pc join Prenotazione p join PrenotazioneAcquisto a on p.OID = pc.cliente and p.OID = a.prenotazione WHERE pc.cliente='$OID';";
+        } else {
+            $query = "select DISTINCT p.OID from PrenotazioneCliente pc join Prenotazione p join PrenotazioneAcquisto a on p.OID = pc.prenotazione and p.OID = a.prenotazione WHERE pc.cliente='$OID';";
         }
         $codiciPrenotazioni = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
         foreach ($codiciPrenotazioni as $OID){

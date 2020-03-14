@@ -31,10 +31,10 @@ class Prenotazione{
 
     public function generaEstrattoContoParziale($estrattoConto)
     {
-        foreach ($this->listaAcquisti as $acquisto) {
+        foreach ($this->getListaAcquisti() as $acquisto) {
             $punti = $acquisto->getPuntiAccumulati();
             if ($punti > 0) {
-                $estrattoConto->addRiga($this->volo, $estrattoConto::$ACQUISTO, $punti);
+                $estrattoConto->addRiga($this->getVolo(), $estrattoConto::$ACQUISTO, $punti);
             }
             $pag = $acquisto->getPagamento();
             if (get_class($pag) == PagamentoConPunti::class) {
