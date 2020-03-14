@@ -134,7 +134,7 @@ class Volo {
 
     public function getDisponibilitaPosti($numPosti){
         $contaLiberi=0;
-        $posti = $this->getPosti();;
+        $posti = $this->getPosti();
         foreach ($posti as $posto){
             if($posto->isOccupato()==0) {
                 $contaLiberi++;

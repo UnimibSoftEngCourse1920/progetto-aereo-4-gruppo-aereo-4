@@ -100,7 +100,7 @@ class PrenotazioneDB extends AbstractDB
         $stmt = $this->connection->query($query);
         $stmt->bindColumn(1, $OIDCliente);
         $stmt->bindColumn(2, $data);
-        while($cli = $stmt->fetch(PDO::FETCH_BOUND))
+        while($stmt->fetch(PDO::FETCH_BOUND))
         {
             $result[] = array($OIDCliente, $data);
         }
