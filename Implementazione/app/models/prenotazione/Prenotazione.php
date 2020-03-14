@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 
@@ -184,5 +185,4 @@ class Prenotazione{
         }
         return $listaRitorno;
     }
-
 }
