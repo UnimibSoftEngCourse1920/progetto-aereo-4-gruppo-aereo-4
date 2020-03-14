@@ -8,9 +8,6 @@ require_once "../app/models/servizi/Mailer.php";
 
 class RegistroVoli{
 
-    public static $AVVISAMODIFICAVOLO='MODIFICA';
-    public static $AVVISACANCELLAZIONEVOLO='CANCELLAZIONE';
-
     private $mailer;
 
     public function __construct(){
@@ -49,10 +46,12 @@ class RegistroVoli{
                 $voloMod = DBFacade::getIstance()->get($OIDVolo, Volo::class);
                 $voloMod->setDataOraPartenza($nuovaDataoraPart);
                 $voloMod->setDataOraArrivo($nuovaDataoraArr);
-                return DBFacade::getIstance()->update($voloMod);
+                DBFacade::getIstance()->update($voloMod);
+                //TODO esito
+                return $voloMod;
             }
         }
-        return false;
+        return null;
     }
 
     public function rimuoviVolo($OIDVolo){
@@ -60,23 +59,11 @@ class RegistroVoli{
         $volo = $database ->get($OIDVolo, Volo::class);
         if($volo != null) {
             $volo->setStato(Volo::$STATO_CANCELLATO);
-            return $database->update($volo);
+            $database->update($volo);
+            return $volo;
+            //TODO esito
         }
-        return false;
-    }
-
-    public function avvisaPasseggeri($listaPasseggeri, $OIDVolo, $tipologiaAvviso){
-        $volo = DBFacade::getIstance() ->get($OIDVolo, Volo::class);
-        switch ($tipologiaAvviso){
-            case self::$AVVISAMODIFICAVOLO:
-                $this->mailer->inviaEmailModificaVolo($listaPasseggeri, $volo);
-                break;
-            case self::$AVVISACANCELLAZIONEVOLO:
-                $this->mailer->inviaEmailCancellazioneVolo($listaPasseggeri, $volo);
-                break;
-            default:
-                return false;
-          }
+        return null;
     }
 
     private function validaDate($data1, $data2){

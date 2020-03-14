@@ -5,6 +5,7 @@ require_once __DIR__ . "/../core/Controller.php";
 require_once __DIR__ . "/../models/volo/RegistroVoli.php";
 require_once __DIR__ . "/../models/prenotazione/RegistroPrenotazioni.php";
 require_once __DIR__ . "/../models/volo/RegistroPromozioni.php";
+require_once __DIR__ . "/../models/cliente/RegistroClienti.php";
 
 define("LOCATIONVOLI","Location: /public/volo/voli");
 define("LOCATIONPROMOZIONI","Location: /public/volo/promozioni");
@@ -14,11 +15,13 @@ class VoloController extends Controller {
     private $registroVoli;
     private $registroPromozioni;
     private $registroPrenotazioni;
+    private $registroClienti;
 
     public function __construct(){
         $this->registroVoli = new RegistroVoli();
         $this->registroPromozioni = new RegistroPromozioni();
         $this->registroPrenotazioni = new RegistroPrenotazioni();
+        $this->registroClienti = new RegistroClienti();
     }
 
 
@@ -78,20 +81,21 @@ class VoloController extends Controller {
     }
 
     public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest){
-        $esito = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest);
-        if($esito){
+        $volo = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest);
+        if($volo != null){
             $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
-            $this->registroVoli->avvisaPasseggeri($listaClienti, $OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
+            //
+            $this->registroClienti->avvisaPasseggeri($listaClienti, $volo, TipologiaAvviso::$AVVISA_MODIFICA_VOLO);
         }
         header(LOCATIONVOLI);
     }
 
 
     public function cancellaVolo($OIDVolo){
-    $esito = $this->registroVoli->rimuoviVolo($OIDVolo);
-    if($esito){
+    $volo = $this->registroVoli->rimuoviVolo($OIDVolo);
+    if($volo != null){
         $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
-        $this->registroVoli->avvisaPasseggeri($listaClienti, $OIDVolo, RegistroVoli::$AVVISACANCELLAZIONEVOLO);
+        $this->registroClienti->avvisaPasseggeri($listaClienti, $volo, TipologiaAvviso::$AVVISA_CANCELLAZIONE_VOLO);
     }
     header(LOCATIONVOLI);
 }
