@@ -16,8 +16,9 @@
 <div class="container pb-5 pt-5 mt-5">
     <?php if(isset($data["prenotazione"])) {?>
         <form id="acquistoForm" action="../vendita/acquistaPrenotazione" method="post" style="min-height: 0px">
-            <input type="hidden" name="idCliente" value="<?= $data["idCliente"]?>">
             <input type="hidden" name="idPrenotazione" value="<?= $data["prenotazione"]?>">
+            <input type="hidden" name="idCliente" value="<?= $data["idCliente"]?>">
+
         </form>
         <script>
             $("#acquistoForm").submit();
