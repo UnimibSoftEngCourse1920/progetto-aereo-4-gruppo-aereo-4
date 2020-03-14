@@ -55,7 +55,7 @@ class ClienteController extends Controller{
 
     public function avvisaPromozioniFedelta() {
         $listaPromozioni = $this->registroPromozioni -> getPromozioniFedelta();
-        $this->registroClienti->avvisaClientiFedelta($listaPromozioni, RegistroClienti::$AVVISAPROMOZIONI);
+        $this->registroClienti->avvisaClientiFedelta($listaPromozioni, TipologiaAvviso::$AVVISA_PROMOZIONI);
     }
 
     public function registrato() {

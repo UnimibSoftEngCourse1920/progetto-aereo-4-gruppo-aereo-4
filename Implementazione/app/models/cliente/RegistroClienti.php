@@ -4,12 +4,15 @@ require_once "../app/models/servizi/DBFacade.php";
 require_once "../app/models/servizi/Mailer.php";
 require_once "../app/models/cliente/Cliente.php";
 
+abstract class TipologiaAvviso{
+    public static $AVVISA_PROMOZIONI = "PROMOZIONI";
+    public static $AVVISA_MODIFICA_VOLO='MODIFICA';
+    public static $AVVISA_CANCELLAZIONE_VOLO='CANCELLAZIONE';
+}
 
 class RegistroClienti
 {
-    public static $AVVISACANCELLAZIONEFEDELTA = "CANCELLAZIONEFEDELTA";
-    public static $AVVISACLIENTEINFEDELE = "CLIENTEINFEDELE";
-    public static $AVVISAPROMOZIONI = "PROMOZIONI";
+
 
     public $mailer;
 
@@ -49,25 +52,23 @@ class RegistroClienti
         return false;
     }
 
-    public function avvisaPasseggeri($OID, $tipologiaAvviso){
-        $cliente = DBFacade::getIstance()->get($OID, Cliente::class);
-
-        switch ($tipologiaAvviso){
-            case RegistroClienti::$AVVISACANCELLAZIONEFEDELTA:
-                $this->mailer->inviaCancellazioneFedelta($cliente);
-                break;
-            case RegistroClienti::$AVVISACLIENTEINFEDELE:
-                $this->mailer->inviaComunicazioneInfedelta($cliente);
-                break;
-            default:
-                return false;
+    public function avvisaClientiFedelta($object, $tipo){
+        if($tipo == TipologiaAvviso::$AVVISA_PROMOZIONI && $object!=null && get_class($object[0]) == Promozione::class) {
+                $listaClienti = DBFacade::getIstance()->getAllFedelta();
+                $this->mailer->avvisaClientiPromozioni($listaClienti, $object);
         }
     }
 
-    public function avvisaClientiFedelta($object, $tipo){
-        if($tipo == self::$AVVISAPROMOZIONI && $object!=null && get_class($object[0]) == Promozione::class) {
-                $listaClienti = DBFacade::getIstance()->getAllFedelta();
-                $this->mailer->avvisaClientiPromozioni($listaClienti, $object);
+    public function avvisaPasseggeri($listaPasseggeri, $volo, $tipologiaAvviso){
+        switch ($tipologiaAvviso){
+            case TipologiaAvviso::$AVVISA_MODIFICA_VOLO:
+                $this->mailer->inviaEmailModificaVolo($listaPasseggeri, $volo);
+                break;
+            case TipologiaAvviso::$AVVISA_CANCELLAZIONE_VOLO:
+                $this->mailer->inviaEmailCancellazioneVolo($listaPasseggeri, $volo);
+                break;
+            default:
+                return false;
         }
     }
 
