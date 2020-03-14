@@ -37,6 +37,16 @@ class PrenotazioneController extends Controller
         } else {
             $this->view('prenotazione/prenotazione',["error","Errore durante la prenotazione"]);
         }
+    }
 
+    public function gestionePrenotazione($idPrenotazione){
+        $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+        $cliente = $prenotazione->getCliente();
+        $acquistato = false;
+        if($prenotazione->getListaAcquisti() != null){
+            $acquistato = true;
+        }
+
+        $this->view('prenotazione/gestioneprenotazione', ["idPrenotazione"=>$idPrenotazione,"idCliente","acquistato"=>$acquistato]);
     }
 }
