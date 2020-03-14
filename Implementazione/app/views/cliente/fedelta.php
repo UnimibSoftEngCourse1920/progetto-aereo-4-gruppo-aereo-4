@@ -39,6 +39,7 @@
                         <th scope="col">Data</th>
                         <th scope="col">Pagamento</th>
                         <th scope="col">Punti</th>
+                        <th scope="col">Operazioni</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,6 +60,16 @@
                                     ?>
                             </td>
                             <td>
+                                <?php
+                                $sommaPunti = 0;
+                                foreach ($listaAcquisti as $acquisto){
+                                    $sommaPunti+=$acquisto->getPuntiAccumulati();
+                                }
+                                echo $sommaPunti;
+                                ?>
+                            </td>
+
+                            <td>
                                 <form id="acquistoForm" action="../vendita/acquistaPrenotazione" method="post" style="min-height: 0px">
                                     <input type="hidden" name="idPrenotazione" value="<?= $prenotazione->getOID(); ?>">
                                     <input type="hidden" name="idCliente" value="<?= $_SESSION["id_cliente"]?>">
@@ -66,13 +77,7 @@
 
                                 <div class="dropdown">
                                     <span class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <?php
-                                        $sommaPunti = 0;
-                                        foreach ($listaAcquisti as $acquisto){
-                                            $sommaPunti+=$acquisto->getPuntiAccumulati();
-                                        }
-                                        echo $sommaPunti;
-                                        ?>
+                                        --
                                     </span>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <?php if($listaAcquisti==null){?>
