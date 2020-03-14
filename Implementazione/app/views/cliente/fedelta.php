@@ -98,6 +98,9 @@
         </div>
         <div class="row text-center">
             <div class="col-md-12">
+                <?php if(isset($data["error"])){ ?>
+                        <div class="error mx-auto">Errore nell'eliminazione dell'account.</div>
+                <?php } ?>
                 <a href="annullaIscrizione/<?=$_SESSION["id_cliente"]?>"  style="text-decoration: none;"><button> Elimina account </button></a>
             </div>
         </div>
