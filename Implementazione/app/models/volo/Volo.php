@@ -168,7 +168,7 @@ class Volo {
         foreach ($this->listaPosti as $posto){ //per ogni posto del volo
             if($postiRimanenti>0) { //controllo che ci siano ancora posti da prenotare
                 if ($posto->isOccupato() == 0) { //se non è occupato
-                    $posto->cambiaStato(); //lo occupo
+                    $posto->cambiaStato(1); //lo occupo
                     array_push($listaPostiPrenotati,$posto); //lo aggiungo alla lista dei posti prenotati
                     DBFacade::getIstance()->update($posto); //aggiorno anche sul DB
                     $postiRimanenti--; // diminuisco i posti da prenotare
@@ -177,6 +177,13 @@ class Volo {
 
         }
         return $listaPostiPrenotati;
+    }
+
+    public function libera($posti){
+        foreach($posti as $posto) {
+            $posto->cambiaStato(0);
+            DBFacade::getIstance()->update($posto);
+        }
     }
 
     public function getPrezzoScontato($isFedelta){

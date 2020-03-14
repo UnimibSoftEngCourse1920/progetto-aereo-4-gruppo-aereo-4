@@ -14,8 +14,8 @@ class Posto{
         $this->numeroPosto = $numeroPosto;
     }
 
-    public function cambiaStato(){
-        $this->stato = 1;
+    public function cambiaStato($stato){
+        $this->stato = $stato;
     }
 
     public function isOccupato(){

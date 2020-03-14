@@ -128,9 +128,15 @@ class RegistroPrenotazioni{
             DBFacade::getIstance()->put($acquisto->getPagamento());
             DBFacade::getIstance()->put($acquisto);
         }
-        var_dump($prenotazione);
         DBFacade::getIstance()->update($prenotazione);
 	}
+
+	public function aggiornaBiglietti($prenotazione) {
+        foreach($prenotazione->getListaBiglietti() as $biglietto) {
+            DBFacade::getIstance()->update($biglietto);
+        }
+        DBFacade::getIstance()->update($prenotazione);
+    }
 
 	public function controlloPrenotazioniScadute(){
         $listaPrenotazioni = DBFacade::getIstance() -> getPrenotazioniScaduteIn(72);
