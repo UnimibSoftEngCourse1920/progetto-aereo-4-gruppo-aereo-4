@@ -109,4 +109,12 @@ class ClienteController extends Controller{
         echo "ERRORE";
     }
 
+    public function downloadBiglietti($idPrenotazione) {
+        $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+        $biglietti = $prenotazione->getListaBiglietti();
+        $pdf = PDFGenerator::getInstance()->generaBiglietti($biglietti);
+        PDFGenerator::getInstance()->scaricaPDF($pdf);
+        PDFGenerator::getInstance()->cancellaPDF($pdf);
+    }
+
 }
