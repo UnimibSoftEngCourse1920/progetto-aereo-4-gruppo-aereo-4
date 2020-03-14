@@ -65,7 +65,17 @@ class ClienteController extends Controller{
     public function accedi($email = "", $password = "", $success = "") {
         $error = "";
         if($email != "" && $password != "") {
-            $esitoLogin = $this->login($email, $password);
+            $registroClienti = $this->model('cliente/RegistroClienti');
+            $cliente = $registroClienti->login($email, $password);
+            if ($cliente->getOID()) {
+                $_SESSION['id_cliente'] = $cliente->getOID();
+                $_SESSION['nome_cliente'] = $cliente->getNome() . " " . $cliente->getCognome();
+                $_SESSION['email_cliente'] = $cliente->getEmail();
+                $_SESSION['data_n'] = $cliente->getDataNascita();
+                $esitoLogin = true;
+            } else {
+                $esitoLogin = false;
+            }
             if($esitoLogin) {
                 header("Location: /");
             } else {
@@ -73,20 +83,6 @@ class ClienteController extends Controller{
             }
         }
         $this->view('cliente/login', ["error" => $error, "success" => $success]);
-    }
-
-    public function login($email, $password) {
-        $registroClienti = $this->model('cliente/RegistroClienti');
-        $cliente = $registroClienti->login($email, $password);
-        if ($cliente->getOID()) {
-            $_SESSION['id_cliente'] = $cliente->getOID();
-            $_SESSION['nome_cliente'] = $cliente->getNome() . " " . $cliente->getCognome();
-            $_SESSION['email_cliente'] = $cliente->getEmail();
-            $_SESSION['data_n'] = $cliente->getDataNascita();
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public function esci() {
@@ -109,8 +105,8 @@ class ClienteController extends Controller{
         echo "ERRORE";
     }
 
-    public function downloadBiglietti($idPrenotazione) {
-        $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+    public function downloadBiglietti($OIDPrenotazione) {
+        $prenotazione = $this->registroPrenotazioni->getPrenotazione($OIDPrenotazione);
         $biglietti = $prenotazione->getListaBiglietti();
         $pdf = PDFGenerator::getInstance()->generaBiglietti($biglietti);
         PDFGenerator::getInstance()->scaricaPDF($pdf);
