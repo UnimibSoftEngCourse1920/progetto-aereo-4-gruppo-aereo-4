@@ -185,4 +185,9 @@ class Prenotazione{
         return $listaRitorno;
     }
 
+    public function liberaPostiOccupati(){
+        //Utilizzo le get per materializzazione
+        $this->getVolo()->libera($this->getListaPosti());
+    }
+
 }

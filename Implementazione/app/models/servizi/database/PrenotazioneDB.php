@@ -67,8 +67,8 @@ class PrenotazioneDB extends AbstractDB
 
     protected function generateDeleteQuery($OID, $class)
     {
-        //TODO dovrei cancellare anche i biglietti
         return "DELETE FROM Prenotazione WHERE OID = $OID; 
+                DELETE FROM Biglietto WHERE OID IN (SELECT biglietto from PrenotazioneBiglietto where prenotazione = '$OID');
                 DELETE FROM PrenotazioneCliente WHERE prenotazione = $OID; 
                 DELETE FROM PrenotazioneVolo WHERE prenotazione = $OID;
                 DELETE FROM PrenotazionePosto WHERE prenotazione = $OID;
