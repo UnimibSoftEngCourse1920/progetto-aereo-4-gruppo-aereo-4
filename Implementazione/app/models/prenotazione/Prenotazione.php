@@ -84,8 +84,8 @@ class Prenotazione{
             }
 			if($esitoPagamentoTassa) {
 				$nuoviPosti = $nuovoVolo->prenota($nPosti);
-				$volo = $this->getVolo();
-				$volo->libera($this->getListaPosti());
+				$vecchioVolo = $this->getVolo();
+                $vecchioVolo->libera($this->getListaPosti());
 				$this->setVolo($nuovoVolo);
 				$this->setListaPosti($nuoviPosti);
 				$biglietti = $this->getListaBiglietti();
