@@ -58,7 +58,6 @@ class Mailer{
     }
 
     public function inviaEmailBiglietti($email, $pdf){
-        $email = "o.zaher@campus.unimib.it";
         $content = file_get_contents($pdf);
         $content = chunk_split(base64_encode($content));
         $uid = md5(uniqid(time()));
