@@ -14,6 +14,7 @@ abstract class AbstractDB
     public function __construct(){
         try {
             $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+            $pdo_options[PDO::ATTR_PERSISTENT] = true;
             $this->connection = new PDO('mysql:host=localhost;dbname=id12704943_compagniaaerea' , 'id12704943_sa', '4dm1n', $pdo_options);
         }
         catch (Exception $e)

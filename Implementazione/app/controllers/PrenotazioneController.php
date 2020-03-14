@@ -35,7 +35,7 @@ class PrenotazioneController extends Controller
         if($p!=false){
             $this->view('prenotazione/prenotazione', ["volo"=> $idVolo,"prenotazione"=>$p->getOID()]);
         } else {
-            
+
         }
 
     }
