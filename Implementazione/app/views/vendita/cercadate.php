@@ -13,8 +13,10 @@
         </div>
     </div>
     <?php
-    $dataOraPartenza = DateTime::createFromFormat('Y-m-d H:i:s', $data["volo"]->getDataOraPartenza());
-    $dataOraArrivo = DateTime::createFromFormat('Y-m-d H:i:s', $data["volo"]->getDataOraArrivo());
+    $formatoGiornoConSecondi = 'Y-m-d H:i:s';
+    $formatoGiono = 'Y-m-d H:i';
+    $dataOraPartenza = DateTime::createFromFormat($formatoGiornoConSecondi, $data["volo"]->getDataOraPartenza());
+    $dataOraArrivo = DateTime::createFromFormat($formatoGiornoConSecondi, $data["volo"]->getDataOraArrivo());
     ?>
     <div class="row volo p-md-5">
         <div class="col-md-3"></div>
@@ -72,13 +74,13 @@
                             <div data-volo="<?=$data["voli"][0]->getOID();?>" class="d-flex mx-auto data-disponibile selected">
                                 <p class="mx-auto my-auto">
                                     <?php
-                                    $dataOraPartenza = DateTime::createFromFormat('Y-m-d H:i:s', $data["voli"][0]->getDataOraPartenza());
-                                    $dataOraArrivo = DateTime::createFromFormat('Y-m-d H:i:s', $data["voli"][0]->getDataOraArrivo());
+                                    $dataOraPartenza = DateTime::createFromFormat($formatoGiornoConSecondi, $data["voli"][0]->getDataOraPartenza());
+                                    $dataOraArrivo = DateTime::createFromFormat($formatoGiornoConSecondi, $data["voli"][0]->getDataOraArrivo());
                                     ?>
                                     <strong>Partenza</strong><br>
-                                    <?=$dataOraPartenza->format('Y-m-d H:i')?><br><br>
+                                    <?=$dataOraPartenza->format($formatoGiono)?><br><br>
                                     <strong>Arrivo</strong><br>
-                                    <?=$dataOraPartenza->format('Y-m-d H:i')?>
+                                    <?=$dataOraPartenza->format($formatoGiono)?>
                                 </p>
                             </div>
                         </div>
@@ -99,13 +101,13 @@
                                     <div data-volo="<?=$data["voli"][$i]->getOID();?>" class="d-flex mx-auto data-disponibile">
                                         <p class="mx-auto my-auto">
                                             <?php
-                                            $dataOraPartenza = DateTime::createFromFormat('Y-m-d H:i:s', $data["voli"][$i]->getDataOraPartenza());
-                                            $dataOraArrivo = DateTime::createFromFormat('Y-m-d H:i:s', $data["voli"][$i]->getDataOraArrivo());
+                                            $dataOraPartenza = DateTime::createFromFormat($formatoGiornoConSecondi, $data["voli"][$i]->getDataOraPartenza());
+                                            $dataOraArrivo = DateTime::createFromFormat($formatoGiornoConSecondi, $data["voli"][$i]->getDataOraArrivo());
                                             ?>
                                             <strong>Partenza</strong><br>
-                                            <?= $dataOraPartenza->format('Y-m-d H:i') ?><br><br>
+                                            <?= $dataOraPartenza->format($formatoGiono) ?><br><br>
                                             <strong>Arrivo</strong><br>
-                                            <?= $dataOraPartenza->format('Y-m-d H:i') ?>
+                                            <?= $dataOraPartenza->format($formatoGiono) ?>
                                         </p>
                                     </div>
                                 </div>
