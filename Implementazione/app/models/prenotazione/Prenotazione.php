@@ -8,8 +8,7 @@ require_once($_SERVER['DOCUMENT_ROOT']."/app/models/acquisto/pagamento/Pagamento
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
 
 
-class Prenotazione
-{
+class Prenotazione{
 
     private $data;
     private $OID;
@@ -62,6 +61,7 @@ class Prenotazione
         return $lista;
     }
 
+
     public function getImporto()
     {
         $importo = 0;
@@ -75,46 +75,43 @@ class Prenotazione
         return $importo;
     }
 
-    public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $nuovaTariffa, $carta)
-    {
-        $nPosti = count($this->listaPosti);
-        if ($nuovoVolo->getDisponibilitaPosti($nPosti)) {
-            if ($tassa != 0) {
+	public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $nuovaTariffa, $carta) {
+		$nPosti = count($this->listaPosti);
+		if($nuovoVolo->getDisponibilitaPosti($nPosti)) {
+		    if($tassa != 0) {
                 $esitoPagamentoTassa = $this->acquista($metodoPagamento, $cliente, $tassa, $carta);
             } else {
-                $esitoPagamentoTassa = true;
+		        $esitoPagamentoTassa = true;
             }
-            if ($esitoPagamentoTassa) {
-                $nuoviPosti = $nuovoVolo->prenota($nPosti);
-                $volo = $this->getVolo();
-                $volo->libera($this->getListaPosti());
-                $this->setVolo($nuovoVolo);
-                $biglietti = $this->getListaBiglietti();
-                for ($i = 0; $i < $nPosti; $i++) {
-                    $biglietti[$i]->setPosto($nuoviPosti[$i]->getNumeroPosto()); //Numero che è diverso da OID
+			if($esitoPagamentoTassa) {
+				$nuoviPosti = $nuovoVolo->prenota($nPosti);
+				$volo = $this->getVolo();
+				$volo->libera($this->getListaPosti());
+				$this->setVolo($nuovoVolo);
+				$biglietti = $this->getListaBiglietti();
+				for($i = 0; $i < $nPosti; $i++) {
+					$biglietti[$i]->setPosto($nuoviPosti[$i]->getNumeroPosto()); //Numero che è diverso da OID
                     $biglietti[$i]->setTariffa($nuovaTariffa);
-                }
-            }
-            $esitoCambioData = $esitoPagamentoTassa;
-        } else {
-            $esitoCambioData = false;
-        }
-        return $esitoCambioData;
-    }
-
-    public function acquista($metodoPagamento, $cliente, $importo, $carta)
-    {
-        $acquisto = new Acquisto();
-        $esitoPagamento = $acquisto->effettuaPagamento($metodoPagamento, $cliente, $importo, $carta);
+				}
+			}
+			$esitoCambioData = $esitoPagamentoTassa;
+		} else {
+			$esitoCambioData = false;
+		}
+		return $esitoCambioData;
+	}
+	
+	public function acquista($metodoPagamento, $cliente, $importo, $carta) {
+		$acquisto = new Acquisto();
+		$esitoPagamento = $acquisto->effettuaPagamento($metodoPagamento, $cliente, $importo, $carta);
         $this->listaAcquisti = $this->getListaAcquisti(); //Per fare la materializzazione degli obj
-        array_push($this->listaAcquisti, $acquisto);
-        return $esitoPagamento;
-    }
+		array_push($this->listaAcquisti, $acquisto);
+		return $esitoPagamento;
+	}
 
-    public function setVolo($volo)
-    {
-        $this->volo = $volo;
-    }
+	public function setVolo($volo) {
+		$this->volo = $volo;
+	}
 
     public function setCliente($cliente)
     {

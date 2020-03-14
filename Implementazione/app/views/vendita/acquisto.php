@@ -60,6 +60,10 @@
                         </div>
                         <input type="hidden" name="id_prenotazione" value="<?=$data["id_prenotazione"]?>">
                         <input type="hidden" name="id_cliente" value="<?=$data["id_cliente"]?>">
+                        <?php if(isset($data["tassa_cambio"])) {?>
+                            <input type="hidden" name="id_volo" value="<?=$data["volo"]->getOID();?>">
+                            <input type="hidden" name="tariffa" value="<?=$data["tariffa"]?>">
+                        <?php }?>
                         <input type="hidden" name="metodo_pagamento" value="carta">
                         <input type="hidden" name="carta" value="test">
                         <div class="form-row px-3 pt-4 pb-3">
@@ -76,7 +80,7 @@
             <?php if(isset($_SESSION["id_cliente"])) {?>
             <div class="row mt-md-4" id="pagamento-punti" style="display:none">
                 <div class="col">
-                    <form class="pt-md-4 px-md-5" action="/public/vendita/acquistaPrenotazione" method="post">
+                    <form class="pt-md-4 px-md-5" action="" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <strong>Punti acquisiti</strong>
@@ -103,6 +107,10 @@
                         </div>
                         <input type="hidden" name="id_prenotazione" value="<?=$data["id_prenotazione"]?>">
                         <input type="hidden" name="id_cliente" value="<?=$data["id_cliente"]?>">
+                        <?php if(isset($data["tassa_cambio"])) {?>
+                            <input type="hidden" name="id_volo" value="<?=$data["volo"]->getOID();?>">
+                            <input type="hidden" name="tariffa" value="<?=$data["tariffa"]?>">
+                        <?php }?>
                         <input type="hidden" name="metodo_pagamento" value="punti">
                         <div class="form-row px-3 pt-4 pb-3">
                             <div class="error mx-auto">Non hai punti a sufficienza.</div>
