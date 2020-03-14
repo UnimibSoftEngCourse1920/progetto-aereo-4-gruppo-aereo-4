@@ -71,7 +71,7 @@ class Prenotazione{
         return $importo;
     }
 
-	public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta) {
+	public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $nuovaTariffa, $carta) {
 		$nPosti = count($this->listaPosti);
 		if($nuovoVolo->getDisponibilitaPosti($nPosti)) {
 		    if($tassa != 0) {
@@ -87,6 +87,7 @@ class Prenotazione{
 				$biglietti = $this->getListaBiglietti();
 				for($i = 0; $i < $nPosti; $i++) {
 					$biglietti[$i]->setPosto($nuoviPosti[$i]->getNumeroPosto()); //Numero che è diverso da OID
+                    $biglietti[$i]->setTariffa($nuovaTariffa);
 				}
 			}
 			$esitoCambioData = $esitoPagamentoTassa;

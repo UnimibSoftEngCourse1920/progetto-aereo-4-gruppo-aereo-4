@@ -93,7 +93,7 @@ class RegistroPrenotazioni{
     }
 
 	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta, $tassaCambio) {
-		$esitoCambioData = $prenotazione->cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassaCambio, $carta);
+		$esitoCambioData = $prenotazione->cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassaCambio, $nuovaTariffa, $carta);
 		return $esitoCambioData;
 	}
 	
