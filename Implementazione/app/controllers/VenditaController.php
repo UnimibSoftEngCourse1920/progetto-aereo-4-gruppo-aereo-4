@@ -41,29 +41,35 @@ class VenditaController extends Controller {
 	
 	//TODO: DB
 	public function cambiaData($idPrenotazione, $idCliente, $idNuovoVolo, $nuovaTariffa, $metodoPagamento = "", $carta = "") {
-        if($metodoPagamento != "") {
-            $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+        $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
+        $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+        $tariffa = $prenotazione->getListaBiglietti()[0]->getTariffa();
+        $tassaCambio = $this->registroPrenotazioni->calcolaTassa($tariffa, $nuovaTariffa);
+        if($metodoPagamento != "" || $tassaCambio == 0) {
             $cliente = $prenotazione->getCliente();
             if ($idCliente == $cliente->getOID()) {
                 $volo = $prenotazione->getVolo();
                 $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
-                var_dump($nuovoVolo);
-                exit;
-                $esitoCambioData = $this->registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta);
+                $esitoCambioData = $this->registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa,
+                                                                            $metodoPagamento, $carta, $tassaCambio);
                 if ($esitoCambioData) {
                     //Aggiornare prenotazione (anche biglietti e acquisto), cliente, volo vecchio e volo nuovo per i posti
                     $this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
-                    $this->registroPrenotazioni->aggiornaPrentoazione($prenotazione);
-                    $this->registroClienti->aggiornaCliente($cliente);
-                    $this->registroVoli->aggiornaVolo($volo);
-                    $this->registroVoli->aggiornaVolo($nuovoVolo);
+                    $this->registroPrenotazioni->aggiornaBiglietti($prenotazione);
+                    if($tassaCambio != 0) {
+                        $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
+                        $this->registroClienti->aggiornaCliente($cliente);
+                    }
                     //TODO: view con successo
                 } else {
                     //TODO: view con errore
                 }
             }
         }
-        $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente]);
+        $nPosti = count($prenotazione->getListaPosti());
+        $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente,
+                                                "volo" => $nuovoVolo, "pass" => $nPosti, "tariffa" => $nuovaTariffa,
+                                                "tassa_cambio" => $tassaCambio]);
 	}
 
 	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento = "", $carta = "") {

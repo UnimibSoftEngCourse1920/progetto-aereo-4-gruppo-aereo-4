@@ -70,9 +70,11 @@ class RegistroPrenotazioni{
     }
 
     public function effettuaPrenotazione($cliente,$listaPasseggeri,$codVolo,$numPosti,$tariffa){
-        $univoca = DBFacade::getIstance()->checkPrenotazioneUnivoca($cliente->email,$codVolo);
+        $univoca = DBFacade::getIstance()->checkPrenotazioneUnivoca($cliente->getEmail(),$codVolo);
         if($univoca){
-            DBFacade::getIstance()->put($cliente);
+            if(!$cliente->isFedelta()) {
+                DBFacade::getIstance()->put($cliente);
+            }
             $registroVoli = new RegistroVoli();
             $disp = $registroVoli->checkDisponibilitaPosti($numPosti,$codVolo);
 
@@ -89,14 +91,13 @@ class RegistroPrenotazioni{
             return false;
         }
     }
-	
-	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta) {
-		$tariffa = $prenotazione->getTariffa();
-		$tassa = $this->calcolaTassa($tariffa, $nuovaTariffa);
-		return $prenotazione->cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta);
+
+	public function cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa, $metodoPagamento, $carta, $tassaCambio) {
+		$esitoCambioData = $prenotazione->cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassaCambio, $nuovaTariffa, $carta);
+		return $esitoCambioData;
 	}
 	
-	private function calcolaTassa($tariffa, $nuovaTariffa) {
+	public function calcolaTassa($tariffa, $nuovaTariffa) {
 		$tassa = 0;
 		if($tariffa != Tariffa::PLUS) {
 			$tassa += 10;		
@@ -129,9 +130,15 @@ class RegistroPrenotazioni{
             DBFacade::getIstance()->put($acquisto->getPagamento());
             DBFacade::getIstance()->put($acquisto);
         }
-        var_dump($prenotazione);
         DBFacade::getIstance()->update($prenotazione);
 	}
+
+	public function aggiornaBiglietti($prenotazione) {
+        foreach($prenotazione->getListaBiglietti() as $biglietto) {
+            DBFacade::getIstance()->update($biglietto);
+        }
+        DBFacade::getIstance()->update($prenotazione);
+    }
 
 	public function controlloPrenotazioniScadute(){
         $listaPrenotazioni = DBFacade::getIstance() -> getPrenotazioniScaduteIn(72);

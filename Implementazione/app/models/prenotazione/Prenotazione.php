@@ -71,18 +71,23 @@ class Prenotazione{
         return $importo;
     }
 
-	public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $carta) {
+	public function cambiaData($metodoPagamento, $cliente, $nuovoVolo, $tassa, $nuovaTariffa, $carta) {
 		$nPosti = count($this->listaPosti);
-		if($nPosti <= $nuovoVolo->getNumeroPostiDisponibili()) {
-			$esitoPagamentoTassa = $this->acquista($metodoPagamento, $cliente, $tassa, $carta);
+		if($nuovoVolo->getDisponibilitaPosti($nPosti)) {
+		    if($tassa != 0) {
+                $esitoPagamentoTassa = $this->acquista($metodoPagamento, $cliente, $tassa, $carta);
+            } else {
+		        $esitoPagamentoTassa = true;
+            }
 			if($esitoPagamentoTassa) {
-				$nuoviPosti = $nuovoVolo->occupaPosti($nPosti, $this->getCodice());
+				$nuoviPosti = $nuovoVolo->prenota($nPosti);
 				$volo = $this->getVolo();
-				$volo->liberaPosti($this->getListaPosti());
-				$this->setVolo($nuovoVolo);		
-				$biglietti = $this->getBiglietti();
+				$volo->libera($this->getListaPosti());
+				$this->setVolo($nuovoVolo);
+				$biglietti = $this->getListaBiglietti();
 				for($i = 0; $i < $nPosti; $i++) {
-					$biglietti[$i]->setPosto($nuoviPosti[$i]->getNumero()); //Numero che è diverso da OID
+					$biglietti[$i]->setPosto($nuoviPosti[$i]->getNumeroPosto()); //Numero che è diverso da OID
+                    $biglietti[$i]->setTariffa($nuovaTariffa);
 				}
 			}
 			$esitoCambioData = $esitoPagamentoTassa;

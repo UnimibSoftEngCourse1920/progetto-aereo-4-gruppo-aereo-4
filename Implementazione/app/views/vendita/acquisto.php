@@ -33,7 +33,7 @@
             <?php }?>
             <div class="row mt-md-4" id="pagamento-carta">
                 <div class="col">
-                    <form class="px-md-5" action="/public/vendita/acquistaPrenotazione" method="post">
+                    <form class="px-md-5" action="" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Nome</label>
@@ -130,9 +130,9 @@
                 </div>
             </div>
         </div>
-        <?php if(isset($data["volo"])) { ?>
         <div class="col-md-4 px-md-5 mt-md-4" id="riepilogo">
             <div class="row pb-md-4">
+                <?php if(!isset($data["tassa_cambio"])) { ?>
                 <div class="col-6"><h3>Biglietti</h3></div>
                 <div class="col-6 text-right">
                     <h3 id="prezzo_base">
@@ -144,6 +144,12 @@
                         }?>
                     </h3>
                 </div>
+                <?php } else { ?>
+                <div class="col-8"><h3>Tassa cambio</h3></div>
+                <div class="col-4 text-right">
+                    <h3 id="prezzo_base"><?=$data["tassa_cambio"]?>€</h3>
+                </div>
+                <?php } ?>
             </div>
             <div class="row">
                 <div class="col">
@@ -170,10 +176,12 @@
                 </div>
             </div>
             <?php if($data["tariffa"] == "plus") { ?>
+            <?php if(!isset($data["tassa_cambio"])) { ?>
             <div class="row py-md-4" id="supplemento_row">
                 <div class="col-8"><h3>Supplementi</h3></div>
                 <div class="col-4 text-right"><h3>20€</h3></div>
             </div>
+            <?php } ?>
             <div class="row" id="tariffa_row">
                 <div class="col">
                     <p>
@@ -187,17 +195,19 @@
                 <div class="col-6"><h3>Totale</h3></div>
                 <div class="col-6 text-right">
                     <h3 id="prezzo_tot">
-                        <?php
-                        if($data["volo"]->getPrezzoIntero()==$data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))){
-                            echo number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€";
-                        } else {
-                            echo number_format($data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"],2)."€ </h3><h3><strike id='old_tot' style='font-size: 20px'>".number_format($data["volo"]->getPrezzoIntero()*$data["pass"],2)."€</strike>";
-                        }?>
+                        <?php if(!isset($data["tassa_cambio"])) { ?>
+                            <?php if($data["tariffa"] == "plus") { ?>
+                                <?=number_format($data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"]+20,2)?>€
+                            <?php } else { ?>
+                                <?=number_format($data["volo"]->getPrezzoScontato(isset($_SESSION["id_cliente"]))*$data["pass"],2)?>€
+                            <?php } ?>
+                        <?php } else { ?>
+                            <?=$data["tassa_cambio"]?>€
+                        <?php } ?>
                     </h3>
                 </div>
             </div>
         </div>
-        <?php } ?>
     </div>
 </div>
 <?php include("../app/template/footer.php") ?>

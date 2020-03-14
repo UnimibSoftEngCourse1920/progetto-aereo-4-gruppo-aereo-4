@@ -38,12 +38,12 @@
             </div>
             <div class="row mt-md-4">
                 <div class="col">
-                    <form class="py-md-4 px-md-5" action="acquisto.html" method="post">
+                    <form class="py-md-4 px-md-5" id="form-prenotazione" action="../../effettuaPrenotazione" method="post">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Nome</label>
                                 <?php if(isset($_SESSION["id_cliente"])){ ?>
-                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" value="<?= explode(" ",$_SESSION["nome_cliente"])[0]; ?>" disabled>
+                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" value="<?= explode(" ",$_SESSION["nome_cliente"])[0]; ?>" >
                                 <?php } else { ?>
                                     <input type="text" class="form-control" name="name" id="nome" placeholder="Nome">
                                 <?php } ?>
@@ -51,23 +51,36 @@
                             <div class="form-group col-md-6">
                                 <label for="inputCity">Cognome</label>
                                 <?php if(isset($_SESSION["id_cliente"])){ ?>
-                                    <input type="text" class="form-control" name="cognome" id="cognome" placeholder="Cognome" value="<?= explode(" ",$_SESSION["nome_cliente"])[1]; ?>" disabled>
+                                    <input type="text" class="form-control" name="cognome" id="cognome" placeholder="Cognome" value="<?= explode(" ",$_SESSION["nome_cliente"])[1]; ?>" >
                                 <?php } else { ?>
-                                    <input type="text" class="form-control" name="cognome" id="cognome" placeholder="Cognome" disabled>
+                                    <input type="text" class="form-control" name="cognome" id="cognome" placeholder="Cognome">
                                 <?php } ?>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col">
+                            <div class="form-group col-6">
                                 <label for="inputState">E-mail</label>
                                 <?php if(isset($_SESSION["email_cliente"])){ ?>
-                                    <input type="email" class="form-control" name="email" placeholder="E-mail" value="<?= $_SESSION["email_cliente"]?>" disabled>
+                                    <input type="email" class="form-control" name="email" placeholder="E-mail" value="<?= $_SESSION["email_cliente"]?>">
                                 <?php } else { ?>
                                     <input type="email" class="form-control" name="email" placeholder="E-mail">
                                 <?php } ?>
                             </div>
+                            <div class="form-group col-6">
+                                <label for="inputState">Data di nascita</label>
+                                <?php if(isset($_SESSION["email_cliente"])){ ?>
+                                    <input type="date" class="form-control" name="datanascita" placeholder="" value="<?= $_SESSION["data_n"]?>">
+                                <?php } else { ?>
+                                    <input type="date" class="form-control" name="datanascita" placeholder="">
+                                <?php } ?>
+                            </div>
                         </div>
+
                         <input type="hidden" id="lista-passeggeri" name="lista">
+                        <input type="hidden" name="id_volo" value="<?= $data["volo"]->getOID()?>">
+                        <input type="hidden" name="nPass" value="<?= $data["pass"]?>">
+                        <input type="hidden" id="tariffa" name="tariffa">
+
                         <?php for($i=1;$i<=$data["pass"];$i++){?>
                         <div class="form-row px-2 py-3">
                             Passeggero <?= $i ?>
