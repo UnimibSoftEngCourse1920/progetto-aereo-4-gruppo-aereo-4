@@ -33,7 +33,7 @@ class PrenotazioneController extends Controller
         }
         $p = $this->registroPrenotazioni->effettuaPrenotazione($cliente,json_decode($listaPasseggeri,true),$idVolo,$nPosti,$tariffa);
         if($p!=false){
-            $this->view('prenotazione/prenotazione', ["volo"=> $idVolo,"prenotazione"=>$p->getOID()]);
+            $this->view('prenotazione/prenotazione', ["idCliente"=> $cliente->getOID(),"prenotazione"=>$p->getOID()]);
         } else {
 
         }

@@ -14,6 +14,15 @@
 <body>
 <?php include("../app/template/menu.php") ?>
 <div class="container pb-5 pt-5 mt-5">
+    <?php if(isset($data["prenotazione"])) {?>
+        <form id="acquistoForm" action="../vendita/acquistaPrenotazione" method="post" style="min-height: 0px">
+            <input type="hidden" name="idCliente" value="<?= $data["idCliente"]?>">
+            <input type="hidden" name="idPrenotazione" value="<?= $data["prenotazione"]?>">
+        </form>
+        <script>
+            $("#acquistoForm").submit();
+        </script>
+    <?php } ?>
     <div class="row">
         <div class="col text-center">
             <h2>Conferma la tua prenotazione</h2>
@@ -97,17 +106,17 @@
                         </div>
 
                         <?php }?>
-                        <?php if(!$data["volo"]->getDisponibilitaPosti($data["pass"])){ ?>
+                        <?php //if(!$data["volo"]->getDisponibilitaPosti($data["pass"])){ ?>
                         <div class="form-row px-3 pt-4 pb-3">
                             <div class="error mx-auto">Non ci sono più posti per questo volo.</div>
                         </div>
-                        <?php } else { ?>
+                        <?php //} else { ?>
                         <div class="form-row pt-4">
                             <div class="form-group col-md-4 mx-auto">
                                 <button type="submit" id="prenota-btn" class="btn btn-primary w-100">Prenota</button>
                             </div>
                         </div>
-                        <?php } ?>
+                        <?php// } ?>
                     </form>
                 </div>
             </div>

@@ -24,7 +24,7 @@ class Prenotazione{
         $this->cliente = $cliente;
         $this->volo = $volo;
         $this->listaPosti = $this->volo->prenota($numPosti);
-        $prezzo = $this->volo->calcolaPrezzo($this->cliente->isFedelta());
+        $prezzo = $this->volo->getPrezzoScontato($this->cliente->isFedelta());
         $this->listaBiglietti = $this->generaBiglietti($prezzo, $tariffa, $listaPasseggeri);
         $this->listaAcquisti = array();
         $this->data = date("Y-m-d");
@@ -53,7 +53,7 @@ class Prenotazione{
         $lista = array();
         $i = 0;
         foreach ($this->listaPosti as $posto) {
-            $b = new Biglietto($posto->numeroPosto, $tariffa, $listaPasseggeri[$i], $prezzo);
+            $b = new Biglietto($posto->getNumeroPosto(), $tariffa, $listaPasseggeri[$i], $prezzo);
             DBFacade::getIstance()->put($b);
             array_push($lista, $b);
             $i++;
