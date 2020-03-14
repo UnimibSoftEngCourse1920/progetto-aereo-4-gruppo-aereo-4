@@ -11,8 +11,11 @@ class IstitutoDiCredito
     }
 
     public function autorizzaPagamento($carta) {
-        $this->nome = "Banca Bicocca";
-		return (mt_rand() / mt_getrandmax() <= 0.9);
+        //Eventuali controlli/operazioni sui dati della carta
+        if($carta) {
+            $this->nome = "Banca Bicocca";
+            return (mt_rand() / mt_getrandmax() <= 0.9);
+        }
 	}
 }
 

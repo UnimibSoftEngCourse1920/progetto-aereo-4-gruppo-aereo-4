@@ -84,8 +84,8 @@ class Prenotazione{
             }
 			if($esitoPagamentoTassa) {
 				$nuoviPosti = $nuovoVolo->prenota($nPosti);
-				$volo = $this->getVolo();
-				$volo->libera($this->getListaPosti());
+				$vecchioVolo = $this->getVolo();
+                $vecchioVolo->libera($this->getListaPosti());
 				$this->setVolo($nuovoVolo);
 				$this->setListaPosti($nuoviPosti);
 				$biglietti = $this->getListaBiglietti();
@@ -161,7 +161,7 @@ class Prenotazione{
 
     public function getListaPosti()
     {
-        if (is_string($this->listaPosti[0])) {
+        if (count($this->listaPosti)>0 && is_string($this->listaPosti[0])) {
             $this->listaPosti = $this->materializeAll($this->listaPosti, Posto::class);
         }
         return $this->listaPosti;
@@ -169,7 +169,7 @@ class Prenotazione{
 
     public function getListaBiglietti()
     {
-        if (is_string($this->listaBiglietti[0])) {
+        if (count($this->listaBiglietti)>0 && is_string($this->listaBiglietti[0])) {
             $this->listaBiglietti = $this->materializeAll($this->listaBiglietti, Biglietto::class);
         }
         return $this->listaBiglietti;
@@ -177,7 +177,8 @@ class Prenotazione{
 
     public function getListaAcquisti()
     {
-        if (is_string($this->listaAcquisti[0])) {
+
+        if (count($this->listaAcquisti)>0 && is_string($this->listaAcquisti[0])) {
             $this->listaAcquisti = $this->materializeAll($this->listaAcquisti, Acquisto::class);
         }
         return $this->listaAcquisti;

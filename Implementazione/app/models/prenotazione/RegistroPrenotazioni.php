@@ -1,14 +1,14 @@
 <?php
 
 
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/RegistroClienti.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/EstrattoConto.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/cliente/Cliente.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/PDFGenerator.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/Mailer.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/RegistroVoli.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/prenotazione/Prenotazione.php";
+require_once "../app/models/cliente/RegistroClienti.php";
+require_once "../app/models/cliente/EstrattoConto.php";
+require_once "../app/models/cliente/Cliente.php";
+require_once "../app/models/servizi/DBFacade.php";
+require_once "../app/models/servizi/PDFGenerator.php";
+require_once "../app/models/servizi/Mailer.php";
+require_once "../app/models/volo/RegistroVoli.php";
+require_once "../app/models/prenotazione/Prenotazione.php";
 
 abstract class Tariffa
 {

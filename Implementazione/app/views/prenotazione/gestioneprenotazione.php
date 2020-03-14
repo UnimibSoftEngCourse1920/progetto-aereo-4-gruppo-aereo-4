@@ -62,8 +62,8 @@
                         </div>
                     <?php } else { ?>
                         <div class="row mt-5 w-100">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-4 text-center">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3 text-center">
                                 <a href="../../cliente/downloadBiglietti/<?= $data["idPrenotazione"]?>">
                                     <div class="d-flex mx-auto tariffa selected">
                                         <em class="fas fa-file-download"></em>
@@ -71,7 +71,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-md-4 text-center">
+                            <div class="col-md-3 text-center">
                                <a href="../../vendita/cercaDateDisponibili/<?= $data["idPrenotazione"]?>">
                                    <div class="d-flex mx-auto tariffa selected">
                                         <em class="fas fa-calendar-alt"></em>

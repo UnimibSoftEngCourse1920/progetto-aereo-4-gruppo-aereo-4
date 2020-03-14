@@ -38,8 +38,7 @@ class VenditaController extends Controller {
 		$this->view('vendita/cercadate', ["id_prenotazione" => $idPrenotazione, "volo" => $volo, "voli" => $voli,
                                                 "tariffa" => $tariffa]);
 	}
-	
-	//TODO: DB
+
 	public function cambiaData($idPrenotazione, $idCliente, $idNuovoVolo, $nuovaTariffa, $metodoPagamento = "", $carta = "") {
         $error = "";
         $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
@@ -65,7 +64,7 @@ class VenditaController extends Controller {
                         $error = "Non è stato possibile effettuare il cambio data.";
                     }
                 } else {
-                    $errore = "La prenotazione non è ancora stata acquistata.";
+                    $error = "La prenotazione non è ancora stata acquistata.";
                 }
             } else {
                 $error = "La prenotazione appartiene ad un altro cliente.";

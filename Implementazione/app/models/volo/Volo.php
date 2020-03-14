@@ -1,9 +1,9 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
+require_once "../app/models/servizi/DBFacade.php";
 require_once __DIR__."/Posto.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/volo/RegistroPromozioni.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+require_once "../app/models/volo/RegistroPromozioni.php";
+require_once "../app/models/servizi/OIDGenerator.php";
 
 
 class Volo {
@@ -134,7 +134,7 @@ class Volo {
 
     public function getDisponibilitaPosti($numPosti){
         $contaLiberi=0;
-        $posti = $this->getPosti();;
+        $posti = $this->getPosti();
         foreach ($posti as $posto){
             if($posto->isOccupato()==0) {
                 $contaLiberi++;

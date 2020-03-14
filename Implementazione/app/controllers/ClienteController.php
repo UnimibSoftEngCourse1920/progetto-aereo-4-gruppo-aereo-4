@@ -24,13 +24,12 @@ class ClienteController extends Controller{
             header("Location: https://gruppoaereo4.000webhostapp.com/public/");
         }
         else {
-            //TODO esito negativo: non fa nulla semplicemente?
+            $this->view('cliente/fedelta', ["errore"=>true]);
         }
     }
 
     public function iscrizioneFedelta($nome = "", $cognome = "", $email = "", $dataNascita = "", $indirizzo = "",
                                         $password = "", $confermaPassword = "") {
-        //$registroClienti = $this->model('cliente/RegistroClienti');
         $error = "";
         if($nome != "" && $cognome != "" && $indirizzo != "" && $dataNascita != "" && $email != "" && $password != "") {
             if($password == $confermaPassword) {
@@ -65,8 +64,7 @@ class ClienteController extends Controller{
     public function accedi($email = "", $password = "", $success = "") {
         $error = "";
         if($email != "" && $password != "") {
-            $registroClienti = $this->model('cliente/RegistroClienti');
-            $cliente = $registroClienti->login($email, $password);
+            $cliente = $this->registroClienti->login($email, $password);
             if ($cliente->getOID()) {
                 $_SESSION['id_cliente'] = $cliente->getOID();
                 $_SESSION['nome_cliente'] = $cliente->getNome() . " " . $cliente->getCognome();

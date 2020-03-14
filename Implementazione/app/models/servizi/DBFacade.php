@@ -117,6 +117,10 @@ class DBFacade{
         return $this->gestori[Cliente::class] -> getAllFedelta();
     }
 
+    public function getPromozioniAttive(){
+        return $this->gestori[Promozione::class]->getPromozioniAttive();
+    }
+
 }
 
 

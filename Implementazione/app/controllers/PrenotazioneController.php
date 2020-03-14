@@ -32,7 +32,7 @@ class PrenotazioneController extends Controller
             $cliente = new Cliente($nome, $cognome, $email, $dataNascita);
         }
         $p = $this->registroPrenotazioni->effettuaPrenotazione($cliente,json_decode($listaPasseggeri,true),$idVolo,$nPosti,$tariffa);
-        if($p!=false){
+        if($p){
             $this->view('prenotazione/prenotazione', ["idCliente"=> $cliente->getOID(),"prenotazione"=>$p->getOID()]);
         } else {
             $this->view('prenotazione/prenotazione',["error","Errore durante la prenotazione"]);

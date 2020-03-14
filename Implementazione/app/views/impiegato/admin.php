@@ -18,24 +18,39 @@
         <div class="login-form col-md-12 mt-5">
             <div class="container">
                 <div class="row text-center mb-3">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6">
-                       <a href="voli">
-                           <button class="btn btn-primary btn-lg mb-3">
-                            <h4> <em class="fas fa-plane-departure"></em> Gestione dei voli</h4>
-                        </button>
-                       </a><br>
-                        <a href="promozioni">
-                        <button  class="btn btn-primary btn-lg mt-3">
-                            <h4> <em class="fas fa-percentage"></em> Gestione delle promozioni</h4>
-                        </button>
-                        </a>
+                    <div class="col-md-12">
+                        <h2>Pannello di amministrazione</h2>
+                    </div>
+                    <div class="row mt-5 w-100">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3 text-center">
+                            <a href="voli">
+                                <div class="d-flex mx-auto tariffa selected">
+                                    <em class="fas fa-paper-plane"></em>
+                                    <p class="mt-auto mx-auto">Voli</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <a href="promozioni">
+                                <div class="d-flex mx-auto tariffa selected">
+                                    <em class="fas fa-ad"></em>
+                                    <p class="mt-auto mx-auto">Promozioni</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<style>
+    .tariffa.selected:before{
+        content: '' !important;
+        background: none !important;
+    }
+</style>
 <?php include("../app/template/footer.php") ?>
 </body>
 

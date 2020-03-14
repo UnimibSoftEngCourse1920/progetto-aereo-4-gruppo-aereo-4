@@ -39,6 +39,7 @@
                         <th scope="col">Data</th>
                         <th scope="col">Pagamento</th>
                         <th scope="col">Punti</th>
+                        <th scope="col">Operazioni</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -60,12 +61,34 @@
                             </td>
                             <td>
                                 <?php
-                                    $sommaPunti = 0;
-                                    foreach ($listaAcquisti as $acquisto){
-                                        $sommaPunti+=$acquisto->getPuntiAccumulati();
-                                    }
-                                    echo $sommaPunti;
+                                $sommaPunti = 0;
+                                foreach ($listaAcquisti as $acquisto){
+                                    $sommaPunti+=$acquisto->getPuntiAccumulati();
+                                }
+                                echo $sommaPunti;
                                 ?>
+                            </td>
+
+                            <td>
+                                <form id="acquistoForm" action="../vendita/acquistaPrenotazione" method="post" style="min-height: 0px">
+                                    <input type="hidden" name="idPrenotazione" value="<?= $prenotazione->getOID(); ?>">
+                                    <input type="hidden" name="idCliente" value="<?= $_SESSION["id_cliente"]?>">
+                                </form>
+
+                                <div class="dropdown">
+                                    <span class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        --
+                                    </span>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <?php if($listaAcquisti==null){?>
+                                        <a class="dropdown-item" id="acquistaDrop" href="#">Acquista</a>
+                                        <?php } else { ?>
+                                        <a class="dropdown-item" href="../cliente/downloadBiglietti/<?= $prenotazione->getOID(); ?>">Scarica biglietti</a>
+                                        <a class="dropdown-item" href="../vendita/cercaDateDisponibili/<?= $prenotazione->getOID(); ?>">Modifica prenotazione</a>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+
                             </td>
                         </tr>
                     <?php } ?>
@@ -75,11 +98,19 @@
         </div>
         <div class="row text-center">
             <div class="col-md-12">
+                <?php if(isset($data["error"])){ ?>
+                        <div class="error mx-auto">Errore nell'eliminazione dell'account.</div>
+                <?php } ?>
                 <a href="annullaIscrizione/<?=$_SESSION["id_cliente"]?>"  style="text-decoration: none;"><button> Elimina account </button></a>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $("#acquistaDrop").click(function(){
+        $("#acquistoForm").submit();
+    });
+</script>
 <script src="<?php echo $dir ?>js/script.js"></script>
 <?php include("../app/template/footer.php") ?>
 </body>
