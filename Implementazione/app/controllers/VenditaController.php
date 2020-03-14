@@ -49,19 +49,23 @@ class VenditaController extends Controller {
         if($metodoPagamento != "" || $tassaCambio == 0) {
             $cliente = $prenotazione->getCliente();
             if ($idCliente == $cliente->getOID()) {
-                $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
-                $esitoCambioData = $this->registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa,
-                                                                            $metodoPagamento, $carta, $tassaCambio);
-                if ($esitoCambioData) {
-                    $this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
-                    $this->registroPrenotazioni->aggiornaBiglietti($prenotazione);
-                    if($tassaCambio != 0) {
-                        $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
-                        $this->registroClienti->aggiornaCliente($cliente);
+                if(count($prenotazione->getListaAcquisti()) > 0) {
+                    $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
+                    $esitoCambioData = $this->registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa,
+                        $metodoPagamento, $carta, $tassaCambio);
+                    if ($esitoCambioData) {
+                        $this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
+                        $this->registroPrenotazioni->aggiornaBiglietti($prenotazione);
+                        if ($tassaCambio != 0) {
+                            $this->registroPrenotazioni->aggiornaAcquisti($prenotazione);
+                            $this->registroClienti->aggiornaCliente($cliente);
+                        }
+                        header("Location: /public/vendita/confermaCambioData");
+                    } else {
+                        $error = "Non è stato possibile effettuare il cambio data.";
                     }
-                    header("Location: /public/vendita/confermaCambioData");
                 } else {
-                    $error = "Non è stato possibile effettuare il cambio data.";
+                    $errore = "La prenotazione non è ancora stata acquistata.";
                 }
             } else {
                 $error = "La prenotazione appartiene ad un altro cliente.";
@@ -76,7 +80,6 @@ class VenditaController extends Controller {
 	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento = "", $carta = "") {
         $error = "";
         $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
-        var_dump($idPrenotazione);
         if($metodoPagamento != "") {
             $cliente = $prenotazione->getCliente();
             if ($idCliente == $cliente->getOID()) {
