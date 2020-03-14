@@ -64,7 +64,8 @@ class VoloController extends Controller {
     public function modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest){
         $esito = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest);
         if($esito){
-            $this->registroVoli->avvisaPasseggeri($OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
+            $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
+            $this->registroVoli->avvisaPasseggeri($listaClienti, $OIDVolo, RegistroVoli::$AVVISAMODIFICAVOLO);
         }
         header(LOCATIONVOLI);
     }
@@ -86,12 +87,13 @@ class VoloController extends Controller {
     }
 
     public function cancellaVolo($OIDVolo){
-        $esito = $this->registroVoli->rimuoviVolo($OIDVolo);
-        if($esito){
-            $this->registroVoli->avvisaPasseggeri($OIDVolo, RegistroVoli::$AVVISACANCELLAZIONEVOLO);
-        }
-        header(LOCATIONVOLI);
+    $esito = $this->registroVoli->rimuoviVolo($OIDVolo);
+    if($esito){
+        $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
+        $this->registroVoli->avvisaPasseggeri($listaClienti, $OIDVolo, RegistroVoli::$AVVISACANCELLAZIONEVOLO);
     }
+    header(LOCATIONVOLI);
+}
 
     public function inserisciPromozione($nome, $sconto, $dataInizio,$dataFine, $codVolo, $promozioneFedelta){
         $this->registroPromozioni->creaPromozione((int)$sconto, $dataInizio, $dataFine, $nome, $codVolo, (int)$promozioneFedelta);

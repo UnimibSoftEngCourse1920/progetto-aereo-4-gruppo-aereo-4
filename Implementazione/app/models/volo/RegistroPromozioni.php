@@ -1,8 +1,8 @@
 <?php
 
 
-require_once "Promozione.php";
-require_once "RegistroVoli.php";
+require_once __DIR__."/Promozione.php";
+require_once __DIR__."/RegistroVoli.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
 
 

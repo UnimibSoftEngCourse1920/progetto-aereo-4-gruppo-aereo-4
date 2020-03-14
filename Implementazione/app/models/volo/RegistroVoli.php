@@ -1,10 +1,9 @@
 <?php
 
-require_once "Volo.php";
-require_once "Aeroporto.php";
+require_once __DIR__."/Volo.php";
+require_once __DIR__."/Aeroporto.php";
 require_once "../app/models/servizi/DBFacade.php";
 require_once "../app/models/servizi/Mailer.php";
-require_once "../app/models/prenotazione/RegistroPrenotazioni.php";
 
 
 class RegistroVoli{
@@ -13,11 +12,9 @@ class RegistroVoli{
     public static $AVVISACANCELLAZIONEVOLO='CANCELLAZIONE';
 
     private $mailer;
-    private $registroPrenotazioni;
 
     public function __construct(){
         $this->mailer = new Mailer();
-        $this->registroPrenotazioni = new RegistroPrenotazioni();
     }
 
     public function inserisciVolo($dataOraPart, $dataOraArr, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo)
@@ -68,19 +65,18 @@ class RegistroVoli{
         return false;
     }
 
-    public function avvisaPasseggeri($OIDVolo, $tipologiaAvviso){
+    public function avvisaPasseggeri($listaPasseggeri, $OIDVolo, $tipologiaAvviso){
         $volo = DBFacade::getIstance() ->get($OIDVolo, Volo::class);
-        $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
         switch ($tipologiaAvviso){
             case self::$AVVISAMODIFICAVOLO:
-                $this->mailer->inviaEmailModificaVolo($listaClienti, $volo);
+                $this->mailer->inviaEmailModificaVolo($listaPasseggeri, $volo);
                 break;
             case self::$AVVISACANCELLAZIONEVOLO:
-                $this->mailer->inviaEmailCancellazioneVolo($listaClienti, $volo);
+                $this->mailer->inviaEmailCancellazioneVolo($listaPasseggeri, $volo);
                 break;
             default:
                 return false;
-        }
+          }
     }
 
     private function validaDate($data1, $data2){
@@ -97,15 +93,15 @@ class RegistroVoli{
         $v = $this->getVolo($codVolo);
         return $v->getDisponibilitaPosti($numPosti);
     }
-	
+
 	public function cercaVoli($partenza, $destinazione, $data, $nPosti) {
         return DBFacade::getIstance()->cercaVoli($partenza, $destinazione, $data, $nPosti);
     }
-	
+
 	public function getVolo($idVolo) {
 		return DBFacade::getIstance()->get($idVolo,"Volo");
 	}
-	
+
 	public function aggiornaVolo($idVolo) {
         //TODO vedere se serve o meno
         //TODO chiamare la update

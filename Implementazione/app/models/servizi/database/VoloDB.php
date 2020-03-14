@@ -53,7 +53,7 @@ class VoloDB extends AbstractDB
                     WHERE va.aeroportoPartenza = '$partenza' AND va.aeroportoDestinazione = '$destinazione' 
                         AND DATE(v.dataOraPartenza) = '$data'
                         AND v.stato <> '".Volo::$STATO_CANCELLATO."'
-                        AND $nPosti < (SELECT count(*) from VoloPosto where volo = v.OID)";
+                        AND $nPosti <= (SELECT count(*) FROM VoloPosto vp join Posto p on vp.posto = p.OID WHERE stato = '0' and vp.volo = v.OID)"; 
         $stmt = $this->connection->query($query);
         return $this->fetchResultsByClass($stmt, Volo::class);
     }
