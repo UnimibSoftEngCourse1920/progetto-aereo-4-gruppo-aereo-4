@@ -24,7 +24,7 @@ class Mailer{
                     Buona giornata\n\n
                     GruppoAereo4";
 
-        $message = sprintf($message, $volo->getaeroportoPartenza()->getNome(), $volo->getDataOraPartenza(), $volo->getaeroportoDestinazione(), $volo -> getDataOraArrivo());
+        $message = sprintf($message, $volo->getaeroportoPartenza()->getNome(), $volo->getDataOraPartenza(), $volo->getaeroportoDestinazione()->getNome(), $volo -> getDataOraArrivo());
 
         mail($recipients , "Avviso modifica volo",$message);
     }
