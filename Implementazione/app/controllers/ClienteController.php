@@ -64,8 +64,7 @@ class ClienteController extends Controller{
     public function accedi($email = "", $password = "", $success = "") {
         $error = "";
         if($email != "" && $password != "") {
-            $registroClienti = $this->model('cliente/RegistroClienti');
-            $cliente = $registroClienti->login($email, $password);
+            $cliente = $this->registroClienti->login($email, $password);
             if ($cliente->getOID()) {
                 $_SESSION['id_cliente'] = $cliente->getOID();
                 $_SESSION['nome_cliente'] = $cliente->getNome() . " " . $cliente->getCognome();
