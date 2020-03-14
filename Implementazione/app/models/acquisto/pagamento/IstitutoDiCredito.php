@@ -12,7 +12,7 @@ class IstitutoDiCredito
 
     public function autorizzaPagamento($carta) {
         $this->nome = "Banca Bicocca";
-		return (mt_rand() / mt_getrandmax() <= 0.8);
+		return (mt_rand() / mt_getrandmax() <= 0.9);
 	}
 }
 

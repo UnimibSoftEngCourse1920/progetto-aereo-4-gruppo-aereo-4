@@ -1,10 +1,7 @@
+var aeroporti = [];
 $(function() {
 
     //TODO: https://stackoverflow.com/questions/7517188/how-can-you-tell-if-a-suggestion-was-selected-from-jquery-ui-autocomplete
-
-    if (typeof aeroporti === 'undefined') {
-        var aeroporti = [];
-    }
 
     $( ".datepicker" ).datepicker({
         dateFormat: 'yy-mm-dd',

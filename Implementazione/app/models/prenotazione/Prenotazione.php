@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 
@@ -88,6 +87,7 @@ class Prenotazione{
 				$volo = $this->getVolo();
 				$volo->libera($this->getListaPosti());
 				$this->setVolo($nuovoVolo);
+				$this->setListaPosti($nuoviPosti);
 				$biglietti = $this->getListaBiglietti();
 				for($i = 0; $i < $nPosti; $i++) {
 					$biglietti[$i]->setPosto($nuoviPosti[$i]->getNumeroPosto()); //Numero che è diverso da OID
