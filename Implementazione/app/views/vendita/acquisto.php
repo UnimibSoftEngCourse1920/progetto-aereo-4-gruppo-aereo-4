@@ -66,9 +66,11 @@
                         <?php }?>
                         <input type="hidden" name="metodo_pagamento" value="carta">
                         <input type="hidden" name="carta" value="test">
+                        <?php if($data["error"]) { ?>
                         <div class="form-row px-3 pt-4 pb-3">
-                            <div class="error mx-auto">Non è stato possibile completare la transazione.</div>
+                            <div class="error mx-auto"><?=$data["error"]?></div>
                         </div>
+                        <?php } ?>
                         <div class="form-row pt-4">
                             <div class="form-group col-md-4 mx-auto">
                                 <button type="submit" class="btn btn-primary w-100">Paga</button>
@@ -112,9 +114,11 @@
                             <input type="hidden" name="tariffa" value="<?=$data["tariffa"]?>">
                         <?php }?>
                         <input type="hidden" name="metodo_pagamento" value="punti">
-                        <div class="form-row px-3 pt-4 pb-3">
-                            <div class="error mx-auto">Non hai punti a sufficienza.</div>
-                        </div>
+                        <?php if($data["error"]) { ?>
+                            <div class="form-row px-3 pt-4 pb-3">
+                                <div class="error mx-auto"><?=$data["error"]?></div>
+                            </div>
+                        <?php } ?>
                         <div class="form-row pt-4">
                             <div class="form-group col-md-4 mx-auto">
                                 <button type="submit" class="btn btn-primary w-100">Paga</button>

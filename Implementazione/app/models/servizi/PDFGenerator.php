@@ -43,8 +43,22 @@
         }
 
         public function cancellaPDF($pdf) {
-            if(strpos($pdf, ".pdf") == strlen($pdf) - 4) {
+            if($this->isPDF($pdf)) {
                 unlink($pdf);
             }
+        }
+
+        public function scaricaPDF($pdf) {
+            if($this->isPDF($pdf)) {
+                header("Cache-Control: public");
+                header("Content-Description: File Transfer");
+                header("Content-Disposition: attachment; filename= " . $pdf);
+                header("Content-Transfer-Encoding: binary");
+                readfile($pdf);
+            }
+        }
+
+        public function isPDF($file) {
+            return strpos($file, ".pdf") == strlen($file) - 4;
         }
     }
