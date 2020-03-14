@@ -111,6 +111,9 @@ class RegistroVoli{
     public function getAerei(){
         return DBFacade::getIstance()->getAll(Aereo::class);
     }
+    public function getVoliConPromozione(){
+        return DBFacade::getIstance()->getVoliConPromozione();
+    }
 
 
 }

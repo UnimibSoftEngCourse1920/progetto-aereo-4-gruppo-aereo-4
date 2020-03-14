@@ -28,7 +28,7 @@ class VoloDB extends AbstractDB
 
     protected function generateGetQuery($OID, $class)
     {
-        return $this->generateGetAllQuery(Volo::class) ." WHERE v.OID = '$OID'";
+        return $this->generateGetAllQuery(Volo::class) ." and v.OID = '$OID'";
     }
 
     protected function generateGetAllQuery($class)
@@ -71,5 +71,12 @@ class VoloDB extends AbstractDB
                 OR (dataOraArrivo BETWEEN '$partenza' and '$arrivo') OR (dataOraPartenza < '$partenza' AND dataOraArrivo > '$arrivo'))";
         $result = $this->connection->query($query);
         return $result->rowCount() == 0;
+    }
+
+    public function getVoliConPromozione(){
+        $data = date("Y-m-d");
+        $query = "select * from Volo where promozione != '' and stato = 'ATTIVO' and dataOraPartenza > '$data'";
+        $stmt = $this->connection->query($query);
+        return $this->fetchResultsByClass($stmt, Volo::class);
     }
 }

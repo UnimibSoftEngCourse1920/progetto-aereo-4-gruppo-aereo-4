@@ -5,12 +5,17 @@
     <?php include("../app/template/header.php") ?>
 </head>
 <body>
-    <?php include("../app/template/menu.php") ?>
-    <?php $promozioneBanner = $data["promozioneBanner"] ?>
+
+    <?php
+       include("../app/template/menu.php");
+       $promozioneBanner = $data["promozioneBanner"];
+       $voli = $data["voli"];
+     ?>
+
     <div class="container-fluid">
         <div class="row" id="promozione">
             <div class="col p-2 text-center">
-                <span style="color: white"> <i><?= $promozioneBanner->getNome() ?></i> risparmia il <?= $promozioneBanner->getSconto() ?>% fino al <?= $promozioneBanner->getDataFine() ?> su una selezione di voli.</span>
+                <span style="color: white"> <em><?= $promozioneBanner->getNome() ?></em> risparmia il <?= $promozioneBanner->getSconto() ?>% fino al <?= $promozioneBanner->getDataFine() ?> su una selezione di voli.</span>
             </div>
         </div>
         <script>
@@ -68,19 +73,23 @@
         <div class="row pt-md-5 mt-md-5 pb-md-5 px-md-5">
             <h2>In promozione</h2>
         </div>
+        <?= var_dump($voli)?>
+        <?php foreach ($voli as $volo){ ?>
+
         <div class="row pb-md-5 mb-md-5">
             <div class="col-md-4">
-                <div class="promozione" style="background: url('img/roma.jpg')">
+                <div class="promozione" style="background: url('https://source.unsplash.com/featured/?<?= $volo->getAeroportoDestinazione()->getCitta() ?>')">
                     <div class="volo p-md-3">
-                        <div class="tratta">Milano - Roma</div>
-                        <div class="data">07/03/2020</div>
+                        <div class="tratta"><?= $volo->getAeroportoPartenza()->getCitta()?> - <?= $volo->getAeroportoDestinazione()->getCitta()?></div>
+                        <div class="data"><?= $volo->getDataOraPartenza()?></div>
                         <div class="prezzo">
-                            60€
-                            <strike>70€</strike>
+                            <?= $volo->getPrezzoScontato(false)?>
+                            <strike><?= $volo->getPrezzoIntero()?></strike>
                         </div>
                     </div>
                 </div>
             </div>
+            <?php } ?>
             <div class="col-md-4">
                 <div class="promozione" style="background: url('img/parigi.jpg')">
                     <div class="volo p-md-3">

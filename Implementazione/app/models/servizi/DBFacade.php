@@ -121,6 +121,10 @@ class DBFacade{
         return $this->gestori[Promozione::class]->getPromozioniAttive();
     }
 
+    public function getVoliConPromozione(){
+        return $this->gestori[Volo::class]->getVoliConPromozione();
+    }
+
 }
 
 
