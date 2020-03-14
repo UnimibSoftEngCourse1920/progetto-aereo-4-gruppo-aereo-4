@@ -86,7 +86,8 @@ class PrenotazioneDB extends AbstractDB
     public function checkUnivoca($email, $OIDVolo)
     {
         $query = "SELECT * from Prenotazione p JOIN PrenotazioneCliente as pc JOIN Cliente as c JOIN PrenotazioneVolo as pv on c.OID=pc.cliente and p.OID = pc.prenotazione and pv.prenotazione=p.OID
-                    WHERE c.email = '$email' and  pv.volo='$OIDVolo' and p.OID NOT IN (select OID from PrenotazioneAcquisto)";
+                    WHERE c.email = '$email' and  pv.volo='$OIDVolo' and p.OID NOT IN (select PrenotazioneAcquisto.prenotazione from PrenotazioneAcquisto)";
+
         $result = $this->connection->query($query);
         return $result->rowCount() == 0;
     }

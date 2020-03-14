@@ -41,24 +41,8 @@ class Posto{
     /**
      * @return bool
      */
-    public function isStato()
+    public function getStato()
     {
-        //TODO rinominare
         return $this->stato;
-    }
-
-
-    public function __get($attributo) {
-        //da rimuovere
-        if (property_exists($this, $attributo)) {
-            return $this->$attributo;
-        }
-    }
-
-    public function __set($attributo, $valore) {
-        if (property_exists($this, $attributo)) {
-            $this->$attributo = $valore;
-        }
-        return $this;
     }
 }

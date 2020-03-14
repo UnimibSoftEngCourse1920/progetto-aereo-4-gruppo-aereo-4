@@ -70,9 +70,11 @@ class RegistroPrenotazioni{
     }
 
     public function effettuaPrenotazione($cliente,$listaPasseggeri,$codVolo,$numPosti,$tariffa){
-        $univoca = DBFacade::getIstance()->checkPrenotazioneUnivoca($cliente->email,$codVolo);
+        $univoca = DBFacade::getIstance()->checkPrenotazioneUnivoca($cliente->getEmail(),$codVolo);
         if($univoca){
-            DBFacade::getIstance()->put($cliente);
+            if(!$cliente->isFedelta()) {
+                DBFacade::getIstance()->put($cliente);
+            }
             $registroVoli = new RegistroVoli();
             $disp = $registroVoli->checkDisponibilitaPosti($numPosti,$codVolo);
 

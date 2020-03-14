@@ -127,10 +127,16 @@ $(function() {
             var arr = new Array();
             var i = 1;
             $(".nome-cognome-pass").each(function(){
-                arr.push({nome:$("#nome"+i).val(),cognome:$("#cognome"+i).val()});
+                arr.push($("#nome"+i).val()+" "+$("#cognome"+i).val());
                 i++;
             });
-            console.log(JSON.stringify(arr));
+            $("#lista-passeggeri").val(JSON.stringify(arr));
+            if($("#tar_plus").hasClass("selected")){
+                $("#tariffa").val("plus");
+            } else {
+                $("#tariffa").val("standard");
+            }
+            $("#form-prenotazione").submit();
         });
     });
 

@@ -37,8 +37,7 @@ class Volo {
         $this->listaPosti = array();
         $this->codiceVolo = $codiceVolo;
         for($i=0; $i<$this->aereo->getNumeroPosti(); $i++){
-            $p = new Posto($i+1);
-            $this->listaPosti[] = $p;
+            $this->listaPosti[$i] = new Posto($i+1);
         }
     }
 
@@ -165,6 +164,7 @@ class Volo {
     public function prenota($numPosti){
         $postiRimanenti = $numPosti;
         $listaPostiPrenotati = array();
+        var_dump($this->listaPosti);
         foreach ($this->listaPosti as $posto){ //per ogni posto del volo
             if($postiRimanenti>0) { //controllo che ci siano ancora posti da prenotare
                 if ($posto->isOccupato() == 0) { //se non è occupato
