@@ -50,21 +50,21 @@
                             <tbody>
                             <?php
 
-                                foreach ($data["voli"] as $volo){
-                                    echo "<tr>
-                                            <th scope='row'>".$volo->getOID()."</th>
-                                            <td>".$volo->getAeroportoPartenza()->getCitta()." ".$volo->getAeroportoPartenza()->getNome()." (".$volo->getAeroportoPartenza()->getCodice().")"." </td>
-                                            <td>".$volo->getAeroportoDestinazione()->getCitta()." ".$volo->getAeroportoDestinazione()->getNome()." (".$volo->getAeroportoDestinazione()->getCodice().")"."</td>
-                                            <td>".$volo->getDataOraPartenza()."</td>
-                                            <td>".$volo->getDataOraArrivo()."</td>
-                                            <td>".$volo->getMiglia()."</td>
-                                            <td>".$volo->getStato()."</td>
-                                            <td>
-                                                <a href='modifica/".$volo->getOID()."'><button class='btn btn-danger'> <em class='fas fa-pencil-alt'></em> Modifica </button></a>
-                                                <a href='cancellaVolo/".$volo->getOID()."'><button class='btn btn-danger'> <em class='fas fa-trash-alt'></em> Cancella </button></a>
-                                            </td>
-                                            </tr>";
-                                }
+                                foreach ($data["voli"] as $volo){ ?>
+                                    <tr>
+                                        <th scope='row'><?=$volo->getOID()?></th>
+                                        <td> <?= $volo->getAeroportoPartenza()->getCitta()." ".$volo->getAeroportoPartenza()->getNome()." (".$volo->getAeroportoPartenza()->getCodice().")"?> </td>
+                                        <td> <?= $volo->getAeroportoDestinazione()->getCitta()." ".$volo->getAeroportoDestinazione()->getNome()." (".$volo->getAeroportoDestinazione()->getCodice().")"?></td>
+                                        <td><?= $volo->getDataOraPartenza()?></td>
+                                        <td><?= $volo->getDataOraArrivo()?></td>
+                                        <td><?= $volo->getMiglia()?></td>
+                                        <td><?= $volo->getStato() ?></td>
+                                        <td>
+                                            <a href='modifica/<?= $volo->getOID() ?>'><button class='btn btn-danger'> <em class='fas fa-pencil-alt'></em> Modifica </button></a>
+                                            <a href='cancellaVolo/<?= $volo->getOID() ?>'><button class='btn btn-danger'> <em class='fas fa-trash-alt'></em> Cancella </button></a>
+                                        </td>
+                                    </tr>";
+                               <?php } ?>
                             ?>
                             </tbody>
                         </table>
@@ -94,30 +94,27 @@
                                     <label for="title">Partenza</label>
                                     <select name="partenza" class="form-control">
                                         <?php
-                                            foreach ($data["aeroporti"] as $aeroporto){
-                                               echo "<option value='".$aeroporto->getOID()."'>".$aeroporto->getCitta()." ".$aeroporto->getNome()." (".$aeroporto->getCodice().")"."</option>";
-                                            }
-                                        ?>
+                                            foreach ($data["aeroporti"] as $aeroporto){ ?>
+                                               <option value='<?= $aeroporto->getOID()?>'><?= $aeroporto->getCitta()." ".$aeroporto->getNome()." (".$aeroporto->getCodice().")"?></option>
+                                        <?php  } ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="dataset">Destinazione</label>
                                     <select name="destinazione" class="form-control">
                                         <?php
-                                        foreach ($data["aeroporti"] as $aeroporto){
-                                            echo "<option value='".$aeroporto->getOID()."'>".$aeroporto->getNome()."</option>";
-                                        }
-                                        ?>
+                                        foreach ($data["aeroporti"] as $aeroporto){ ?>
+                                            <option value='<?= $aeroporto->getOID()?>'><?= $aeroporto->getCitta()." ".$aeroporto->getNome()." (".$aeroporto->getCodice().")"?></option>
+                                        <?php  } ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="title">Codice Aereo</label>
                                     <select name="aereo" class="form-control">
                                         <?php
-                                        foreach ($data["aerei"] as $aereo){
-                                            echo "<option value='".$aereo->getOID()."'>".$aereo->getMarcaModello()."</option>";
-                                        }
-                                        ?>
+                                        foreach ($data["aerei"] as $aereo){ ?>
+                                            <option value='<?= $aereo->getOID()?>'><?= $aereo->getMarcaModello() ?></option>
+                                       <?php } ?>
                                     </select>
                                 </div>
                             </div>
