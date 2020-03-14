@@ -41,6 +41,7 @@ class VenditaController extends Controller {
 	
 	//TODO: DB
 	public function cambiaData($idPrenotazione, $idCliente, $idNuovoVolo, $nuovaTariffa, $metodoPagamento = "", $carta = "") {
+        $error = "";
         $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
         $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
         $tariffa = $prenotazione->getListaBiglietti()[0]->getTariffa();
@@ -48,12 +49,10 @@ class VenditaController extends Controller {
         if($metodoPagamento != "" || $tassaCambio == 0) {
             $cliente = $prenotazione->getCliente();
             if ($idCliente == $cliente->getOID()) {
-                $volo = $prenotazione->getVolo();
                 $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
                 $esitoCambioData = $this->registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa,
                                                                             $metodoPagamento, $carta, $tassaCambio);
                 if ($esitoCambioData) {
-                    //Aggiornare prenotazione (anche biglietti e acquisto), cliente, volo vecchio e volo nuovo per i posti
                     $this->registroPrenotazioni->generaBiglietti($prenotazione, $cliente);
                     $this->registroPrenotazioni->aggiornaBiglietti($prenotazione);
                     if($tassaCambio != 0) {
@@ -62,18 +61,22 @@ class VenditaController extends Controller {
                     }
                     header("Location: /public/vendita/confermaCambioData");
                 } else {
-                    //TODO: view con errore
+                    $error = "Non è stato possibile effettuare il cambio data.";
                 }
+            } else {
+                $error = "La prenotazione appartiene ad un altro cliente.";
             }
         }
         $nPosti = count($prenotazione->getListaPosti());
         $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente,
                                                 "volo" => $nuovoVolo, "pass" => $nPosti, "tariffa" => $nuovaTariffa,
-                                                "tassa_cambio" => $tassaCambio]);
+                                                "tassa_cambio" => $tassaCambio, "error" => $error]);
 	}
 
 	public function acquistaPrenotazione($idPrenotazione, $idCliente, $metodoPagamento = "", $carta = "") {
+        $error = "";
         $prenotazione = $this->registroPrenotazioni->getPrenotazione($idPrenotazione);
+        var_dump($idPrenotazione);
         if($metodoPagamento != "") {
             $cliente = $prenotazione->getCliente();
             if ($idCliente == $cliente->getOID()) {
@@ -84,16 +87,17 @@ class VenditaController extends Controller {
                     $this->registroClienti->aggiornaCliente($cliente);
                     header("Location: /public/vendita/confermaAcquisto");
                 } else {
-                    //TODO: view con errore
+                    $error = "Non è stato possibile completare il pagamento.";
                 }
+            } else {
+                $error = "La prenotazione appartiene ad un altro cliente.";
             }
         }
         $nPosti = count($prenotazione->getListaPosti());
         $tariffa = $prenotazione->getListaBiglietti()[0]->getTariffa();
         $this->view('vendita/acquisto', ["id_prenotazione" => $idPrenotazione, "id_cliente" => $idCliente,
-                                                "volo" => $prenotazione->getVolo(),
-                                                "pass" => $nPosti,
-                                                "tariffa" => $tariffa]);
+                                                "volo" => $prenotazione->getVolo(), "pass" => $nPosti,
+                                                "tariffa" => $tariffa, "error" => $error]);
 	}
 
     public function confermaPrenotazione() {
