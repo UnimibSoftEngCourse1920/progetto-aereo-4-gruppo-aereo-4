@@ -25,7 +25,7 @@
                     </p>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="/public/cliente/prenotazioni">Il mio account</a>
-                        <a class="dropdown-item" href="#">Estratto conto</a>
+                        <a class="dropdown-item" href="/public/cliente/richiediEstrattoConto/<?=$_SESSION["id_cliente"];?>">Estratto conto</a>
                         <a class="dropdown-item" href="/public/cliente/esci">Esci</a>
                     </div>
                 </div>
