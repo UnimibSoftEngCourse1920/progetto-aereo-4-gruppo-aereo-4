@@ -17,8 +17,8 @@ class ClienteController extends Controller{
         $this->registroPromozioni = new RegistroPromozioni();
     }
 
-    public function annullaIscrizione($codiceFedelta){
-        $esito = $this->registroClienti -> annullaIscrizione($codiceFedelta);
+    public function annullaIscrizione($OIDCliente){
+        $esito = $this->registroClienti -> annullaIscrizione($OIDCliente);
         if($esito) {
             session_destroy();
             header("Location: https://gruppoaereo4.000webhostapp.com/public/");

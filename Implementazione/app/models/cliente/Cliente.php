@@ -94,7 +94,7 @@ class Cliente{
     public function annullaIscrizioneFedelta(){
         $this->indirizzo = null;
         $this->codiceFedelta = null;
-        $this->username = null;
+        $this->saldoPunti = 0;
         $this->password = null;
         $this->stato = self::$STATO_CANCELLATO;
     }
