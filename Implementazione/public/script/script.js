@@ -3,7 +3,7 @@ $(function() {
     //TODO: https://stackoverflow.com/questions/7517188/how-can-you-tell-if-a-suggestion-was-selected-from-jquery-ui-autocomplete
 
     if (typeof aeroporti === 'undefined') {
-        aeroporti = [];
+        var aeroporti = [];
     }
 
     $( ".datepicker" ).datepicker({
@@ -32,9 +32,10 @@ $(function() {
         },
         beforeShow : function(input, inst) {
             inst.dpDiv.addClass('month_year_datepicker')
-            if ((datestr = $(this).val()).length > 0) {
-                year = datestr.substring(datestr.length-4, datestr.length);
-                month = datestr.substring(0, 2);
+            var datestr = $(this).val().length;
+            if (datestr > 0) {
+                var year = datestr.substring(datestr.length-4, datestr.length);
+                var month = datestr.substring(0, 2);
                 $(this).datepicker('option', 'defaultDate', new Date(year, month-1, 1));
                 $(this).datepicker('setDate', new Date(year, month-1, 1));
                 $(".ui-datepicker-calendar").hide();
@@ -100,9 +101,7 @@ $(function() {
 
     $(document).ready(function () {
         $("#tar_plus").click(function () {
-            if($(this).hasClass("selected")){
-
-            } else {
+            if(!$(this).hasClass("selected")){
                 $(this).addClass("selected");
                 $("#tar_stand").removeClass("selected");
                 $("#supplemento_row").slideDown();
@@ -111,9 +110,7 @@ $(function() {
             }
         });
         $("#tar_stand").click(function () {
-            if($(this).hasClass("selected")){
-
-            } else {
+            if(!$(this).hasClass("selected")){
                 $(this).addClass("selected");
                 $("#tar_plus").removeClass("selected");
                 $("#supplemento_row").slideUp();
