@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col text-center">
             <h2><?=$data["success"]?></h2>
-            <i class="far fa-check-circle mt-5" style="font-size: 150px; color: #7091BE;"></i>
+            <em class="far fa-check-circle mt-5" style="font-size: 150px; color: #7091BE;"></em>
         </div>
     </div>
 </div>

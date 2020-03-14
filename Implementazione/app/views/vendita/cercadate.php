@@ -27,8 +27,8 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8  px-0">
                     <div class="flight-line"></div>
-                    <i class="fas fa-plane-departure float-left pr-1"></i>
-                    <i class="fas fa-plane-arrival float-right pl-1"></i>
+                    <em class="fas fa-plane-departure float-left pr-1"></em>
+                    <em class="fas fa-plane-arrival float-right pl-1"></em>
                 </div>
             </div>
         </div>
@@ -75,9 +75,9 @@
                                     $dataOraPartenza = DateTime::createFromFormat('Y-m-d H:i:s', $data["voli"][0]->getDataOraPartenza());
                                     $dataOraArrivo = DateTime::createFromFormat('Y-m-d H:i:s', $data["voli"][0]->getDataOraArrivo());
                                     ?>
-                                    <b>Partenza</b><br>
+                                    <strong>Partenza</strong><br>
                                     <?=$dataOraPartenza->format('Y-m-d H:i')?><br><br>
-                                    <b>Arrivo</b><br>
+                                    <strong>Arrivo</strong><br>
                                     <?=$dataOraPartenza->format('Y-m-d H:i')?>
                                 </p>
                             </div>
@@ -102,9 +102,9 @@
                                             $dataOraPartenza = DateTime::createFromFormat('Y-m-d H:i:s', $data["voli"][$i]->getDataOraPartenza());
                                             $dataOraArrivo = DateTime::createFromFormat('Y-m-d H:i:s', $data["voli"][$i]->getDataOraArrivo());
                                             ?>
-                                            <b>Partenza</b><br>
+                                            <strong>Partenza</strong><br>
                                             <?= $dataOraPartenza->format('Y-m-d H:i') ?><br><br>
-                                            <b>Arrivo</b><br>
+                                            <strong>Arrivo</strong><br>
                                             <?= $dataOraPartenza->format('Y-m-d H:i') ?>
                                         </p>
                                     </div>
@@ -117,7 +117,7 @@
                     <div class="row  mb-5">
                         <div class="col-md-12 text-center">
                             <div data-tariffa="standard" class="d-flex mx-auto tariffa <?php if($data["tariffa"] == "standard") {?>selected<?php }?>">
-                                <i class="fas fa-paper-plane"></i>
+                                <em class="fas fa-paper-plane"></em>
                                 <p class="mt-auto mx-auto">Tariffa Standard</p>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <div data-tariffa="plus" class="d-flex mx-auto tariffa <?php if($data["tariffa"] == "plus") {?>selected<?php }?>">
-                                <i class="fas fa-rocket"></i>
+                                <em class="fas fa-rocket"></em>
                                 <p class="mt-auto mx-auto">Tariffa VoloPlus</p>
                             </div>
                         </div>
