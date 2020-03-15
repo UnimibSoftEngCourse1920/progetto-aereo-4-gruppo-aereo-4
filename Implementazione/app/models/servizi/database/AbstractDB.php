@@ -85,9 +85,7 @@ abstract class AbstractDB
     }
 
     //TODO da rivedere
-    protected function generatePutQuery($object){
-        return '';
-    }
+    protected function generatePutQuery($object){ return '';}
 
     protected function generateUpdateQuery($posto){ return '';}
 

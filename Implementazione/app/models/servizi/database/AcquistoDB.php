@@ -8,7 +8,6 @@ class AcquistoDB extends AbstractDB
 {
     public function get($OID, $class)
     {
-        //TODO riutilizzo la get ??
         $acquisto = parent::get($OID, $class); //Fa la get di acquisto
         $tipo = $this->getTipoPagamento($acquisto->getPagamento());
 
