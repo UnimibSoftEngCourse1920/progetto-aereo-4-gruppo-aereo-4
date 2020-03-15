@@ -83,28 +83,16 @@
             <div class="row mt-md-4" id="pagamento-punti" style="display:none">
                 <div class="col">
                     <form class="pt-md-4 px-md-5" action="" method="post">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <strong>Punti acquisiti</strong>
-                            </div>
-                            <div class="form-group col-md-6 text-right">
-                                12312312312
-                            </div>
-                        </div>
-                        <div class="form-row">
+                        <div class="form-row px-md-5 mx-md-5">
                             <div class="form-group col-md-6">
                                 <strong>Punti necessari</strong>
                             </div>
                             <div class="form-group col-md-6 text-right">
-                                12312321
-                            </div>
-                        </div>
-                        <div class="form-row pt-3" style="border-top: 1px solid #eee;">
-                            <div class="form-group col-md-6">
-                                <strong>Punti rimanenti</strong>
-                            </div>
-                            <div class="form-group col-md-6 text-right">
-                                1231232112
+                                <?php if(!isset($data["tassa_cambio"])) {?>
+                                    <?=$data["volo"]->getPrezzoIntero()*20?>
+                                <?php } else { ?>
+                                    <?=$data["tassa_cambio"]*20?>
+                                <?php } ?>
                             </div>
                         </div>
                         <input type="hidden" name="id_prenotazione" value="<?=$data["id_prenotazione"]?>">
@@ -128,6 +116,7 @@
                 </div>
             </div>
             <?php } ?>
+            <?php if(!isset($data["tassa_cambio"])) {?>
             <div class="row">
                 <div class="col text-center">
                     <small>oppure</small>
@@ -141,6 +130,7 @@
                     </a>
                 </div>
             </div>
+            <?php } ?>
         </div>
         <div class="col-md-4 px-md-5 mt-md-4" id="riepilogo">
             <div class="row pb-md-4">
