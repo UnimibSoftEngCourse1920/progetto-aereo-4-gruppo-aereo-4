@@ -54,6 +54,9 @@ class ClienteController extends Controller{
 
     public function avvisaPromozioniFedelta() {
         $listaPromozioni = $this->registroPromozioni -> getPromozioniFedelta();
+        echo "<pre>";
+        var_dump($listaPromozioni);
+        echo "</pre>";
         $this->registroClienti->avvisaClientiFedelta($listaPromozioni, TipologiaAvviso::$AVVISA_PROMOZIONI);
     }
 

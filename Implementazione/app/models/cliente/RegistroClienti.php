@@ -55,7 +55,16 @@ class RegistroClienti
     public function avvisaClientiFedelta($object, $tipo){
         if($tipo == TipologiaAvviso::$AVVISA_PROMOZIONI && $object!=null && get_class($object[0]) == Promozione::class) {
                 $listaClienti = DBFacade::getIstance()->getClientiFedelta();
-                $this->mailer->avvisaClientiPromozioni($listaClienti, $object);
+                $listaFedeli = array();
+                foreach ($listaClienti as $cliente){
+                    if($cliente->getStato()=="FEDELE"){
+                        array_push($listaFedeli,$cliente);
+                    }
+                }
+                if(count($listaFedeli)>0){
+                    $this->mailer->avvisaClientiPromozioni($listaFedeli, $object);
+                }
+
         }
     }
 

@@ -25,7 +25,7 @@ class PrenotazioneController extends Controller
         $this->view('prenotazione/prenotazione', ["volo"=> $volo,"pass"=>$viaggiatori]);
     }
 
-    public function effettuaPrenotazione($nome = "", $cognome = "", $email = "",$dataNascita,$listaPasseggeri,$idVolo,$nPosti = "",$tariffa) {
+    public function effettuaPrenotazione($nome, $cognome, $email,$dataNascita,$listaPasseggeri,$idVolo,$nPosti,$tariffa) {
         if(isset($_SESSION["id_cliente"])){
             $cliente = $this->registroClienti->getCliente($_SESSION["id_cliente"]);
         } else {

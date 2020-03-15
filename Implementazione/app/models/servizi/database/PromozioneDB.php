@@ -12,14 +12,15 @@ class PromozioneDB extends AbstractDB{
     }
 
     public function getPromozioniFedelta(){
-        $query = "select * from Promozione where promozioneFedelta = 'TRUE'";
+        $data = date("Y-m-g");
+        $query = "select * from Promozione where promozioneFedelta = 1  and dataFine > '$data'";
         $stmt = $this->connection->query($query);
         return $this->fetchResultsByClass($stmt, Promozione::class);
     }
 
     public function getPromozioniAttive(){
         $data = date("Y-m-g");
-        $query = "select * from Promozione where dataFine < '$data' and promozioneFedelta = 0";
+        $query = "select * from Promozione where dataFine > '$data' and promozioneFedelta = 0";
         $stmt = $this->connection->query($query);
         return $this->fetchResultsByClass($stmt, Promozione::class);
     }
