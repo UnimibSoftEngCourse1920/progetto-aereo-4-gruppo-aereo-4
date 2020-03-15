@@ -84,10 +84,12 @@ class VoloController extends Controller {
         $volo = $this->registroVoli -> modificaVolo($OIDVolo, $nuovaDataoraPart, $nuovaDataoraDest);
         if($volo != null){
             $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
-            //
             $this->registroClienti->avvisaPasseggeri($listaClienti, $volo, TipologiaAvviso::$AVVISA_MODIFICA_VOLO);
+            header(LOCATIONVOLI);
+        } else {
+            $this->view("Location: /public/volo/error",["error","Errore nella modifica del volo"]);
         }
-        header(LOCATIONVOLI);
+
     }
 
 
@@ -96,8 +98,11 @@ class VoloController extends Controller {
     if($volo != null){
         $listaClienti = $this->registroPrenotazioni->getListaClientiVolo($OIDVolo);
         $this->registroClienti->avvisaPasseggeri($listaClienti, $volo, TipologiaAvviso::$AVVISA_CANCELLAZIONE_VOLO);
+        header(LOCATIONVOLI);
+    } else {
+        $this->view("Location: /public/volo/error",["error","Errore nella cancellazione del volo"]);
     }
-    header(LOCATIONVOLI);
+
 }
 
     public function inserisciPromozione($nome, $sconto, $dataInizio,$dataFine, $codVolo, $promozioneFedelta){
