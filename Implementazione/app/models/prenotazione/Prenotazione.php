@@ -3,8 +3,8 @@
 
 require_once("../app/models/volo/Biglietto.php");
 require_once("../app/models/acquisto/Acquisto.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/app/models/acquisto/pagamento/PagamentoConPunti.php");
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+require_once("../app/models/acquisto/pagamento/PagamentoConPunti.php");
+require_once "../app/models/servizi/OIDGenerator.php";
 
 
 class Prenotazione{

@@ -3,7 +3,7 @@
 
 require_once __DIR__."/Promozione.php";
 require_once __DIR__."/RegistroVoli.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/DBFacade.php";
+require_once "../app/models/servizi/DBFacade.php";
 
 
 class RegistroPromozioni

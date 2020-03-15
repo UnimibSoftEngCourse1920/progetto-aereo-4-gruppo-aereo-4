@@ -1,7 +1,7 @@
 <?php
 
 
-require_once $_SERVER['DOCUMENT_ROOT']."/app/models/servizi/OIDGenerator.php";
+require_once "../app/models/servizi/OIDGenerator.php";
 
 
 abstract class Pagamento{
