@@ -49,6 +49,6 @@ class PrenotazioneController extends Controller
             $acquistato = true;
         }
 
-        $this->view('prenotazione/gestioneprenotazione', ["idPrenotazione"=>$idPrenotazione,"idCliente","acquistato"=>$acquistato,"volo"=>$volo]);
+        $this->view('prenotazione/gestioneprenotazione', ["idPrenotazione"=>$idPrenotazione,"idCliente"=>$cliente->getOID(),"acquistato"=>$acquistato,"volo"=>$volo]);
     }
 }

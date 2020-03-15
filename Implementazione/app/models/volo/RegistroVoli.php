@@ -40,7 +40,6 @@ class RegistroVoli{
                 $voloMod->setDataOraPartenza($nuovaDataoraPart);
                 $voloMod->setDataOraArrivo($nuovaDataoraArr);
                 DBFacade::getIstance()->update($voloMod);
-                //TODO esito
                 return $voloMod;
             }
         }
@@ -54,7 +53,6 @@ class RegistroVoli{
             $volo->setStato(Volo::$STATO_CANCELLATO);
             $database->update($volo);
             return $volo;
-            //TODO esito
         }
         return null;
     }

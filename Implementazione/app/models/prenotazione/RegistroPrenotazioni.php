@@ -32,7 +32,7 @@ class RegistroPrenotazioni{
     }
 
     public function generaEstrattoConto($OIDCliente){
-        //se faccio tutto con il codice fedelta non devo controllare sia fedelta
+
         $db = DBFacade::getIstance();
         $cli = $db->get($OIDCliente, Cliente::class);
         if($cli != null && $cli->isFedelta()){
@@ -40,9 +40,7 @@ class RegistroPrenotazioni{
             $ec = new EstrattoConto();
             foreach ($listaPrenotazioni as $prenotazione){
                 $prenotazione->generaEstrattoContoParziale($ec);
-                //Usare il return??
             }
-            //$this->mailer->inviaEstrattoConto($cli, $estrattoConto);
             return $ec;
         }
         return null;
