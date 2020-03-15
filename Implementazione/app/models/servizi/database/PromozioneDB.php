@@ -8,7 +8,7 @@ class PromozioneDB extends AbstractDB{
 
     protected function generatePutQuery($obj){
         return sprintf("INSERT INTO Promozione VALUES ('%s', '%s', '%s', '%s', %u, %u)",
-            $obj->getOID(), $obj->getDataInizio(), $obj->getDataFine(), $obj->getNome(), (int)$obj->isFedelta(), (int)$obj->getSconto());
+            $obj->getOID(), $obj->getDataInizio(), $obj->getDataFine(), $obj->getNome(), (int)$obj->getSconto(), (int)$obj->isFedelta());
     }
 
     public function getPromozioniFedelta(){

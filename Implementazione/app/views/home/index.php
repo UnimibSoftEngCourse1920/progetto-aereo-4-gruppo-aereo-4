@@ -5,12 +5,17 @@
     <?php include("../app/template/header.php") ?>
 </head>
 <body>
-    <?php include("../app/template/menu.php") ?>
-    <?php $promozioneBanner = $data["promozioneBanner"] ?>
+
+    <?php
+       include("../app/template/menu.php");
+       $promozioneBanner = $data["promozioneBanner"];
+       $voli = $data["voli"];
+     ?>
+
     <div class="container-fluid">
         <div class="row" id="promozione">
             <div class="col p-2 text-center">
-                <span style="color: white"> <i><?= $promozioneBanner->getNome() ?></i> risparmia il <?= $promozioneBanner->getSconto() ?>% fino al <?= $promozioneBanner->getDataFine() ?> su una selezione di voli.</span>
+                <span style="color: white"> <em><?= $promozioneBanner->getNome() ?></em> risparmia il <?= $promozioneBanner->getSconto() ?>% fino al <?= $promozioneBanner->getDataFine() ?> su una selezione di voli.</span>
             </div>
         </div>
         <script>
@@ -69,42 +74,26 @@
             <h2>In promozione</h2>
         </div>
         <div class="row pb-md-5 mb-md-5">
+        <?php
+            $i = 0;
+            foreach ($voli as $volo){
+                if($i<3){?>
             <div class="col-md-4">
-                <div class="promozione" style="background: url('img/roma.jpg')">
+                <div class="promozione" style="background: url('https://source.unsplash.com/featured/?<?= $volo->getAeroportoDestinazione()->getCitta() ?>')">
                     <div class="volo p-md-3">
-                        <div class="tratta">Milano - Roma</div>
-                        <div class="data">07/03/2020</div>
+                        <div class="tratta"><?= $volo->getAeroportoPartenza()->getCitta()?> - <?= $volo->getAeroportoDestinazione()->getCitta()?></div>
+                        <div class="data"><?= explode(" ",$volo->getDataOraPartenza())[0]?></div>
                         <div class="prezzo">
-                            60€
-                            <strike>70€</strike>
+                            <?= $volo->getPrezzoScontato(false)?>€
+                            <strike><?= $volo->getPrezzoIntero()?>€</strike>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="promozione" style="background: url('img/parigi.jpg')">
-                    <div class="volo p-md-3">
-                        <div class="tratta">Firenze - Parigi</div>
-                        <div class="data">10/03/2020</div>
-                        <div class="prezzo">
-                            72€
-                            <strike>80€</strike>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="promozione" style="background: url('img/londra.jpg')">
-                    <div class="volo p-md-3">
-                        <div class="tratta">Roma - Londra</div>
-                        <div class="data">15/03/2020</div>
-                        <div class="prezzo">
-                            85€
-                            <strike>93€</strike>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+                $i++;
+                }
+            } ?>
         </div>
     </div>
 	<?php include("../app/template/footer.php") ?>

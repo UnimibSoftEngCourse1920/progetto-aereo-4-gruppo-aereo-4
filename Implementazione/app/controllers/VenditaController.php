@@ -49,7 +49,6 @@ class VenditaController extends Controller {
             $cliente = $prenotazione->getCliente();
             if ($idCliente == $cliente->getOID()) {
                 if(count($prenotazione->getListaAcquisti()) > 0) {
-                    $nuovoVolo = $this->registroVoli->getVolo($idNuovoVolo);
                     $esitoCambioData = $this->registroPrenotazioni->cambiaData($prenotazione, $cliente, $nuovoVolo, $nuovaTariffa,
                         $metodoPagamento, $carta, $tassaCambio);
                     if ($esitoCambioData) {

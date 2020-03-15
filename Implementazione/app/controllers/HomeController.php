@@ -18,8 +18,9 @@ class HomeController extends Controller {
     public function index() {
 	    $aeroporti = $this->registroVoli->getAeroporti();
 	    $promozione = $this->registroPromozioni->getMigliorPromozioneAttiva();
+        $promozioniVoli = $this->registroVoli->getVoliConPromozione();
 
-		$this->view('home/index', ["aeroporti" => $aeroporti,"promozioneBanner" => $promozione]);
+		$this->view('home/index', ["aeroporti" => $aeroporti,"promozioneBanner" => $promozione,"voli"=>$promozioniVoli]);
 	}
 	
 }

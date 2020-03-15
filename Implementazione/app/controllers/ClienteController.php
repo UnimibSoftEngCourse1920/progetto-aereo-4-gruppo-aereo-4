@@ -95,12 +95,11 @@ class ClienteController extends Controller{
     }
 
     public function richiediEstrattoConto($OIDCliente){
-        //TODO implementare errori
+
         $estrattoConto = $this->registroPrenotazioni->generaEstrattoConto($OIDCliente);
         if($estrattoConto != null){
-            echo "ESTRATTO OK";
+            $this->view('cliente/estrattoconto',["estrattoconto"=>$estrattoConto]);
         }
-        echo "ERRORE";
     }
 
     public function downloadBiglietti($OIDPrenotazione) {
