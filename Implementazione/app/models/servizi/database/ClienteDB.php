@@ -11,11 +11,11 @@ class ClienteDB extends AbstractDB
             $cliente->getCodiceFedelta(), $cliente->getStato(), $cliente->getPassword(), $cliente->getEmail(), $cliente->getSaldoPunti());
     }
 
-    public function generateUpdateQuery($cliente)
+    public function generateUpdateQuery($posto)
     {
         $query = "update Cliente set saldoPunti = %d, indirizzo='%s', stato='%s',password='%s',codiceFedelta='%s' where OID = '%s'";
-        return sprintf($query, $cliente->getSaldoPunti(), $cliente->getIndirizzo(), $cliente->getStato(),
-                               $cliente->getPassword(), $cliente->getCodiceFedelta(), $cliente->getOID());
+        return sprintf($query, $posto->getSaldoPunti(), $posto->getIndirizzo(), $posto->getStato(),
+                               $posto->getPassword(), $posto->getCodiceFedelta(), $posto->getOID());
     }
 
     public function emailFedeltaExists($email){
@@ -32,12 +32,6 @@ class ClienteDB extends AbstractDB
 
     public function getClientiFedelta(){
         $query = "SELECT * FROM CLIENTE WHERE codiceFedelta is null";
-        $stmt = $this->connection->query($query);
-        return $this->fetchResultsByClass($stmt, Cliente::class);
-    }
-
-    public function getAllFedelta(){
-        $query = "Select * from Cliente where codiceFedelta is not null";
         $stmt = $this->connection->query($query);
         return $this->fetchResultsByClass($stmt, Cliente::class);
     }

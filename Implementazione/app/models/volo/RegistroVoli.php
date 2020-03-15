@@ -3,16 +3,9 @@
 require_once __DIR__."/Volo.php";
 require_once __DIR__."/Aeroporto.php";
 require_once "../app/models/servizi/DBFacade.php";
-require_once "../app/models/servizi/Mailer.php";
 
 
 class RegistroVoli{
-
-    private $mailer;
-
-    public function __construct(){
-        $this->mailer = new Mailer();
-    }
 
     public function inserisciVolo($dataOraPart, $dataOraArr, $OIDAeroportoPart, $OIDAeroportoDest, $OIDAereo)
     {

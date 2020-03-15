@@ -11,9 +11,9 @@ class PostoDB extends AbstractDB
         return sprintf($query, $obj->getOID(), $obj->isOccupato(), $obj->getNumeroPosto());
     }
 
-    protected function generateUpdateQuery($cliente){
-        $query = "UPDATE %s SET stato = %b WHERE OID = '%s'";
-        return sprintf($query, $this->getClassName($cliente), $cliente->isOccupato(), $cliente->getOID());
+    protected function generateUpdateQuery($posto){
+        $query = "UPDATE Posto SET stato = %b WHERE OID = '%s'";
+        return sprintf($query, $posto->isOccupato(), $posto->getOID());
     }
 
 }
