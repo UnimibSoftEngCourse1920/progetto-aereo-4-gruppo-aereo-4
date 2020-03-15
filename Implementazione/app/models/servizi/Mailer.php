@@ -118,6 +118,16 @@ class Mailer{
         mail($this->generateRecipients($listaClienti), "Prenotazione cancellata", $message);
     }
 
+    public function inviaInformazioniPrenotazione($email,$OIDPrenotazione){
+        $message = "Gentile cliente, \n
+                    la tua prenotazione è andata a buon fine! \n
+                    Con il link seguente potrai gestirla in tutta comodità: \n
+                    https://gruppoaereo4.000webhostapp.com/public/prenotazione/gestionePrenotazione/".$OIDPrenotazione.". \n
+                    Buona giornata \n\n
+                    GruppoAereo4";
+        mail($email, "Prenotazione confermata", $message);
+    }
+
     private function generateRecipients($listaClienti)
     {
         $recipients = array();

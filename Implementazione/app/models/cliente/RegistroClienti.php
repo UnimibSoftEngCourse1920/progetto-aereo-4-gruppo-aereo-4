@@ -85,6 +85,11 @@ class RegistroClienti
         return false;
     }
 
+    public function avvisaClientePrenotazione($email,$OIDPrenotazione){
+        $this->mailer->inviaInformazioniPrenotazione($email,$OIDPrenotazione);
+    }
+
+
 	public function getCliente($idCliente) {
         return DBFacade::getIstance()->get($idCliente, 'Cliente');
 	}
