@@ -31,7 +31,7 @@ class ClienteDB extends AbstractDB
     }
 
     public function getClientiFedelta(){
-        $query = "SELECT * FROM CLIENTE WHERE codiceFedelta is not null";
+        $query = "SELECT * FROM Cliente WHERE codiceFedelta != ''";
         $stmt = $this->connection->query($query);
         return $this->fetchResultsByClass($stmt, Cliente::class);
     }
