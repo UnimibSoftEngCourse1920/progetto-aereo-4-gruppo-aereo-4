@@ -57,7 +57,7 @@ class RegistroPrenotazioni{
             if($anni == 3) {
                 $this->registroClienti->annullaIscrizione($cliente[0]);
             }
-            else if(anni == 2){
+            else if($anni == 2){
                 $this->registroClienti->setClienteInfedele($cliente[0]);
             }
          }
