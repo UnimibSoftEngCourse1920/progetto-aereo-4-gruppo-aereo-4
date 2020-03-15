@@ -67,17 +67,18 @@ class PrenotazioneDB extends AbstractDB
 
     protected function generateDeleteQuery($OID, $class)
     {
-        return "DELETE FROM Prenotazione WHERE OID = $OID; 
-                DELETE FROM Biglietto WHERE OID IN (SELECT biglietto from PrenotazioneBiglietto where prenotazione = '$OID');
-                DELETE FROM PrenotazioneCliente WHERE prenotazione = $OID; 
+        return "DELETE FROM PrenotazioneCliente WHERE prenotazione = $OID; 
                 DELETE FROM PrenotazioneVolo WHERE prenotazione = $OID;
                 DELETE FROM PrenotazionePosto WHERE prenotazione = $OID;
-                DELETE FROM PrenotazioneBiglietto WHERE prenotazione = $OID;";
+                DELETE FROM PrenotazioneBiglietto WHERE prenotazione = $OID;
+                DELETE FROM Biglietto WHERE OID IN (SELECT biglietto from PrenotazioneBiglietto where prenotazione = '$OID');
+                DELETE FROM Prenotazione WHERE OID = $OID;";
     }
 
     public function getScadute($ore){
-        $query = "select p.OID, v.*, TIMESTAMPDIFF(HOUR, NOW(), v.dataOraPartenza) from Prenotazione as p JOIN Volo as v JOIN PrenotazioneVolo pv 
-                    on p.OID = pv.prenotazione and pv.volo = v.OID where TIMESTAMPDIFF(HOUR, NOW(), v.dataOraPartenza) <= '$ore' 
+        $query = "select p.*,pc.cliente,pv.volo from Prenotazione as p JOIN Volo as v JOIN PrenotazioneVolo pv JOIN PrenotazioneCliente pc
+                    on p.OID = pv.prenotazione and pv.volo = v.OID and pc.prenotazione = p.OID
+                    where TIMESTAMPDIFF(HOUR, NOW(), v.dataOraPartenza) <= '$ore' 
                     AND p.OID NOT IN (select prenotazione from PrenotazioneAcquisto);";
         $stmt = $this->connection->query($query);
         return $this->fetchResultsByClass($stmt, Prenotazione::class);
@@ -96,7 +97,7 @@ class PrenotazioneDB extends AbstractDB
         //Per ogni codice fedeltà, ritorna l'ultima prenotazione effettuata
         $result = array();
         $query = "select c.OID,max(data) from Prenotazione p JOIN PrenotazioneCliente pc JOIN Cliente c 
-                    on p.OID=pc.prenotazione and c.OID = pc.cliente where c.codiceFedelta is not null group by c.OID;";
+                    on p.OID=pc.prenotazione and c.OID = pc.cliente where c.codiceFedelta != '' group by c.OID;";
         $stmt = $this->connection->query($query);
         $stmt->bindColumn(1, $OIDCliente);
         $stmt->bindColumn(2, $data);

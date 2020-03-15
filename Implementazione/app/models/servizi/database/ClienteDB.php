@@ -19,19 +19,19 @@ class ClienteDB extends AbstractDB
     }
 
     public function emailFedeltaExists($email){
-        $query = "SELECT * from Cliente WHERE email = '$email' and codiceFedelta is not null";
+        $query = "SELECT * from Cliente WHERE email = '$email' and codiceFedelta != ''";
         $stmt = $this->connection->query($query);
         return ($stmt->rowCount() > 0);
     }
 
     public function login($email, $password){
-        $query = "SELECT * from Cliente where email = '$email' and password='$password'  and codiceFedelta is not null";
+        $query = "SELECT * from Cliente where email = '$email' and password='$password'  and codiceFedelta != ''";
         $stmt = $this->connection->query($query);
         return $this->fetchSingleByClass($stmt, Cliente::class);
     }
 
     public function getClientiFedelta(){
-        $query = "SELECT * FROM CLIENTE WHERE codiceFedelta is not null";
+        $query = "SELECT * FROM CLIENTE WHERE codiceFedelta != ''";
         $stmt = $this->connection->query($query);
         return $this->fetchResultsByClass($stmt, Cliente::class);
     }

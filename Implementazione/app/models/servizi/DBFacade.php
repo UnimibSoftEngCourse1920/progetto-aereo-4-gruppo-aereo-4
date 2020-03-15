@@ -74,7 +74,7 @@ class DBFacade{
     }
 
     public function getPrenotazioniScaduteIn($ore){
-        return $this->gestori[Promozione::class] -> getScadute($ore);
+        return $this->gestori[Prenotazione::class]->getScadute($ore);
     }
 
     public function userLogin($email, $password){
