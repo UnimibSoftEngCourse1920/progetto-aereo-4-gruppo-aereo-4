@@ -1,7 +1,5 @@
 <?php
 
-    require_once('../app/core/phpToPDF.php');
-
     class PDFGenerator {
         private static $instance = null;
 
@@ -14,31 +12,48 @@
         }
 
         public function generaBiglietti($biglietti) {
-            $html = "<html><head></head><body>";
-
             $numBiglietti = count($biglietti);
+            $html = "";
             for($i = 0; $i < $numBiglietti; $i++) {
-                $html .= $biglietti[$i]->getNominativo();
+                $html .= "<h2>Biglietto ".($i + 1)."</h2>";
+                $html .= "<b>Nomativo: </b>" . $biglietti[$i]->getNominativo();
                 $html .= "<br>";
-                $html .= $biglietti[$i]->getTariffa();
+                $html .= "<b>Tariffa: </b>" . $biglietti[$i]->getTariffa();
                 $html .= "<br>";
-                $html .= $biglietti[$i]->getNumPosto();
+                $html .= "<b>Numero di posto: </b>" . $biglietti[$i]->getNumPosto();
+                $html .= "<br>";
+                $html .= "<b>PNR: </b>" . $biglietti[$i]->getOID();
                 if($i != $numBiglietti - 1) {
-                    $html .= "<div class=\"phpToPDF-page-break\"></div>";
+                    $html .= "<br><br><hr>";
                 }
             }
-            $html .= "</body></html>";
             return $this->creaPDF($html);
         }
 
         private function creaPDF($html) {
             $nome = time().".pdf";
-            $pdf_options = array(
-                "source_type" => 'html',
-                "source" => $html,
-                "action" => 'save',
-                "file_name" => $nome);
-            phptopdf($pdf_options);
+            $data = [
+                'html' => $html,
+                'apiKey' => '51ee0943e64af4a9139f10cd7388aabeb6c2f55f13e26c34a4b04f8aa73f184d',
+            ];
+            $dataString = json_encode($data);
+            $ch = curl_init('https://api.html2pdf.app/v1/generate');
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'Content-Type: application/json',
+            ]);
+            $response = curl_exec($ch);
+            $err = curl_error($ch);
+            curl_close($ch);
+            if (!$err) {
+                header('Content-Type: application/pdf');
+                header('Content-Disposition: inline; filename="your-file-name.pdf"');
+                header('Content-Transfer-Encoding: binary');
+                header('Accept-Ranges: bytes');
+                file_put_contents($nome, $response);
+            }
             return $nome;
         }
 
