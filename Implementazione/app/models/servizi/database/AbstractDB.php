@@ -78,10 +78,6 @@ abstract class AbstractDB
         ));
     }
 
-    protected function getClassName($object){
-        return get_class($object);
-    }
-
     //Metodi hook
 
     protected function generateGetQuery($OID, $class){
@@ -93,7 +89,7 @@ abstract class AbstractDB
         return '';
     }
 
-    protected function generateUpdateQuery($cliente){ return '';}
+    protected function generateUpdateQuery($posto){ return '';}
 
     protected function generateDeleteQuery($OID, $class){
         return "DELETE FROM ".$class." WHERE OID ='".$OID."'";
