@@ -8,11 +8,13 @@ class PrenotazioneController extends Controller
 {
     private $registroPrenotazioni;
     private $registroClienti;
+    private $registroVoli;
 
     public function __construct()
     {
         $this->registroPrenotazioni = new RegistroPrenotazioni();
         $this->registroClienti = new RegistroClienti();
+        $this->registroVoli = new RegistroVoli();
     }
 
     public function controlloPrenotazioniScadute(){
@@ -20,8 +22,7 @@ class PrenotazioneController extends Controller
     }
 
     public function prenota($idVolo, $viaggiatori) {
-        $registro = $this->model('volo/RegistroVoli');
-        $volo = $registro->getVolo($idVolo);
+        $volo = $this->registroVoli->getVolo($idVolo);
         $this->view('prenotazione/prenotazione', ["volo"=> $volo,"pass"=>$viaggiatori]);
     }
 
