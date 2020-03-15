@@ -1,6 +1,6 @@
 # Gruppo Aereo 4 
 
-<img src="https://raw.githubusercontent.com/UnimibSoftEngCourse1920/progetto-aereo-4-gruppo-aereo-4/master/Implementazione/public/img/Screenshot.png" alt="alt text" width="900" height="whatever">
+<img src="https://raw.githubusercontent.com/UnimibSoftEngCourse1920/progetto-aereo-4-gruppo-aereo-4/master/Implementazione/public/img/headerReadme.png" alt="Header" width="900" height="whatever">
 
 Gruppo Aereo 4 è un sito che permette la consultazione di voli e la prenotazione e l'acquisto di biglietti aerei.
 Gli utenti possono utilizzare il sito come ospiti o come utenti fedeli. 
