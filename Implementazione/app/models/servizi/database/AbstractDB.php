@@ -1,7 +1,5 @@
 <?php
 
-
-//TODO perchè queste??
 require_once "../app/models/volo/Aeroporto.php";
 require_once "../app/models/volo/Aereo.php";
 require_once "../app/models/volo/Volo.php";
@@ -83,8 +81,7 @@ abstract class AbstractDB
     protected function generateGetQuery($OID, $class){
         return "SELECT * FROM " . $class . " WHERE OID = '" . $OID . "'";
     }
-
-    //TODO da rivedere
+    
     protected function generatePutQuery($object){ return '';}
 
     protected function generateUpdateQuery($posto){ return '';}
