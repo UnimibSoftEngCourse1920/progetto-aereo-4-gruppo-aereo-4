@@ -81,7 +81,7 @@ abstract class AbstractDB
     protected function generateGetQuery($OID, $class){
         return "SELECT * FROM " . $class . " WHERE OID = '" . $OID . "'";
     }
-    
+
     protected function generatePutQuery($object){ return '';}
 
     protected function generateUpdateQuery($posto){ return '';}
