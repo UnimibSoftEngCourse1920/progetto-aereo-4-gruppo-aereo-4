@@ -61,10 +61,10 @@ class ClienteController extends Controller{
     }
 
     public function registrato() {
-        $this->accedi("", "", "Account registrato! Accedi compilando il form.");
+        $this->view('cliente/login', ["success" => "Account registrato! Accedi compilando il form."]);
     }
 
-    public function accedi($email = "", $password = "", $success = "") {
+    public function accedi($email = "", $password = "") {
         $error = "";
         if($email != "" && $password != "") {
             $cliente = $this->registroClienti->login($email, $password);
@@ -83,7 +83,7 @@ class ClienteController extends Controller{
                 $error = "Combinazione email/password non trovata.";
             }
         }
-        $this->view('cliente/login', ["error" => $error, "success" => $success]);
+        $this->view('cliente/login', ["error" => $error]);
     }
 
     public function esci() {
