@@ -27,6 +27,6 @@ Per cominciare a usufruire dei servizi di Gruppo Aereo 4 è possibile visitare i
 
 ## Autori 
 
-* *Omar Zaher* 
-* *Davide Rendina* 
-* *Federico Piscitelli* 
+* [Omar Zaher](https://github.com/omarzaher)
+* [Davide Rendina](https://github.com/daviderendina)
+* [Federico Piscitelli](https://github.com/federicopiscitelli)
